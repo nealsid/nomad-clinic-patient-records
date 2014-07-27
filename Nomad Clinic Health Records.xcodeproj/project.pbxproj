@@ -7,11 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F911FF84197C07B20063A1F1 /* NEMRPatientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F911FF82197C07B20063A1F1 /* NEMRPatientViewController.m */; };
+		F911FF85197C07B20063A1F1 /* NEMRPatientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F911FF83197C07B20063A1F1 /* NEMRPatientViewController.xib */; };
+		F911FF89197CC2570063A1F1 /* NEMRPatientsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F911FF87197CC2570063A1F1 /* NEMRPatientsTableViewController.m */; };
+		F911FF8A197CC2570063A1F1 /* NEMRPatientsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F911FF88197CC2570063A1F1 /* NEMRPatientsTableViewController.xib */; };
+		F911FF8C197CCCDC0063A1F1 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F911FF8B197CCCDC0063A1F1 /* HeaderView.xib */; };
+		F93E6A20197D96DF002616A6 /* Patient.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A1F197D96DF002616A6 /* Patient.m */; };
+		F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A22197D9A4C002616A6 /* PatientStore.m */; };
 		F9FAEA65197B075500C9B3E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA64197B075500C9B3E5 /* main.m */; };
-		F9FAEA68197B075500C9B3E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA67197B075500C9B3E5 /* AppDelegate.m */; };
+		F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */; };
 		F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA69197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld */; };
 		F9FAEA6D197B075500C9B3E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9FAEA6C197B075500C9B3E5 /* Images.xcassets */; };
 		F9FAEA79197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA78197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m */; };
+		F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA82197B0B2800C9B3E5 /* NEMRImageTransformer.m */; };
+		F9FAEA8B197B10E600C9B3E5 /* NEMREntryPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA89197B10E600C9B3E5 /* NEMREntryPointViewController.m */; };
+		F9FAEA8C197B10E600C9B3E5 /* NEMREntryPointViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FAEA8A197B10E600C9B3E5 /* NEMREntryPointViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,16 +35,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F911FF81197C07B20063A1F1 /* NEMRPatientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMRPatientViewController.h; sourceTree = "<group>"; };
+		F911FF82197C07B20063A1F1 /* NEMRPatientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMRPatientViewController.m; sourceTree = "<group>"; };
+		F911FF83197C07B20063A1F1 /* NEMRPatientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEMRPatientViewController.xib; sourceTree = "<group>"; };
+		F911FF86197CC2570063A1F1 /* NEMRPatientsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMRPatientsTableViewController.h; sourceTree = "<group>"; };
+		F911FF87197CC2570063A1F1 /* NEMRPatientsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMRPatientsTableViewController.m; sourceTree = "<group>"; };
+		F911FF88197CC2570063A1F1 /* NEMRPatientsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEMRPatientsTableViewController.xib; sourceTree = "<group>"; };
+		F911FF8B197CCCDC0063A1F1 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		F93E6A1E197D96DF002616A6 /* Patient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Patient.h; path = ../Patient.h; sourceTree = "<group>"; };
+		F93E6A1F197D96DF002616A6 /* Patient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Patient.m; path = ../Patient.m; sourceTree = "<group>"; };
+		F93E6A21197D9A4C002616A6 /* PatientStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientStore.h; sourceTree = "<group>"; };
+		F93E6A22197D9A4C002616A6 /* PatientStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientStore.m; sourceTree = "<group>"; };
 		F9FAEA5F197B075500C9B3E5 /* Nomad Clinic Health Records.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nomad Clinic Health Records.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FAEA63197B075500C9B3E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9FAEA64197B075500C9B3E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F9FAEA66197B075500C9B3E5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F9FAEA67197B075500C9B3E5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F9FAEA66197B075500C9B3E5 /* NEMRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEMRAppDelegate.h; sourceTree = "<group>"; };
+		F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NEMRAppDelegate.m; sourceTree = "<group>"; };
 		F9FAEA6A197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nomad_Clinic_Health_Records.xcdatamodel; sourceTree = "<group>"; };
 		F9FAEA6C197B075500C9B3E5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F9FAEA72197B075500C9B3E5 /* Nomad Clinic Health RecordsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nomad Clinic Health RecordsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FAEA77197B075500C9B3E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9FAEA78197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nomad_Clinic_Health_RecordsTests.m; sourceTree = "<group>"; };
+		F9FAEA82197B0B2800C9B3E5 /* NEMRImageTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMRImageTransformer.m; sourceTree = "<group>"; };
+		F9FAEA84197B0B3800C9B3E5 /* NEMRImageTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEMRImageTransformer.h; sourceTree = "<group>"; };
+		F9FAEA88197B10E600C9B3E5 /* NEMREntryPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMREntryPointViewController.h; sourceTree = "<group>"; };
+		F9FAEA89197B10E600C9B3E5 /* NEMREntryPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMREntryPointViewController.m; sourceTree = "<group>"; };
+		F9FAEA8A197B10E600C9B3E5 /* NEMREntryPointViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEMREntryPointViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,10 +102,26 @@
 		F9FAEA61197B075500C9B3E5 /* Nomad Clinic Health Records */ = {
 			isa = PBXGroup;
 			children = (
-				F9FAEA66197B075500C9B3E5 /* AppDelegate.h */,
-				F9FAEA67197B075500C9B3E5 /* AppDelegate.m */,
+				F9FAEA66197B075500C9B3E5 /* NEMRAppDelegate.h */,
+				F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */,
+				F93E6A21197D9A4C002616A6 /* PatientStore.h */,
+				F93E6A22197D9A4C002616A6 /* PatientStore.m */,
+				F9FAEA88197B10E600C9B3E5 /* NEMREntryPointViewController.h */,
+				F9FAEA89197B10E600C9B3E5 /* NEMREntryPointViewController.m */,
+				F9FAEA8A197B10E600C9B3E5 /* NEMREntryPointViewController.xib */,
+				F911FF86197CC2570063A1F1 /* NEMRPatientsTableViewController.h */,
+				F911FF87197CC2570063A1F1 /* NEMRPatientsTableViewController.m */,
+				F911FF88197CC2570063A1F1 /* NEMRPatientsTableViewController.xib */,
+				F911FF81197C07B20063A1F1 /* NEMRPatientViewController.h */,
+				F911FF82197C07B20063A1F1 /* NEMRPatientViewController.m */,
+				F911FF83197C07B20063A1F1 /* NEMRPatientViewController.xib */,
 				F9FAEA6C197B075500C9B3E5 /* Images.xcassets */,
 				F9FAEA69197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld */,
+				F93E6A1E197D96DF002616A6 /* Patient.h */,
+				F93E6A1F197D96DF002616A6 /* Patient.m */,
+				F911FF8B197CCCDC0063A1F1 /* HeaderView.xib */,
+				F9FAEA84197B0B3800C9B3E5 /* NEMRImageTransformer.h */,
+				F9FAEA82197B0B2800C9B3E5 /* NEMRImageTransformer.m */,
 				F9FAEA62197B075500C9B3E5 /* Supporting Files */,
 			);
 			path = "Nomad Clinic Health Records";
@@ -190,6 +232,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F911FF8A197CC2570063A1F1 /* NEMRPatientsTableViewController.xib in Resources */,
+				F9FAEA8C197B10E600C9B3E5 /* NEMREntryPointViewController.xib in Resources */,
+				F911FF8C197CCCDC0063A1F1 /* HeaderView.xib in Resources */,
+				F911FF85197C07B20063A1F1 /* NEMRPatientViewController.xib in Resources */,
 				F9FAEA6D197B075500C9B3E5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,8 +255,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */,
-				F9FAEA68197B075500C9B3E5 /* AppDelegate.m in Sources */,
+				F93E6A20197D96DF002616A6 /* Patient.m in Sources */,
+				F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */,
+				F9FAEA8B197B10E600C9B3E5 /* NEMREntryPointViewController.m in Sources */,
+				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,
+				F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */,
+				F911FF84197C07B20063A1F1 /* NEMRPatientViewController.m in Sources */,
+				F911FF89197CC2570063A1F1 /* NEMRPatientsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,9 +368,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Nomad Clinic Health Records/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -327,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Nomad Clinic Health Records/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -388,6 +443,7 @@
 				F9FAEA7E197B075500C9B3E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F9FAEA7F197B075500C9B3E5 /* Build configuration list for PBXNativeTarget "Nomad Clinic Health RecordsTests" */ = {
 			isa = XCConfigurationList;
@@ -396,6 +452,7 @@
 				F9FAEA81197B075500C9B3E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

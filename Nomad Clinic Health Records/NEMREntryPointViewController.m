@@ -3,7 +3,7 @@
 //  Nomad Clinic Health Records
 //
 //  Created by Neal Sidhwaney on 7/19/14.
-//  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
+//  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
 #import "NEMREntryPointViewController.h"

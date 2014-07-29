@@ -8,6 +8,7 @@
 
 #import "NEMREntryPointViewController.h"
 #import "NEMRPatientsTableViewController.h"
+#import "NEMRClinicianTableViewController.h"
 
 @interface NEMREntryPointViewController ()
 
@@ -21,7 +22,7 @@
   [self.navigationController setNavigationBarHidden:NO];
 }
 - (IBAction)clinicianButtonUp:(id)sender {
-  UITableViewController* tvc = [[NEMRPatientsTableViewController alloc] init];
+  UITableViewController* tvc = [[NEMRClinicianTableViewController alloc] init];
   [self.navigationController pushViewController:tvc animated:YES];
   [self.navigationController setNavigationBarHidden:NO];
 }

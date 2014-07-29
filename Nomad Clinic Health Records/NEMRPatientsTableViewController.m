@@ -18,9 +18,16 @@
 @property (nonatomic, retain) PatientStore* patientStore;
 @property (nonatomic, retain) NSArray* patients;
 
-// Returns true if the rowNumber represents the last row in the table view.
-// Note that this is 1 more than the number of elements in Patients because
-// we provide a row that indicates "No more patients" at the bottom.
+/**
+ * Returns true if the rowNumber represents the last row in the table view.
+ * Note that this is 1 more than the number of elements in Patients because
+ * we provide a row that indicates "No more patients" at the bottom, so this
+ * test is frequently done to determine if the user can perform some action on
+ * a row.
+ *
+ * @param rowNumber the Row Number to test whether is last.
+ * @returns YES if it's the last row in the table view, NO if not.
+ */
 - (BOOL) isLastRow:(NSInteger)rowNumber;
 
 @end
@@ -69,7 +76,8 @@
   return 1;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)      tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   NSLog(@"Selecting row at: %lu", (long)row);
   Patient* p = [self.patients objectAtIndex:row];
@@ -78,20 +86,23 @@
                                               bundle:nil
                                           andPatient:p
                                         withDelegate:self];
-  
+
   [self presentViewController:pvc animated:YES completion:nil];
 
 }
 
-- (BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)    tableView:(UITableView *)tableView
+canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
   return NO;
 }
 
-- (BOOL) tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)                     tableView:(UITableView *)tableView
+shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
   return ![self isLastRow: [indexPath row]];
 }
 
-- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (BOOL)              tableView:(UITableView *)tableView
+shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
   return ![self isLastRow: [indexPath row]];
 }
 
@@ -103,6 +114,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void) tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
  forRowAtIndexPath:(NSIndexPath *)indexPath {
+
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Patient* p = [self.patients objectAtIndex:[indexPath row]];
     [[PatientStore sharedPatientStore] removePatient:p];
@@ -112,8 +124,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView
+  numberOfRowsInSection:(NSInteger)section {
   // We return the number of rows, plus 1 extra
   // row for the "No more patients" row.
   return [self.patients count] + 1;
@@ -131,8 +143,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (UITableViewCell*) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
-  UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                 reuseIdentifier:@"UITableViewCell"];
+  UITableViewCell* cell =
+      [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                             reuseIdentifier:@"UITableViewCell"];
   [cell setBackgroundColor:nil];
   if ([self isLastRow:row]) {
     cell.textLabel.text = @"No more patients";
@@ -157,13 +170,12 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (IBAction) addNewItem: (id) sender {
-  Patient* p = [self.patientStore newPatient];
   NEMRPatientViewController* pvc =
     [[NEMRPatientViewController alloc] initWithNibName:nil
                                                 bundle:nil
-                                            andPatient:p
+                                            andPatient:nil
                                           withDelegate:self];
-  
+
   [self presentViewController:pvc animated:YES completion:nil];
 }
 
@@ -185,7 +197,7 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void) patientViewControllerCancel:(NEMRPatientViewController*)patientViewController {
-  [self dismissViewControllerAnimated:YES completion:nil];  
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

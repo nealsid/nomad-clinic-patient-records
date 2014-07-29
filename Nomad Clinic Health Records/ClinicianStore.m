@@ -1,5 +1,5 @@
 //
-//  PatientStore.m
+//  clinicianStore.m
 //  Nomad Clinic Health Records
 //
 //  Created by Neal Sidhwaney on 7/21/14.
@@ -7,28 +7,28 @@
 //
 
 
-#import "PatientStore.h"
+#import "ClinicianStore.h"
 
-#import "Patient.h"
+#import "Clinician.h"
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "NEMRAppDelegate.h"
 
-@interface PatientStore ()
+@interface ClinicianStore ()
 
 @property (nonatomic, retain) NSManagedObjectContext* managedObjectContext;
 
-- (void)createPatientsIfNecessary;
+- (void)createCliniciansIfNecessary;
 - (instancetype)init;
 
 @end
 
-@implementation PatientStore
+@implementation ClinicianStore
 
-- (Patient*) newPatient {
+- (Clinician*) newClinician {
   NSManagedObjectContext* ctx = self.managedObjectContext;
 
-  Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
+  Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
                                              inManagedObjectContext:ctx];
   NSError* error;
   if (![ctx save:&error]) {
@@ -36,16 +36,16 @@
                 format:@"Reason: %@", [error localizedDescription]];
   }
 
-  return p;
+  return c;
 }
 
-+ (instancetype) sharedPatientStore {
-  static PatientStore* patientStore;
-  
-  if (!patientStore) {
-    patientStore = [[PatientStore alloc] init];
++ (instancetype) sharedClinicianStore {
+  static ClinicianStore* clinicianStore;
+
+  if (!clinicianStore) {
+    clinicianStore = [[ClinicianStore alloc] init];
   }
-  return patientStore;
+  return clinicianStore;
 }
 
 - (instancetype) init {
@@ -53,13 +53,13 @@
   if (self) {
     NEMRAppDelegate* app = (NEMRAppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [app managedObjectContext];
-    [self createPatientsIfNecessary];
+    [self createCliniciansIfNecessary];
   }
   return self;
 }
 
-- (void)removePatient:(Patient*)p {
-  [self.managedObjectContext deleteObject:p];
+- (void)removeClinician:(Clinician*)c {
+  [self.managedObjectContext deleteObject:c];
   [self saveChanges];
 }
 
@@ -71,10 +71,10 @@
   }
 }
 
-- (NSArray*) patients {
+- (NSArray*) clinicians {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient"
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"Clinician"
                                        inManagedObjectContext:ctx];
   NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
                                                        ascending:YES];
@@ -90,11 +90,13 @@
   return result;
 }
 
-- (void)createPatientsIfNecessary {
+- (void)createCliniciansIfNecessary {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient" inManagedObjectContext:ctx];
-  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"Clinician"
+                                       inManagedObjectContext:ctx];
+  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                       ascending:YES];
   req.sortDescriptors = @[sd];
   req.entity = e;
   NSError *error;
@@ -103,12 +105,10 @@
     [NSException raise:@"Fetch failed" format:@"Reason: %@",[error localizedDescription]];
   }
   if ([result count] == 0) {
-    NSLog(@"No patients found, generating..");
-    Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient" inManagedObjectContext:ctx];
-    p.name = @"Neal Sidhwaney";
-    p.gender = 0;
-    p.age = [NSNumber numberWithInt:24];
-    p.dob = [[NSDate alloc] init];
+    NSLog(@"No Clinicians found, generating..");
+    Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
+                                                 inManagedObjectContext:ctx];
+    c.name = @"Neal Sidhwaney";
     if (![ctx save:&error]) {
       [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
     }

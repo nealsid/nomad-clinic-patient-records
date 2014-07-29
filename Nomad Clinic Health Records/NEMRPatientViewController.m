@@ -13,13 +13,14 @@
 @interface NEMRPatientViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain) Patient* patient;
+@property (weak, nonatomic) id<NEMRPatientViewControllerDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UIImageView *patientImageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *patientPictureCamera;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property (weak, nonatomic) id<NEMRPatientViewControllerDelegate> delegate;
 
 @end
 
@@ -32,7 +33,11 @@
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
   NSNumber * newAge = [f numberFromString:self.patientAgeField.text];
   BOOL requiresSave = NO;
-  
+  if (self.patient == nil) {
+    Patient* p = [[PatientStore sharedPatientStore] newPatient];
+    self.patient = p;
+  }
+
   if ((self.patient.name == nil && [newName length] != 0) ||
       ![newName isEqualToString:self.patient.name]) {
     requiresSave = YES;
@@ -44,7 +49,7 @@
     requiresSave = YES;
     self.patient.age = newAge;
   }
-  
+
   if (requiresSave) {
     [[PatientStore sharedPatientStore] saveChanges];
     [self.delegate patientViewControllerSave:self patient:self.patient];
@@ -65,7 +70,7 @@
     self.patient = p;
     self.delegate = delegate;
   }
-  
+
   return self;
 }
 

@@ -1,5 +1,5 @@
 //
-//  AppDelegate.m
+//  NEMRAppDelegate.m
 //  Nomad Clinic Health Records
 //
 //  Created by Neal Sidhwaney on 7/19/14.
@@ -21,11 +21,13 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)          application:(UIApplication *)application
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  // Override point for customization after application launch.
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
+
   UINavigationController* navController = [[UINavigationController alloc] init];
 
   NEMREntryPointViewController* vc = [[NEMREntryPointViewController alloc] init];
@@ -47,7 +49,9 @@
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
              // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+             // abort() causes the application to generate a crash log and terminate.
+             // You should not use this function in a shipping application, although
+             // it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 

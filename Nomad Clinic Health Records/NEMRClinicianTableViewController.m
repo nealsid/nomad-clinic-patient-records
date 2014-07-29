@@ -95,7 +95,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                               withDelegate:self];
 
   [self presentViewController:cvc animated:YES completion:nil];
-
 }
 
 - (BOOL)    tableView:(UITableView *)tableView
@@ -116,6 +115,15 @@ shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (BOOL)    tableView:(UITableView *)tableView
 canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return ![self isLastRow:[indexPath row]];
+}
+
+- (BOOL)            tableView:(UITableView *)tableView
+shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  if ([self isLastRow:row]) {
+    return NO;
+  }
+  return YES;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView
@@ -163,6 +171,5 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   [self dismissViewControllerAnimated:YES completion:nil];
 
 }
-
 
 @end

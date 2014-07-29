@@ -1,50 +1,52 @@
 //
-//  ClinicianStore.m
+//  PatientVisitStore.m
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 7/21/14.
+//  Created by Neal Sidhwaney on 7/29/14.
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
-
-#import "ClinicianStore.h"
+#import "PatientVisitStore.h"
 
 #import "Clinician.h"
-#import <CoreData/CoreData.h>
+#import "ClinicianStore.h"
 #import "NEMRAppDelegate.h"
+#import "Patient.h"
+#import "PatientStore.h"
+#import "PatientVisit.h"
+#import <CoreData/CoreData.h>
 
-@interface ClinicianStore ()
+@interface PatientVisitStore ()
 
 @property (nonatomic, retain) NSManagedObjectContext* managedObjectContext;
 
-- (void)createCliniciansIfNecessary;
 - (instancetype)init;
 
 @end
 
-@implementation ClinicianStore
+@implementation PatientVisitStore
 
-- (Clinician*) newClinician {
+- (PatientVisit*) newPatientVisit {
   NSManagedObjectContext* ctx = self.managedObjectContext;
 
-  Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
-                                             inManagedObjectContext:ctx];
+  PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+                                                   inManagedObjectContext:ctx];
   NSError* error;
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
 
-  return c;
+  return pv;
 }
 
-+ (instancetype) sharedClinicianStore {
-  static ClinicianStore* clinicianStore;
++ (instancetype) sharedPatientVisitStore {
+  static PatientVisitStore* patientvisitStore;
 
-  if (!clinicianStore) {
-    clinicianStore = [[ClinicianStore alloc] init];
+  if (!patientvisitStore) {
+    patientvisitStore = [[PatientVisitStore alloc] init];
   }
-  return clinicianStore;
+  return patientvisitStore;
 }
 
 - (instancetype) init {
@@ -52,13 +54,13 @@
   if (self) {
     NEMRAppDelegate* app = (NEMRAppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [app managedObjectContext];
-    [self createCliniciansIfNecessary];
+    [self createPatientVisitsIfNecessary];
   }
   return self;
 }
 
-- (void)removeClinician:(Clinician*)c {
-  [self.managedObjectContext deleteObject:c];
+- (void)removePatientVisit:(PatientVisit*)pv {
+  [self.managedObjectContext deleteObject:pv];
   [self saveChanges];
 }
 
@@ -70,12 +72,12 @@
   }
 }
 
-- (NSArray*) clinicians {
+- (NSArray*) patientVisits {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"Clinician"
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisit"
                                        inManagedObjectContext:ctx];
-  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"visit_date"
                                                        ascending:YES];
   req.sortDescriptors = @[sd];
   req.entity = e;
@@ -89,12 +91,12 @@
   return result;
 }
 
-- (void)createCliniciansIfNecessary {
+- (void)createPatientVisitsIfNecessary {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"Clinician"
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisit"
                                        inManagedObjectContext:ctx];
-  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"visit_date"
                                                        ascending:YES];
   req.sortDescriptors = @[sd];
   req.entity = e;
@@ -104,10 +106,10 @@
     [NSException raise:@"Fetch failed" format:@"Reason: %@",[error localizedDescription]];
   }
   if ([result count] == 0) {
-    NSLog(@"No Clinicians found, generating..");
-    Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
-                                                 inManagedObjectContext:ctx];
-    c.name = @"Neal Sidhwaney";
+    NSLog(@"No PatientVisits found, generating..");
+    PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+                                                     inManagedObjectContext:ctx];
+    pv.visit_date = [NSDate date];
     if (![ctx save:&error]) {
       [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
     }

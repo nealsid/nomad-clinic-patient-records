@@ -8,9 +8,9 @@
             <connections>
                 <outlet property="cancelButton" destination="LQ9-ga-Xd1" id="6hr-az-A5u"/>
                 <outlet property="patientAgeField" destination="L8o-xQ-s9O" id="Jqj-fk-Nj5"/>
-                <outlet property="patientImageView" destination="Dnf-z3-7cI" id="GZN-1I-qhk"/>
                 <outlet property="patientNameField" destination="EmV-nv-Q8B" id="ZBq-l2-IkQ"/>
                 <outlet property="patientPictureCamera" destination="F1O-iO-CDc" id="JiZ-Q2-gx7"/>
+                <outlet property="patientVisitTableView" destination="YAY-gi-yS4" id="dHg-wS-K4K"/>
                 <outlet property="saveButton" destination="lcd-No-xgR" id="u6x-7A-V46"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,12 +28,6 @@
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uN-F7-Oym">
                     <rect key="frame" x="22" y="120" width="31" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gender" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zuy-c5-pEH">
-                    <rect key="frame" x="24" y="177" width="57" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -73,12 +67,17 @@
                         <rect key="frame" x="94" y="120" width="206" height="30"/>
                     </variation>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dnf-z3-7cI">
-                    <rect key="frame" x="24" y="229" width="356" height="306"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YAY-gi-yS4">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="24" y="206" width="276" height="318"/>
+                        <rect key="frame" x="20" y="232" width="280" height="285"/>
                     </variation>
-                </imageView>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="ho5-VO-Y3M"/>
+                        <outlet property="delegate" destination="-1" id="faw-2c-JSi"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
@@ -89,11 +88,13 @@
             <variation key="default">
                 <mask key="subviews">
                     <exclude reference="L8o-xQ-s9O"/>
+                    <exclude reference="YAY-gi-yS4"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
                     <include reference="L8o-xQ-s9O"/>
+                    <include reference="YAY-gi-yS4"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="139" y="135"/>

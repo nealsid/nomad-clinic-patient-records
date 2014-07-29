@@ -12,9 +12,9 @@
         <attribute name="picture" optional="YES" attributeType="Transformable" valueTransformerName="NEMRImageTransformer" syncable="YES"/>
         <relationship name="visits" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisit" inverseName="patient" inverseEntity="PatientVisit" syncable="YES"/>
     </entity>
-    <entity name="PatientVisit" syncable="YES">
+    <entity name="PatientVisit" representedClassName="PatientVisit" syncable="YES">
         <attribute name="visit_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="clinician" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Clinician" inverseName="patient" inverseEntity="Clinician" syncable="YES"/>
+        <relationship name="clinician" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Clinician" inverseName="patient" inverseEntity="Clinician" syncable="YES"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="visits" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <elements>

@@ -9,18 +9,21 @@
 #import "NEMRPatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
+#import "PatientVisitStore.h"
 
-@interface NEMRPatientViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface NEMRPatientViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 @property (weak, nonatomic) id<NEMRPatientViewControllerDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
-@property (weak, nonatomic) IBOutlet UIImageView *patientImageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *patientPictureCamera;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UITableView* patientVisitTableView;
+
+@property (weak, nonatomic) PatientVisitStore* patientVisitStore;
 
 @end
 
@@ -52,8 +55,8 @@
 
   if (requiresSave) {
     [[PatientStore sharedPatientStore] saveChanges];
-    [self.delegate patientViewControllerSave:self patient:self.patient];
   }
+  [self.delegate patientViewControllerSave:self patient:self.patient];
 }
 
 - (IBAction)cancelButtonAction:(id)sender {
@@ -69,6 +72,7 @@
   if (self) {
     self.patient = p;
     self.delegate = delegate;
+    self.patientVisitStore = [PatientVisitStore sharedPatientVisitStore];
   }
 
   return self;
@@ -86,20 +90,81 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   if (self.patient != nil) {
+    [self.patientVisitTableView registerClass:[UITableViewCell class]
+                       forCellReuseIdentifier:@"UITableViewCell"];
     [self.patientNameField setText:self.patient.name];
     [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
   }
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-  return 80;
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section {
+  return [[[PatientVisitStore sharedPatientVisitStore] patientVisits] count] + 1;
 }
 
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-  return [NSString stringWithFormat:@"%lu",(long)row];
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
+
+- (BOOL) isLastRow:(NSInteger)rowNumber {
+  return rowNumber == ([[self.patientVisitStore patientVisits] count]);
+}
+
+- (BOOL)    tableView:(UITableView *)tableView
+canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+  return NO;
+}
+
+- (BOOL)                     tableView:(UITableView *)tableView
+shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+  return ![self isLastRow: [indexPath row]];
+}
+
+- (BOOL)              tableView:(UITableView *)tableView
+shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return ![self isLastRow: [indexPath row]];
+}
+
+- (BOOL)    tableView:(UITableView *)tableView
+canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  return ![self isLastRow:[indexPath row]];
+}
+
+- (BOOL)            tableView:(UITableView *)tableView
+shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  if ([self isLastRow:row]) {
+    return NO;
+  }
+  return YES;
+}
+
+- (CGFloat)   tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  if (![self isLastRow:row]) {
+    return 60;
+  }
+  return 44;
+}
+
+- (UITableViewCell*) tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  UITableViewCell* cell =
+      [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                             reuseIdentifier:@"UITableViewCell"];
+  [cell setBackgroundColor:nil];
+  if ([self isLastRow:row]) {
+    cell.textLabel.text = @"No more patient visits";
+    return cell;
+  }
+  if (row > [[self.patientVisitStore patientVisits] count]) {
+    return nil;
+  }
+  PatientVisit* pv = [[self.patientVisitStore patientVisits] objectAtIndex:row];
+  cell.textLabel.text = [NSString stringWithFormat:@"%@",pv.visit_date];
+  return cell;
+}
+
 @end

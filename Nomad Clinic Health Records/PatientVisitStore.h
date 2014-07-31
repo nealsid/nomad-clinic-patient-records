@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Patient.h"
 #import "PatientVisit.h"
 
 @interface PatientVisitStore : NSObject
@@ -21,9 +22,10 @@
 /**
  * Fetches PatientVisits from store and returns them as an array
  *
+ * @param p A patient to fetch visits for, or nil for all visits.
  * @returns NSArray of PatientVisits
  */
-- (NSArray*) patientVisits;
+- (NSArray*) patientVisitsForPatient:(Patient*)p;
 
 /**
  * Saves all outstanding changes to the underlying store

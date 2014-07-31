@@ -9,17 +9,23 @@
 
 #import "PatientStore.h"
 
+#import "Clinician.h"
 #import "Patient.h"
+#import "PatientVisit.h"
+#import "NEMRAppDelegate.h"
+
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "NEMRAppDelegate.h"
 
 @interface PatientStore ()
 
 @property (nonatomic, retain) NSManagedObjectContext* managedObjectContext;
 
-- (void)createPatientsIfNecessary;
+- (void)createTestDataIfNecessary;
 - (instancetype)init;
+- (NSDate*)dateFromMonth:(NSInteger)month
+                     day:(NSInteger)day
+                    year:(NSInteger)year;
 
 @end
 
@@ -53,7 +59,7 @@
   if (self) {
     NEMRAppDelegate* app = (NEMRAppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [app managedObjectContext];
-    [self createPatientsIfNecessary];
+    [self createTestDataIfNecessary];
   }
   return self;
 }
@@ -90,7 +96,7 @@
   return result;
 }
 
-- (void)createPatientsIfNecessary {
+- (void) createTestDataIfNecessary {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
   NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient" inManagedObjectContext:ctx];
@@ -102,17 +108,66 @@
   if (!result) {
     [NSException raise:@"Fetch failed" format:@"Reason: %@",[error localizedDescription]];
   }
-  if ([result count] == 0) {
-    NSLog(@"No patients found, generating..");
-    Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient" inManagedObjectContext:ctx];
-    p.name = @"Neal Sidhwaney";
-    p.gender = 0;
-    p.age = [NSNumber numberWithInt:24];
-    p.dob = [[NSDate alloc] init];
-    if (![ctx save:&error]) {
-      [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
-    }
+  if ([result count] > 0) {
+    return;
   }
+  NSLog(@"No patients found, generating..");
+  
+  NSArray* patientNames = @[@"Neal Sidhwaney",
+                            @"Bob Jones",
+                            @"Jane Doe",
+                            @"Tenzin Dolma Lama"];
+  NSArray* patientAges = @[@34, @30, @29, @30];
+  NSArray* patientGenders = @[@1, @1, @0, @0];
+  NSArray* patientDob = @[[self dateFromMonth:9 day:2 year:1980],
+                          [self dateFromMonth:5 day:30 year:1990],
+                          [self dateFromMonth:6 day:2 year:1980],
+                          [self dateFromMonth:6 day:2 year:1990]];
+  NSMutableArray* patients = [[NSMutableArray alloc] init];
+  for (int i = 0; i < [patientNames count]; i++) {
+    Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
+                                               inManagedObjectContext:ctx];
+    p.name = [patientNames objectAtIndex:i];
+    p.gender = [patientGenders objectAtIndex:i];
+    p.age = [patientAges objectAtIndex:i];
+    p.dob = [patientDob objectAtIndex:i];
+    [patients addObject:p];
+  }
+  
+  NSMutableArray* clinicians = [[NSMutableArray alloc] init];
+  NSArray* clinicianNames = @[@"Roshi Joan Halifax",
+                              @"Trudy Goldman",
+                              @"Kat Bogacz",
+                              @"Gary Pasternak",
+                              @"Sam Hughes"];
+  for (int i = 0; i < [clinicianNames count]; i++) {
+    Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
+                                               inManagedObjectContext:ctx];
+    c.name = [clinicianNames objectAtIndex:i];
+    [clinicians addObject:c];
+  }
+  
+  for (int i = 0; i < [patientNames count]; i++) {
+    PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+                                                     inManagedObjectContext:ctx];
+    pv.patient = [patients objectAtIndex:i];
+    pv.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
+    NSLog(@"Creating pv for %@ - %@", pv.patient.name, [[pv.clinician anyObject] name]);
+  }
+  
+  if (![ctx save:&error]) {
+    [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
+  }
+}
+                          
+- (NSDate*)dateFromMonth:(NSInteger)month day:(NSInteger)day year:(NSInteger)year {
+  NSDateComponents *comps = [[NSDateComponents alloc] init];
+  [comps setDay:day];
+  [comps setMonth:month];
+  [comps setYear:year];
+  NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDate *date = [cal dateFromComponents:comps];
+  return date;
 }
 
 @end

@@ -53,8 +53,10 @@
   [super viewDidLoad];
   [self.tableView registerClass:[UITableViewCell class]
          forCellReuseIdentifier:@"UITableViewCell"];
-  UIView* headerView = self.headerView;
-  [self.tableView setTableHeaderView:headerView];
+//  UIView* headerView = self.headerView;
+//  [self.tableView setTableHeaderView:headerView];
+  [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  [self.navigationController setTitle:@"Patient"];
 }
 
 - (UIView*) headerView {
@@ -67,7 +69,7 @@
 }
 
 - (BOOL) isLastRow:(NSInteger)rowNumber {
-  return rowNumber == ([self.patients count]);
+  return rowNumber == [self.patients count];
 }
 
 #pragma mark - Table view data source
@@ -86,9 +88,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                               bundle:nil
                                           andPatient:p
                                         withDelegate:self];
-
-  [self presentViewController:pvc animated:YES completion:nil];
-
+  [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (BOOL)    tableView:(UITableView *)tableView
@@ -109,6 +109,18 @@ shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (BOOL)    tableView:(UITableView *)tableView
 canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return ![self isLastRow:[indexPath row]];
+}
+
+- (CGFloat)    tableView:(UITableView *)tableView
+heightForHeaderInSection:(NSInteger)section {
+  NSLog(@"Returning 20 for header height");
+  return 20;
+}
+
+- (CGFloat)    tableView:(UITableView *)tableView
+heightForFooterInSection:(NSInteger)section {
+  NSLog(@"Returning 20 for footer height");
+  return 20;
 }
 
 - (void) tableView:(UITableView *)tableView
@@ -144,19 +156,31 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   UITableViewCell* cell =
-      [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+      [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                              reuseIdentifier:@"UITableViewCell"];
-  [cell setBackgroundColor:nil];
   if ([self isLastRow:row]) {
     cell.textLabel.text = @"No more patients";
     return cell;
   }
+  [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   if (row > [self.patients count]) {
     return nil;
   }
   Patient* p = [self.patients objectAtIndex:row];
   cell.textLabel.text = p.name;
+
   [cell.textLabel setFont:self.itemFont];
+  cell.detailTextLabel.text = @"1980/09/02";
+  NSString* imagePath;
+  if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
+    imagePath = [[NSBundle mainBundle] pathForResource:@"female-patient"
+                                                          ofType:@"png"];
+  } else if ([p.gender isEqualToNumber:[NSNumber numberWithInt:1]]) {
+    imagePath = [[NSBundle mainBundle] pathForResource:@"male-patient"
+                                                          ofType:@"png"];
+  }
+  UIImage* femaleImage = [[UIImage alloc] initWithContentsOfFile:imagePath];
+  [cell.imageView setImage:femaleImage];
   return cell;
 }
 
@@ -191,13 +215,15 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void) patientViewControllerSave:(NEMRPatientViewController*)patientViewController
                            patient:(Patient*)p {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES
+                           completion:nil];
   self.patients = [self.patientStore patients];
   [self.tableView reloadData];
 }
 
 - (void) patientViewControllerCancel:(NEMRPatientViewController*)patientViewController {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES
+                           completion:nil];
 }
 
 @end

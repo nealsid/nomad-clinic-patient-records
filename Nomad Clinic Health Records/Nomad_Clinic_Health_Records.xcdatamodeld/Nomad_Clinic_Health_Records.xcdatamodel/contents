@@ -15,11 +15,18 @@
     <entity name="PatientVisit" representedClassName="PatientVisit" syncable="YES">
         <attribute name="visit_date" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="clinician" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Clinician" inverseName="patient" inverseEntity="Clinician" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PatientVisitNotes" inverseName="patientVisit" inverseEntity="PatientVisitNotes" syncable="YES"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="visits" inverseEntity="Patient" syncable="YES"/>
     </entity>
+    <entity name="PatientVisitNotes" syncable="YES">
+        <attribute name="note_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="patientVisit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisit" inverseName="notes" inverseEntity="PatientVisit" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Patient" positionX="-63" positionY="-18" width="128" height="133"/>
-        <element name="PatientVisit" positionX="-63" positionY="18" width="128" height="88"/>
         <element name="Clinician" positionX="-54" positionY="27" width="128" height="73"/>
+        <element name="Patient" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="PatientVisit" positionX="-63" positionY="18" width="128" height="28"/>
+        <element name="PatientVisitNotes" positionX="-54" positionY="36" width="128" height="28"/>
     </elements>
 </model>

@@ -99,7 +99,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-  return [[[PatientVisitStore sharedPatientVisitStore] patientVisits] count] + 1;
+  return [[[PatientVisitStore sharedPatientVisitStore] patientVisitsForPatient:self.patient] count] + 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -107,7 +107,7 @@
 }
 
 - (BOOL) isLastRow:(NSInteger)rowNumber {
-  return rowNumber == ([[self.patientVisitStore patientVisits] count]);
+  return rowNumber == ([[self.patientVisitStore patientVisitsForPatient:self.patient] count]);
 }
 
 - (BOOL)    tableView:(UITableView *)tableView
@@ -159,11 +159,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = @"No more patient visits";
     return cell;
   }
-  if (row > [[self.patientVisitStore patientVisits] count]) {
+  if (row > [[self.patientVisitStore patientVisitsForPatient:self.patient] count]) {
     return nil;
   }
-  PatientVisit* pv = [[self.patientVisitStore patientVisits] objectAtIndex:row];
-  cell.textLabel.text = [NSString stringWithFormat:@"%@",pv.visit_date];
+  PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
+  cell.textLabel.text = [NSString stringWithFormat:@"%@",[[pv.clinician anyObject] name]];
   return cell;
 }
 

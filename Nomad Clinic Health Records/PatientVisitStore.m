@@ -72,7 +72,7 @@
   }
 }
 
-- (NSArray*) patientVisits {
+- (NSArray*) patientVisitsForPatient:(Patient*)p {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
   NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisit"
@@ -81,6 +81,12 @@
                                                        ascending:YES];
   req.sortDescriptors = @[sd];
   req.entity = e;
+
+  if (p) {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"patient == %@", p];
+    req.predicate = predicate;
+  }
+
   NSError *error;
   NSArray* result = [ctx executeFetchRequest:req error:&error];
   if (!result) {

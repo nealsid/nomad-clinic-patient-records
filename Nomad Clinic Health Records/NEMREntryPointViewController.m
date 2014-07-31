@@ -21,6 +21,7 @@
   [self.navigationController pushViewController:tvc animated:YES];
   [self.navigationController setNavigationBarHidden:NO];
 }
+
 - (IBAction)clinicianButtonUp:(id)sender {
   UITableViewController* tvc = [[NEMRClinicianTableViewController alloc] init];
   [self.navigationController pushViewController:tvc animated:YES];

@@ -12,6 +12,7 @@
 #import "Clinician.h"
 #import "Patient.h"
 #import "PatientVisit.h"
+#import "PatientVisitNotes.h"
 #import "NEMRAppDelegate.h"
 
 #import <UIKit/UIKit.h>
@@ -47,7 +48,7 @@
 
 + (instancetype) sharedPatientStore {
   static PatientStore* patientStore;
-  
+
   if (!patientStore) {
     patientStore = [[PatientStore alloc] init];
   }
@@ -112,7 +113,7 @@
     return;
   }
   NSLog(@"No patients found, generating..");
-  
+
   NSArray* patientNames = @[@"Neal Sidhwaney",
                             @"Bob Jones",
                             @"Jane Doe",
@@ -124,7 +125,7 @@
                           [self dateFromMonth:6 day:2 year:1980],
                           [self dateFromMonth:6 day:2 year:1990]];
   NSMutableArray* patients = [[NSMutableArray alloc] init];
-  for (int i = 0; i < [patientNames count]; i++) {
+  for (int i = 0; i < [patientNames count]; ++i) {
     Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
                                                inManagedObjectContext:ctx];
     p.name = [patientNames objectAtIndex:i];
@@ -133,33 +134,41 @@
     p.dob = [patientDob objectAtIndex:i];
     [patients addObject:p];
   }
-  
+
   NSMutableArray* clinicians = [[NSMutableArray alloc] init];
   NSArray* clinicianNames = @[@"Roshi Joan Halifax",
                               @"Trudy Goldman",
                               @"Kat Bogacz",
                               @"Gary Pasternak",
                               @"Sam Hughes"];
-  for (int i = 0; i < [clinicianNames count]; i++) {
+  for (int i = 0; i < [clinicianNames count]; ++i) {
     Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
                                                inManagedObjectContext:ctx];
     c.name = [clinicianNames objectAtIndex:i];
     [clinicians addObject:c];
   }
-  
-  for (int i = 0; i < [patientNames count]; i++) {
+
+  for (int i = 0; i < [patientNames count]; ++i) {
     PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
                                                      inManagedObjectContext:ctx];
     pv.patient = [patients objectAtIndex:i];
     pv.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
     NSLog(@"Creating pv for %@ - %@", pv.patient.name, [[pv.clinician anyObject] name]);
+    for (int j = 0; j < 2; ++j) {
+      PatientVisitNotes* pvnote =
+          [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
+                                        inManagedObjectContext:ctx];
+      pvnote.note = @"This is a test note";
+      pvnote.patientVisit = pv;
+      pvnote.note_date = [NSDate date];
+    }
   }
-  
+
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
   }
 }
-                          
+
 - (NSDate*)dateFromMonth:(NSInteger)month day:(NSInteger)day year:(NSInteger)year {
   NSDateComponents *comps = [[NSDateComponents alloc] init];
   [comps setDay:day];

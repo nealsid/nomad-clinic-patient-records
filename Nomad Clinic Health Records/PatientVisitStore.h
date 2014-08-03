@@ -28,6 +28,14 @@
 - (NSArray*) patientVisitsForPatient:(Patient*)p;
 
 /**
+ * Fetches PatientVisitNotes from store and returns them as an array
+ *
+ * @param pv A PatientVisit to fetch visits for. Required.
+ * @returns NSArray of PatientVisitNote objects.
+ */
+- (NSArray*) notesForPatientVisit:(PatientVisit*)pv;
+
+/**
  * Saves all outstanding changes to the underlying store
  *
  * @returns none
@@ -48,4 +56,5 @@
  * @return none
  */
 - (void)removePatientVisit:(PatientVisit*)c;
+
 @end

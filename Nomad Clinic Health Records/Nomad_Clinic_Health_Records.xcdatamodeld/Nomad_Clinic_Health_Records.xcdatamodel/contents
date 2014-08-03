@@ -4,6 +4,10 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisit" inverseName="clinician" inverseEntity="PatientVisit" syncable="YES"/>
     </entity>
+    <entity name="Complaint" representedClassName="Complaint" syncable="YES">
+        <attribute name="complaint_description" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="patients_with_complaint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisitNotes" inverseName="chief_complaint" inverseEntity="PatientVisitNotes" syncable="YES"/>
+    </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="dob" optional="YES" attributeType="Date" syncable="YES"/>
@@ -18,15 +22,22 @@
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PatientVisitNotes" inverseName="patientVisit" inverseEntity="PatientVisitNotes" syncable="YES"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="visits" inverseEntity="Patient" syncable="YES"/>
     </entity>
-    <entity name="PatientVisitNotes" syncable="YES">
+    <entity name="PatientVisitNotes" representedClassName="PatientVisitNotes" syncable="YES">
+        <attribute name="bp_diastolic" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="bp_systolic" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="breathing_rate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pulse" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="temp_fahrenheit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="chief_complaint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Complaint" inverseName="patients_with_complaint" inverseEntity="Complaint" syncable="YES"/>
         <relationship name="patientVisit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisit" inverseName="notes" inverseEntity="PatientVisit" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clinician" positionX="-54" positionY="27" width="128" height="73"/>
-        <element name="Patient" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Clinician" positionX="81" positionY="99" width="128" height="73"/>
+        <element name="Patient" positionX="-270" positionY="-261" width="128" height="133"/>
         <element name="PatientVisit" positionX="-63" positionY="18" width="128" height="28"/>
-        <element name="PatientVisitNotes" positionX="-54" positionY="36" width="128" height="28"/>
+        <element name="PatientVisitNotes" positionX="-56" positionY="-108" width="128" height="178"/>
+        <element name="Complaint" positionX="-81" positionY="-99" width="128" height="73"/>
     </elements>
 </model>

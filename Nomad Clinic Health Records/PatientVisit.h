@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSDate * visit_date;
 @property (nonatomic, retain) Patient *patient;
 @property (nonatomic, retain) NSSet *clinician;
+
 @end
 
 @interface PatientVisit (CoreDataGeneratedAccessors)

@@ -7,20 +7,40 @@
 //
 
 #import "PatientVisitViewController.h"
-#import "patientVisit.h"
+
+#import "PatientVisit.h"
+#import "PatientVisitNotes.h"
+#import "Patient.h"
+#import "Clinician.h"
+#import "PatientVisitStore.h"
 
 @interface PatientVisitViewController ()
 
 @property (weak, nonatomic) PatientVisit* patientVisit;
+@property (weak, nonatomic) NSArray* notes;
 
 @property (weak, nonatomic) IBOutlet UILabel *patientNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *clinicianNameLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *notesView;
-@property (weak, nonatomic) IBOutlet UIScrollView *notesLabel;
+@property (weak, nonatomic) IBOutlet UITextView *notesTextField;
 
 @end
 
 @implementation PatientVisitViewController
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.patientNameLabel.text = self.patientVisit.patient.name;
+  self.clinicianNameLabel.text = [[self.patientVisit.clinician anyObject] name];
+
+  PatientVisitStore* pvstore = [PatientVisitStore sharedPatientVisitStore];
+  self.notes = [pvstore notesForPatientVisit:self.patientVisit];
+  self.notesTextField.text = @"";
+  for (PatientVisitNotes* oneNote in self.notes) {
+    self.notesTextField.text = [self.notesTextField.text stringByAppendingString:oneNote.note];
+    self.notesTextField.text = [self.notesTextField.text stringByAppendingString:@"\n"];
+  }
+}
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
@@ -39,11 +59,6 @@
               format:@"Reason: You must use the designated initializer for this class"];
   return nil;
 
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "Patient.h"
 #import "PatientStore.h"
 #import "PatientVisitStore.h"
+#import "PatientVisitViewController.h"
 
 @interface NEMRPatientViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -130,6 +131,9 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return ![self isLastRow:[indexPath row]];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+  return @"Clinicians";
+}
 - (BOOL)            tableView:(UITableView *)tableView
 shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
@@ -165,6 +169,19 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
   cell.textLabel.text = [NSString stringWithFormat:@"%@",[[pv.clinician anyObject] name]];
   return cell;
+}
+
+- (void)      tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  NSLog(@"Selecting row at: %lu", (long)row);
+  PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
+  PatientVisitViewController* pvvc =
+      [[PatientVisitViewController alloc] initWithNibName:nil
+                                                   bundle:nil
+                                             patientVisit:pv];
+
+  [self.navigationController pushViewController:pvvc animated:YES];
 }
 
 @end

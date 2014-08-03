@@ -88,6 +88,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                               bundle:nil
                                           andPatient:p
                                         withDelegate:self];
+
   [self.navigationController pushViewController:pvc animated:YES];
 }
 
@@ -119,8 +120,7 @@ heightForHeaderInSection:(NSInteger)section {
 
 - (CGFloat)    tableView:(UITableView *)tableView
 heightForFooterInSection:(NSInteger)section {
-  NSLog(@"Returning 20 for footer height");
-  return 20;
+  return 0;
 }
 
 - (void) tableView:(UITableView *)tableView
@@ -187,10 +187,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (BOOL)            tableView:(UITableView *)tableView
 shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
-  if ([self isLastRow:row]) {
-    return NO;
-  }
-  return YES;
+  return ![self isLastRow:row];
 }
 
 - (IBAction) addNewItem: (id) sender {

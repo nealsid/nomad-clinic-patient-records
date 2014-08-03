@@ -29,8 +29,9 @@
 - (PatientVisit*) newPatientVisit {
   NSManagedObjectContext* ctx = self.managedObjectContext;
 
-  PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
-                                                   inManagedObjectContext:ctx];
+  PatientVisit* pv =
+      [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+                                    inManagedObjectContext:ctx];
   NSError* error;
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed"
@@ -93,7 +94,29 @@
     [NSException raise:@"Fetch failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
-  NSLog(@"%@", result);
+  return result;
+}
+
+- (NSArray*) notesForPatientVisit:(PatientVisit*)pv {
+  NSManagedObjectContext* ctx = self.managedObjectContext;
+  NSFetchRequest* req = [[NSFetchRequest alloc] init];
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisitNotes"
+                                       inManagedObjectContext:ctx];
+  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"note_date"
+                                                       ascending:YES];
+  req.sortDescriptors = @[sd];
+  req.entity = e;
+
+  NSPredicate *predicate =
+      [NSPredicate predicateWithFormat:@"patientVisit == %@", pv];
+  req.predicate = predicate;
+
+  NSError *error;
+  NSArray* result = [ctx executeFetchRequest:req error:&error];
+  if (!result) {
+    [NSException raise:@"Fetch failed"
+                format:@"Reason: %@", [error localizedDescription]];
+  }
   return result;
 }
 

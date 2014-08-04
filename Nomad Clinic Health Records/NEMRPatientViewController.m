@@ -100,7 +100,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-  return [[[PatientVisitStore sharedPatientVisitStore] patientVisitsForPatient:self.patient] count] + 1;
+  return [[[PatientVisitStore sharedPatientVisitStore]
+           patientVisitsForPatient:self.patient] count] + 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -131,9 +132,11 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
   return ![self isLastRow:[indexPath row]];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section {
   return @"Clinicians";
 }
+
 - (BOOL)            tableView:(UITableView *)tableView
 shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];

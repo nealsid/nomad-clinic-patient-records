@@ -161,6 +161,11 @@
       pvnote.note = @"This is a test note";
       pvnote.patientVisit = pv;
       pvnote.note_date = [NSDate date];
+      pvnote.bp_systolic = @120;
+      pvnote.bp_diastolic = @80;
+      pvnote.breathing_rate = @60;
+      pvnote.pulse = @75;
+      pvnote.temp_fahrenheit = @98.6;
     }
   }
 

@@ -12,6 +12,7 @@
 #import "Patient.h"
 #import "PatientVisit.h"
 #import "PatientVisitNotes.h"
+#import "SOAPViewController.h"
 
 @interface PatientVisitNoteViewController ()
 @property (weak, nonatomic) PatientVisitNotes* note;
@@ -24,6 +25,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *pulseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bodyTempLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *subjectiveButton;
+@property (weak, nonatomic) IBOutlet UIButton *objectiveButton;
+@property (weak, nonatomic) IBOutlet UIButton *assessmentButton;
+@property (weak, nonatomic) IBOutlet UIButton *planButton;
+
 @end
 
 @implementation PatientVisitNoteViewController
@@ -34,13 +40,6 @@
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     self.note = note;
-    self.dateLabel.text = [NSString stringWithFormat:@"%@", note.note_date];
-    self.patientNameLabel.text = [NSString stringWithFormat:@"%@", note.patientVisit.patient.name];
-    self.clinicianNameLabel.text = [NSString stringWithFormat:@"%@", [(Clinician*)[note.patientVisit.clinician anyObject] name]];
-    self.bpLabel.text = [NSString stringWithFormat:@"%@/%@", note.bp_systolic, note.bp_diastolic];
-    self.breathingRateLabel.text = [NSString stringWithFormat:@"%@", note.breathing_rate];
-    self.pulseLabel.text = [NSString stringWithFormat:@"%@", note.pulse];
-    self.bodyTempLabel.text = [NSString stringWithFormat:@"%@ ° F", note.temp_fahrenheit];
   }
   return self;
 }
@@ -53,12 +52,49 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  [super viewDidLoad];
+  self.dateLabel.text = [NSString stringWithFormat:@"%@", self.note.note_date];
+  self.patientNameLabel.text = [NSString stringWithFormat:@"%@", self.note.patientVisit.patient.name];
+  self.clinicianNameLabel.text = [NSString stringWithFormat:@"%@", [(Clinician*)[self.note.patientVisit.clinician anyObject] name]];
+  self.bpLabel.text = [NSString stringWithFormat:@"%@/%@", self.note.bp_systolic, self.note.bp_diastolic];
+  self.breathingRateLabel.text = [NSString stringWithFormat:@"%@", self.note.breathing_rate];
+  self.pulseLabel.text = [NSString stringWithFormat:@"%@", self.note.pulse];
+  self.bodyTempLabel.text = [NSString stringWithFormat:@"%@ ° F", self.note.temp_fahrenheit];
+
+  [self.subjectiveButton setTitle:self.note.subjective forState:UIControlStateNormal];
+  [self.objectiveButton setTitle:self.note.objective forState:UIControlStateNormal];
+  [self.assessmentButton setTitle:self.note.assessment forState:UIControlStateNormal];
+  [self.planButton setTitle:self.note.plan forState:UIControlStateNormal];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (IBAction)soapButton:(id)sender {
+  SOAPViewController* soapVc;
+  if (sender == self.subjectiveButton) {
+    soapVc = [[SOAPViewController alloc] initWithNibName:nil
+                                                  bundle:nil
+                                                soapType:S
+                                                    note:self.note.subjective];
+  }
+  if (sender == self.objectiveButton) {
+    soapVc = [[SOAPViewController alloc] initWithNibName:nil
+                                                  bundle:nil
+                                                soapType:O
+                                                    note:self.note.objective];
+  }
+  if (sender == self.assessmentButton) {
+    soapVc = [[SOAPViewController alloc] initWithNibName:nil
+                                                  bundle:nil
+                                                soapType:A
+                                                    note:self.note.assessment];
+  }
+  if (sender == self.planButton) {
+    soapVc = [[SOAPViewController alloc] initWithNibName:nil
+                                                  bundle:nil
+                                                soapType:P
+                                                    note:self.note.plan];
+  }
+  [self.navigationController pushViewController:soapVc animated:YES];
 }
+
 
 @end

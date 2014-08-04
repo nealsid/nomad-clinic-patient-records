@@ -154,19 +154,37 @@
     pv.patient = [patients objectAtIndex:i];
     pv.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
     NSLog(@"Creating pv for %@ - %@", pv.patient.name, [[pv.clinician anyObject] name]);
-    for (int j = 0; j < 2; ++j) {
-      PatientVisitNotes* pvnote =
-          [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
-                                        inManagedObjectContext:ctx];
-      pvnote.note = @"This is a test note";
-      pvnote.patientVisit = pv;
-      pvnote.note_date = [NSDate date];
-      pvnote.bp_systolic = @120;
-      pvnote.bp_diastolic = @80;
-      pvnote.breathing_rate = @60;
-      pvnote.pulse = @75;
-      pvnote.temp_fahrenheit = @98.6;
-    }
+    PatientVisitNotes* pvnote =
+    [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
+                                  inManagedObjectContext:ctx];
+    pvnote.note = @"This is test note #1";
+    pvnote.patientVisit = pv;
+    pvnote.note_date = [self dateFromMonth:10 day:2 year:2013];
+    pvnote.bp_systolic = @120;
+    pvnote.bp_diastolic = @80;
+    pvnote.breathing_rate = @60;
+    pvnote.pulse = @75;
+    pvnote.temp_fahrenheit = @98.6;
+    pvnote.subjective = @"This is the S in SOAP";
+    pvnote.objective = @"This is the O in SOAP";
+    pvnote.assessment = @"This is the A in SOAP";
+    pvnote.plan = @"This is the P in SOAP";
+
+    pvnote =
+    [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
+                                  inManagedObjectContext:ctx];
+    pvnote.note = @"This is test note #2";
+    pvnote.patientVisit = pv;
+    pvnote.note_date = [self dateFromMonth:10 day:2 year:2013];
+    pvnote.bp_systolic = @130;
+    pvnote.bp_diastolic = @100;
+    pvnote.breathing_rate = @70;
+    pvnote.pulse = @90;
+    pvnote.temp_fahrenheit = @102.6;
+    pvnote.subjective = @"This is the S in SOAP";
+    pvnote.objective = @"This is the O in SOAP";
+    pvnote.assessment = @"This is the A in SOAP";
+    pvnote.plan = @"This is the P in SOAP";
   }
 
   if (![ctx save:&error]) {

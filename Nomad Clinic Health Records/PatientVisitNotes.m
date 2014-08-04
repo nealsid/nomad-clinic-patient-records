@@ -2,7 +2,7 @@
 //  PatientVisitNotes.m
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 8/2/14.
+//  Created by Neal Sidhwaney on 8/4/14.
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
@@ -13,14 +13,18 @@
 
 @implementation PatientVisitNotes
 
+@dynamic bp_diastolic;
+@dynamic bp_systolic;
+@dynamic breathing_rate;
 @dynamic note;
 @dynamic note_date;
-@dynamic temp_fahrenheit;
 @dynamic pulse;
-@dynamic breathing_rate;
-@dynamic bp_systolic;
-@dynamic bp_diastolic;
-@dynamic patientVisit;
+@dynamic temp_fahrenheit;
+@dynamic subjective;
+@dynamic objective;
+@dynamic assessment;
+@dynamic plan;
 @dynamic chief_complaint;
+@dynamic patientVisit;
 
 @end

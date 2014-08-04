@@ -23,21 +23,25 @@
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="visits" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <entity name="PatientVisitNotes" representedClassName="PatientVisitNotes" syncable="YES">
+        <attribute name="assessment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="bp_diastolic" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="bp_systolic" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="breathing_rate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="objective" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plan" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pulse" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="subjective" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temp_fahrenheit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="chief_complaint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Complaint" inverseName="patients_with_complaint" inverseEntity="Complaint" syncable="YES"/>
         <relationship name="patientVisit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisit" inverseName="notes" inverseEntity="PatientVisit" syncable="YES"/>
     </entity>
     <elements>
         <element name="Clinician" positionX="81" positionY="99" width="128" height="73"/>
+        <element name="Complaint" positionX="-81" positionY="-99" width="128" height="73"/>
         <element name="Patient" positionX="-270" positionY="-261" width="128" height="133"/>
         <element name="PatientVisit" positionX="-63" positionY="18" width="128" height="28"/>
-        <element name="PatientVisitNotes" positionX="-56" positionY="-108" width="128" height="178"/>
-        <element name="Complaint" positionX="-81" positionY="-99" width="128" height="73"/>
+        <element name="PatientVisitNotes" positionX="-56" positionY="-108" width="128" height="240"/>
     </elements>
 </model>

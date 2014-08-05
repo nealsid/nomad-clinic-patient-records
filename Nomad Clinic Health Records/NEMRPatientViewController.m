@@ -95,7 +95,37 @@
                        forCellReuseIdentifier:@"UITableViewCell"];
     [self.patientNameField setText:self.patient.name];
     [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
+    [self.patientNameField setEnabled:NO];
+    [self.patientAgeField setEnabled:NO];
+    UIBarButtonItem* editPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                       target:self
+                                                                                       action:@selector(editPatient:)];
+    [self.navigationItem setRightBarButtonItem:editPatientButton];
+
   }
+}
+
+- (void)editPatient:(id)sender {
+  [self.patientNameField setEnabled:YES];
+  [self.patientAgeField setEnabled:YES];
+  [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
+  [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
+
+  UIBarButtonItem* doneEditingButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                     target:self
+                                                                                     action:@selector(doneEditingPatient:)];
+  [self.navigationItem setRightBarButtonItem:doneEditingButton];
+}
+
+- (void)doneEditingPatient:(id)sender {
+  [self.patientNameField setEnabled:NO];
+  [self.patientAgeField setEnabled:NO];
+  [self.patientNameField setBorderStyle:UITextBorderStyleNone];
+  [self.patientAgeField setBorderStyle:UITextBorderStyleNone];
+  UIBarButtonItem* editPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                                     target:self
+                                                                                     action:@selector(editPatient:)];
+  [self.navigationItem setRightBarButtonItem:editPatientButton];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
@@ -134,7 +164,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
-  return @"Clinicians";
+  return @"Visits";
 }
 
 - (BOOL)            tableView:(UITableView *)tableView
@@ -170,14 +200,14 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return nil;
   }
   PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
-  cell.textLabel.text = [NSString stringWithFormat:@"%@",[[pv.clinician anyObject] name]];
+  cell.textLabel.text = [NSString stringWithFormat:@"%@",
+                         pv.visit_date];
   return cell;
 }
 
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
-  NSLog(@"Selecting row at: %lu", (long)row);
   PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
   PatientVisitViewController* pvvc =
       [[PatientVisitViewController alloc] initWithNibName:nil

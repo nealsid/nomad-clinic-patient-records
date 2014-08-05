@@ -12,6 +12,7 @@
 #import "Patient.h"
 #import "PatientVisit.h"
 #import "PatientVisitNotes.h"
+#import "PatientVisitStore.h"
 #import "SOAPViewController.h"
 
 @interface PatientVisitNoteViewController ()
@@ -30,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *assessmentButton;
 @property (weak, nonatomic) IBOutlet UIButton *planButton;
 
+- (void)displayNoteInUI;
+
 @end
 
 @implementation PatientVisitNoteViewController
@@ -37,6 +40,7 @@
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
                 patientVisitNote:(PatientVisitNotes*)note {
+  
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     self.note = note;
@@ -53,6 +57,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self displayNoteInUI];
+}
+
+- (void)displayNoteInUI {
   self.dateLabel.text = [NSString stringWithFormat:@"%@", self.note.note_date];
   self.patientNameLabel.text = [NSString stringWithFormat:@"%@", self.note.patientVisit.patient.name];
   self.clinicianNameLabel.text = [NSString stringWithFormat:@"%@", [(Clinician*)[self.note.patientVisit.clinician anyObject] name]];
@@ -66,34 +74,56 @@
   [self.assessmentButton setTitle:self.note.assessment forState:UIControlStateNormal];
   [self.planButton setTitle:self.note.plan forState:UIControlStateNormal];
 }
-
 - (IBAction)soapButton:(id)sender {
   SOAPViewController* soapVc;
+  SOAPEntryType entryType = S;
+  NSString* noteText;
+
   if (sender == self.subjectiveButton) {
-    soapVc = [[SOAPViewController alloc] initWithNibName:nil
-                                                  bundle:nil
-                                                soapType:S
-                                                    note:self.note.subjective];
+    entryType = S;
+    noteText = self.note.subjective;
   }
   if (sender == self.objectiveButton) {
-    soapVc = [[SOAPViewController alloc] initWithNibName:nil
-                                                  bundle:nil
-                                                soapType:O
-                                                    note:self.note.objective];
+    entryType = O;
+    noteText = self.note.objective;
   }
   if (sender == self.assessmentButton) {
-    soapVc = [[SOAPViewController alloc] initWithNibName:nil
-                                                  bundle:nil
-                                                soapType:A
-                                                    note:self.note.assessment];
+    entryType = A;
+    noteText = self.note.assessment;
   }
   if (sender == self.planButton) {
-    soapVc = [[SOAPViewController alloc] initWithNibName:nil
-                                                  bundle:nil
-                                                soapType:P
-                                                    note:self.note.plan];
+    entryType = P;
+    noteText = self.note.plan;
   }
+
+  soapVc = [[SOAPViewController alloc] initWithNibName:nil
+                                                bundle:nil
+                                              soapType:entryType
+                                                  note:noteText
+                                              delegate:self];
+  
   [self.navigationController pushViewController:soapVc animated:YES];
+}
+
+- (void) soapViewController:(SOAPViewController *)vc
+                saveNewNote:(NSString *)newNote
+                    forType:(SOAPEntryType)type {
+  switch(type) {
+    case S:
+      self.note.subjective = newNote;
+      break;
+    case O:
+      self.note.objective = newNote;
+      break;
+    case A:
+      self.note.assessment = newNote;
+      break;
+    case P:
+      self.note.plan = newNote;
+      break;
+  }
+  [[PatientVisitStore sharedPatientVisitStore] saveChanges];
+  [self displayNoteInUI];
 }
 
 

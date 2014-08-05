@@ -33,6 +33,7 @@
   [super viewDidLoad];
   self.patientNameLabel.text = self.patientVisit.patient.name;
   self.clinicianNameLabel.text = [[self.patientVisit.clinician anyObject] name];
+  self.title = @"Patient Visit";
 }
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
@@ -62,7 +63,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
-  return @"Notes";
+  return @"Visits";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

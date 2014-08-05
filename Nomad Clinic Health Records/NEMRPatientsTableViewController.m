@@ -57,6 +57,10 @@
 //  [self.tableView setTableHeaderView:headerView];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   [self.navigationController setTitle:@"Patient"];
+  UIBarButtonItem* newPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                    target:self
+                                                                                    action:@selector(addNewItem:)];
+  [self.navigationItem setRightBarButtonItem:newPatientButton];
 }
 
 - (UIView*) headerView {
@@ -114,8 +118,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (CGFloat)    tableView:(UITableView *)tableView
 heightForHeaderInSection:(NSInteger)section {
-  NSLog(@"Returning 20 for header height");
-  return 20;
+  return 0;
 }
 
 - (CGFloat)    tableView:(UITableView *)tableView

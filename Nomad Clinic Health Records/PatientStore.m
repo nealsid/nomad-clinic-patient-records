@@ -153,6 +153,7 @@
                                                      inManagedObjectContext:ctx];
     pv.patient = [patients objectAtIndex:i];
     pv.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
+    pv.visit_date = [NSDate date];
     NSLog(@"Creating pv for %@ - %@", pv.patient.name, [[pv.clinician anyObject] name]);
     PatientVisitNotes* pvnote =
     [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"

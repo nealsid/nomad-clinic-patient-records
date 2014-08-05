@@ -17,10 +17,22 @@ typedef NS_ENUM(NSInteger, SOAPEntryType) {
   P    // Plan
 };
 
+@class SOAPViewController;
+
+@protocol SOAPNoteViewControllerDelegate
+
+- (void) soapViewController:(SOAPViewController*)vc saveNewNote:(NSString*)s
+                    forType:(SOAPEntryType)type;
+
+@end
+
 @interface SOAPViewController : UIViewController
+
+- (NSString*) stringForSoapEntryType:(SOAPEntryType)s;
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
                         soapType:(SOAPEntryType)s
-                            note:(NSString*)text;
+                            note:(NSString*)text
+                        delegate:(id<SOAPNoteViewControllerDelegate>)delegate;
 @end

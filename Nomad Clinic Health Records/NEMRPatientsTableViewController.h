@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NEMRPatientViewController.h"
 
-@interface NEMRPatientsTableViewController : UITableViewController <NEMRPatientViewControllerDelegate>
+@interface NEMRPatientsTableViewController : UITableViewController
 @end

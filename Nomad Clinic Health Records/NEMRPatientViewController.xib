@@ -9,9 +9,8 @@
                 <outlet property="cancelButton" destination="LQ9-ga-Xd1" id="6hr-az-A5u"/>
                 <outlet property="patientAgeField" destination="L8o-xQ-s9O" id="Jqj-fk-Nj5"/>
                 <outlet property="patientNameField" destination="EmV-nv-Q8B" id="ZBq-l2-IkQ"/>
-                <outlet property="patientPictureCamera" destination="F1O-iO-CDc" id="JiZ-Q2-gx7"/>
                 <outlet property="patientVisitTableView" destination="YAY-gi-yS4" id="dHg-wS-K4K"/>
-                <outlet property="saveButton" destination="lcd-No-xgR" id="u6x-7A-V46"/>
+                <outlet property="toolbar" destination="whu-Lk-jtB" id="7tT-5T-0aK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,15 +19,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whu-Lk-jtB">
+                <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whu-Lk-jtB">
                     <rect key="frame" x="0.0" y="556" width="400" height="44"/>
                     <items>
-                        <barButtonItem systemItem="camera" id="F1O-iO-CDc"/>
-                        <barButtonItem systemItem="save" id="lcd-No-xgR">
-                            <connections>
-                                <action selector="saveButtonAction:" destination="-1" id="ZmU-7F-MDp"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Dfu-kM-61r"/>
                         <barButtonItem systemItem="cancel" id="LQ9-ga-Xd1">
                             <connections>
                                 <action selector="cancelButtonAction:" destination="-1" id="5qd-mP-2Ck"/>
@@ -43,13 +37,22 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="232" width="280" height="285"/>
+                        <rect key="frame" x="20" y="395" width="280" height="122"/>
                     </variation>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ho5-VO-Y3M"/>
                         <outlet property="delegate" destination="-1" id="faw-2c-JSi"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecy-JI-8Y9">
+                    <rect key="frame" x="20" y="65" width="46" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="20" y="84" width="46" height="21"/>
+                    </variation>
+                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uN-F7-Oym">
                     <rect key="frame" x="22" y="120" width="31" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -66,6 +69,9 @@
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="94" y="80" width="206" height="30"/>
                     </variation>
+                    <connections>
+                        <action selector="nameChanged:" destination="-1" eventType="editingChanged" id="psH-rn-rv9"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L8o-xQ-s9O">
                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -75,15 +81,18 @@
                         <rect key="frame" x="94" y="118" width="206" height="30"/>
                     </variation>
                 </textField>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecy-JI-8Y9">
-                    <rect key="frame" x="20" y="65" width="46" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eTi-fJ-6DU">
+                    <rect key="frame" x="-160" y="-81" width="320" height="162"/>
+                    <date key="date" timeIntervalSinceReferenceDate="429042218.97334301">
+                        <!--2014-08-06 18:23:38 +0000-->
+                    </date>
+                    <date key="maximumDate" timeIntervalSinceReferenceDate="441716400">
+                        <!--2014-12-31 11:00:00 +0000-->
+                    </date>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="84" width="46" height="21"/>
+                        <rect key="frame" x="20" y="154" width="280" height="162"/>
                     </variation>
-                </label>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
@@ -96,15 +105,17 @@
                 <mask key="subviews">
                     <exclude reference="YAY-gi-yS4"/>
                     <exclude reference="L8o-xQ-s9O"/>
+                    <exclude reference="eTi-fJ-6DU"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
                     <include reference="YAY-gi-yS4"/>
                     <include reference="L8o-xQ-s9O"/>
+                    <include reference="eTi-fJ-6DU"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="139" y="135"/>
+            <point key="canvasLocation" x="139" y="137"/>
         </view>
     </objects>
 </document>

@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Patient.h"
 
-@protocol NEMRPatientViewControllerDelegate;
-
 @interface NEMRPatientViewController : UIViewController
 
 /**
@@ -23,15 +21,6 @@
  */
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
-                     andPatient:(Patient*)p
-                   withDelegate:(id<NEMRPatientViewControllerDelegate>)delegate;
-
-@end
-
-@protocol NEMRPatientViewControllerDelegate
-
-- (void) patientViewControllerSave:(NEMRPatientViewController*)patientViewController
-               patient:(Patient*)p;
-- (void) patientViewControllerCancel:(NEMRPatientViewController*)patientViewController;
+                     andPatient:(Patient*)p;
 
 @end

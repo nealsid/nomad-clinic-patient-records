@@ -15,22 +15,36 @@
 @interface NEMRPatientViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) Patient* patient;
-@property (weak, nonatomic) id<NEMRPatientViewControllerDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *patientPictureCamera;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UITableView* patientVisitTableView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (weak, nonatomic) PatientVisitStore* patientVisitStore;
+
+- (void) updateTitleFromPatientNameField;
 
 @end
 
 @implementation NEMRPatientViewController
 
-- (IBAction)saveButtonAction:(id)sender {
+- (IBAction)nameChanged:(id)sender {
+  [self updateTitleFromPatientNameField];
+}
+
+- (void) updateTitleFromPatientNameField {
+  NSString* nameField = self.patientNameField.text;
+
+  if (!self.patient && [nameField length] == 0) {
+    self.title = @"New patient";
+  } else {
+    self.title = self.patientNameField.text;
+  }
+}
+
+- (void) saveChangesIfNecessary {
   NSString* newName = self.patientNameField.text;
 
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
@@ -57,23 +71,41 @@
   if (requiresSave) {
     [[PatientStore sharedPatientStore] saveChanges];
   }
-  [self.delegate patientViewControllerSave:self patient:self.patient];
+  [self updateUIWithPatient];
 }
 
 - (IBAction)cancelButtonAction:(id)sender {
-  [self.delegate patientViewControllerCancel:self];
+  [self updateUIWithPatient];
+  [self setEditing:NO animated:NO];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+  [super setEditing:editing animated:animated];
+  if (editing) {
+    [self.patientNameField setEnabled:YES];
+    [self.patientAgeField setEnabled:YES];
+    [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.toolbar setHidden:NO];
+  } else {
+    [self.patientNameField setEnabled:NO];
+    [self.patientAgeField setEnabled:NO];
+    [self.patientNameField setBorderStyle:UITextBorderStyleNone];
+    [self.patientAgeField setBorderStyle:UITextBorderStyleNone];
+    [self.toolbar setHidden:YES];
+    [self saveChangesIfNecessary];
+  }
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
-                     andPatient:(Patient*)p
-                   withDelegate:(id<NEMRPatientViewControllerDelegate>)delegate {
+                     andPatient:(Patient*)p {
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil];
   if (self) {
     self.patient = p;
-    self.delegate = delegate;
     self.patientVisitStore = [PatientVisitStore sharedPatientVisitStore];
+    [self updateTitleFromPatientNameField];
   }
 
   return self;
@@ -83,49 +115,27 @@
                          bundle:(NSBundle *)nibBundleOrNil {
   self = [self initWithNibName:nibNameOrNil
                         bundle:nibBundleOrNil
-                    andPatient:nil
-                  withDelegate:nil];
+                    andPatient:nil];
   return self;
+}
+
+- (void)updateUIWithPatient {
+  [self.patientNameField setText:self.patient.name];
+  [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
+  [self updateTitleFromPatientNameField];
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
   if (self.patient != nil) {
     [self.patientVisitTableView registerClass:[UITableViewCell class]
                        forCellReuseIdentifier:@"UITableViewCell"];
-    [self.patientNameField setText:self.patient.name];
-    [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
-    [self.patientNameField setEnabled:NO];
-    [self.patientAgeField setEnabled:NO];
-    UIBarButtonItem* editPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                       target:self
-                                                                                       action:@selector(editPatient:)];
-    [self.navigationItem setRightBarButtonItem:editPatientButton];
-
+    [self updateUIWithPatient];
+    [self setEditing:NO animated:NO];
+  } else {
+    [self setEditing:YES animated:NO];
   }
-}
-
-- (void)editPatient:(id)sender {
-  [self.patientNameField setEnabled:YES];
-  [self.patientAgeField setEnabled:YES];
-  [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
-  [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
-
-  UIBarButtonItem* doneEditingButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                     target:self
-                                                                                     action:@selector(doneEditingPatient:)];
-  [self.navigationItem setRightBarButtonItem:doneEditingButton];
-}
-
-- (void)doneEditingPatient:(id)sender {
-  [self.patientNameField setEnabled:NO];
-  [self.patientAgeField setEnabled:NO];
-  [self.patientNameField setBorderStyle:UITextBorderStyleNone];
-  [self.patientAgeField setBorderStyle:UITextBorderStyleNone];
-  UIBarButtonItem* editPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
-                                                                                     target:self
-                                                                                     action:@selector(editPatient:)];
-  [self.navigationItem setRightBarButtonItem:editPatientButton];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView

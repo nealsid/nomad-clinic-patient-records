@@ -22,7 +22,7 @@
 /**
  * Fetches PatientVisits from store and returns them as an array
  *
- * @param p A patient to fetch visits for, or nil for all visits.
+ * @param p A patient to fetch visits for.  If nil, no visits are returned.
  * @returns NSArray of PatientVisits
  */
 - (NSArray*) patientVisitsForPatient:(Patient*)p;

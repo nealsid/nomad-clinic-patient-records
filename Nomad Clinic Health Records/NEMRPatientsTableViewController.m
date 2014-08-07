@@ -39,7 +39,6 @@
   if (self) {
     self.itemFont = [UIFont systemFontOfSize:20];
     self.patientStore = [PatientStore sharedPatientStore];
-    self.patients = [self.patientStore patients];
   }
   return self;
 }
@@ -53,14 +52,19 @@
   [super viewDidLoad];
   [self.tableView registerClass:[UITableViewCell class]
          forCellReuseIdentifier:@"UITableViewCell"];
-//  UIView* headerView = self.headerView;
-//  [self.tableView setTableHeaderView:headerView];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  [self.navigationController setTitle:@"Patient"];
+  self.title = @"Patients";
   UIBarButtonItem* newPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                     target:self
                                                                                     action:@selector(addNewItem:)];
   [self.navigationItem setRightBarButtonItem:newPatientButton];
+  self.patients = [self.patientStore patients];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  self.patients = [self.patientStore patients];
+  [self.tableView reloadData];
 }
 
 - (UIView*) headerView {
@@ -90,8 +94,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NEMRPatientViewController* pvc =
   [[NEMRPatientViewController alloc] initWithNibName:nil
                                               bundle:nil
-                                          andPatient:p
-                                        withDelegate:self];
+                                          andPatient:p];
 
   [self.navigationController pushViewController:pvc animated:YES];
 }
@@ -173,7 +176,11 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   cell.textLabel.text = p.name;
 
   [cell.textLabel setFont:self.itemFont];
-  cell.detailTextLabel.text = @"1980/09/02";
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+  [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"Born on %@",
+                               [dateFormatter stringFromDate:p.dob]];
   NSString* imagePath;
   if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
     imagePath = [[NSBundle mainBundle] pathForResource:@"female-patient"
@@ -197,10 +204,8 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
   NEMRPatientViewController* pvc =
     [[NEMRPatientViewController alloc] initWithNibName:nil
                                                 bundle:nil
-                                            andPatient:nil
-                                          withDelegate:self];
-
-  [self presentViewController:pvc animated:YES completion:nil];
+                                            andPatient:nil];
+  [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (IBAction) toggleEditing: (id) sender {

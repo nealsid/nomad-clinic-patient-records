@@ -6,125 +6,91 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AgeEditViewController">
             <connections>
-                <outlet property="ageRangeView" destination="Wp4-76-YLs" id="APK-LN-ht4"/>
-                <outlet property="datePicker" destination="ig3-3M-44O" id="F81-wf-g0s"/>
-                <outlet property="dobPickerView" destination="JwD-QQ-tes" id="ggZ-NA-eiq"/>
-                <outlet property="specificAgeView" destination="sRS-y2-dDe" id="kSv-R6-eIR"/>
+                <outlet property="ageRangeButton" destination="bO5-bx-uz7" id="yRf-g2-PEt"/>
+                <outlet property="dobButton" destination="XjR-1X-5Me" id="dNb-jM-wBX"/>
+                <outlet property="specificAgeButton" destination="p8C-gi-N5K" id="jGN-Kk-csj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRS-y2-dDe">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PLM-dC-6Zy">
-                            <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <variation key="widthClass=compact" fixedFrame="YES">
-                                <rect key="frame" x="138" y="32" width="58" height="30"/>
-                            </variation>
-                        </textField>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyS-Jj-6Gp">
-                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                            <variation key="widthClass=compact" fixedFrame="YES">
-                                <rect key="frame" x="99" y="35" width="31" height="21"/>
-                            </variation>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="5"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <variation key="default">
-                        <mask key="subviews">
-                            <exclude reference="PLM-dC-6Zy"/>
-                            <exclude reference="vyS-Jj-6Gp"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="155" width="280" height="123"/>
-                        <mask key="subviews">
-                            <include reference="PLM-dC-6Zy"/>
-                            <include reference="vyS-Jj-6Gp"/>
-                        </mask>
-                    </variation>
-                </view>
-                <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-76-YLs">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="5"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="277" width="280" height="123"/>
-                    </variation>
-                </view>
-                <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwD-QQ-tes">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <subviews>
-                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ig3-3M-44O">
-                            <rect key="frame" x="-160" y="-81" width="320" height="162"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <date key="date" timeIntervalSinceReferenceDate="429220580.77327698">
-                                <!--2014-08-08 19:56:20 +0000-->
-                            </date>
-                            <date key="maximumDate" timeIntervalSinceReferenceDate="504874800">
-                                <!--2016-12-31 11:00:00 +0000-->
-                            </date>
-                            <variation key="widthClass=compact" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="162"/>
-                            </variation>
-                            <connections>
-                                <action selector="datePickerTouchdown:" destination="-1" eventType="touchDown" id="ukX-5D-1Ij"/>
-                                <action selector="datePickerTouchdown:" destination="-1" eventType="valueChanged" id="y83-db-tpE"/>
-                            </connections>
-                        </datePicker>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="5"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <variation key="default">
-                        <mask key="subviews">
-                            <exclude reference="ig3-3M-44O"/>
-                        </mask>
-                    </variation>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="400" width="280" height="162"/>
-                        <mask key="subviews">
-                            <include reference="ig3-3M-44O"/>
-                        </mask>
-                    </variation>
-                </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can set the patient's age in 3 different ways:  By entering an age, entering a range, or entering a date of birth." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Dbh-1E-gyX">
                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="67" width="280" height="80"/>
+                        <rect key="frame" x="20" y="51" width="280" height="80"/>
+                    </variation>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8C-gi-N5K">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Specific Age (e.g. 19)">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="20" y="177" width="280" height="54"/>
+                    </variation>
+                    <connections>
+                        <action selector="specificAgeButton:" destination="-1" eventType="touchUpInside" id="ROC-Ql-I2M"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bO5-bx-uz7">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Age Range (e.g. 34-36)">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="20" y="239" width="280" height="54"/>
+                    </variation>
+                    <connections>
+                        <action selector="ageRangeButton:" destination="-1" eventType="touchUpInside" id="yij-Sj-4Xf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjR-1X-5Me">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Birthday (e.g. Aug 21st, 1986)">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="20" y="301" width="280" height="54"/>
+                    </variation>
+                    <connections>
+                        <action selector="dateOfBirthButton:" destination="-1" eventType="touchUpInside" id="wvq-YH-q5M"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This space intentionally left blank." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCy-2W-oWA">
+                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="widthClass=compact" fixedFrame="YES">
+                        <rect key="frame" x="20" y="449" width="280" height="21"/>
                     </variation>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4">
                 <size key="portraitSize" width="320" height="568"/>
@@ -132,18 +98,20 @@
             </simulatedScreenMetrics>
             <variation key="default">
                 <mask key="subviews">
-                    <exclude reference="sRS-y2-dDe"/>
-                    <exclude reference="Wp4-76-YLs"/>
-                    <exclude reference="JwD-QQ-tes"/>
                     <exclude reference="Dbh-1E-gyX"/>
+                    <exclude reference="p8C-gi-N5K"/>
+                    <exclude reference="bO5-bx-uz7"/>
+                    <exclude reference="XjR-1X-5Me"/>
+                    <exclude reference="DCy-2W-oWA"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
                 <mask key="subviews">
-                    <include reference="sRS-y2-dDe"/>
-                    <include reference="Wp4-76-YLs"/>
-                    <include reference="JwD-QQ-tes"/>
                     <include reference="Dbh-1E-gyX"/>
+                    <include reference="p8C-gi-N5K"/>
+                    <include reference="bO5-bx-uz7"/>
+                    <include reference="XjR-1X-5Me"/>
+                    <include reference="DCy-2W-oWA"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="139" y="68"/>

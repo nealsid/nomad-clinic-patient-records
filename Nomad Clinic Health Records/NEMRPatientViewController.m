@@ -6,11 +6,14 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
+#import "AgeEditViewController.h"
 #import "NEMRPatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
 #import "PatientVisitStore.h"
 #import "PatientVisitViewController.h"
+
+#import <QuartzCore/QuartzCore.h>
 
 @interface NEMRPatientViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -23,12 +26,26 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (weak, nonatomic) PatientVisitStore* patientVisitStore;
+@property (weak, nonatomic) IBOutlet UISwitch *dobSwitch;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 - (void) updateTitleFromPatientNameField;
 
 @end
 
 @implementation NEMRPatientViewController
+- (IBAction)agebutton:(id)sender {
+  AgeEditViewController* vc = [[AgeEditViewController alloc] init];
+  [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (IBAction)dobSwitchSwitched:(id)sender {
+  if ([self.dobSwitch isOn]) {
+    [self.datePicker setHidden:NO];
+  } else {
+    [self.datePicker setHidden:YES];
+  }
+}
 
 - (IBAction)nameChanged:(id)sender {
   [self updateTitleFromPatientNameField];
@@ -38,56 +55,94 @@
   NSString* nameField = self.patientNameField.text;
 
   if (!self.patient && [nameField length] == 0) {
-    self.title = @"New patient";
+    self.title = @"New Patient";
   } else {
     self.title = self.patientNameField.text;
   }
 }
 
+- (BOOL) patientFieldsValidForSave {
+  return [self.patientNameField.text length] > 0 &&
+    [self.patientAgeField.text length] > 0;
+}
+
+- (void) highlightInvalidUIElements {
+  if ([self.patientNameField.text length] == 0) {
+    self.patientNameField.layer.cornerRadius = 8.0f;
+    self.patientNameField.layer.masksToBounds = YES;
+    self.patientNameField.layer.borderColor = [[UIColor redColor]CGColor];
+    self.patientNameField.layer.borderWidth = 1.0f;
+  } else {
+    self.patientNameField.layer.borderColor = [[UIColor clearColor] CGColor];
+  }
+
+  if ([self.patientAgeField.text length] == 0) {
+    self.patientAgeField.layer.cornerRadius = 8.0f;
+    self.patientAgeField.layer.masksToBounds = YES;
+    self.patientAgeField.layer.borderColor = [[UIColor redColor]CGColor];
+    self.patientAgeField.layer.borderWidth = 1.0f;
+  } else {
+    self.patientAgeField.layer.borderColor = [[UIColor clearColor] CGColor];
+  }
+}
 - (void) saveChangesIfNecessary {
   NSString* newName = self.patientNameField.text;
+
+  BOOL requiresSave = NO;
+
+  // If we're adding a patient and the field length is > 0.
+  if (!self.patient && [newName length] > 0) {
+    requiresSave = YES;
+  } else if (![newName isEqualToString:self.patient.name]) {
+    // Or if the user has modified the patient name.
+    requiresSave = YES;
+  }
 
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
   NSNumber * newAge = [f numberFromString:self.patientAgeField.text];
-  BOOL requiresSave = NO;
-  if (self.patient == nil) {
-    Patient* p = [[PatientStore sharedPatientStore] newPatient];
-    self.patient = p;
-  }
-
-  if ((self.patient.name == nil && [newName length] != 0) ||
-      ![newName isEqualToString:self.patient.name]) {
-    requiresSave = YES;
-    self.patient.name = newName;
-  }
 
   if ((self.patient.age == nil && [self.patientAgeField.text length] != 0) ||
       ![newAge isEqualToNumber:self.patient.age]) {
     requiresSave = YES;
-    self.patient.age = newAge;
   }
 
   if (requiresSave) {
+    if (self.patient == nil) {
+      Patient* p = [[PatientStore sharedPatientStore] newPatient];
+      self.patient = p;
+    }
+    self.patient.name = newName;
+    self.patient.age = newAge;
     [[PatientStore sharedPatientStore] saveChanges];
   }
+
   [self updateUIWithPatient];
 }
 
 - (IBAction)cancelButtonAction:(id)sender {
+  if (!self.patient) {
+    [self.navigationController popViewControllerAnimated:YES];
+    return;
+  }
   [self updateUIWithPatient];
   [self setEditing:NO animated:NO];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-  [super setEditing:editing animated:animated];
   if (editing) {
+    [super setEditing:editing animated:animated];
     [self.patientNameField setEnabled:YES];
     [self.patientAgeField setEnabled:YES];
     [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
     [self.toolbar setHidden:NO];
   } else {
+    [self highlightInvalidUIElements];
+    if (![self patientFieldsValidForSave]) {
+      return;
+    }
+    [super setEditing:editing animated:animated];
     [self.patientNameField setEnabled:NO];
     [self.patientAgeField setEnabled:NO];
     [self.patientNameField setBorderStyle:UITextBorderStyleNone];
@@ -136,6 +191,8 @@
   } else {
     [self setEditing:YES animated:NO];
   }
+  [self.patientAgeField setRightView:[UIButton new]];
+  self.patientAgeField.rightViewMode = UITextFieldViewModeUnlessEditing;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView

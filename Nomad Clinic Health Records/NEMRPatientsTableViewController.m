@@ -217,18 +217,18 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     [self setEditing:YES animated:YES];
   }
 }
-
-- (void) patientViewControllerSave:(NEMRPatientViewController*)patientViewController
-                           patient:(Patient*)p {
-  [self dismissViewControllerAnimated:YES
-                           completion:nil];
-  self.patients = [self.patientStore patients];
-  [self.tableView reloadData];
-}
-
-- (void) patientViewControllerCancel:(NEMRPatientViewController*)patientViewController {
-  [self dismissViewControllerAnimated:YES
-                           completion:nil];
-}
+//
+//- (void) patientViewControllerSave:(NEMRPatientViewController*)patientViewController
+//                           patient:(Patient*)p {
+//  [self dismissViewControllerAnimated:YES
+//                           completion:nil];
+//  self.patients = [self.patientStore patients];
+//  [self.tableView reloadData];
+//}
+//
+//- (void) patientViewControllerCancel:(NEMRPatientViewController*)patientViewController {
+//  [self dismissViewControllerAnimated:YES
+//                           completion:nil];
+//}
 
 @end

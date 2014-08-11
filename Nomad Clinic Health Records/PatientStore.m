@@ -10,6 +10,7 @@
 #import "PatientStore.h"
 
 #import "Clinician.h"
+#import "FlexDate.h"
 #import "Patient.h"
 #import "PatientVisit.h"
 #import "PatientVisitNotes.h"
@@ -117,21 +118,30 @@
   NSArray* patientNames = @[@"Neal Sidhwaney",
                             @"Bob Jones",
                             @"Jane Doe",
-                            @"Tenzin Dolma Lama"];
-  NSArray* patientAges = @[@34, @30, @29, @30];
+                            @""];
+  NSMutableArray* flexDates = [NSMutableArray array];
+  for(int i = 0 ; i < 2 ; ++i) {
+    FlexDate* f = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
+                                                inManagedObjectContext:ctx];
+    f.minimum_year = @(1980 + i);
+    f.maximum_year = @(1981 + i);
+    [flexDates addObject:f];
+  }
+  for(int i = 0 ; i < 3 ; ++i) {
+    FlexDate* f = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
+                                                inManagedObjectContext:ctx];
+    f.specificdate = [self dateFromMonth:9 day:2 year:(1980 + i)];
+    [flexDates addObject:f];
+  }
+
   NSArray* patientGenders = @[@1, @1, @0, @0];
-  NSArray* patientDob = @[[self dateFromMonth:9 day:2 year:1980],
-                          [self dateFromMonth:5 day:30 year:1990],
-                          [self dateFromMonth:6 day:2 year:1980],
-                          [self dateFromMonth:6 day:2 year:1990]];
   NSMutableArray* patients = [[NSMutableArray alloc] init];
   for (int i = 0; i < [patientNames count]; ++i) {
     Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
                                                inManagedObjectContext:ctx];
     p.name = [patientNames objectAtIndex:i];
     p.gender = [patientGenders objectAtIndex:i];
-    p.age = [patientAges objectAtIndex:i];
-    p.dob = [patientDob objectAtIndex:i];
+    p.dob = [flexDates objectAtIndex:i];
     [patients addObject:p];
   }
 

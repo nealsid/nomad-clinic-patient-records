@@ -15,7 +15,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface NEMRPatientViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface NEMRPatientViewController () <UITableViewDataSource,UITableViewDelegate, AgeChosenDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 
@@ -24,17 +24,40 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UITableView* patientVisitTableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIButton *ageButton;
 
 @property (weak, nonatomic) PatientVisitStore* patientVisitStore;
-@property (weak, nonatomic) IBOutlet UISwitch *dobSwitch;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
+@property (strong, nonatomic) NSDate* chosenDate;
+@property NSNumber* chosenAge;
+@property NSNumber* chosenMinAge;
+@property NSNumber* chosenMaxAge;
+@property BOOL ageSet;
 
 - (void) updateTitleFromPatientNameField;
 
 @end
 
 @implementation NEMRPatientViewController
-- (IBAction)agebutton:(id)sender {
+
+- (void)ageWasChosenByBirthdate:(NSDate *)birthDate {
+  self.chosenDate = birthDate;
+  self.ageSet = YES;
+}
+
+- (void)ageWasChosenByAge:(NSInteger)age {
+  self.chosenAge = [NSNumber numberWithInteger:age];
+  self.ageSet = YES;
+}
+
+- (void)ageWasChosenByAgeRange:(NSInteger)minAge
+                            to:(NSInteger)maxAge {
+  self.chosenMinAge = [NSNumber numberWithInteger:minAge];
+  self.chosenMaxAge = [NSNumber numberWithInteger:maxAge];
+  self.ageSet = YES;
+}
+
+- (IBAction)ageButtonPushed:(id)sender {
   AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] initWithNibName:nil
                                                                                     bundle:nil
                                                                                patientName:self.patient.name
@@ -42,16 +65,13 @@
   [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)dobSwitchSwitched:(id)sender {
-  if ([self.dobSwitch isOn]) {
-    [self.datePicker setHidden:NO];
-  } else {
-    [self.datePicker setHidden:YES];
-  }
-}
-
+// This is connected to the value changed event, so we can update the
+// view title.
 - (IBAction)nameChanged:(id)sender {
   [self updateTitleFromPatientNameField];
+}
+
+- (void)formatAgeField {
 }
 
 - (void) updateTitleFromPatientNameField {
@@ -88,6 +108,7 @@
     self.patientAgeField.layer.borderColor = [[UIColor clearColor] CGColor];
   }
 }
+
 - (void) saveChangesIfNecessary {
   NSString* newName = self.patientNameField.text;
 
@@ -103,12 +124,12 @@
 
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
-  NSNumber * newAge = [f numberFromString:self.patientAgeField.text];
+//  NSNumber * newAge = [f numberFromString:self.patientAgeField.text];
 
-  if ((self.patient.age == nil && [self.patientAgeField.text length] != 0) ||
-      ![newAge isEqualToNumber:self.patient.age]) {
-    requiresSave = YES;
-  }
+//  if ((self.patient.age == nil && [self.patientAgeField.text length] != 0) ||
+//      ![newAge isEqualToNumber:self.patient.age]) {
+//    requiresSave = YES;
+//  }
 
   if (requiresSave) {
     if (self.patient == nil) {
@@ -116,7 +137,7 @@
       self.patient = p;
     }
     self.patient.name = newName;
-    self.patient.age = newAge;
+//    self.patient.age = newAge;
     [[PatientStore sharedPatientStore] saveChanges];
   }
 
@@ -136,20 +157,27 @@
   if (editing) {
     [super setEditing:editing animated:animated];
     [self.patientNameField setEnabled:YES];
-    [self.patientAgeField setEnabled:YES];
     [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
-    [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
+
+    [self.patientAgeField setHidden:YES];
+    [self.ageButton setHidden:NO];
+
     [self.toolbar setHidden:NO];
   } else {
+
     [self highlightInvalidUIElements];
+
     if (![self patientFieldsValidForSave]) {
       return;
     }
+
     [super setEditing:editing animated:animated];
     [self.patientNameField setEnabled:NO];
-    [self.patientAgeField setEnabled:NO];
     [self.patientNameField setBorderStyle:UITextBorderStyleNone];
-    [self.patientAgeField setBorderStyle:UITextBorderStyleNone];
+
+    [self.patientAgeField setHidden:NO];
+    [self.ageButton setHidden:YES];
+
     [self.toolbar setHidden:YES];
     [self saveChangesIfNecessary];
   }
@@ -163,6 +191,7 @@
   if (self) {
     self.patient = p;
     self.patientVisitStore = [PatientVisitStore sharedPatientVisitStore];
+    self.ageSet = NO;
     [self updateTitleFromPatientNameField];
   }
 
@@ -179,7 +208,7 @@
 
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
-  [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
+//  [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
   [self updateTitleFromPatientNameField];
 }
 

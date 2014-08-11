@@ -6,9 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NEMRPatientViewController">
             <connections>
+                <outlet property="ageButton" destination="ZkU-Ii-XDE" id="1lE-Li-8SF"/>
                 <outlet property="cancelButton" destination="LQ9-ga-Xd1" id="6hr-az-A5u"/>
-                <outlet property="datePicker" destination="eTi-fJ-6DU" id="4fg-Sz-UAX"/>
-                <outlet property="dobSwitch" destination="9Ys-bn-r36" id="5Si-Jr-zzl"/>
                 <outlet property="patientAgeField" destination="L8o-xQ-s9O" id="Jqj-fk-Nj5"/>
                 <outlet property="patientNameField" destination="EmV-nv-Q8B" id="ZBq-l2-IkQ"/>
                 <outlet property="patientVisitTableView" destination="YAY-gi-yS4" id="dHg-wS-K4K"/>
@@ -32,36 +31,36 @@
                         </barButtonItem>
                     </items>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="524" width="320" height="44.5"/>
                     </variation>
                 </toolbar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YAY-gi-yS4">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="395" width="280" height="122"/>
+                        <rect key="frame" x="20" y="222" width="280" height="295"/>
                     </variation>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="ho5-VO-Y3M"/>
                         <outlet property="delegate" destination="-1" id="faw-2c-JSi"/>
                     </connections>
                 </tableView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecy-JI-8Y9">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecy-JI-8Y9">
                     <rect key="frame" x="20" y="65" width="46" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="84" width="46" height="21"/>
+                        <rect key="frame" x="20" y="84" width="51" height="21"/>
                     </variation>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uN-F7-Oym">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Age:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uN-F7-Oym">
                     <rect key="frame" x="22" y="120" width="31" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="35" y="122" width="31" height="21"/>
+                        <rect key="frame" x="35" y="122" width="35" height="21"/>
                     </variation>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EmV-nv-Q8B">
@@ -80,49 +79,19 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="94" y="118" width="206" height="30"/>
+                        <rect key="frame" x="94" y="118" width="137" height="30"/>
                     </variation>
                 </textField>
-                <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="eTi-fJ-6DU">
-                    <rect key="frame" x="-160" y="-81" width="320" height="162"/>
-                    <date key="date" timeIntervalSinceReferenceDate="429042218.97334301">
-                        <!--2014-08-06 18:23:38 +0000-->
-                    </date>
-                    <date key="maximumDate" timeIntervalSinceReferenceDate="441716400">
-                        <!--2014-12-31 11:00:00 +0000-->
-                    </date>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="20" y="209" width="280" height="162"/>
-                    </variation>
-                </datePicker>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Ys-bn-r36">
-                    <rect key="frame" x="-25" y="-15" width="51" height="31"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="251" y="156" width="51" height="31"/>
-                    </variation>
-                    <connections>
-                        <action selector="dobSwitchSwitched:" destination="-1" eventType="valueChanged" id="Wao-58-Cgg"/>
-                    </connections>
-                </switch>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lV-aG-j6Y">
-                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="29" y="161" width="37" height="21"/>
-                    </variation>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkU-Ii-XDE">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZkU-Ii-XDE">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                    <state key="normal" title="Age">
+                    <state key="normal" title="Set Age">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <variation key="widthClass=compact" fixedFrame="YES">
-                        <rect key="frame" x="41" y="184" width="30" height="30"/>
+                        <rect key="frame" x="94" y="118" width="55" height="30"/>
                     </variation>
                     <connections>
-                        <action selector="agebutton:" destination="-1" eventType="touchUpInside" id="D1e-gX-jik"/>
+                        <action selector="ageButtonPushed:" destination="-1" eventType="touchUpInside" id="aFC-XV-LcH"/>
                     </connections>
                 </button>
             </subviews>
@@ -137,9 +106,6 @@
                 <mask key="subviews">
                     <exclude reference="YAY-gi-yS4"/>
                     <exclude reference="L8o-xQ-s9O"/>
-                    <exclude reference="eTi-fJ-6DU"/>
-                    <exclude reference="9Ys-bn-r36"/>
-                    <exclude reference="1lV-aG-j6Y"/>
                     <exclude reference="ZkU-Ii-XDE"/>
                 </mask>
             </variation>
@@ -147,9 +113,6 @@
                 <mask key="subviews">
                     <include reference="YAY-gi-yS4"/>
                     <include reference="L8o-xQ-s9O"/>
-                    <include reference="eTi-fJ-6DU"/>
-                    <include reference="9Ys-bn-r36"/>
-                    <include reference="1lV-aG-j6Y"/>
                     <include reference="ZkU-Ii-XDE"/>
                 </mask>
             </variation>

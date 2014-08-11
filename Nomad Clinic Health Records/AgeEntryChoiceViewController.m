@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
-#import "AgeEditViewController.h"
+#import "AgeEntryChoiceViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface AgeEditViewController ()
+@interface AgeEntryChoiceViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *specificAgeButton;
 @property (weak, nonatomic) IBOutlet UIButton *ageRangeButton;
 @property (weak, nonatomic) IBOutlet UIButton *dobButton;
 
 @end
 
-@implementation AgeEditViewController
+@implementation AgeEntryChoiceViewController
 - (IBAction)specificAgeButton:(id)sender {
 }
 - (IBAction)ageRangeButton:(id)sender {

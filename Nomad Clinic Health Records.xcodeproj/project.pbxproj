@@ -20,8 +20,8 @@
 		F914D8E8198D7F0300BBD38E /* Complaint.m in Sources */ = {isa = PBXBuildFile; fileRef = F914D8E7198D7F0300BBD38E /* Complaint.m */; };
 		F914D8EF198D80A200BBD38E /* PatientVisitNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */; };
 		F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */; };
-		F925BE4E1995544D0043029D /* AgeEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925BE4C1995544D0043029D /* AgeEditViewController.m */; };
-		F925BE4F1995544D0043029D /* AgeEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925BE4D1995544D0043029D /* AgeEditViewController.xib */; };
+		F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */; };
+		F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */; };
 		F93E6A20197D96DF002616A6 /* Patient.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A1F197D96DF002616A6 /* Patient.m */; };
 		F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A22197D9A4C002616A6 /* PatientStore.m */; };
 		F9834346199003820015974B /* PatientVisitNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = F9834345199003820015974B /* PatientVisitNotes.m */; };
@@ -75,9 +75,9 @@
 		F914D8EC198D80A200BBD38E /* PatientVisitNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientVisitNoteViewController.h; sourceTree = "<group>"; };
 		F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientVisitNoteViewController.m; sourceTree = "<group>"; };
 		F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientVisitNoteViewController.xib; sourceTree = "<group>"; };
-		F925BE4B1995544D0043029D /* AgeEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeEditViewController.h; sourceTree = "<group>"; };
-		F925BE4C1995544D0043029D /* AgeEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeEditViewController.m; sourceTree = "<group>"; };
-		F925BE4D1995544D0043029D /* AgeEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeEditViewController.xib; sourceTree = "<group>"; };
+		F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeEntryChoiceViewController.h; sourceTree = "<group>"; };
+		F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeEntryChoiceViewController.m; sourceTree = "<group>"; };
+		F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeEntryChoiceViewController.xib; sourceTree = "<group>"; };
 		F93E6A1E197D96DF002616A6 /* Patient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Patient.h; path = ../Patient.h; sourceTree = "<group>"; };
 		F93E6A1F197D96DF002616A6 /* Patient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Patient.m; path = ../Patient.m; sourceTree = "<group>"; };
 		F93E6A21197D9A4C002616A6 /* PatientStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientStore.h; sourceTree = "<group>"; };
@@ -190,9 +190,9 @@
 				F911FF81197C07B20063A1F1 /* NEMRPatientViewController.h */,
 				F911FF82197C07B20063A1F1 /* NEMRPatientViewController.m */,
 				F911FF83197C07B20063A1F1 /* NEMRPatientViewController.xib */,
-				F925BE4B1995544D0043029D /* AgeEditViewController.h */,
-				F925BE4C1995544D0043029D /* AgeEditViewController.m */,
-				F925BE4D1995544D0043029D /* AgeEditViewController.xib */,
+				F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */,
+				F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */,
+				F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */,
 				F914D8D719883C5500BBD38E /* PatientVisitViewController.h */,
 				F914D8D819883C5500BBD38E /* PatientVisitViewController.m */,
 				F914D8D919883C5500BBD38E /* PatientVisitViewController.xib */,
@@ -359,7 +359,7 @@
 				F9FAEA8C197B10E600C9B3E5 /* NEMREntryPointViewController.xib in Resources */,
 				F983434B19900AC50015974B /* SOAPViewController.xib in Resources */,
 				F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */,
-				F925BE4F1995544D0043029D /* AgeEditViewController.xib in Resources */,
+				F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */,
 				F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */,
 				F914D8DD1989837800BBD38E /* female-patient.png in Resources */,
 				F914D8DB19883C5500BBD38E /* PatientVisitViewController.xib in Resources */,
@@ -403,7 +403,7 @@
 				F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */,
 				F911FF84197C07B20063A1F1 /* NEMRPatientViewController.m in Sources */,
 				F9E9DAA81986C11B00E8568F /* ClinicianStore.m in Sources */,
-				F925BE4E1995544D0043029D /* AgeEditViewController.m in Sources */,
+				F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */,
 				F911FF89197CC2570063A1F1 /* NEMRPatientsTableViewController.m in Sources */,
 				F914D8EF198D80A200BBD38E /* PatientVisitNoteViewController.m in Sources */,
 				F9E9DAB81987FB2B00E8568F /* PatientVisit.m in Sources */,

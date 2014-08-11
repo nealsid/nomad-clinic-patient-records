@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AgeEditViewController : UIViewController
+@interface AgeEntryChoiceViewController : UIViewController
 
 @end

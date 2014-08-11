@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
-#import "AgeEditViewController.h"
+#import "AgeEntryChoiceViewController.h"
 #import "NEMRPatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
@@ -35,7 +35,7 @@
 
 @implementation NEMRPatientViewController
 - (IBAction)agebutton:(id)sender {
-  AgeEditViewController* vc = [[AgeEditViewController alloc] init];
+  AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] init];
   [self presentViewController:vc animated:YES completion:nil];
 }
 

@@ -7,6 +7,8 @@
 //
 
 #import "AgeEntryChoiceViewController.h"
+#import "FlexDate.h"
+#import "FlexDate+ToString.h"
 #import "NEMRPatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
@@ -29,9 +31,9 @@
 @property (weak, nonatomic) PatientVisitStore* patientVisitStore;
 
 @property (strong, nonatomic) NSDate* chosenDate;
-@property NSNumber* chosenAge;
-@property NSNumber* chosenMinAge;
-@property NSNumber* chosenMaxAge;
+@property NSNumber* chosenYear;
+@property NSNumber* chosenMinYear;
+@property NSNumber* chosenMaxYear;
 @property BOOL ageSet;
 
 - (void) updateTitleFromPatientNameField;
@@ -42,18 +44,23 @@
 
 - (void)ageWasChosenByBirthdate:(NSDate *)birthDate {
   self.chosenDate = birthDate;
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  formatter.dateStyle = NSDateFormatterMediumStyle;
+  formatter.timeStyle = NSDateFormatterNoStyle;
+  self.patientAgeField.text = [formatter stringFromDate:birthDate];
+  self.ageSet = YES;
+  [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void)ageWasChosenByYear:(NSInteger)year {
+  self.chosenYear = [NSNumber numberWithInteger:year];
   self.ageSet = YES;
 }
 
-- (void)ageWasChosenByAge:(NSInteger)age {
-  self.chosenAge = [NSNumber numberWithInteger:age];
-  self.ageSet = YES;
-}
-
-- (void)ageWasChosenByAgeRange:(NSInteger)minAge
-                            to:(NSInteger)maxAge {
-  self.chosenMinAge = [NSNumber numberWithInteger:minAge];
-  self.chosenMaxAge = [NSNumber numberWithInteger:maxAge];
+- (void)ageWasChosenByYearRange:(NSInteger)minYear
+                             to:(NSInteger)maxYear {
+  self.chosenMinYear = [NSNumber numberWithInteger:minYear];
+  self.chosenMaxYear = [NSNumber numberWithInteger:maxYear];
   self.ageSet = YES;
 }
 
@@ -69,9 +76,6 @@
 // view title.
 - (IBAction)nameChanged:(id)sender {
   [self updateTitleFromPatientNameField];
-}
-
-- (void)formatAgeField {
 }
 
 - (void) updateTitleFromPatientNameField {
@@ -208,8 +212,9 @@
 
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
-//  [self.patientAgeField setText:[NSString stringWithFormat:@"%@",self.patient.age]];
+  [self.patientAgeField setText:[self.patient.dob toString]];
   [self updateTitleFromPatientNameField];
+
 }
 
 - (void)viewDidLoad {
@@ -223,8 +228,8 @@
   } else {
     [self setEditing:YES animated:NO];
   }
-  [self.patientAgeField setRightView:[UIButton new]];
-  self.patientAgeField.rightViewMode = UITextFieldViewModeUnlessEditing;
+  [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
+  self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView

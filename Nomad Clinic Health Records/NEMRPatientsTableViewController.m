@@ -8,6 +8,7 @@
 
 #import "NEMRPatientsTableViewController.h"
 #import "NEMRPatientViewController.h"
+#import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "PatientStore.h"
 
@@ -65,15 +66,6 @@
   [super viewWillAppear:animated];
   self.patients = [self.patientStore patients];
   [self.tableView reloadData];
-}
-
-- (UIView*) headerView {
-  if (!_headerView) {
-    [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
-                                  owner:self
-                                options:nil];
-  }
-  return _headerView;
 }
 
 - (BOOL) isLastRow:(NSInteger)rowNumber {
@@ -179,8 +171,8 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
   [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"Born on %@",
-                               [dateFormatter stringFromDate:p.dob]];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"Born: %@",
+                               [p.dob toString]];
   NSString* imagePath;
   if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
     imagePath = [[NSBundle mainBundle] pathForResource:@"female-patient"

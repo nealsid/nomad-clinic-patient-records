@@ -48,7 +48,9 @@
 }
 
 - (IBAction)dateOfBirthButton:(id)sender {
-  DOBSetViewController* dobVc = [[DOBSetViewController alloc] init];
+  DOBSetViewController* dobVc = [[DOBSetViewController alloc] initWithNibName:nil
+                                                                       bundle:nil
+                                                            ageChosenDelegate:self.delegate];
   [self.navigationController pushViewController:dobVc animated:YES];
 }
 

@@ -11,8 +11,8 @@
 @protocol AgeChosenDelegate
 
 - (void) ageWasChosenByBirthdate:(NSDate*) birthDate;
-- (void) ageWasChosenByAge:(NSInteger) age;
-- (void) ageWasChosenByAgeRange:(NSInteger)minAge to:(NSInteger)maxAge;
+- (void) ageWasChosenByYear:(NSInteger) year;
+- (void) ageWasChosenByYearRange:(NSInteger)minYear to:(NSInteger)maxYear;
 
 @end
 

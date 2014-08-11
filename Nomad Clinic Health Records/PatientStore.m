@@ -118,8 +118,9 @@
   NSArray* patientNames = @[@"Neal Sidhwaney",
                             @"Bob Jones",
                             @"Jane Doe",
-                            @""];
+                            @"Larry Darrell"];
   NSMutableArray* flexDates = [NSMutableArray array];
+
   for(int i = 0 ; i < 2 ; ++i) {
     FlexDate* f = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
                                                 inManagedObjectContext:ctx];
@@ -127,6 +128,7 @@
     f.maximum_year = @(1981 + i);
     [flexDates addObject:f];
   }
+
   for(int i = 0 ; i < 3 ; ++i) {
     FlexDate* f = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
                                                 inManagedObjectContext:ctx];

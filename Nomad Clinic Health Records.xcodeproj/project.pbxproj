@@ -22,6 +22,8 @@
 		F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */; };
 		F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */; };
 		F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */; };
+		F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC061999027C00FD1355 /* DOBSetViewController.m */; };
+		F937FC091999027C00FD1355 /* DOBSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC071999027C00FD1355 /* DOBSetViewController.xib */; };
 		F93E6A20197D96DF002616A6 /* Patient.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A1F197D96DF002616A6 /* Patient.m */; };
 		F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A22197D9A4C002616A6 /* PatientStore.m */; };
 		F9834346199003820015974B /* PatientVisitNotes.m in Sources */ = {isa = PBXBuildFile; fileRef = F9834345199003820015974B /* PatientVisitNotes.m */; };
@@ -78,6 +80,9 @@
 		F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeEntryChoiceViewController.h; sourceTree = "<group>"; };
 		F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeEntryChoiceViewController.m; sourceTree = "<group>"; };
 		F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeEntryChoiceViewController.xib; sourceTree = "<group>"; };
+		F937FC051999027C00FD1355 /* DOBSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOBSetViewController.h; sourceTree = "<group>"; };
+		F937FC061999027C00FD1355 /* DOBSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOBSetViewController.m; sourceTree = "<group>"; };
+		F937FC071999027C00FD1355 /* DOBSetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DOBSetViewController.xib; sourceTree = "<group>"; };
 		F93E6A1E197D96DF002616A6 /* Patient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Patient.h; path = ../Patient.h; sourceTree = "<group>"; };
 		F93E6A1F197D96DF002616A6 /* Patient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Patient.m; path = ../Patient.m; sourceTree = "<group>"; };
 		F93E6A21197D9A4C002616A6 /* PatientStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientStore.h; sourceTree = "<group>"; };
@@ -151,6 +156,19 @@
 			name = "Table View Controllers";
 			sourceTree = "<group>";
 		};
+		F937FC041999025900FD1355 /* Age Entry View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */,
+				F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */,
+				F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */,
+				F937FC051999027C00FD1355 /* DOBSetViewController.h */,
+				F937FC061999027C00FD1355 /* DOBSetViewController.m */,
+				F937FC071999027C00FD1355 /* DOBSetViewController.xib */,
+			);
+			name = "Age Entry View Controllers";
+			sourceTree = "<group>";
+		};
 		F9E9DAA91986C16800E8568F /* Stores */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,9 +208,6 @@
 				F911FF81197C07B20063A1F1 /* NEMRPatientViewController.h */,
 				F911FF82197C07B20063A1F1 /* NEMRPatientViewController.m */,
 				F911FF83197C07B20063A1F1 /* NEMRPatientViewController.xib */,
-				F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */,
-				F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */,
-				F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */,
 				F914D8D719883C5500BBD38E /* PatientVisitViewController.h */,
 				F914D8D819883C5500BBD38E /* PatientVisitViewController.m */,
 				F914D8D919883C5500BBD38E /* PatientVisitViewController.xib */,
@@ -227,6 +242,7 @@
 		F9FAEA61197B075500C9B3E5 /* Nomad Clinic Health Records */ = {
 			isa = PBXGroup;
 			children = (
+				F937FC041999025900FD1355 /* Age Entry View Controllers */,
 				F914D8E0198A990E00BBD38E /* Table View Controllers */,
 				F9E9DAB31986C83100E8568F /* Entity View Controllers */,
 				F9E9DAAD1986C24800E8568F /* CoreData Classes */,
@@ -363,6 +379,7 @@
 				F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */,
 				F914D8DD1989837800BBD38E /* female-patient.png in Resources */,
 				F914D8DB19883C5500BBD38E /* PatientVisitViewController.xib in Resources */,
+				F937FC091999027C00FD1355 /* DOBSetViewController.xib in Resources */,
 				F911FF8C197CCCDC0063A1F1 /* HeaderView.xib in Resources */,
 				F914D8DF1989880A00BBD38E /* male-patient.png in Resources */,
 				F911FF85197C07B20063A1F1 /* NEMRPatientViewController.xib in Resources */,
@@ -399,6 +416,7 @@
 				F9834346199003820015974B /* PatientVisitNotes.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,
 				F914D8DA19883C5500BBD38E /* PatientVisitViewController.m in Sources */,
+				F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */,
 				F983434A19900AC50015974B /* SOAPViewController.m in Sources */,
 				F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */,
 				F911FF84197C07B20063A1F1 /* NEMRPatientViewController.m in Sources */,

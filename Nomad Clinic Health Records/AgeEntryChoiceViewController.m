@@ -7,25 +7,49 @@
 //
 
 #import "AgeEntryChoiceViewController.h"
+#import "DOBSetViewController.h"
 #import <UIKit/UIKit.h>
 
 @interface AgeEntryChoiceViewController ()
+
 @property (weak, nonatomic) IBOutlet UIButton *specificAgeButton;
 @property (weak, nonatomic) IBOutlet UIButton *ageRangeButton;
 @property (weak, nonatomic) IBOutlet UIButton *dobButton;
 
+@property (weak, nonatomic) id<AgeChosenDelegate> delegate;
+@property (weak, nonatomic) NSString* patientName;
+
 @end
 
 @implementation AgeEntryChoiceViewController
-- (IBAction)specificAgeButton:(id)sender {
-}
-- (IBAction)ageRangeButton:(id)sender {
-}
-- (IBAction)dateOfBirthButton:(id)sender {
+
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil
+                          bundle:(NSBundle *)nibBundleOrNil
+                     patientName:(NSString*)patientName
+               ageChosenDelegate:(id<AgeChosenDelegate>)delegate {
+
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    self.delegate = delegate;
+    self.patientName = patientName;
+    self.title = self.patientName;
+  }
+  return self;
 }
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
   [super viewDidLoad];
+}
+
+- (IBAction)specificAgeButton:(id)sender {
+}
+
+- (IBAction)ageRangeButton:(id)sender {
+}
+
+- (IBAction)dateOfBirthButton:(id)sender {
+  DOBSetViewController* dobVc = [[DOBSetViewController alloc] init];
+  [self.navigationController pushViewController:dobVc animated:YES];
 }
 
 @end

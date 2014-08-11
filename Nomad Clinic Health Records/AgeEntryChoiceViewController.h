@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AgeChosenDelegate
+
+- (void) ageWasChosenByBirthdate:(NSDate*) birthDate;
+- (void) ageWasChosenByAge:(NSInteger) age;
+- (void) ageWasChosenByAgeRange:(NSInteger)minAge to:(NSInteger)maxAge;
+
+@end
+
 @interface AgeEntryChoiceViewController : UIViewController
+
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil
+                          bundle:(NSBundle *)nibBundleOrNil
+                     patientName:(NSString*)patientName
+               ageChosenDelegate:(id<AgeChosenDelegate>)delegate;
 
 @end

@@ -35,8 +35,11 @@
 
 @implementation NEMRPatientViewController
 - (IBAction)agebutton:(id)sender {
-  AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] init];
-  [self presentViewController:vc animated:YES completion:nil];
+  AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] initWithNibName:nil
+                                                                                    bundle:nil
+                                                                               patientName:self.patient.name
+                                                                         ageChosenDelegate:self];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)dobSwitchSwitched:(id)sender {

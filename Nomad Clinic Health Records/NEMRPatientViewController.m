@@ -32,6 +32,7 @@
 
 @property (strong, nonatomic) NSDate* chosenDate;
 @property NSNumber* chosenYear;
+@property NSNumber* chosenMonth;
 @property BOOL ageSet;
 
 - (void) updateTitleFromPatientNameField;
@@ -51,8 +52,10 @@
   [self.navigationController popToViewController:self animated:YES];
 }
 
-- (void)ageWasChosenByYear:(NSInteger)year {
+- (void) ageWasChosenByMonthAndOrYear:(NSInteger)year
+                             andMonth:(NSInteger)month {
   self.chosenYear = [NSNumber numberWithInteger:year];
+  self.chosenMonth = [NSNumber numberWithInteger:month];
   self.ageSet = YES;
 }
 
@@ -98,15 +101,6 @@
   } else {
     self.patientNameField.layer.borderColor = [[UIColor clearColor] CGColor];
   }
-
-  if ([self.patientAgeField.text length] == 0) {
-    self.patientAgeField.layer.cornerRadius = 8.0f;
-    self.patientAgeField.layer.masksToBounds = YES;
-    self.patientAgeField.layer.borderColor = [[UIColor redColor]CGColor];
-    self.patientAgeField.layer.borderWidth = 1.0f;
-  } else {
-    self.patientAgeField.layer.borderColor = [[UIColor clearColor] CGColor];
-  }
 }
 
 - (void) saveChangesIfNecessary {
@@ -124,12 +118,9 @@
 
   NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
   [f setNumberStyle:NSNumberFormatterDecimalStyle];
-//  NSNumber * newAge = [f numberFromString:self.patientAgeField.text];
-
-//  if ((self.patient.age == nil && [self.patientAgeField.text length] != 0) ||
-//      ![newAge isEqualToNumber:self.patient.age]) {
-//    requiresSave = YES;
-//  }
+  if (self.ageSet) {
+    requiresSave = YES;
+  }
 
   if (requiresSave) {
     if (self.patient == nil) {
@@ -137,7 +128,13 @@
       self.patient = p;
     }
     self.patient.name = newName;
-//    self.patient.age = newAge;
+    if (self.patient.dob == nil) {
+      [NSException raise:@"Patient Save failed"
+                  format:@"Reason: patient has no flex date"];
+    }
+    if (self.ageSet) {
+      self.patient.dob.specificdate = self.chosenDate;
+    }
     [[PatientStore sharedPatientStore] saveChanges];
   }
 

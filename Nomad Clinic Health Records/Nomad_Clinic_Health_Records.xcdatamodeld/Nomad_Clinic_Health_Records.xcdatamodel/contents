@@ -9,10 +9,9 @@
         <relationship name="patients_with_complaint" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PatientVisitNotes" inverseName="chief_complaint" inverseEntity="PatientVisitNotes" syncable="YES"/>
     </entity>
     <entity name="FlexDate" representedClassName="FlexDate" syncable="YES">
-        <attribute name="maximum_year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="minimum_year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="month" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="specificdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="dob" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES">
@@ -49,6 +48,6 @@
         <element name="Patient" positionX="-270" positionY="-261" width="128" height="118"/>
         <element name="PatientVisit" positionX="-63" positionY="18" width="128" height="28"/>
         <element name="PatientVisitNotes" positionX="-56" positionY="-108" width="128" height="240"/>
-        <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="118"/>
+        <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
     </elements>
 </model>

@@ -11,7 +11,8 @@
 @protocol AgeChosenDelegate
 
 - (void) ageWasChosenByBirthdate:(NSDate*) birthDate;
-- (void) ageWasChosenByYear:(NSInteger) year;
+- (void) ageWasChosenByMonthAndOrYear:(NSInteger) year
+                             andMonth:(NSInteger) month;
 
 - (NSDate*) initialDateForDatePicker;
 

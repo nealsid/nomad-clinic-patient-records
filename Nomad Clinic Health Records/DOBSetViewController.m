@@ -30,8 +30,18 @@
   return self;
 }
 
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil
+                          bundle:(NSBundle *)nibBundleOrNil {
+  [NSException raise:@"Wrong initializer"
+              format:@"use designated initializer"];
+  return nil;
+}
+
 - (void) viewDidLoad {
-  self.dobPicker.date = [self.delegate initialDateForDatePicker];
+  NSDate* initialDate = [self.delegate initialDateForDatePicker];
+  if (initialDate) {
+    self.dobPicker.date = initialDate;
+  }
   self.title = @"Choose birthday";
 }
 

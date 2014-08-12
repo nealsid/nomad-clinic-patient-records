@@ -45,9 +45,9 @@
     <elements>
         <element name="Clinician" positionX="81" positionY="99" width="128" height="73"/>
         <element name="Complaint" positionX="-81" positionY="-99" width="128" height="73"/>
+        <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
         <element name="Patient" positionX="-270" positionY="-261" width="128" height="118"/>
         <element name="PatientVisit" positionX="-63" positionY="18" width="128" height="28"/>
         <element name="PatientVisitNotes" positionX="-56" positionY="-108" width="128" height="240"/>
-        <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
     </elements>
 </model>

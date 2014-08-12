@@ -64,8 +64,6 @@
 -(void)tap:(id)sender {
   [self.soapNoteTextView setEditable:YES];
   [self.toolbar setHidden:NO];
-  NSRange d = [self.soapNoteTextView selectedRange];
-  NSLog(@"%lu/%lu", d.length, d.location);
   [self.soapNoteTextView setSelectedRange:NSMakeRange(3,0)];
 }
 

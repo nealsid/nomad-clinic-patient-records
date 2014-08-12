@@ -17,13 +17,15 @@
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     return [dateFormatter stringFromDate:self.specificdate];
   }
-  if (self.minimum_year && !self.maximum_year) {
-    return [NSString stringWithFormat:@"%@", self.minimum_year];
+
+  if (self.year && self.month) {
+    return [NSString stringWithFormat:@"%@/%@", self.month, self.year];
   }
 
-  if (self.minimum_year && self.maximum_year) {
-    return [NSString stringWithFormat:@"%@ - %@", self.minimum_year, self.maximum_year];
+  if (self.year) {
+    return [NSString stringWithFormat:@"%@", self.year];
   }
+
   return @"";
 }
 

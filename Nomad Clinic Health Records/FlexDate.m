@@ -2,7 +2,7 @@
 //  FlexDate.m
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 8/11/14.
+//  Created by Neal Sidhwaney on 8/12/14.
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
@@ -12,10 +12,9 @@
 
 @implementation FlexDate
 
-@dynamic specificdate;
-@dynamic minimum_year;
-@dynamic maximum_year;
 @dynamic month;
+@dynamic specificdate;
+@dynamic year;
 @dynamic patient;
 
 @end

@@ -7,8 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AgeEntryChoiceViewController">
             <connections>
                 <outlet property="dobButton" destination="XjR-1X-5Me" id="dNb-jM-wBX"/>
-                <outlet property="specificAgeButton" destination="p8C-gi-N5K" id="jGN-Kk-csj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yearAndMonthButton" destination="p8C-gi-N5K" id="7H0-Ag-A86"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -28,7 +28,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8C-gi-N5K">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Specific Year (e.g. 1985)">
+                    <state key="normal" title="Year and/or month">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -40,13 +40,13 @@
                         <rect key="frame" x="20" y="161" width="280" height="54"/>
                     </variation>
                     <connections>
-                        <action selector="specificAgeButton:" destination="-1" eventType="touchUpInside" id="ROC-Ql-I2M"/>
+                        <action selector="yearAndMonthButton:" destination="-1" eventType="touchUpInside" id="tFj-W5-Wa4"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjR-1X-5Me">
                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Birthday (e.g. Aug 21st, 1986)">
+                    <state key="normal" title="Specific date (e.g. Aug 21st, 1986)">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <userDefinedRuntimeAttributes>

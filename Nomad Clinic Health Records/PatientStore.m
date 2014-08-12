@@ -124,8 +124,7 @@
   for(int i = 0 ; i < 2 ; ++i) {
     FlexDate* f = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
                                                 inManagedObjectContext:ctx];
-    f.minimum_year = @(1980 + i);
-    f.maximum_year = @(1981 + i);
+    f.year = @(1980 + i);
     [flexDates addObject:f];
   }
 

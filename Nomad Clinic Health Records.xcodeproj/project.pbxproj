@@ -20,11 +20,11 @@
 		F914D8E8198D7F0300BBD38E /* Complaint.m in Sources */ = {isa = PBXBuildFile; fileRef = F914D8E7198D7F0300BBD38E /* Complaint.m */; };
 		F914D8EF198D80A200BBD38E /* PatientVisitNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */; };
 		F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */; };
+		F9247D7B199A940300C97F93 /* FlexDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9247D7A199A940300C97F93 /* FlexDate.m */; };
 		F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */; };
 		F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */; };
 		F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC061999027C00FD1355 /* DOBSetViewController.m */; };
 		F937FC091999027C00FD1355 /* DOBSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC071999027C00FD1355 /* DOBSetViewController.xib */; };
-		F937FC18199935E000FD1355 /* FlexDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC17199935E000FD1355 /* FlexDate.m */; };
 		F937FC1B1999366E00FD1355 /* Patient.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC1A1999366E00FD1355 /* Patient.m */; };
 		F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC1D199940BB00FD1355 /* FlexDate+ToString.m */; };
 		F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC20199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m */; };
@@ -81,14 +81,14 @@
 		F914D8EC198D80A200BBD38E /* PatientVisitNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientVisitNoteViewController.h; sourceTree = "<group>"; };
 		F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientVisitNoteViewController.m; sourceTree = "<group>"; };
 		F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientVisitNoteViewController.xib; sourceTree = "<group>"; };
+		F9247D79199A940300C97F93 /* FlexDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexDate.h; sourceTree = "<group>"; };
+		F9247D7A199A940300C97F93 /* FlexDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexDate.m; sourceTree = "<group>"; };
 		F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeEntryChoiceViewController.h; sourceTree = "<group>"; };
 		F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeEntryChoiceViewController.m; sourceTree = "<group>"; };
 		F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeEntryChoiceViewController.xib; sourceTree = "<group>"; };
 		F937FC051999027C00FD1355 /* DOBSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOBSetViewController.h; sourceTree = "<group>"; };
 		F937FC061999027C00FD1355 /* DOBSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOBSetViewController.m; sourceTree = "<group>"; };
 		F937FC071999027C00FD1355 /* DOBSetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DOBSetViewController.xib; sourceTree = "<group>"; };
-		F937FC16199935E000FD1355 /* FlexDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlexDate.h; path = ../FlexDate.h; sourceTree = "<group>"; };
-		F937FC17199935E000FD1355 /* FlexDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlexDate.m; path = ../FlexDate.m; sourceTree = "<group>"; };
 		F937FC191999366E00FD1355 /* Patient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patient.h; sourceTree = "<group>"; };
 		F937FC1A1999366E00FD1355 /* Patient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patient.m; sourceTree = "<group>"; };
 		F937FC1C199940BB00FD1355 /* FlexDate+ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlexDate+ToString.h"; sourceTree = "<group>"; };
@@ -203,8 +203,8 @@
 				F9E9DAAB1986C23F00E8568F /* Clinician.m */,
 				F914D8E6198D7F0300BBD38E /* Complaint.h */,
 				F914D8E7198D7F0300BBD38E /* Complaint.m */,
-				F937FC16199935E000FD1355 /* FlexDate.h */,
-				F937FC17199935E000FD1355 /* FlexDate.m */,
+				F9247D79199A940300C97F93 /* FlexDate.h */,
+				F9247D7A199A940300C97F93 /* FlexDate.m */,
 				F937FC191999366E00FD1355 /* Patient.h */,
 				F937FC1A1999366E00FD1355 /* Patient.m */,
 				F9E9DAB61987FB2B00E8568F /* PatientVisit.h */,
@@ -429,6 +429,7 @@
 				F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */,
 				F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */,
 				F9E9DAB11986C4EC00E8568F /* NEMRClinicianViewController.m in Sources */,
+				F9247D7B199A940300C97F93 /* FlexDate.m in Sources */,
 				F9FAEA8B197B10E600C9B3E5 /* NEMREntryPointViewController.m in Sources */,
 				F9E9DABB198814ED00E8568F /* PatientVisitStore.m in Sources */,
 				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
@@ -445,7 +446,6 @@
 				F911FF89197CC2570063A1F1 /* NEMRPatientsTableViewController.m in Sources */,
 				F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */,
 				F914D8EF198D80A200BBD38E /* PatientVisitNoteViewController.m in Sources */,
-				F937FC18199935E000FD1355 /* FlexDate.m in Sources */,
 				F9E9DAB81987FB2B00E8568F /* PatientVisit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

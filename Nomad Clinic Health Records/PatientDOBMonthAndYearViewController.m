@@ -14,11 +14,42 @@
 
 @property (weak, nonatomic) id<AgeChosenDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UIButton *setAgeButton;
 @property (weak, nonatomic) IBOutlet UITextField* monthField;
 @property (weak, nonatomic) IBOutlet UITextField* yearField;
+
 @end
 
 @implementation PatientDOBMonthAndYearViewController
+
+- (IBAction)ageButtonPushed:(id)sender {
+
+}
+
+- (IBAction)monthFieldChanged:(id)sender {
+  [self updateButtonText];
+}
+
+- (IBAction)yearFieldChanged:(id)sender {
+  [self updateButtonText];
+}
+
+- (void) updateButtonText {
+  if (![self.monthField.text isEqualToString:@""] &&
+      ![self.yearField.text isEqualToString:@""]) {
+    [self.setAgeButton setTitle:@"Set Month and Year" forState:UIControlStateNormal];
+    return;
+  }
+
+  if (![self.monthField.text isEqualToString:@""]) {
+    [self.setAgeButton setTitle:@"Set Month" forState:UIControlStateNormal];
+    return;
+  }
+  if (![self.yearField.text isEqualToString:@""]) {
+    [self.setAgeButton setTitle:@"Set Year" forState:UIControlStateNormal];
+    return;
+  }
+}
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
@@ -35,16 +66,6 @@
   [NSException raise:@"Wrong initializer"
               format:@"use designated initializer"];
   return nil;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

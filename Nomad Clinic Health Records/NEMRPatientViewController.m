@@ -32,8 +32,6 @@
 
 @property (strong, nonatomic) NSDate* chosenDate;
 @property NSNumber* chosenYear;
-@property NSNumber* chosenMinYear;
-@property NSNumber* chosenMaxYear;
 @property BOOL ageSet;
 
 - (void) updateTitleFromPatientNameField;
@@ -47,20 +45,14 @@
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   formatter.dateStyle = NSDateFormatterMediumStyle;
   formatter.timeStyle = NSDateFormatterNoStyle;
-  self.patientAgeField.text = [formatter stringFromDate:birthDate];
+  [self.ageButton setTitle:[formatter stringFromDate:birthDate]
+                  forState:UIControlStateNormal];
   self.ageSet = YES;
   [self.navigationController popToViewController:self animated:YES];
 }
 
 - (void)ageWasChosenByYear:(NSInteger)year {
   self.chosenYear = [NSNumber numberWithInteger:year];
-  self.ageSet = YES;
-}
-
-- (void)ageWasChosenByYearRange:(NSInteger)minYear
-                             to:(NSInteger)maxYear {
-  self.chosenMinYear = [NSNumber numberWithInteger:minYear];
-  self.chosenMaxYear = [NSNumber numberWithInteger:maxYear];
   self.ageSet = YES;
 }
 
@@ -72,8 +64,12 @@
   [self.navigationController pushViewController:vc animated:YES];
 }
 
-// This is connected to the value changed event, so we can update the
-// view title.
+- (NSDate*) initialDateForDatePicker {
+  return self.patient.dob.specificdate;
+}
+
+// This is connected to the value changed event from the patient name field, so
+// we can update the view title.
 - (IBAction)nameChanged:(id)sender {
   [self updateTitleFromPatientNameField];
 }
@@ -163,9 +159,10 @@
     [self.patientNameField setEnabled:YES];
     [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
 
+    [self.ageButton setTitle:[self.patient.dob toString]
+                    forState:UIControlStateNormal];
     [self.patientAgeField setHidden:YES];
     [self.ageButton setHidden:NO];
-
     [self.toolbar setHidden:NO];
   } else {
 

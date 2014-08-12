@@ -30,6 +30,11 @@
   return self;
 }
 
+- (void) viewDidLoad {
+  self.dobPicker.date = [self.delegate initialDateForDatePicker];
+  self.title = @"Choose birthday";
+}
+
 - (IBAction)setBirthdayButtonClicked:(id)sender {
   [self.delegate ageWasChosenByBirthdate:[self.dobPicker date]];
 }

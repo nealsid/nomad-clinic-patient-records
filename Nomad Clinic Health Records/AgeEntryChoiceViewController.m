@@ -13,7 +13,7 @@
 @interface AgeEntryChoiceViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *specificAgeButton;
-@property (weak, nonatomic) IBOutlet UIButton *ageRangeButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *dobButton;
 
 @property (weak, nonatomic) id<AgeChosenDelegate> delegate;
@@ -42,9 +42,6 @@
 }
 
 - (IBAction)specificAgeButton:(id)sender {
-}
-
-- (IBAction)ageRangeButton:(id)sender {
 }
 
 - (IBAction)dateOfBirthButton:(id)sender {

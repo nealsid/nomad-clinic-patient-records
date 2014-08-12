@@ -12,7 +12,8 @@
 
 - (void) ageWasChosenByBirthdate:(NSDate*) birthDate;
 - (void) ageWasChosenByYear:(NSInteger) year;
-- (void) ageWasChosenByYearRange:(NSInteger)minYear to:(NSInteger)maxYear;
+
+- (NSDate*) initialDateForDatePicker;
 
 @end
 

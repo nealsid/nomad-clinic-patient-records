@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer* tapRecognizer;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property (weak, nonatomic) IBOutlet UIToolbar *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @property (weak, nonatomic) id<SOAPNoteViewControllerDelegate> delegate;
 
@@ -72,6 +72,34 @@
   self.soapNoteTextView.text = self.note;
   [self.soapNoteTextView addGestureRecognizer:self.tapRecognizer];
   self.title = [self stringForSoapEntryType:entryType];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardWillShow: (NSNotification *)notification {
+  UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
+  NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  CGRect keyboardBounds = [(NSValue *)[[notification userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  [UIView beginAnimations:nil context: nil];
+  [UIView setAnimationCurve:animationCurve];
+  [UIView setAnimationDuration:animationDuration];
+  [self.toolbar setFrame:CGRectMake(0.0f,
+                                    self.view.frame.size.height - keyboardBounds.size.height - self.toolbar.frame.size.height,
+                                    self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
+  [UIView commitAnimations];
+}
+
+- (void) keyboardWillHide: (NSNotification *)notification {
+  UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
+  NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  [UIView beginAnimations:nil context: nil];
+  [UIView setAnimationCurve:animationCurve];
+  [UIView setAnimationDuration:animationDuration];
+  [self.toolbar setFrame:CGRectMake(0.0f,
+                                    self.view.frame.size.height - 46.0f, self.toolbar.frame.size.width,
+                                    self.toolbar.frame.size.height)];
+
+  [UIView commitAnimations];
 }
 
 - (NSString*) stringForSoapEntryType:(SOAPEntryType)s {

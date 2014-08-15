@@ -146,10 +146,18 @@
     [self.navigationController popViewControllerAnimated:YES];
     return;
   }
+  [self unsetAge];
   [self updateUIWithPatient];
   [self setEditing:NO animated:NO];
 }
 
+- (void)unsetAge {
+  self.ageSet = NO;
+  self.chosenDate = nil;
+  self.chosenYear = nil;
+  self.chosenMonth = nil;
+
+}
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
   if (editing) {
     [super setEditing:editing animated:animated];
@@ -224,6 +232,38 @@
   }
   [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
   self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+
+
+- (void) keyboardWillShow: (NSNotification *)notification {
+  NSLog(@"Got kb will show");
+  UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
+  NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  CGRect keyboardBounds = [(NSValue *)[[notification userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  [UIView beginAnimations:nil context: nil];
+  [UIView setAnimationCurve:animationCurve];
+  [UIView setAnimationDuration:animationDuration];
+  [self.toolbar setFrame:CGRectMake(0.0f,
+                                    self.view.frame.size.height - keyboardBounds.size.height - self.toolbar.frame.size.height,
+                                    self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
+  [UIView commitAnimations];
+}
+
+- (void) keyboardWillHide: (NSNotification *)notification {
+  UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
+  NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+  [UIView beginAnimations:nil context: nil];
+  [UIView setAnimationCurve:animationCurve];
+  [UIView setAnimationDuration:animationDuration];
+  [self.toolbar setFrame:CGRectMake(0.0f,
+                                    self.view.frame.size.height - 46.0f, self.toolbar.frame.size.width,
+                                    self.toolbar.frame.size.height)];
+  
+  [UIView commitAnimations];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView

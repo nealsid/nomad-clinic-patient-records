@@ -7,7 +7,7 @@
 //
 
 #import "NEMRAppDelegate.h"
-#import "NEMREntryPointViewController.h"
+#import "NEMRPatientsTableViewController.h"
 #import "Patient.h"
 
 @import CoreData;
@@ -30,11 +30,24 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
   /* Set up root view controller */
   UINavigationController* navController = [[UINavigationController alloc] init];
-  NEMREntryPointViewController* vc = [[NEMREntryPointViewController alloc] init];
+  NEMRPatientsTableViewController* vc = [[NEMRPatientsTableViewController alloc] init];
   [navController pushViewController:vc animated:NO];
-  navController.navigationBarHidden = YES;
+  [navController.navigationBar setBackgroundColor:[UIColor blueColor]];
+  [navController.navigationBar setAlpha:.75];
+//  [navController.navigationBar setTintColor:[UIColor darkGrayColor]];
   [self.window setRootViewController:navController];
   return YES;
+}
+
++ (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size
+{
+  UIGraphicsBeginImageContext(size);
+  UIBezierPath* rPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., 0., size.width, size.height)];
+  [color setFill];
+  [rPath fill];
+  UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  return image;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

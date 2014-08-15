@@ -160,6 +160,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = @"No more patients";
     return cell;
   }
+  cell.layer.cornerRadius = 25;
   [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   if (row > [self.patients count]) {
     return nil;
@@ -175,14 +176,14 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                                [p.dob toString]];
   NSString* imagePath;
   if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
-    imagePath = [[NSBundle mainBundle] pathForResource:@"female-patient"
+    imagePath = [[NSBundle mainBundle] pathForResource:@"female"
                                                           ofType:@"png"];
   } else if ([p.gender isEqualToNumber:[NSNumber numberWithInt:1]]) {
-    imagePath = [[NSBundle mainBundle] pathForResource:@"male-patient"
+    imagePath = [[NSBundle mainBundle] pathForResource:@"male"
                                                           ofType:@"png"];
   }
-  UIImage* femaleImage = [[UIImage alloc] initWithContentsOfFile:imagePath];
-  [cell.imageView setImage:femaleImage];
+  UIImage* genderImage = [[UIImage alloc] initWithContentsOfFile:imagePath];
+  [cell.imageView setImage:genderImage];
   return cell;
 }
 
@@ -209,18 +210,5 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     [self setEditing:YES animated:YES];
   }
 }
-//
-//- (void) patientViewControllerSave:(NEMRPatientViewController*)patientViewController
-//                           patient:(Patient*)p {
-//  [self dismissViewControllerAnimated:YES
-//                           completion:nil];
-//  self.patients = [self.patientStore patients];
-//  [self.tableView reloadData];
-//}
-//
-//- (void) patientViewControllerCancel:(NEMRPatientViewController*)patientViewController {
-//  [self dismissViewControllerAnimated:YES
-//                           completion:nil];
-//}
 
 @end

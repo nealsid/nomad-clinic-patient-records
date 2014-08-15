@@ -11,10 +11,11 @@
 
 #import "Clinician.h"
 #import "FlexDate.h"
+#import "NEMRAppDelegate.h"
 #import "Patient.h"
 #import "PatientVisit.h"
 #import "PatientVisitNotes.h"
-#import "NEMRAppDelegate.h"
+#import "Utils.h"
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
@@ -25,9 +26,6 @@
 
 - (void)createTestDataIfNecessary;
 - (instancetype)init;
-- (NSDate*)dateFromMonth:(NSInteger)month
-                     day:(NSInteger)day
-                    year:(NSInteger)year;
 
 @end
 
@@ -118,7 +116,7 @@
   NSArray* patientNames = @[@"Neal Sidhwaney",
                             @"Bob Jones",
                             @"Jane Doe",
-                            @"Larry Darrell"];
+                            @"Isabel Bradley"];
   NSMutableArray* flexDates = [NSMutableArray array];
 
   for(int i = 0 ; i < 2 ; ++i) {
@@ -131,7 +129,7 @@
   for(int i = 0 ; i < 3 ; ++i) {
     FlexDate* f = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
                                                 inManagedObjectContext:ctx];
-    f.specificdate = [self dateFromMonth:9 day:2 year:(1980 + i)];
+    f.specificdate = [Utils dateFromMonth:9 day:2 year:(1980 + i)];
     [flexDates addObject:f];
   }
 
@@ -171,7 +169,7 @@
                                   inManagedObjectContext:ctx];
     pvnote.note = @"This is test note #1";
     pvnote.patientVisit = pv;
-    pvnote.note_date = [self dateFromMonth:10 day:2 year:2013];
+    pvnote.note_date = [Utils dateFromMonth:10 day:2 year:2013];
     pvnote.bp_systolic = @120;
     pvnote.bp_diastolic = @80;
     pvnote.breathing_rate = @60;
@@ -187,7 +185,7 @@
                                   inManagedObjectContext:ctx];
     pvnote.note = @"This is test note #2";
     pvnote.patientVisit = pv;
-    pvnote.note_date = [self dateFromMonth:10 day:2 year:2013];
+    pvnote.note_date = [Utils dateFromMonth:10 day:2 year:2013];
     pvnote.bp_systolic = @130;
     pvnote.bp_diastolic = @100;
     pvnote.breathing_rate = @70;
@@ -202,16 +200,6 @@
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
   }
-}
-
-- (NSDate*)dateFromMonth:(NSInteger)month day:(NSInteger)day year:(NSInteger)year {
-  NSDateComponents *comps = [[NSDateComponents alloc] init];
-  [comps setDay:day];
-  [comps setMonth:month];
-  [comps setYear:year];
-  NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-  NSDate *date = [cal dateFromComponents:comps];
-  return date;
 }
 
 @end

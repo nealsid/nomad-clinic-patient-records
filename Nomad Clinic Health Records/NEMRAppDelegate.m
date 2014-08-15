@@ -32,9 +32,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   UINavigationController* navController = [[UINavigationController alloc] init];
   NEMRPatientsTableViewController* vc = [[NEMRPatientsTableViewController alloc] init];
   [navController pushViewController:vc animated:NO];
-  [navController.navigationBar setBackgroundColor:[UIColor blueColor]];
-  [navController.navigationBar setAlpha:.75];
-//  [navController.navigationBar setTintColor:[UIColor darkGrayColor]];
+  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:54.0/255 green:79.0/255 blue:42.0/255 alpha:1.0]];
+  [navController.navigationBar setAlpha:.25];
+  self.window.tintColor = [UIColor darkGrayColor];
+
   [self.window setRootViewController:navController];
   return YES;
 }

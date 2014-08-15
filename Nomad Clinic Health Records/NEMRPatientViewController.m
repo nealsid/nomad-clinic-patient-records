@@ -14,6 +14,7 @@
 #import "PatientStore.h"
 #import "PatientVisitStore.h"
 #import "PatientVisitViewController.h"
+#import "Utils.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -68,7 +69,14 @@
 }
 
 - (NSDate*) initialDateForDatePicker {
-  return self.patient.dob.specificdate;
+  if (self.patient.dob.specificdate) {
+    return self.patient.dob.specificdate;
+  } else if ([self.patient.dob.year intValue] > 0 && [self.patient.dob.month intValue] > 0) {
+    return [Utils dateFromMonth:[self.patient.dob.month intValue] day:01 year:[self.patient.dob.year intValue]];
+  } else if ([self.patient.dob.year intValue] > 0) {
+    return [Utils dateFromMonth:01 day:01 year:[self.patient.dob.year intValue]];
+  }
+  return nil;
 }
 
 // This is connected to the value changed event from the patient name field, so
@@ -240,7 +248,6 @@
 
 
 - (void) keyboardWillShow: (NSNotification *)notification {
-  NSLog(@"Got kb will show");
   UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
   NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
   CGRect keyboardBounds = [(NSValue *)[[notification userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey] CGRectValue];

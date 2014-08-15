@@ -55,6 +55,8 @@
          forCellReuseIdentifier:@"UITableViewCell"];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.title = @"Patients";
+  self.navigationController.navigationBar.titleTextAttributes =
+  [NSDictionary dictionaryWithObjects:@[[UIColor darkGrayColor], [UIFont fontWithName:@"MarkerFelt-Thin" size:24.0]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
   UIBarButtonItem* newPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                     target:self
                                                                                     action:@selector(addNewItem:)];
@@ -113,7 +115,14 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (CGFloat)    tableView:(UITableView *)tableView
 heightForHeaderInSection:(NSInteger)section {
-  return 0;
+  return 5;
+}
+
+- (UIView*)    tableView:(UITableView *)tableView
+viewForHeaderInSection:(NSInteger)section {
+  UIView* view = [[UIView alloc] init];
+  view.backgroundColor = [UIColor whiteColor];
+  return view;
 }
 
 - (CGFloat)    tableView:(UITableView *)tableView
@@ -150,18 +159,29 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return 44;
 }
 
+- (void) tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ([self isLastRow:[indexPath row]]) {
+    return;
+  }
+  if ([indexPath row] % 2 == 0) {
+    cell.backgroundColor = [UIColor colorWithRed:0xda/255.0 green:0xe5/255.0 blue:0xf4/255.0 alpha:1.0];
+  }
+  cell.layer.cornerRadius = 20;
+}
+
 - (UITableViewCell*) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   UITableViewCell* cell =
       [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                              reuseIdentifier:@"UITableViewCell"];
+  cell.textLabel.textColor = [UIColor darkGrayColor];
+  cell.backgroundColor = [UIColor clearColor];
   if ([self isLastRow:row]) {
     cell.textLabel.text = @"No more patients";
     return cell;
   }
-  cell.layer.cornerRadius = 25;
-  [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+  [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
   if (row > [self.patients count]) {
     return nil;
   }
@@ -172,18 +192,15 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
   [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"Born: %@",
-                               [p.dob toString]];
-  NSString* imagePath;
+  NSString* gender = @"";
   if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
-    imagePath = [[NSBundle mainBundle] pathForResource:@"female"
-                                                          ofType:@"png"];
+    gender = @"Female";
   } else if ([p.gender isEqualToNumber:[NSNumber numberWithInt:1]]) {
-    imagePath = [[NSBundle mainBundle] pathForResource:@"male"
-                                                          ofType:@"png"];
+    gender = @"Male";
   }
-  UIImage* genderImage = [[UIImage alloc] initWithContentsOfFile:imagePath];
-  [cell.imageView setImage:genderImage];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, Born: %@",
+                               gender, [p.dob toString]];
+  cell.detailTextLabel.textColor = [UIColor grayColor];
   return cell;
 }
 

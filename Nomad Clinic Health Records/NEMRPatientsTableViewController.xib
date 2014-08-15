@@ -19,7 +19,6 @@
                 <size key="portraitSize" width="400" height="600"/>
                 <size key="landscapeSize" width="400" height="600"/>
             </simulatedScreenMetrics>
-            <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             <connections>
                 <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
                 <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>

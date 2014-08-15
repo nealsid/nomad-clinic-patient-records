@@ -18,7 +18,8 @@
     return [dateFormatter stringFromDate:self.specificdate];
   }
 
-  if (self.year && self.month) {
+  if (self.year && [self.month intValue] > 0) {
+    NSLog(@"%d", [self.month intValue]);
     return [NSString stringWithFormat:@"%@/%@", self.month, self.year];
   }
 

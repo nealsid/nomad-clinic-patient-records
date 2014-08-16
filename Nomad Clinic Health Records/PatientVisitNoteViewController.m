@@ -12,7 +12,7 @@
 #import "Patient.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
-#import "PatientVisitStore.h"
+#import "VisitStore.h"
 #import "SOAPViewController.h"
 
 @interface PatientVisitNoteViewController ()
@@ -123,7 +123,7 @@
       self.note.plan = newNote;
       break;
   }
-  [[PatientVisitStore sharedPatientVisitStore] saveChanges];
+  [[VisitStore sharedVisitStore] saveChanges];
   [self displayNoteInUI];
 }
 

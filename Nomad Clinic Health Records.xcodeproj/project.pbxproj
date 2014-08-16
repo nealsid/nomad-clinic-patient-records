@@ -34,7 +34,7 @@
 		F983434B19900AC50015974B /* SOAPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F983434919900AC50015974B /* SOAPViewController.xib */; };
 		F9844660199E5BFA00F59910 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F984465F199E5BFA00F59910 /* Utils.m */; };
 		F9B9EF51199FE10A00072D7D /* Visit.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF50199FE10A00072D7D /* Visit.m */; };
-		F9B9EF54199FE10B00072D7D /* VisitNotesComplex.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF53199FE10B00072D7D /* VisitNotesComplex.m */; };
+		F9B9EF57199FECEE00072D7D /* VisitNotesComplex.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF56199FECEE00072D7D /* VisitNotesComplex.m */; };
 		F9DBC47D199D57EE00FB2544 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DBC47B199D57EE00FB2544 /* female.png */; };
 		F9DBC47E199D57EE00FB2544 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DBC47C199D57EE00FB2544 /* male.png */; };
 		F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAA21986C03000E8568F /* NEMRClinicianTableViewController.m */; };
@@ -44,7 +44,7 @@
 		F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAAF1986C4EC00E8568F /* ClinicianViewController.m */; };
 		F9E9DAB21986C4EC00E8568F /* ClinicianViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAB01986C4EC00E8568F /* ClinicianViewController.xib */; };
 		F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAB41986D47A00E8568F /* ClinicianTableViewHeader.xib */; };
-		F9E9DABB198814ED00E8568F /* PatientVisitStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DABA198814ED00E8568F /* PatientVisitStore.m */; };
+		F9E9DABB198814ED00E8568F /* VisitStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DABA198814ED00E8568F /* VisitStore.m */; };
 		F9FAEA65197B075500C9B3E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA64197B075500C9B3E5 /* main.m */; };
 		F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */; };
 		F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA69197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld */; };
@@ -106,8 +106,8 @@
 		F984465F199E5BFA00F59910 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		F9B9EF4F199FE10A00072D7D /* Visit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visit.h; sourceTree = "<group>"; };
 		F9B9EF50199FE10A00072D7D /* Visit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visit.m; sourceTree = "<group>"; };
-		F9B9EF52199FE10B00072D7D /* VisitNotesComplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitNotesComplex.h; sourceTree = "<group>"; };
-		F9B9EF53199FE10B00072D7D /* VisitNotesComplex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitNotesComplex.m; sourceTree = "<group>"; };
+		F9B9EF55199FECEE00072D7D /* VisitNotesComplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitNotesComplex.h; sourceTree = "<group>"; };
+		F9B9EF56199FECEE00072D7D /* VisitNotesComplex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitNotesComplex.m; sourceTree = "<group>"; };
 		F9DBC47B199D57EE00FB2544 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		F9DBC47C199D57EE00FB2544 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		F9E9DAA11986C03000E8568F /* NEMRClinicianTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMRClinicianTableViewController.h; sourceTree = "<group>"; };
@@ -121,8 +121,8 @@
 		F9E9DAAF1986C4EC00E8568F /* ClinicianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicianViewController.m; path = ../ClinicianViewController.m; sourceTree = "<group>"; };
 		F9E9DAB01986C4EC00E8568F /* ClinicianViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicianViewController.xib; path = ../ClinicianViewController.xib; sourceTree = "<group>"; };
 		F9E9DAB41986D47A00E8568F /* ClinicianTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicianTableViewHeader.xib; sourceTree = "<group>"; };
-		F9E9DAB9198814ED00E8568F /* PatientVisitStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientVisitStore.h; sourceTree = "<group>"; };
-		F9E9DABA198814ED00E8568F /* PatientVisitStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientVisitStore.m; sourceTree = "<group>"; };
+		F9E9DAB9198814ED00E8568F /* VisitStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitStore.h; sourceTree = "<group>"; };
+		F9E9DABA198814ED00E8568F /* VisitStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitStore.m; sourceTree = "<group>"; };
 		F9FAEA5F197B075500C9B3E5 /* Nomad Clinic Health Records.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nomad Clinic Health Records.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FAEA63197B075500C9B3E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9FAEA64197B075500C9B3E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 				F9E9DAA71986C11B00E8568F /* ClinicianStore.m */,
 				F93E6A21197D9A4C002616A6 /* PatientStore.h */,
 				F93E6A22197D9A4C002616A6 /* PatientStore.m */,
-				F9E9DAB9198814ED00E8568F /* PatientVisitStore.h */,
-				F9E9DABA198814ED00E8568F /* PatientVisitStore.m */,
+				F9E9DAB9198814ED00E8568F /* VisitStore.h */,
+				F9E9DABA198814ED00E8568F /* VisitStore.m */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -209,8 +209,8 @@
 				F937FC1A1999366E00FD1355 /* Patient.m */,
 				F9B9EF4F199FE10A00072D7D /* Visit.h */,
 				F9B9EF50199FE10A00072D7D /* Visit.m */,
-				F9B9EF52199FE10B00072D7D /* VisitNotesComplex.h */,
-				F9B9EF53199FE10B00072D7D /* VisitNotesComplex.m */,
+				F9B9EF55199FECEE00072D7D /* VisitNotesComplex.h */,
+				F9B9EF56199FECEE00072D7D /* VisitNotesComplex.m */,
 			);
 			name = "CoreData Classes";
 			sourceTree = "<group>";
@@ -434,9 +434,8 @@
 				F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */,
 				F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */,
 				F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */,
-				F9B9EF54199FE10B00072D7D /* VisitNotesComplex.m in Sources */,
 				F9247D7B199A940300C97F93 /* FlexDate.m in Sources */,
-				F9E9DABB198814ED00E8568F /* PatientVisitStore.m in Sources */,
+				F9E9DABB198814ED00E8568F /* VisitStore.m in Sources */,
 				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,
 				F914D8DA19883C5500BBD38E /* PatientVisitViewController.m in Sources */,
@@ -447,6 +446,7 @@
 				F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */,
 				F911FF84197C07B20063A1F1 /* PatientViewController.m in Sources */,
 				F9E9DAA81986C11B00E8568F /* ClinicianStore.m in Sources */,
+				F9B9EF57199FECEE00072D7D /* VisitNotesComplex.m in Sources */,
 				F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */,
 				F9B9EF51199FE10A00072D7D /* Visit.m in Sources */,
 				F911FF89197CC2570063A1F1 /* NEMRPatientsTableViewController.m in Sources */,

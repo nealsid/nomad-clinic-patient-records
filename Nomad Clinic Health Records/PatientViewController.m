@@ -12,7 +12,7 @@
 #import "PatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
-#import "PatientVisitStore.h"
+#import "VisitStore.h"
 #import "PatientVisitViewController.h"
 #import "Utils.h"
 
@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIButton *ageButton;
 
-@property (weak, nonatomic) PatientVisitStore* patientVisitStore;
+@property (weak, nonatomic) VisitStore* patientVisitStore;
 
 @property (strong, nonatomic) NSDate* chosenDate;
 @property NSNumber* chosenYear;
@@ -203,7 +203,7 @@
                          bundle:nibBundleOrNil];
   if (self) {
     self.patient = p;
-    self.patientVisitStore = [PatientVisitStore sharedPatientVisitStore];
+    self.patientVisitStore = [VisitStore sharedVisitStore];
     self.ageSet = NO;
     [self updateTitleFromPatientNameField];
   }

@@ -156,14 +156,14 @@
   }
 
   for (int i = 0; i < [patientNames count]; ++i) {
-    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
                                              inManagedObjectContext:ctx];
     visit.patient = [patients objectAtIndex:i];
     visit.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
     visit.visit_date = [Utils dateFromMonth:10 day:2 year:2013];
     NSLog(@"Creating pv for %@ - %@", visit.patient.name, [[visit.clinician anyObject] name]);
     VisitNotesComplex* visitNote =
-    [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
+    [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
                                   inManagedObjectContext:ctx];
     visitNote.note = @"This is test note #1";
     visitNote.visit = visit;

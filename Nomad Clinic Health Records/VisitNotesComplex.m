@@ -7,7 +7,6 @@
 //
 
 #import "VisitNotesComplex.h"
-#import "Complaint.h"
 #import "Visit.h"
 
 
@@ -24,7 +23,6 @@
 @dynamic subjective;
 @dynamic temp_fahrenheit;
 @dynamic weight;
-@dynamic chief_complaint;
 @dynamic visit;
 
 @end

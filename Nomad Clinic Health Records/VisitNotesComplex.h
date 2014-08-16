@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Complaint, Visit;
+@class Visit;
 
 @interface VisitNotesComplex : NSManagedObject
 
@@ -24,7 +24,6 @@
 @property (nonatomic, retain) NSString * subjective;
 @property (nonatomic, retain) NSNumber * temp_fahrenheit;
 @property (nonatomic, retain) NSNumber * weight;
-@property (nonatomic, retain) Complaint *chief_complaint;
 @property (nonatomic, retain) Visit *visit;
 
 @end

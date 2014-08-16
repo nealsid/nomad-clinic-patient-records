@@ -10,14 +10,14 @@
 #import "Patient.h"
 #import "Visit.h"
 
-@interface PatientVisitStore : NSObject
+@interface VisitStore : NSObject
 
 /**
  * Returns an application wide PatientVisitStore singleton.
  *
  * @returns PatientVisitStore that is shared for every consumer in the app.
  */
-+ (instancetype) sharedPatientVisitStore;
++ (instancetype) sharedVisitStore;
 
 /**
  * Fetches PatientVisits from store and returns them as an array
@@ -25,7 +25,7 @@
  * @param p A patient to fetch visits for.  If nil, no visits are returned.
  * @returns NSArray of PatientVisits
  */
-- (NSArray*) patientVisitsForPatient:(Patient*)p;
+- (NSArray*) visitsForPatient:(Patient*)p;
 
 /**
  * Fetches PatientVisitNotes from store and returns them as an array
@@ -33,7 +33,7 @@
  * @param pv A PatientVisit to fetch visits for. Required.
  * @returns NSArray of PatientVisitNote objects.
  */
-- (NSArray*) notesForPatientVisit:(Visit*)visit;
+- (NSArray*) notesForVisit:(Visit*)visit;
 
 /**
  * Fetches the most recent patient visit for a patient.
@@ -55,7 +55,7 @@
  *
  * @returns PatientVisit object
  */
-- (Visit*) newPatientVisit;
+- (Visit*) newVisit;
 
 /**
  * Removes a PatientVisit from the PatientVisitStore
@@ -63,6 +63,6 @@
  * @param p A PatientVisit to remove (must be an NSManagedObject)
  * @return none
  */
-- (void)removePatientVisit:(Visit*)v;
+- (void)removeVisit:(Visit*)v;
 
 @end

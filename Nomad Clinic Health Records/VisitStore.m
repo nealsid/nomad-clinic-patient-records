@@ -1,12 +1,12 @@
 //
-//  PatientVisitStore.m
+//  VisitStore.m
 //  Nomad Clinic Health Records
 //
 //  Created by Neal Sidhwaney on 7/29/14.
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
-#import "PatientVisitStore.h"
+#import "VisitStore.h"
 
 #import "Clinician.h"
 #import "ClinicianStore.h"
@@ -16,7 +16,7 @@
 #import "Visit.h"
 #import <CoreData/CoreData.h>
 
-@interface PatientVisitStore ()
+@interface VisitStore ()
 
 @property (nonatomic, retain) NSManagedObjectContext* managedObjectContext;
 
@@ -24,13 +24,13 @@
 
 @end
 
-@implementation PatientVisitStore
+@implementation VisitStore
 
-- (PatientVisit*) newPatientVisit {
+- (Visit*) newVisit {
   NSManagedObjectContext* ctx = self.managedObjectContext;
 
-  PatientVisit* pv =
-      [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+  Visit* pv =
+      [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
                                     inManagedObjectContext:ctx];
   NSError* error;
   if (![ctx save:&error]) {
@@ -41,13 +41,13 @@
   return pv;
 }
 
-+ (instancetype) sharedPatientVisitStore {
-  static PatientVisitStore* patientvisitStore;
++ (instancetype) sharedVisitStore {
+  static VisitStore* visitStore;
 
-  if (!patientvisitStore) {
-    patientvisitStore = [[PatientVisitStore alloc] init];
+  if (!visitStore) {
+    visitStore = [[VisitStore alloc] init];
   }
-  return patientvisitStore;
+  return visitStore;
 }
 
 - (instancetype) init {
@@ -55,12 +55,12 @@
   if (self) {
     NEMRAppDelegate* app = (NEMRAppDelegate*)[[UIApplication sharedApplication] delegate];
     self.managedObjectContext = [app managedObjectContext];
-    [self createPatientVisitsIfNecessary];
+    [self createVisitsIfNecessary];
   }
   return self;
 }
 
-- (void)removePatientVisit:(Visit*)pv {
+- (void)removeVisit:(Visit*)pv {
   [self.managedObjectContext deleteObject:pv];
   [self saveChanges];
 }
@@ -73,13 +73,13 @@
   }
 }
 
-- (NSArray*) patientVisitsForPatient:(Patient*)p {
+- (NSArray*) visitsForPatient:(Patient*)p {
   if (!p) {
     return nil;
   }
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisit"
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"Visit"
                                        inManagedObjectContext:ctx];
   NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"visit_date"
                                                        ascending:YES];
@@ -98,10 +98,10 @@
   return result;
 }
 
-- (NSArray*) notesForPatientVisit:(PatientVisit*)pv {
+- (NSArray*) notesForVisit:(Visit*)pv {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisitNotes"
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"VisitNotesComplex"
                                        inManagedObjectContext:ctx];
   NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"note_date"
                                                        ascending:YES];
@@ -109,7 +109,7 @@
   req.entity = e;
 
   NSPredicate *predicate =
-      [NSPredicate predicateWithFormat:@"patientVisit == %@", pv];
+      [NSPredicate predicateWithFormat:@"Visit == %@", pv];
   req.predicate = predicate;
 
   NSError *error;
@@ -121,10 +121,10 @@
   return result;
 }
 
-- (void)createPatientVisitsIfNecessary {
+- (void)createVisitsIfNecessary {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"PatientVisit"
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"Visit"
                                        inManagedObjectContext:ctx];
   NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"visit_date"
                                                        ascending:YES];
@@ -136,8 +136,8 @@
     [NSException raise:@"Fetch failed" format:@"Reason: %@",[error localizedDescription]];
   }
   if ([result count] == 0) {
-    NSLog(@"No PatientVisits found, generating..");
-    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+    NSLog(@"No Visits found, generating..");
+    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
                                                      inManagedObjectContext:ctx];
     visit.visit_date = [NSDate date];
     if (![ctx save:&error]) {

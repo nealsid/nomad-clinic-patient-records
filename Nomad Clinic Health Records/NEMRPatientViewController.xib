@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <objects>
@@ -118,25 +117,25 @@
                     <exclude reference="ZkU-Ii-XDE"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="2B5-dc-Hu8"/>
-                    <exclude reference="Hcc-7c-iRi"/>
-                    <exclude reference="OQm-oF-4xf"/>
                     <exclude reference="NBH-aP-A4n"/>
                     <exclude reference="gP6-Kk-dTU"/>
                     <exclude reference="wGB-16-JTl"/>
                     <exclude reference="EOU-sX-IHp"/>
                     <exclude reference="LTl-4i-mBN"/>
                     <exclude reference="YuU-42-uUO"/>
+                    <exclude reference="2B5-dc-Hu8"/>
+                    <exclude reference="Hcc-7c-iRi"/>
+                    <exclude reference="OQm-oF-4xf"/>
+                    <exclude reference="Bdn-0D-PNm"/>
+                    <exclude reference="dVm-yh-mD6"/>
+                    <exclude reference="t1s-Oi-zIn"/>
+                    <exclude reference="wBB-Hv-4mi"/>
                     <exclude reference="2uT-5x-8rd"/>
                     <exclude reference="Cbm-tq-Ybu"/>
                     <exclude reference="Dzo-qz-Vge"/>
                     <exclude reference="HcZ-Iz-QU2"/>
                     <exclude reference="nVf-W5-YvA"/>
                     <exclude reference="w4K-UX-FJv"/>
-                    <exclude reference="Bdn-0D-PNm"/>
-                    <exclude reference="dVm-yh-mD6"/>
-                    <exclude reference="t1s-Oi-zIn"/>
-                    <exclude reference="wBB-Hv-4mi"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -146,25 +145,25 @@
                     <include reference="ZkU-Ii-XDE"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="2B5-dc-Hu8"/>
-                    <include reference="Hcc-7c-iRi"/>
-                    <include reference="OQm-oF-4xf"/>
                     <include reference="NBH-aP-A4n"/>
                     <include reference="gP6-Kk-dTU"/>
                     <include reference="wGB-16-JTl"/>
                     <include reference="EOU-sX-IHp"/>
                     <include reference="LTl-4i-mBN"/>
                     <include reference="YuU-42-uUO"/>
+                    <include reference="2B5-dc-Hu8"/>
+                    <include reference="Hcc-7c-iRi"/>
+                    <include reference="OQm-oF-4xf"/>
+                    <include reference="Bdn-0D-PNm"/>
+                    <include reference="dVm-yh-mD6"/>
+                    <include reference="t1s-Oi-zIn"/>
+                    <include reference="wBB-Hv-4mi"/>
                     <include reference="2uT-5x-8rd"/>
                     <include reference="Cbm-tq-Ybu"/>
                     <include reference="Dzo-qz-Vge"/>
                     <exclude reference="HcZ-Iz-QU2"/>
                     <include reference="nVf-W5-YvA"/>
                     <include reference="w4K-UX-FJv"/>
-                    <include reference="Bdn-0D-PNm"/>
-                    <include reference="dVm-yh-mD6"/>
-                    <include reference="t1s-Oi-zIn"/>
-                    <include reference="wBB-Hv-4mi"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="139" y="137"/>

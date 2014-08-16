@@ -96,8 +96,7 @@
 }
 
 - (BOOL) patientFieldsValidForSave {
-  return [self.patientNameField.text length] > 0 &&
-    [self.patientAgeField.text length] > 0;
+  return [self.patientNameField.text length] > 0;
 }
 
 - (void) highlightInvalidUIElements {
@@ -136,12 +135,13 @@
       self.patient = p;
     }
     self.patient.name = newName;
+    if (self.ageSet) {
+      self.patient.dob.specificdate = self.chosenDate;
+    }
+
     if (self.patient.dob == nil) {
       [NSException raise:@"Patient Save failed"
                   format:@"Reason: patient has no flex date"];
-    }
-    if (self.ageSet) {
-      self.patient.dob.specificdate = self.chosenDate;
     }
     [[PatientStore sharedPatientStore] saveChanges];
   }
@@ -177,6 +177,7 @@
     [self.patientAgeField setHidden:YES];
     [self.ageButton setHidden:NO];
     [self.toolbar setHidden:NO];
+    self.patientVisitTableView.hidden=YES;
   } else {
 
     [self highlightInvalidUIElements];

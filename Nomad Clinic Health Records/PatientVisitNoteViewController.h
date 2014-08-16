@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-#import "PatientVisitNotes.h"
+#import "VisitNotesComplex.h"
 #import "SOAPViewController.h"
 
 @interface PatientVisitNoteViewController : UIViewController <SOAPNoteViewControllerDelegate>
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
-                patientVisitNote:(PatientVisitNotes*)note;
+                patientVisitNote:(VisitNotesComplex*)note;
 
 - (void) soapViewController:(SOAPViewController *)vc saveNewNote:(NSString *)s forType:(SOAPEntryType)type;
 @end

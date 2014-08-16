@@ -13,8 +13,8 @@
 #import "FlexDate.h"
 #import "NEMRAppDelegate.h"
 #import "Patient.h"
-#import "PatientVisit.h"
-#import "PatientVisitNotes.h"
+#import "Visit.h"
+#import "VisitNotesComplex.h"
 #import "Utils.h"
 
 #import <UIKit/UIKit.h>
@@ -156,43 +156,26 @@
   }
 
   for (int i = 0; i < [patientNames count]; ++i) {
-    PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
-                                                     inManagedObjectContext:ctx];
-    pv.patient = [patients objectAtIndex:i];
-    pv.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
-    pv.visit_date = [NSDate date];
-    NSLog(@"Creating pv for %@ - %@", pv.patient.name, [[pv.clinician anyObject] name]);
-    PatientVisitNotes* pvnote =
+    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+                                             inManagedObjectContext:ctx];
+    visit.patient = [patients objectAtIndex:i];
+    visit.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
+    visit.visit_date = [Utils dateFromMonth:10 day:2 year:2013];
+    NSLog(@"Creating pv for %@ - %@", visit.patient.name, [[visit.clinician anyObject] name]);
+    VisitNotesComplex* visitNote =
     [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
                                   inManagedObjectContext:ctx];
-    pvnote.note = @"This is test note #1";
-    pvnote.patientVisit = pv;
-    pvnote.note_date = [Utils dateFromMonth:10 day:2 year:2013];
-    pvnote.bp_systolic = @120;
-    pvnote.bp_diastolic = @80;
-    pvnote.breathing_rate = @60;
-    pvnote.pulse = @75;
-    pvnote.temp_fahrenheit = @98.6;
-    pvnote.subjective = @"This is the S in SOAP";
-    pvnote.objective = @"This is the O in SOAP";
-    pvnote.assessment = @"This is the A in SOAP";
-    pvnote.plan = @"This is the P in SOAP";
-
-    pvnote =
-    [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisitNotes"
-                                  inManagedObjectContext:ctx];
-    pvnote.note = @"This is test note #2";
-    pvnote.patientVisit = pv;
-    pvnote.note_date = [Utils dateFromMonth:10 day:2 year:2013];
-    pvnote.bp_systolic = @130;
-    pvnote.bp_diastolic = @100;
-    pvnote.breathing_rate = @70;
-    pvnote.pulse = @90;
-    pvnote.temp_fahrenheit = @102.6;
-    pvnote.subjective = @"This is the S in SOAP";
-    pvnote.objective = @"This is the O in SOAP";
-    pvnote.assessment = @"This is the A in SOAP";
-    pvnote.plan = @"This is the P in SOAP";
+    visitNote.note = @"This is test note #1";
+    visitNote.visit = visit;
+    visitNote.bp_systolic = @120;
+    visitNote.bp_diastolic = @80;
+    visitNote.breathing_rate = @60;
+    visitNote.pulse = @75;
+    visitNote.temp_fahrenheit = @98.6;
+    visitNote.subjective = @"This is the S in SOAP";
+    visitNote.objective = @"This is the O in SOAP";
+    visitNote.assessment = @"This is the A in SOAP";
+    visitNote.plan = @"This is the P in SOAP";
   }
 
   if (![ctx save:&error]) {

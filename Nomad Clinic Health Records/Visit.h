@@ -1,25 +1,25 @@
 //
-//  PatientVisit.h
+//  Visit.h
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 7/29/14.
+//  Created by Neal Sidhwaney on 8/16/14.
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Clinician, Patient;
+@class Clinician, Patient, VisitNotesComplex;
 
-@interface PatientVisit : NSManagedObject
+@interface Visit : NSManagedObject
 
 @property (nonatomic, retain) NSDate * visit_date;
-@property (nonatomic, retain) Patient *patient;
 @property (nonatomic, retain) NSSet *clinician;
-
+@property (nonatomic, retain) VisitNotesComplex *notes;
+@property (nonatomic, retain) Patient *patient;
 @end
 
-@interface PatientVisit (CoreDataGeneratedAccessors)
+@interface Visit (CoreDataGeneratedAccessors)
 
 - (void)addClinicianObject:(Clinician *)value;
 - (void)removeClinicianObject:(Clinician *)value;

@@ -10,14 +10,14 @@
 
 #import "Clinician.h"
 #import "Patient.h"
-#import "PatientVisit.h"
-#import "PatientVisitNotes.h"
+#import "Visit.h"
+#import "VisitNotesComplex.h"
 #import "PatientVisitNoteViewController.h"
 #import "PatientVisitStore.h"
 
 @interface PatientVisitViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) PatientVisit* patientVisit;
+@property (weak, nonatomic) Visit* visit;
 @property (strong, nonatomic) NSArray* notes;
 @property (nonatomic, retain) UIFont* itemFont;
 
@@ -31,23 +31,23 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.patientNameLabel.text = self.patientVisit.patient.name;
-  self.clinicianNameLabel.text = [[self.patientVisit.clinician anyObject] name];
+  self.patientNameLabel.text = self.visit.patient.name;
+  self.clinicianNameLabel.text = [[self.visit.clinician anyObject] name];
   self.title = @"Patient Visit";
 }
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
-                    patientVisit:(PatientVisit*)pv {
+                    patientVisit:(Visit*)visit {
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil];
   if (self) {
-    self.patientVisit = pv;
+    self.visit = visit;
     [self.noteTableView registerClass:[UITableViewCell class]
                forCellReuseIdentifier:@"UITableViewCell"];
     self.itemFont = [UIFont systemFontOfSize:20];
     PatientVisitStore* pvstore = [PatientVisitStore sharedPatientVisitStore];
-    self.notes = [pvstore notesForPatientVisit:self.patientVisit];
+    self.notes = [pvstore notesForPatientVisit:self.visit];
   }
   return self;
 }
@@ -120,7 +120,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return cell;
   }
   [cell.textLabel setFont:self.itemFont];
-  PatientVisitNotes* oneNote = [self.notes objectAtIndex:row];
+  VisitNotesComplex* oneNote = [self.notes objectAtIndex:row];
 
   NSString* cellText = [NSString stringWithFormat:@"%@/%@, %@, %@, %@",
                         oneNote.bp_systolic,
@@ -130,7 +130,7 @@ canEditRowAtIndexPath:(NSIndexPath *)indexPath {
                         oneNote.temp_fahrenheit];
   cell.textLabel.text = cellText;
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",
-                               oneNote.note_date];
+                               oneNote.visit.visit_date];
   return cell;
 }
 

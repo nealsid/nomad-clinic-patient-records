@@ -13,7 +13,7 @@
 #import "NEMRAppDelegate.h"
 #import "Patient.h"
 #import "PatientStore.h"
-#import "PatientVisit.h"
+#import "Visit.h"
 #import <CoreData/CoreData.h>
 
 @interface PatientVisitStore ()
@@ -60,7 +60,7 @@
   return self;
 }
 
-- (void)removePatientVisit:(PatientVisit*)pv {
+- (void)removePatientVisit:(Visit*)pv {
   [self.managedObjectContext deleteObject:pv];
   [self saveChanges];
 }
@@ -137,9 +137,9 @@
   }
   if ([result count] == 0) {
     NSLog(@"No PatientVisits found, generating..");
-    PatientVisit* pv = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
+    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"PatientVisit"
                                                      inManagedObjectContext:ctx];
-    pv.visit_date = [NSDate date];
+    visit.visit_date = [NSDate date];
     if (![ctx save:&error]) {
       [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
     }

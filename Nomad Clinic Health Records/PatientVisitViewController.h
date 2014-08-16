@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PatientVisit.h"
+#import "Visit.h"
 
 @interface PatientVisitViewController : UIViewController
 
@@ -21,5 +21,5 @@
  */
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
-                    patientVisit:(PatientVisit*)pv;
+                    patientVisit:(Visit*)visit;
 @end

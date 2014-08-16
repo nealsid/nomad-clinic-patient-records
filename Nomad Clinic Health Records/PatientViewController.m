@@ -18,14 +18,13 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface PatientViewController () <UITableViewDataSource,UITableViewDelegate, AgeChosenDelegate>
+@interface PatientViewController () <AgeChosenDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property (weak, nonatomic) IBOutlet UITableView* patientVisitTableView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIButton *ageButton;
 
@@ -177,7 +176,6 @@
     [self.patientAgeField setHidden:YES];
     [self.ageButton setHidden:NO];
     [self.toolbar setHidden:NO];
-    self.patientVisitTableView.hidden=YES;
   } else {
 
     [self highlightInvalidUIElements];
@@ -232,8 +230,6 @@
   [super viewDidLoad];
   [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
   if (self.patient != nil) {
-    [self.patientVisitTableView registerClass:[UITableViewCell class]
-                       forCellReuseIdentifier:@"UITableViewCell"];
     [self updateUIWithPatient];
     [self setEditing:NO animated:NO];
   } else {
@@ -272,95 +268,6 @@
                                     self.toolbar.frame.size.height)];
   
   [UIView commitAnimations];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
-  return [[[PatientVisitStore sharedPatientVisitStore]
-           patientVisitsForPatient:self.patient] count] + 1;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
-}
-
-- (BOOL) isLastRow:(NSInteger)rowNumber {
-  return rowNumber == ([[self.patientVisitStore patientVisitsForPatient:self.patient] count]);
-}
-
-- (BOOL)    tableView:(UITableView *)tableView
-canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-  return NO;
-}
-
-- (BOOL)                     tableView:(UITableView *)tableView
-shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-  return ![self isLastRow: [indexPath row]];
-}
-
-- (BOOL)              tableView:(UITableView *)tableView
-shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return ![self isLastRow: [indexPath row]];
-}
-
-- (BOOL)    tableView:(UITableView *)tableView
-canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  return ![self isLastRow:[indexPath row]];
-}
-
-- (NSString *)tableView:(UITableView *)tableView
-titleForHeaderInSection:(NSInteger)section {
-  return @"Visits";
-}
-
-- (BOOL)            tableView:(UITableView *)tableView
-shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  if ([self isLastRow:row]) {
-    return NO;
-  }
-  return YES;
-}
-
-- (CGFloat)   tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  if (![self isLastRow:row]) {
-    return 60;
-  }
-  return 44;
-}
-
-- (UITableViewCell*) tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  UITableViewCell* cell =
-      [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                             reuseIdentifier:@"UITableViewCell"];
-  [cell setBackgroundColor:nil];
-  if ([self isLastRow:row]) {
-    cell.textLabel.text = @"No more patient visits";
-    return cell;
-  }
-  if (row > [[self.patientVisitStore patientVisitsForPatient:self.patient] count]) {
-    return nil;
-  }
-  PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
-  cell.textLabel.text = [NSString stringWithFormat:@"%@",
-                         pv.visit_date];
-  return cell;
-}
-
-- (void)      tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  PatientVisit* pv = [[self.patientVisitStore patientVisitsForPatient:self.patient] objectAtIndex:row];
-  PatientVisitViewController* pvvc =
-      [[PatientVisitViewController alloc] initWithNibName:nil
-                                                   bundle:nil
-                                             patientVisit:pv];
-
-  [self.navigationController pushViewController:pvvc animated:YES];
 }
 
 @end

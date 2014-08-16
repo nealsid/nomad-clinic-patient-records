@@ -8,7 +8,7 @@
 
 #import "Patient.h"
 #import "FlexDate.h"
-#import "PatientVisit.h"
+#import "Visit.h"
 
 
 @implementation Patient

@@ -10,13 +10,13 @@
 
 #import "Clinician.h"
 #import "Patient.h"
-#import "PatientVisit.h"
-#import "PatientVisitNotes.h"
+#import "Visit.h"
+#import "VisitNotesComplex.h"
 #import "PatientVisitStore.h"
 #import "SOAPViewController.h"
 
 @interface PatientVisitNoteViewController ()
-@property (weak, nonatomic) PatientVisitNotes* note;
+@property (weak, nonatomic) VisitNotesComplex* note;
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientNameLabel;
@@ -39,7 +39,7 @@
 
 - (instancetype) initWithNibName:(NSString *)nibNameOrNil
                           bundle:(NSBundle *)nibBundleOrNil
-                patientVisitNote:(PatientVisitNotes*)note {
+                patientVisitNote:(VisitNotesComplex*)note {
   
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
@@ -61,9 +61,10 @@
 }
 
 - (void)displayNoteInUI {
-  self.dateLabel.text = [NSString stringWithFormat:@"%@", self.note.note_date];
-  self.patientNameLabel.text = [NSString stringWithFormat:@"%@", self.note.patientVisit.patient.name];
-  self.clinicianNameLabel.text = [NSString stringWithFormat:@"%@", [(Clinician*)[self.note.patientVisit.clinician anyObject] name]];
+  self.dateLabel.text = [NSString stringWithFormat:@"%@", self.note.visit.visit_date];
+  self.patientNameLabel.text = [NSString stringWithFormat:@"%@", self.note.visit.patient.name];
+  self.clinicianNameLabel.text = [NSString stringWithFormat:@"%@",
+                                  [(Clinician*)[self.note.visit.clinician anyObject] name]];
   self.bpLabel.text = [NSString stringWithFormat:@"%@/%@", self.note.bp_systolic, self.note.bp_diastolic];
   self.breathingRateLabel.text = [NSString stringWithFormat:@"%@", self.note.breathing_rate];
   self.pulseLabel.text = [NSString stringWithFormat:@"%@", self.note.pulse];

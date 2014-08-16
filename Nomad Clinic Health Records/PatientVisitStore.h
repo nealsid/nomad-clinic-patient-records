@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Patient.h"
-#import "PatientVisit.h"
+#import "Visit.h"
 
 @interface PatientVisitStore : NSObject
 
@@ -33,7 +33,15 @@
  * @param pv A PatientVisit to fetch visits for. Required.
  * @returns NSArray of PatientVisitNote objects.
  */
-- (NSArray*) notesForPatientVisit:(PatientVisit*)pv;
+- (NSArray*) notesForPatientVisit:(Visit*)visit;
+
+/**
+ * Fetches the most recent patient visit for a patient.
+ *
+ * @param p A Patient to fetch the most recent patient visit.  Required.
+ * @returns The most recent patient visit.
+*/
+- (Visit*) mostRecentVisitForPatient:(Patient*)p;
 
 /**
  * Saves all outstanding changes to the underlying store
@@ -43,11 +51,11 @@
 - (void) saveChanges;
 
 /**
- * Creates a new PatientVisit that is stored in the data store.
+ * Creates a new Visit that is stored in the data store.
  *
  * @returns PatientVisit object
  */
-- (PatientVisit*) newPatientVisit;
+- (Visit*) newPatientVisit;
 
 /**
  * Removes a PatientVisit from the PatientVisitStore
@@ -55,6 +63,6 @@
  * @param p A PatientVisit to remove (must be an NSManagedObject)
  * @return none
  */
-- (void)removePatientVisit:(PatientVisit*)c;
+- (void)removePatientVisit:(Visit*)v;
 
 @end

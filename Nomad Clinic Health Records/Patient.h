@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class FlexDate, PatientVisit;
+@class FlexDate, Visit;
 
 @interface Patient : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * gender;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) id picture;
-@property (nonatomic, retain) PatientVisit *visits;
+@property (nonatomic, retain) Visit *visits;
 @property (nonatomic, retain) FlexDate *dob;
 
 @end

@@ -9,7 +9,7 @@
 #import "AgeEntryChoiceViewController.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
-#import "NEMRPatientViewController.h"
+#import "PatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
 #import "PatientVisitStore.h"
@@ -18,7 +18,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface NEMRPatientViewController () <UITableViewDataSource,UITableViewDelegate, AgeChosenDelegate>
+@interface PatientViewController () <UITableViewDataSource,UITableViewDelegate, AgeChosenDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 
@@ -40,7 +40,7 @@
 
 @end
 
-@implementation NEMRPatientViewController
+@implementation PatientViewController
 
 - (void)ageWasChosenByBirthdate:(NSDate *)birthDate {
   self.chosenDate = birthDate;

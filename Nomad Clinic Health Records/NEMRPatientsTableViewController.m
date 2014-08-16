@@ -7,7 +7,7 @@
 //
 
 #import "NEMRPatientsTableViewController.h"
-#import "NEMRPatientViewController.h"
+#import "PatientViewController.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "PatientStore.h"
@@ -50,6 +50,7 @@
                                                                                     action:@selector(addNewItem:)];
   [self.navigationItem setRightBarButtonItem:newPatientButton];
   self.patients = [self.patientStore patients];
+  self.numberOfRows = [self.patients count];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -64,8 +65,8 @@
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   Patient* p = [self.patients objectAtIndex:row];
-  NEMRPatientViewController* pvc =
-  [[NEMRPatientViewController alloc] initWithNibName:nil
+  PatientViewController* pvc =
+  [[PatientViewController alloc] initWithNibName:nil
                                               bundle:nil
                                           andPatient:p];
 
@@ -120,8 +121,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 - (IBAction) addNewItem: (id) sender {
-  NEMRPatientViewController* pvc =
-    [[NEMRPatientViewController alloc] initWithNibName:nil
+  PatientViewController* pvc =
+    [[PatientViewController alloc] initWithNibName:nil
                                                 bundle:nil
                                             andPatient:nil];
   [self.navigationController pushViewController:pvc animated:YES];

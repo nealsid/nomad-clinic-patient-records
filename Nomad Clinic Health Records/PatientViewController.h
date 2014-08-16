@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Patient.h"
 
-@interface NEMRPatientViewController : UIViewController
+@interface PatientViewController : UIViewController
 
 /**
  * Designated initializer for the Patient view controller.

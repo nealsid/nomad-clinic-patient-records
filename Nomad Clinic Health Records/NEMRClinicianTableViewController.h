@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NEMRClinicianViewController.h"
+#import "ClinicianViewController.h"
 
-@interface NEMRClinicianTableViewController : UITableViewController <NEMRClinicianViewControllerDelegate>
+@interface NEMRClinicianTableViewController : UITableViewController <ClinicianViewControllerDelegate>
 
 @end

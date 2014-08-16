@@ -7,7 +7,7 @@
 //
 
 #import "NEMRClinicianTableViewController.h"
-#import "NEMRClinicianViewController.h"
+#import "ClinicianViewController.h"
 #import "Clinician.h"
 #import "ClinicianStore.h"
 
@@ -59,8 +59,8 @@
 }
 
 - (IBAction)addNewItem:(id)sender {
-  NEMRClinicianViewController* cvc =
-    [[NEMRClinicianViewController alloc] initWithNibName:nil
+  ClinicianViewController* cvc =
+    [[ClinicianViewController alloc] initWithNibName:nil
                                                   bundle:nil
                                             andClinician:nil
                                             withDelegate:self];
@@ -88,8 +88,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   NSLog(@"Selecting row at: %lu", (long)row);
   Clinician* c = [self.clinicians objectAtIndex:row];
-  NEMRClinicianViewController* cvc =
-      [[NEMRClinicianViewController alloc] initWithNibName:nil
+  ClinicianViewController* cvc =
+      [[ClinicianViewController alloc] initWithNibName:nil
                                                     bundle:nil
                                               andClinician:c
                                               withDelegate:self];
@@ -160,14 +160,14 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return cell;
 }
 
-- (void) clinicianViewControllerSave:(NEMRClinicianViewController*)clinicianViewController
+- (void) clinicianViewControllerSave:(ClinicianViewController*)clinicianViewController
                            clinician:(Clinician*)c {
   [self dismissViewControllerAnimated:YES completion:nil];
   self.clinicians = [self.clinicianStore clinicians];
   [self.tableView reloadData];
 }
 
-- (void) clinicianViewControllerCancel:(NEMRClinicianViewController*)clinicianViewController {
+- (void) clinicianViewControllerCancel:(ClinicianViewController*)clinicianViewController {
   [self dismissViewControllerAnimated:YES completion:nil];
 
 }

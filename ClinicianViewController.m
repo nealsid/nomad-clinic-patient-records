@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
-#import "NEMRClinicianViewController.h"
+#import "ClinicianViewController.h"
 #import "Clinician.h"
 #import "CLinicianStore.h"
 
-@interface NEMRClinicianViewController ()
+@interface ClinicianViewController ()
 
 @property (weak, nonatomic) Clinician* clinician;
-@property (weak, nonatomic) id<NEMRClinicianViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<ClinicianViewControllerDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @end
 
-@implementation NEMRClinicianViewController
+@implementation ClinicianViewController
 
 - (IBAction)saveButton:(id)sender {
   NSString* newName = self.nameField.text;
@@ -49,7 +49,7 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
                    andClinician:(Clinician*)c
-                   withDelegate:(id<NEMRClinicianViewControllerDelegate>)delegate {
+                   withDelegate:(id<ClinicianViewControllerDelegate>)delegate {
   self = [super initWithNibName:nibNameOrNil
                          bundle:nibBundleOrNil];
   if (self) {

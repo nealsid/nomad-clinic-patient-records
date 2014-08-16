@@ -1,5 +1,5 @@
 //
-//  NEMRClinicianViewController.h
+//  ClinicianViewController.h
 //  Nomad Clinic Health Records
 //
 //  Created by Neal Sidhwaney on 7/28/14.
@@ -9,29 +9,29 @@
 #import <UIKit/UIKit.h>
 #import "Clinician.h"
 
-@protocol NEMRClinicianViewControllerDelegate;
+@protocol ClinicianViewControllerDelegate;
 
-@interface NEMRClinicianViewController : UIViewController
+@interface ClinicianViewController : UIViewController
 
 /**
  * Designated initializer for the Clinician view controller.
  *
  * @param andClinician The clinician to view/edit
  * @param withDelegate The object that conforms to
- *                     NEMRPatientViewControllerDelegate
+ *                     PatientViewControllerDelegate
  * @returns An initialized viewcontroller
  */
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
                    andClinician:(Clinician*)c
-                   withDelegate:(id<NEMRClinicianViewControllerDelegate>)delegate;
+                   withDelegate:(id<ClinicianViewControllerDelegate>)delegate;
 
 @end
 
-@protocol NEMRClinicianViewControllerDelegate
+@protocol ClinicianViewControllerDelegate
 
-- (void) clinicianViewControllerSave:(NEMRClinicianViewController*)clinicianViewController
+- (void) clinicianViewControllerSave:(ClinicianViewController*)clinicianViewController
                clinician:(Clinician*)c;
-- (void) clinicianViewControllerCancel:(NEMRClinicianViewController*)clinicianViewController;
+- (void) clinicianViewControllerCancel:(ClinicianViewController*)clinicianViewController;
 
 @end

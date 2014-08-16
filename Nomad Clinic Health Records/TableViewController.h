@@ -15,7 +15,7 @@
 
 /**
  * Returns true if the rowNumber represents the last row in the table view.
- * Note that this is 1 more than the number of elements in Patients because
+ * Note that this is 1 more than the number of Rows because
  * we provide a row that indicates "No more patients" at the bottom, so this
  * test is frequently done to determine if the user can perform some action on
  * a row.

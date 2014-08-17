@@ -205,7 +205,7 @@
     self.patient = p;
     self.patientVisitStore = [VisitStore sharedVisitStore];
     self.ageSet = NO;
-    [self updateTitleFromPatientNameField];
+//    [self updateTitleFromPatientNameField];
   }
 
   return self;
@@ -222,8 +222,7 @@
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
   [self.patientAgeField setText:[self.patient.dob toString]];
-  [self updateTitleFromPatientNameField];
-
+//  [self updateTitleFromPatientNameField];
 }
 
 - (void)viewDidLoad {

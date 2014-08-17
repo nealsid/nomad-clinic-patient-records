@@ -28,6 +28,7 @@
         <attribute name="bp_diastolic" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="bp_systolic" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="breathing_rate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="healthy" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objective" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="plan" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,6 +43,6 @@
         <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
         <element name="Patient" positionX="-270" positionY="-261" width="128" height="118"/>
         <element name="Visit" positionX="-63" positionY="18" width="128" height="103"/>
-        <element name="VisitNotesComplex" positionX="-56" positionY="-108" width="128" height="225"/>
+        <element name="VisitNotesComplex" positionX="-56" positionY="-108" width="128" height="240"/>
     </elements>
 </model>

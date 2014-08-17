@@ -50,6 +50,14 @@
   return visitStore;
 }
 
+- (Visit*) mostRecentVisitForPatient:(Patient*)p {
+  NSArray* visits = [self visitsForPatient:p];
+  if (visits.count > 0) {
+    return [visits objectAtIndex:0];
+  }
+  return nil;
+}
+
 - (instancetype) init {
   self = [super init];
   if (self) {
@@ -82,7 +90,7 @@
   NSEntityDescription* e = [NSEntityDescription entityForName:@"Visit"
                                        inManagedObjectContext:ctx];
   NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"visit_date"
-                                                       ascending:YES];
+                                                       ascending:NO];
   req.sortDescriptors = @[sd];
   req.entity = e;
 

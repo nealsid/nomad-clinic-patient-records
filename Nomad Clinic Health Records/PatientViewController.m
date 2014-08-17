@@ -18,15 +18,16 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface PatientViewController () <AgeChosenDelegate>
+@interface PatientViewController () <AgeChosenDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 
-@property (weak, nonatomic) IBOutlet UITextField *patientNameField;
-@property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIButton *ageButton;
+@property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
+@property (weak, nonatomic) IBOutlet UITextField *patientNameField;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UITableView *patientVitalsTable;
 
 @property (weak, nonatomic) VisitStore* patientVisitStore;
 
@@ -78,22 +79,6 @@
   return nil;
 }
 
-// This is connected to the value changed event from the patient name field, so
-// we can update the view title.
-- (IBAction)nameChanged:(id)sender {
-  [self updateTitleFromPatientNameField];
-}
-
-- (void) updateTitleFromPatientNameField {
-  NSString* nameField = self.patientNameField.text;
-
-  if (!self.patient && [nameField length] == 0) {
-    self.title = @"New Patient";
-  } else {
-    self.title = self.patientNameField.text;
-  }
-}
-
 - (BOOL) patientFieldsValidForSave {
   return [self.patientNameField.text length] > 0;
 }
@@ -134,6 +119,7 @@
       self.patient = p;
     }
     self.patient.name = newName;
+
     if (self.ageSet) {
       self.patient.dob.specificdate = self.chosenDate;
     }
@@ -222,7 +208,6 @@
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
   [self.patientAgeField setText:[self.patient.dob toString]];
-//  [self updateTitleFromPatientNameField];
 }
 
 - (void)viewDidLoad {
@@ -247,6 +232,7 @@
   UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
   NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
   CGRect keyboardBounds = [(NSValue *)[[notification userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  keyboardBounds = [self.view convertRect:keyboardBounds fromView:nil];
   [UIView beginAnimations:nil context: nil];
   [UIView setAnimationCurve:animationCurve];
   [UIView setAnimationDuration:animationDuration];
@@ -254,6 +240,7 @@
                                     self.view.frame.size.height - keyboardBounds.size.height - self.toolbar.frame.size.height,
                                     self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
   [UIView commitAnimations];
+  [self.view bringSubviewToFront:self.toolbar];
 }
 
 - (void) keyboardWillHide: (NSNotification *)notification {
@@ -267,6 +254,82 @@
                                     self.toolbar.frame.size.height)];
   
   [UIView commitAnimations];
+}
+
+- (BOOL) isLastRow:(NSInteger)rowNumber {
+  return rowNumber == self.numberOfRows + 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
+- (BOOL)    tableView:(UITableView *)tableView
+canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+  return NO;
+}
+
+- (BOOL)                     tableView:(UITableView *)tableView
+shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+  return ![self isLastRow: [indexPath row]];
+}
+
+- (BOOL)              tableView:(UITableView *)tableView
+shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return ![self isLastRow: [indexPath row]];
+}
+
+- (BOOL)    tableView:(UITableView *)tableView
+canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+  return ![self isLastRow:[indexPath row]];
+}
+
+- (CGFloat)    tableView:(UITableView *)tableView
+heightForHeaderInSection:(NSInteger)section {
+  return 5;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView
+  numberOfRowsInSection:(NSInteger)section {
+  // We return the number of rows, plus 1 extra
+  // row for the "No more patients" row.
+  return self.numberOfRows;
+}
+
+- (UIView*)    tableView:(UITableView *)tableView
+  viewForHeaderInSection:(NSInteger)section {
+  UIView* view = [[UIView alloc] init];
+  view.backgroundColor = [UIColor whiteColor];
+  return view;
+}
+
+- (CGFloat)    tableView:(UITableView *)tableView
+heightForFooterInSection:(NSInteger)section {
+  return 0;
+}
+
+- (CGFloat)   tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  if (![self isLastRow:row]) {
+    return 60;
+  }
+  return 44;
+}
+
+- (void) tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ([self isLastRow:[indexPath row]]) {
+    return;
+  }
+  if ([indexPath row] % 2 == 0) {
+    cell.backgroundColor = [UIColor colorWithRed:0xda/255.0 green:0xe5/255.0 blue:0xf4/255.0 alpha:1.0];
+  }
+}
+
+- (BOOL)            tableView:(UITableView *)tableView
+shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  return ![self isLastRow:row];
 }
 
 @end

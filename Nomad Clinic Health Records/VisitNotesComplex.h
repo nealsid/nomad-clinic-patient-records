@@ -2,7 +2,7 @@
 //  VisitNotesComplex.h
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 8/16/14.
+//  Created by Neal Sidhwaney on 8/18/14.
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSString * subjective;
 @property (nonatomic, retain) NSNumber * temp_fahrenheit;
 @property (nonatomic, retain) NSNumber * weight;
+@property (nonatomic, retain) NSNumber * healthy;
 @property (nonatomic, retain) Visit *visit;
 
 @end

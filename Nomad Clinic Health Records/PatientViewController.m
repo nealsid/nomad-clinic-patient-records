@@ -9,11 +9,13 @@
 #import "AgeEntryChoiceViewController.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
+#import "NumberFieldViewController.h"
 #import "PatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
+#import "Visit.h"
+#import "VisitNotesComplex.h"
 #import "VisitStore.h"
-#import "PatientVisitViewController.h"
 #import "Utils.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -28,10 +30,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UITableView *patientVitalsTable;
+@property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
 
 @property (weak, nonatomic) VisitStore* patientVisitStore;
-@property (strong, nonatomic) NSArray* visitsForPatient;
+@property (strong, nonatomic) Visit* mostRecentVisit;
 
 @property (strong, nonatomic) NSDate* chosenDate;
 @property NSNumber* chosenYear;
@@ -42,41 +44,51 @@
 
 @implementation PatientViewController
 
-- (void)ageWasChosenByBirthdate:(NSDate *)birthDate {
-  self.chosenDate = birthDate;
-  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  formatter.dateStyle = NSDateFormatterMediumStyle;
-  formatter.timeStyle = NSDateFormatterNoStyle;
-  [self.ageButton setTitle:[formatter stringFromDate:birthDate]
-                  forState:UIControlStateNormal];
-  self.ageSet = YES;
-  [self.navigationController popToViewController:self animated:YES];
-}
-
-- (void) ageWasChosenByMonthAndOrYear:(NSInteger)year
-                             andMonth:(NSInteger)month {
-  self.chosenYear = [NSNumber numberWithInteger:year];
-  self.chosenMonth = [NSNumber numberWithInteger:month];
-  self.ageSet = YES;
-}
-
-- (IBAction)ageButtonPushed:(id)sender {
-  AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] initWithNibName:nil
-                                                                                    bundle:nil
-                                                                               patientName:self.patient.name
-                                                                         ageChosenDelegate:self];
-  [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (NSDate*) initialDateForDatePicker {
-  if (self.patient.dob.specificdate) {
-    return self.patient.dob.specificdate;
-  } else if ([self.patient.dob.year intValue] > 0 && [self.patient.dob.month intValue] > 0) {
-    return [Utils dateFromMonth:[self.patient.dob.month intValue] day:01 year:[self.patient.dob.year intValue]];
-  } else if ([self.patient.dob.year intValue] > 0) {
-    return [Utils dateFromMonth:01 day:01 year:[self.patient.dob.year intValue]];
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
+  if (self.patient != nil) {
+    [self updateUIWithPatient];
+    [self setEditing:NO animated:NO];
+  } else {
+    [self setEditing:YES animated:NO];
   }
-  return nil;
+  [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
+  self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWillShow:)
+                                               name:UIKeyboardWillShowNotification
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWillHide:)
+                                               name:UIKeyboardWillHideNotification
+                                             object:nil];
+  [self.recentVisitTable registerClass:[UITableViewCell class]
+                forCellReuseIdentifier:@"UITableViewCell"];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil
+                     andPatient:(Patient*)p {
+  self = [super initWithNibName:nibNameOrNil
+                         bundle:nibBundleOrNil];
+  if (self) {
+    self.patient = p;
+    self.patientVisitStore = [VisitStore sharedVisitStore];
+    self.ageSet = NO;
+    self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
+  }
+
+  return self;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil {
+  self = [self initWithNibName:nibNameOrNil
+                        bundle:nibBundleOrNil
+                    andPatient:nil];
+  return self;
 }
 
 - (BOOL) patientFieldsValidForSave {
@@ -182,55 +194,10 @@
   }
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil
-                     andPatient:(Patient*)p {
-  self = [super initWithNibName:nibNameOrNil
-                         bundle:nibBundleOrNil];
-  if (self) {
-    self.patient = p;
-    self.patientVisitStore = [VisitStore sharedVisitStore];
-    self.ageSet = NO;
-    self.visitsForPatient = [self.patientVisitStore visitsForPatient:self.patient];
-//    [self updateTitleFromPatientNameField];
-  }
-
-  return self;
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil {
-  self = [self initWithNibName:nibNameOrNil
-                        bundle:nibBundleOrNil
-                    andPatient:nil];
-  return self;
-}
-
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
   [self.patientAgeField setText:[self.patient.dob toString]];
 }
-
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
-  if (self.patient != nil) {
-    [self updateUIWithPatient];
-    [self setEditing:NO animated:NO];
-  } else {
-    [self setEditing:YES animated:NO];
-  }
-  [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
-  self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-  [self.t registerClass:[UITableViewCell class]
-         forCellReuseIdentifier:@"UITableViewCell"];
-
-}
-
-
 
 - (void) keyboardWillShow: (NSNotification *)notification {
   UIViewAnimationCurve animationCurve = [[[notification userInfo] valueForKey: UIKeyboardAnimationCurveUserInfoKey] intValue];
@@ -264,10 +231,6 @@
   
 }
 
-- (BOOL) isLastRow:(NSInteger)rowNumber {
-  return rowNumber == [self.visitsForPatient count];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
@@ -277,38 +240,24 @@ canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
   return NO;
 }
 
-- (BOOL)                     tableView:(UITableView *)tableView
-shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-  return ![self isLastRow: [indexPath row]];
-}
-
-- (BOOL)              tableView:(UITableView *)tableView
-shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return ![self isLastRow: [indexPath row]];
-}
-
 - (BOOL)    tableView:(UITableView *)tableView
 canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  return ![self isLastRow:[indexPath row]];
+  return NO;
 }
 
 - (CGFloat)    tableView:(UITableView *)tableView
 heightForHeaderInSection:(NSInteger)section {
-  return 5;
+  return 40;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView
   numberOfRowsInSection:(NSInteger)section {
-  // We return the number of rows, plus 1 extra
-  // row for the "No more patients" row.
-  return [self.visitsForPatient count];
+  return 2;
 }
 
-- (UIView*)    tableView:(UITableView *)tableView
-  viewForHeaderInSection:(NSInteger)section {
-  UIView* view = [[UIView alloc] init];
-  view.backgroundColor = [UIColor whiteColor];
-  return view;
+- (NSString*) tableView:(UITableView *)tableView
+titleForHeaderInSection:(NSInteger)section {
+  return @"Most recent visit";
 }
 
 - (CGFloat)    tableView:(UITableView *)tableView
@@ -318,65 +267,89 @@ heightForFooterInSection:(NSInteger)section {
 
 - (CGFloat)   tableView:(UITableView *)tableView
 heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  if (![self isLastRow:row]) {
-    return 60;
-  }
-  return 44;
-}
-
-- (void) tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([self isLastRow:[indexPath row]]) {
-    return;
-  }
-  if ([indexPath row] % 2 == 0) {
-    cell.backgroundColor = [UIColor colorWithRed:0xda/255.0 green:0xe5/255.0 blue:0xf4/255.0 alpha:1.0];
-  }
+  return 60;
 }
 
 - (BOOL)            tableView:(UITableView *)tableView
 shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  return ![self isLastRow:row];
+  return YES;
 }
 
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ([indexPath row] == 0) {
+    NumberFieldViewController *vc = [[NumberFieldViewController alloc] initWithNibName:nil bundle:nil fieldName:@"Weight" initialValue:@"160"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
-  UITableViewCell* cell =
-  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                         reuseIdentifier:@"UITableViewCell"];
+  UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                                 reuseIdentifier:@"UITableViewCell"];
+
   cell.textLabel.textColor = [UIColor darkGrayColor];
-  cell.backgroundColor = [UIColor clearColor];
-  if ([self isLastRow:row]) {
-    cell.textLabel.text = @"No more patients";
-    return cell;
+  if (row == 0) {
+    cell.textLabel.text = @"Weight";
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ lbs", self.mostRecentVisit.notes.weight];
+  } else {
+    cell.textLabel.text = @"Healthy?";
+    UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+    [switchView addTarget:self
+                   action:@selector(switchClicked:)
+         forControlEvents:UIControlEventValueChanged];
+    cell.accessoryView = switchView;
+    switchView.on = [self.mostRecentVisit.notes.healthy boolValue];
+    if (![self.mostRecentVisit.notes.healthy boolValue]) {
+      cell.textLabel.textColor = [UIColor redColor];
+    }
   }
-  [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
-  if (row > [self.patients count]) {
-    return nil;
-  }
-  Patient* p = [self.patients objectAtIndex:row];
-  cell.textLabel.text = p.name;
-  [cell.textLabel setFont:self.itemFont];
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-  [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-  NSString* gender = @"";
-  if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
-    gender = @"Female";
-  } else if ([p.gender isEqualToNumber:[NSNumber numberWithInt:1]]) {
-    gender = @"Male";
-  }
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, Born: %@",
-                               gender, [p.dob toString]];
-  cell.detailTextLabel.textColor = [UIColor grayColor];
   return cell;
 }
 
+- (IBAction) switchClicked:(id)sender {
+  UISwitch* healthSwitch = (UISwitch*)sender;
+  self.mostRecentVisit.notes.healthy = [NSNumber numberWithBool:healthSwitch.isOn];
+  [self.patientVisitStore saveChanges];
+  [self.recentVisitTable reloadData];
+}
+
+- (void)ageWasChosenByBirthdate:(NSDate *)birthDate {
+  self.chosenDate = birthDate;
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  formatter.dateStyle = NSDateFormatterMediumStyle;
+  formatter.timeStyle = NSDateFormatterNoStyle;
+  [self.ageButton setTitle:[formatter stringFromDate:birthDate]
+                  forState:UIControlStateNormal];
+  self.ageSet = YES;
+  [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void) ageWasChosenByMonthAndOrYear:(NSInteger)year
+                             andMonth:(NSInteger)month {
+  self.chosenYear = [NSNumber numberWithInteger:year];
+  self.chosenMonth = [NSNumber numberWithInteger:month];
+  self.ageSet = YES;
+}
+
+- (IBAction)ageButtonPushed:(id)sender {
+  AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] initWithNibName:nil
+                                                                                    bundle:nil
+                                                                               patientName:self.patient.name
+                                                                         ageChosenDelegate:self];
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (NSDate*) initialDateForDatePicker {
+  if (self.patient.dob.specificdate) {
+    return self.patient.dob.specificdate;
+  } else if ([self.patient.dob.year intValue] > 0 && [self.patient.dob.month intValue] > 0) {
+    return [Utils dateFromMonth:[self.patient.dob.month intValue] day:01 year:[self.patient.dob.year intValue]];
+  } else if ([self.patient.dob.year intValue] > 0) {
+    return [Utils dateFromMonth:01 day:01 year:[self.patient.dob.year intValue]];
+  }
+  return nil;
+}
 
 @end

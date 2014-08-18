@@ -169,6 +169,8 @@
     visitNote.visit = visit;
     visitNote.bp_systolic = @120;
     visitNote.bp_diastolic = @80;
+    visitNote.healthy = [NSNumber numberWithBool:NO];
+    visitNote.weight = [NSNumber numberWithInt:160];
     visitNote.breathing_rate = @60;
     visitNote.pulse = @75;
     visitNote.temp_fahrenheit = @98.6;

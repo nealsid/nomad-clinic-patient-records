@@ -2,7 +2,7 @@
 //  VisitNotesComplex.m
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 8/16/14.
+//  Created by Neal Sidhwaney on 8/18/14.
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
@@ -23,6 +23,7 @@
 @dynamic subjective;
 @dynamic temp_fahrenheit;
 @dynamic weight;
+@dynamic healthy;
 @dynamic visit;
 
 @end

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PatientViewController">
             <connections>
+                <outlet property="addVisitButton" destination="T2y-WF-60L" id="U6r-vK-i4z"/>
                 <outlet property="ageButton" destination="SMb-D9-6o6" id="sdZ-x3-3fh"/>
                 <outlet property="cancelButton" destination="LQ9-ga-Xd1" id="6hr-az-A5u"/>
                 <outlet property="patientAgeField" destination="bfk-W4-de1" id="fVl-Wn-Kay"/>
@@ -64,13 +65,24 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YxO-tN-Fdd">
-                    <rect key="frame" x="17" y="200" width="286" height="303"/>
+                    <rect key="frame" x="17" y="200" width="286" height="184"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="dkh-Cg-JQs"/>
                         <outlet property="delegate" destination="-1" id="8qM-CH-YsO"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2y-WF-60L">
+                    <rect key="frame" x="17" y="480" width="295" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Add Visit">
+                        <color key="titleColor" red="0.95654085860000004" green="1" blue="0.94675923740000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addVisitButtonClicked:" destination="-1" eventType="touchUpInside" id="3EN-De-twL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

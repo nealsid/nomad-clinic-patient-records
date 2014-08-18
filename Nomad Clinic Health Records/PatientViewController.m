@@ -22,6 +22,7 @@
 
 @property (nonatomic, retain) Patient* patient;
 
+@property (weak, nonatomic) IBOutlet UIButton *addVisitButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *ageButton;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
@@ -30,13 +31,12 @@
 @property (weak, nonatomic) IBOutlet UITableView *patientVitalsTable;
 
 @property (weak, nonatomic) VisitStore* patientVisitStore;
+@property (strong, nonatomic) NSArray* visitsForPatient;
 
 @property (strong, nonatomic) NSDate* chosenDate;
 @property NSNumber* chosenYear;
 @property NSNumber* chosenMonth;
 @property BOOL ageSet;
-
-- (void) updateTitleFromPatientNameField;
 
 @end
 
@@ -191,6 +191,7 @@
     self.patient = p;
     self.patientVisitStore = [VisitStore sharedVisitStore];
     self.ageSet = NO;
+    self.visitsForPatient = [self.patientVisitStore visitsForPatient:self.patient];
 //    [self updateTitleFromPatientNameField];
   }
 
@@ -224,6 +225,9 @@
 
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+  [self.t registerClass:[UITableViewCell class]
+         forCellReuseIdentifier:@"UITableViewCell"];
+
 }
 
 
@@ -256,8 +260,12 @@
   [UIView commitAnimations];
 }
 
+- (IBAction)addVisitButtonClicked:(id)sender {
+  
+}
+
 - (BOOL) isLastRow:(NSInteger)rowNumber {
-  return rowNumber == self.numberOfRows + 1;
+  return rowNumber == [self.visitsForPatient count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -293,7 +301,7 @@ heightForHeaderInSection:(NSInteger)section {
   numberOfRowsInSection:(NSInteger)section {
   // We return the number of rows, plus 1 extra
   // row for the "No more patients" row.
-  return self.numberOfRows;
+  return [self.visitsForPatient count];
 }
 
 - (UIView*)    tableView:(UITableView *)tableView
@@ -331,5 +339,44 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   return ![self isLastRow:row];
 }
+
+- (void)      tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (UITableViewCell*) tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+  UITableViewCell* cell =
+  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+                         reuseIdentifier:@"UITableViewCell"];
+  cell.textLabel.textColor = [UIColor darkGrayColor];
+  cell.backgroundColor = [UIColor clearColor];
+  if ([self isLastRow:row]) {
+    cell.textLabel.text = @"No more patients";
+    return cell;
+  }
+  [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
+  if (row > [self.patients count]) {
+    return nil;
+  }
+  Patient* p = [self.patients objectAtIndex:row];
+  cell.textLabel.text = p.name;
+  [cell.textLabel setFont:self.itemFont];
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+  [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+  NSString* gender = @"";
+  if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
+    gender = @"Female";
+  } else if ([p.gender isEqualToNumber:[NSNumber numberWithInt:1]]) {
+    gender = @"Male";
+  }
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, Born: %@",
+                               gender, [p.dob toString]];
+  cell.detailTextLabel.textColor = [UIColor grayColor];
+  return cell;
+}
+
 
 @end

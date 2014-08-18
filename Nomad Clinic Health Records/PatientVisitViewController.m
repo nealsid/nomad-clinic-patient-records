@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) Visit* visit;
 @property (strong, nonatomic) NSArray* notes;
-@property (nonatomic, retain) UIFont* itemFont;
+@property (strong, nonatomic) UIFont* itemFont;
 
 @property (weak, nonatomic) IBOutlet UILabel *patientNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *clinicianNameLabel;

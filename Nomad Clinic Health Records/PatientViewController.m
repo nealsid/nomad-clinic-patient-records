@@ -25,15 +25,17 @@
 
 @property (nonatomic, retain) Patient* patient;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *addVisitButton;
 @property (weak, nonatomic) IBOutlet UIButton *ageButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
+@property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
 
 @property (weak, nonatomic) VisitStore* patientVisitStore;
+
 @property (strong, nonatomic) Visit* mostRecentVisit;
 
 @property (strong, nonatomic) NSDate* chosenDate;
@@ -50,8 +52,10 @@
   [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
   if (self.patient != nil) {
     [self updateUIWithPatient];
+    [self.ageButton setTitle:[self.patient.dob toString]
+                    forState:UIControlStateNormal];
+    [self.genderControl setSelectedSegmentIndex:[self.patient.gender intValue]];
     [self setEditing:NO animated:NO];
-    [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
   } else {
     [self setEditing:YES animated:NO];
     [self.recentVisitTable setHidden:YES];
@@ -127,6 +131,11 @@
     requiresSave = YES;
   }
 
+  if (self.genderControl.enabled &&
+      self.genderControl.selectedSegmentIndex != [self.patient.gender integerValue]) {
+    requiresSave = YES;
+  }
+
   if (requiresSave) {
     if (self.patient == nil) {
       Patient* p = [[PatientStore sharedPatientStore] newPatient];
@@ -142,6 +151,7 @@
       [NSException raise:@"Patient Save failed"
                   format:@"Reason: patient has no flex date"];
     }
+    self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];
     [[PatientStore sharedPatientStore] saveChanges];
   }
 
@@ -176,6 +186,10 @@
     [self.patientAgeField setHidden:YES];
     [self.ageButton setHidden:NO];
     [self.toolbar setHidden:NO];
+    for (NSUInteger i = 0; i < self.genderControl.numberOfSegments; ++i) {
+      [self.genderControl setEnabled:YES forSegmentAtIndex:i];
+    }
+    self.genderControl.selectedSegmentIndex = [self.patient.gender integerValue];
   } else {
 
     [self highlightInvalidUIElements];
@@ -192,6 +206,13 @@
     [self.ageButton setHidden:YES];
 
     [self.toolbar setHidden:YES];
+
+    for (NSUInteger i = 0; i < self.genderControl.numberOfSegments; ++i) {
+      if (i != [self.genderControl selectedSegmentIndex]) {
+        [self.genderControl setEnabled:NO forSegmentAtIndex:i];
+      }
+    }
+
     [self saveChangesIfNecessary];
   }
 }
@@ -275,7 +296,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (BOOL)            tableView:(UITableView *)tableView
 shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-  return YES;
+  return [indexPath row] != 1;
 }
 
 - (void) refreshVisitUI {
@@ -321,7 +342,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = @"Healthy?";
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
     [switchView addTarget:self
-                   action:@selector(switchClicked:)
+                   action:@selector(isHealthySwitchClicked:)
          forControlEvents:UIControlEventValueChanged];
     cell.accessoryView = switchView;
     switchView.on = [self.mostRecentVisit.notes.healthy boolValue];
@@ -334,8 +355,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   }
   return cell;
 }
+- (IBAction)genderSwitch:(id)sender {
+}
 
-- (void) switchClicked:(id)sender {
+- (void) isHealthySwitchClicked:(id)sender {
   UISwitch* healthSwitch = (UISwitch*)sender;
   self.mostRecentVisit.notes.healthy = [NSNumber numberWithBool:healthSwitch.isOn];
   [self.patientVisitStore saveChanges];

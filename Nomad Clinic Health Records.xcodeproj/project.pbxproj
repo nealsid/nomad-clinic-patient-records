@@ -113,6 +113,7 @@
 		F9B9EF6019A25C3800072D7D /* NumberFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberFieldViewController.h; sourceTree = "<group>"; };
 		F9B9EF6119A25C3800072D7D /* NumberFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFieldViewController.m; sourceTree = "<group>"; };
 		F9B9EF6219A25C3800072D7D /* NumberFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberFieldViewController.xib; sourceTree = "<group>"; };
+		F9B9EF6519A3CCE900072D7D /* Patient+Gender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Patient+Gender.h"; sourceTree = "<group>"; };
 		F9DBC47B199D57EE00FB2544 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		F9DBC47C199D57EE00FB2544 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		F9E9DAA11986C03000E8568F /* NEMRClinicianTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMRClinicianTableViewController.h; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 				F9E9DAAB1986C23F00E8568F /* Clinician.m */,
 				F9247D79199A940300C97F93 /* FlexDate.h */,
 				F9247D7A199A940300C97F93 /* FlexDate.m */,
+				F9B9EF6519A3CCE900072D7D /* Patient+Gender.h */,
 				F937FC191999366E00FD1355 /* Patient.h */,
 				F937FC1A1999366E00FD1355 /* Patient.m */,
 				F9B9EF4F199FE10A00072D7D /* Visit.h */,

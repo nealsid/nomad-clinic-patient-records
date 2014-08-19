@@ -13,6 +13,7 @@
 #import "FlexDate.h"
 #import "NEMRAppDelegate.h"
 #import "Patient.h"
+#import "Patient+Gender.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
 #import "Utils.h"
@@ -101,7 +102,6 @@
     [NSException raise:@"Fetch failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
-  NSLog(@"%@", result);
   return result;
 }
 
@@ -127,7 +127,10 @@
                             @"Jane Doe",
                             @"Isabel Bradley"];
 
-  NSArray* patientGenders = @[@1, @1, @0, @0];
+  NSArray* patientGenders = @[[NSNumber numberWithInteger:Male],
+                              [NSNumber numberWithInteger:Male],
+                              [NSNumber numberWithInteger:Female],
+                              [NSNumber numberWithInteger:Female]];
   NSMutableArray* patients = [[NSMutableArray alloc] init];
   for (int i = 0; i < [patientNames count]; ++i) {
     Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"

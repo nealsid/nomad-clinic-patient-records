@@ -10,6 +10,7 @@
                 <outlet property="addVisitButton" destination="T2y-WF-60L" id="U6r-vK-i4z"/>
                 <outlet property="ageButton" destination="SMb-D9-6o6" id="sdZ-x3-3fh"/>
                 <outlet property="cancelButton" destination="LQ9-ga-Xd1" id="6hr-az-A5u"/>
+                <outlet property="genderControl" destination="tvb-Cz-9GQ" id="syt-P6-exm"/>
                 <outlet property="patientAgeField" destination="bfk-W4-de1" id="fVl-Wn-Kay"/>
                 <outlet property="patientNameField" destination="EmV-nv-Q8B" id="ZBq-l2-IkQ"/>
                 <outlet property="recentVisitTable" destination="YxO-tN-Fdd" id="Awp-jp-LN4"/>
@@ -42,7 +43,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfk-W4-de1" userLabel="patient dob field">
-                    <rect key="frame" x="17" y="136" width="286" height="26"/>
+                    <rect key="frame" x="17" y="127" width="286" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="26" id="Lma-hF-ZGZ"/>
                     </constraints>
@@ -50,7 +51,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMb-D9-6o6">
-                    <rect key="frame" x="17" y="132" width="286" height="30"/>
+                    <rect key="frame" x="17" y="126" width="286" height="30"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Tap to set birthday">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,7 +67,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YxO-tN-Fdd">
-                    <rect key="frame" x="17" y="200" width="286" height="272"/>
+                    <rect key="frame" x="17" y="229" width="286" height="243"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <variation key="widthClass=compact" fixedFrame="YES">
                         <rect key="frame" x="17" y="200" width="286" height="272"/>
@@ -87,6 +88,17 @@
                         <action selector="addVisitButtonClicked:" destination="-1" eventType="touchUpInside" id="3EN-De-twL"/>
                     </connections>
                 </button>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tvb-Cz-9GQ">
+                    <rect key="frame" x="17" y="175" width="286" height="29"/>
+                    <segments>
+                        <segment title="Female"/>
+                        <segment title="Other"/>
+                        <segment title="Male"/>
+                    </segments>
+                    <connections>
+                        <action selector="genderSwitch:" destination="-1" eventType="valueChanged" id="Rqb-n5-ZeL"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -98,9 +110,9 @@
                 <constraint firstItem="bfk-W4-de1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="17" id="a7Y-Th-eQQ"/>
                 <constraint firstItem="EmV-nv-Q8B" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="gYp-HE-eH9"/>
                 <constraint firstAttribute="trailing" secondItem="EmV-nv-Q8B" secondAttribute="trailing" constant="17" id="kqh-F6-xMK"/>
-                <constraint firstItem="SMb-D9-6o6" firstAttribute="top" secondItem="EmV-nv-Q8B" secondAttribute="bottom" constant="21" id="nfc-Ot-4YC"/>
+                <constraint firstItem="SMb-D9-6o6" firstAttribute="top" secondItem="EmV-nv-Q8B" secondAttribute="bottom" constant="15" id="nfc-Ot-4YC"/>
                 <constraint firstAttribute="trailing" secondItem="SMb-D9-6o6" secondAttribute="trailing" constant="17" id="oJ4-zz-wSP"/>
-                <constraint firstItem="bfk-W4-de1" firstAttribute="top" secondItem="EmV-nv-Q8B" secondAttribute="bottom" constant="25" id="s4J-St-b1G"/>
+                <constraint firstItem="bfk-W4-de1" firstAttribute="top" secondItem="EmV-nv-Q8B" secondAttribute="bottom" constant="16" id="s4J-St-b1G"/>
                 <constraint firstAttribute="trailing" secondItem="bfk-W4-de1" secondAttribute="trailing" constant="17" id="ycS-yW-0rb"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>

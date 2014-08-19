@@ -10,6 +10,7 @@
 #import "PatientViewController.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
+#import "Patient+Gender.h"
 #import "PatientStore.h"
 #import "TableViewController.h"
 
@@ -66,6 +67,9 @@
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
   Patient* p = [self.patients objectAtIndex:row];
+
+  NSLog(@"%@", p);
+
   PatientViewController* pvc =
   [[PatientViewController alloc] initWithNibName:nil
                                               bundle:nil
@@ -112,10 +116,17 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
   [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
   NSString* gender = @"";
-  if ([p.gender isEqualToNumber:[NSNumber numberWithInt:0]]) {
-    gender = @"Female";
-  } else if ([p.gender isEqualToNumber:[NSNumber numberWithInt:1]]) {
-    gender = @"Male";
+  switch ([p.gender intValue]) {
+    case Female:
+      gender = @"Female";
+      break;
+    case Male:
+      gender = @"Male";
+      break;
+    case Other:
+    default:
+      gender = @"Other";
+      break;
   }
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, Born: %@",
                                gender, [p.dob toString]];

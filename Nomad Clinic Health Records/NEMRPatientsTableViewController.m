@@ -90,6 +90,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
     [tableView deleteRowsAtIndexPaths:@[indexPath]
                      withRowAnimation:UITableViewRowAnimationFade];
+    [tableView reloadData];
   }
 }
 

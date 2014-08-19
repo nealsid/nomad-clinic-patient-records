@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
-#import "AgeEntryChoiceViewController.h"
+#import "DOBSetViewController.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
 #import "NumberFieldViewController.h"
@@ -190,6 +190,7 @@
       [self.genderControl setEnabled:YES forSegmentAtIndex:i];
     }
     self.genderControl.selectedSegmentIndex = [self.patient.gender integerValue];
+    [self.recentVisitTable setHidden:YES];
   } else {
 
     [self highlightInvalidUIElements];
@@ -212,6 +213,7 @@
         [self.genderControl setEnabled:NO forSegmentAtIndex:i];
       }
     }
+    [self.recentVisitTable setHidden:NO];
 
     [self saveChangesIfNecessary];
   }
@@ -402,10 +404,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (IBAction)ageButtonPushed:(id)sender {
-  AgeEntryChoiceViewController* vc = [[AgeEntryChoiceViewController alloc] initWithNibName:nil
-                                                                                    bundle:nil
-                                                                               patientName:self.patient.name
-                                                                         ageChosenDelegate:self];
+  DOBSetViewController* vc = [[DOBSetViewController alloc] initWithNibName:nil
+                                                                    bundle:nil
+                                                         ageChosenDelegate:self];
   [self.navigationController pushViewController:vc animated:YES];
 }
 

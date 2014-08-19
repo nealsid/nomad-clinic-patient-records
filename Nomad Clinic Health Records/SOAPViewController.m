@@ -34,6 +34,8 @@
     [self.delegate soapViewController:self
                           saveNewNote:newText
                               forType:entryType];
+  } else {
+    [self cancelButtonPressed:nil];
   }
 }
 

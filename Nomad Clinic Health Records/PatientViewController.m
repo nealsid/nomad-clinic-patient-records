@@ -283,7 +283,10 @@ heightForHeaderInSection:(NSInteger)section {
 
 - (NSString*) tableView:(UITableView *)tableView
 titleForHeaderInSection:(NSInteger)section {
-  return @"Most recent visit";
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+  return [NSString stringWithFormat:@"Most recent visit: %@",
+          [dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
 }
 
 - (CGFloat)    tableView:(UITableView *)tableView

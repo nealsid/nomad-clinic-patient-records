@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 
+@property (weak, nonatomic) id<FieldEditDelegate> delegate;
+
 @property (strong, nonatomic) NSString* fieldName;
 @property (strong, nonatomic) NSString* initialValue;
 
@@ -23,11 +25,13 @@
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
                        fieldName:(NSString*)fieldName
-                    initialValue:(NSString*)initialValue {
+                    initialValue:(NSString*)initialValue
+            fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
   self = [super initWithNibName:nibNameOrNil bundle:bundleOrNil];
   if(self) {
     self.fieldName = fieldName;
     self.initialValue = initialValue;
+    self.delegate = delegate;
   }
   return self;
 }
@@ -37,7 +41,8 @@
   self = [self initWithNibName:nibNameOrNil
                         bundle:bundleOrNil
                      fieldName:@""
-                  initialValue:@""];
+                  initialValue:@""
+                      fieldChangedDelegate:nil];
   return self;
 }
 
@@ -50,8 +55,35 @@
   [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
+- (void) highlightFieldIfInvalid {
+  if (![self fieldIsValid]) {
+    self.valueField.layer.borderColor = [[UIColor redColor] CGColor];
+    self.valueField.layer.borderWidth = 1.0f;
+  } else {
+    self.valueField.layer.borderColor = [[UIColor clearColor] CGColor];
+    self.valueField.layer.borderWidth = 1.0f;
+  }
+}
+
+- (BOOL) fieldIsValid {
+  NSCharacterSet* ws = [NSCharacterSet whitespaceCharacterSet];
+  if ([self.valueField.text integerValue] == 0 &&
+      ![[self.valueField.text stringByTrimmingCharactersInSet:ws] isEqualToString:@"0"]) {
+    return NO;
+  }
+  return YES;
+}
+
 - (void) saveField:(id)sender {
-  NSLog(@"Should save here");
+  if (![self fieldIsValid]) {
+    [self highlightFieldIfInvalid];
+    return;
+  }
+  NSCharacterSet* ws = [NSCharacterSet whitespaceCharacterSet];
+  NSString* input = [self.valueField.text stringByTrimmingCharactersInSet:ws];
+
+  NSNumber* newValue = [NSNumber numberWithInteger:[input integerValue]];
+  [self.delegate newFieldValue:newValue];
 }
 
 @end

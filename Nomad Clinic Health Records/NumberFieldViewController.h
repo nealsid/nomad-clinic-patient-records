@@ -10,7 +10,7 @@
 
 @protocol FieldEditDelegate
 
-- (void) newFieldValue:(NSString*) newValue;
+- (void) newFieldValue:(NSNumber*) newValue;
 
 @end
 
@@ -19,6 +19,7 @@
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
                        fieldName:(NSString*)fieldName
-                    initialValue:(NSString*)initialValue;
+                    initialValue:(NSString*)initialValue
+            fieldChangedDelegate:(id<FieldEditDelegate>)delegate;
 
 @end

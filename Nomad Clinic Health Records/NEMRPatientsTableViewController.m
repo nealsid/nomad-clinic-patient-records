@@ -56,6 +56,7 @@
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   self.patients = [self.patientStore patients];
+  self.numberOfRows = [self.patients count];
   [self.tableView reloadData];
 }
 
@@ -79,8 +80,10 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Patient* p = [self.patients objectAtIndex:[indexPath row]];
-    [[PatientStore sharedPatientStore] removePatient:p];
+    [self.patientStore removePatient:p];
     self.patients = [self.patientStore patients];
+    self.numberOfRows = [self.patients count];
+
     [tableView deleteRowsAtIndexPaths:@[indexPath]
                      withRowAnimation:UITableViewRowAnimationFade];
   }

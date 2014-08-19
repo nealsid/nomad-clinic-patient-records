@@ -13,6 +13,7 @@
 #import "PatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
+#import "SOAPViewController.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
 #import "VisitStore.h"
@@ -20,13 +21,13 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface PatientViewController () <AgeChosenDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface PatientViewController () <AgeChosenDelegate, UITableViewDataSource, UITableViewDelegate, FieldEditDelegate, SOAPNoteViewControllerDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 
 @property (weak, nonatomic) IBOutlet UIButton *addVisitButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *ageButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
@@ -50,10 +51,12 @@
   if (self.patient != nil) {
     [self updateUIWithPatient];
     [self setEditing:NO animated:NO];
+    [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
   } else {
     [self setEditing:YES animated:NO];
+    [self.recentVisitTable setHidden:YES];
   }
-  [self.ageButton setTitle:[self.patient.dob toString] forState:UIControlStateNormal];
+  [self.addVisitButton setHidden:YES];
   self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -97,9 +100,8 @@
 
 - (void) highlightInvalidUIElements {
   if ([self.patientNameField.text length] == 0) {
-    self.patientNameField.layer.cornerRadius = 8.0f;
     self.patientNameField.layer.masksToBounds = YES;
-    self.patientNameField.layer.borderColor = [[UIColor redColor]CGColor];
+    self.patientNameField.layer.borderColor = [[UIColor redColor] CGColor];
     self.patientNameField.layer.borderWidth = 1.0f;
   } else {
     self.patientNameField.layer.borderColor = [[UIColor clearColor] CGColor];
@@ -197,6 +199,7 @@
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
   [self.patientAgeField setText:[self.patient.dob toString]];
+  [self refreshVisitUI];
 }
 
 - (void) keyboardWillShow: (NSNotification *)notification {
@@ -252,7 +255,7 @@ heightForHeaderInSection:(NSInteger)section {
 
 - (NSInteger) tableView:(UITableView *)tableView
   numberOfRowsInSection:(NSInteger)section {
-  return 2;
+  return 3;
 }
 
 - (NSString*) tableView:(UITableView *)tableView
@@ -275,11 +278,32 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
   return YES;
 }
 
+- (void) refreshVisitUI {
+  self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
+  self.recentVisitTable.hidden = NO;
+  [self.recentVisitTable reloadData];
+}
+
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([indexPath row] == 0) {
-    NumberFieldViewController *vc = [[NumberFieldViewController alloc] initWithNibName:nil bundle:nil fieldName:@"Weight" initialValue:@"160"];
+    NumberFieldViewController *vc = [[NumberFieldViewController alloc]
+                                     initWithNibName:nil
+                                     bundle:nil
+                                     fieldName:@"Weight"
+                                     initialValue:[self.mostRecentVisit.notes.weight stringValue]
+                                     fieldChangedDelegate:self];
     [self.navigationController pushViewController:vc animated:YES];
+    return;
+  }
+  if ([indexPath row] == 2) {
+    SOAPViewController* vc = [[SOAPViewController alloc] initWithNibName:nil
+                                                                  bundle:nil
+                                                                soapType:O
+                                                                    note:self.mostRecentVisit.notes.objective
+                                                                delegate:self];
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
   }
 }
 
@@ -293,7 +317,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (row == 0) {
     cell.textLabel.text = @"Weight";
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ lbs", self.mostRecentVisit.notes.weight];
-  } else {
+  } else if (row == 1) {
     cell.textLabel.text = @"Healthy?";
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
     [switchView addTarget:self
@@ -304,15 +328,36 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![self.mostRecentVisit.notes.healthy boolValue]) {
       cell.textLabel.textColor = [UIColor redColor];
     }
+  } else if (row == 2) {
+    cell.textLabel.text = @"Note";
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   return cell;
 }
 
-- (IBAction) switchClicked:(id)sender {
+- (void) switchClicked:(id)sender {
   UISwitch* healthSwitch = (UISwitch*)sender;
   self.mostRecentVisit.notes.healthy = [NSNumber numberWithBool:healthSwitch.isOn];
   [self.patientVisitStore saveChanges];
   [self.recentVisitTable reloadData];
+}
+
+- (void) newFieldValue:(NSNumber*)newValue {
+  NSLog(@"Setting weight to %@", newValue);
+  self.mostRecentVisit.notes.weight = newValue;
+  [self.patientVisitStore saveChanges];
+  [self.recentVisitTable reloadData];
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) soapViewController:(SOAPViewController*)vc saveNewNote:(NSString*)s
+                    forType:(SOAPEntryType)type {
+  NSLog(@"Setting note to %@", s);
+  self.mostRecentVisit.notes.objective = s;
+  [self.patientVisitStore saveChanges];
+  [self.recentVisitTable reloadData];
+  [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (void)ageWasChosenByBirthdate:(NSDate *)birthDate {

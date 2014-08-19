@@ -38,6 +38,13 @@
                                              inManagedObjectContext:ctx];
   p.dob = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate"
                                         inManagedObjectContext:ctx];
+  Visit *v = [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
+                                           inManagedObjectContext:ctx];
+  VisitNotesComplex *visitNotes = [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
+                                                                inManagedObjectContext:ctx];
+  visitNotes.visit = v;
+  v.patient = p;
+  
   NSError* error;
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed"

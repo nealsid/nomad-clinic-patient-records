@@ -9,7 +9,6 @@
 #import "DOBSetViewController.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
-#import "NumberFieldViewController.h"
 #import "PatientViewController.h"
 #import "Patient.h"
 #import "PatientStore.h"
@@ -21,7 +20,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface PatientViewController () <AgeChosenDelegate, UITableViewDataSource, UITableViewDelegate, FieldEditDelegate, SOAPNoteViewControllerDelegate>
+@interface PatientViewController () <AgeChosenDelegate>
 
 @property (nonatomic, retain) Patient* patient;
 
@@ -35,8 +34,6 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @property (weak, nonatomic) VisitStore* patientVisitStore;
-
-@property (strong, nonatomic) Visit* mostRecentVisit;
 
 @property (strong, nonatomic) NSDate* chosenDate;
 @property NSNumber* chosenYear;
@@ -85,6 +82,8 @@
     self.patientVisitStore = [VisitStore sharedVisitStore];
     self.ageSet = NO;
     self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
   }
 
   return self;
@@ -257,110 +256,15 @@
   
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+- (IBAction)genderSwitch:(id)sender {
+
 }
 
-- (BOOL)    tableView:(UITableView *)tableView
-canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-  return NO;
-}
-
-- (BOOL)    tableView:(UITableView *)tableView
-canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-  return NO;
-}
-
-- (CGFloat)    tableView:(UITableView *)tableView
-heightForHeaderInSection:(NSInteger)section {
-  return 40;
-}
-
-- (NSInteger) tableView:(UITableView *)tableView
-  numberOfRowsInSection:(NSInteger)section {
-  return 3;
-}
-
-- (NSString*) tableView:(UITableView *)tableView
-titleForHeaderInSection:(NSInteger)section {
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-  return [NSString stringWithFormat:@"Most recent visit: %@",
-          [dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
-}
-
-- (CGFloat)    tableView:(UITableView *)tableView
-heightForFooterInSection:(NSInteger)section {
-  return 0;
-}
-
-- (CGFloat)   tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 60;
-}
-
-- (BOOL)            tableView:(UITableView *)tableView
-shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-  return [indexPath row] != 1;
-}
 
 - (void) refreshVisitUI {
   self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
   self.recentVisitTable.hidden = NO;
   [self.recentVisitTable reloadData];
-}
-
-- (void)      tableView:(UITableView *)tableView
-didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([indexPath row] == 0) {
-    NumberFieldViewController *vc = [[NumberFieldViewController alloc]
-                                     initWithNibName:nil
-                                     bundle:nil
-                                     fieldName:@"Weight"
-                                     initialValue:[self.mostRecentVisit.notes.weight stringValue]
-                                     fieldChangedDelegate:self];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-  }
-  if ([indexPath row] == 2) {
-    SOAPViewController* vc = [[SOAPViewController alloc] initWithNibName:nil
-                                                                  bundle:nil
-                                                                soapType:O
-                                                                    note:self.mostRecentVisit.notes.objective
-                                                                delegate:self];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-  }
-}
-
-- (UITableViewCell*) tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                                 reuseIdentifier:@"UITableViewCell"];
-
-  cell.textLabel.textColor = [UIColor darkGrayColor];
-  if (row == 0) {
-    cell.textLabel.text = @"Weight";
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ lbs", self.mostRecentVisit.notes.weight];
-  } else if (row == 1) {
-    cell.textLabel.text = @"Healthy?";
-    UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-    [switchView addTarget:self
-                   action:@selector(isHealthySwitchClicked:)
-         forControlEvents:UIControlEventValueChanged];
-    cell.accessoryView = switchView;
-    switchView.on = [self.mostRecentVisit.notes.healthy boolValue];
-    if (![self.mostRecentVisit.notes.healthy boolValue]) {
-      cell.textLabel.textColor = [UIColor redColor];
-    }
-  } else if (row == 2) {
-    cell.textLabel.text = @"Note";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  }
-  return cell;
-}
-- (IBAction)genderSwitch:(id)sender {
 }
 
 - (void) isHealthySwitchClicked:(id)sender {

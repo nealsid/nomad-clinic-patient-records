@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Patient.h"
 
-@interface PatientViewController : UIViewController
+#import "NumberFieldViewController.h"
+#import "SOAPViewController.h"
+
+@interface PatientViewController : UIViewController <FieldEditDelegate, SOAPNoteViewControllerDelegate>
+
+@property (strong, nonatomic) Visit* mostRecentVisit;
+@property (strong, nonatomic) NSDateFormatter* dateFormatter;
 
 /**
  * Designated initializer for the Patient view controller.
@@ -22,5 +28,11 @@
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
                      andPatient:(Patient*)p;
+
+/**
+ *  Method for the isHealthy switch in the Healthy row for a table visit.
+ *  This method updates & commits the changes to CoreData.
+ */
+- (void) isHealthySwitchClicked:(id)sender;
 
 @end

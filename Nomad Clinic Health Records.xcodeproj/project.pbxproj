@@ -53,6 +53,7 @@
 		F9FAEA6D197B075500C9B3E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9FAEA6C197B075500C9B3E5 /* Images.xcassets */; };
 		F9FAEA79197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA78197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m */; };
 		F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA82197B0B2800C9B3E5 /* NEMRImageTransformer.m */; };
+		F9FC825D19A516E200BA86E7 /* PatientViewController+TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FC825C19A516E200BA86E7 /* PatientViewController+TableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,8 @@
 		F9FAEA78197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Nomad_Clinic_Health_RecordsTests.m; sourceTree = "<group>"; };
 		F9FAEA82197B0B2800C9B3E5 /* NEMRImageTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMRImageTransformer.m; sourceTree = "<group>"; };
 		F9FAEA84197B0B3800C9B3E5 /* NEMRImageTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NEMRImageTransformer.h; sourceTree = "<group>"; };
+		F9FC825B19A516E200BA86E7 /* PatientViewController+TableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PatientViewController+TableView.h"; path = "../PatientViewController+TableView.h"; sourceTree = "<group>"; };
+		F9FC825C19A516E200BA86E7 /* PatientViewController+TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PatientViewController+TableView.m"; path = "../PatientViewController+TableView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +237,8 @@
 				F911FF81197C07B20063A1F1 /* PatientViewController.h */,
 				F911FF82197C07B20063A1F1 /* PatientViewController.m */,
 				F911FF83197C07B20063A1F1 /* PatientViewController.xib */,
+				F9FC825B19A516E200BA86E7 /* PatientViewController+TableView.h */,
+				F9FC825C19A516E200BA86E7 /* PatientViewController+TableView.m */,
 				F914D8D719883C5500BBD38E /* PatientVisitViewController.h */,
 				F914D8D819883C5500BBD38E /* PatientVisitViewController.m */,
 				F914D8D919883C5500BBD38E /* PatientVisitViewController.xib */,
@@ -438,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9FC825D19A516E200BA86E7 /* PatientViewController+TableView.m in Sources */,
 				F9E9DAAC1986C23F00E8568F /* Clinician.m in Sources */,
 				F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */,
 				F937FC1B1999366E00FD1355 /* Patient.m in Sources */,

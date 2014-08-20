@@ -164,6 +164,7 @@
   }
   [self unsetAge];
   [self updateUIWithPatient];
+  [self.genderControl setSelectedSegmentIndex:[self.patient.gender intValue]];
   [self setEditing:NO animated:NO];
 }
 
@@ -221,6 +222,7 @@
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
   [self.patientAgeField setText:[self.patient.dob toString]];
+
   [self refreshVisitUI];
 }
 

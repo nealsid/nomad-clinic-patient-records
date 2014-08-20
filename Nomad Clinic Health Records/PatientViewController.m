@@ -57,7 +57,6 @@
     [self setEditing:YES animated:NO];
     [self.recentVisitTable setHidden:YES];
   }
-  [self.addVisitButton setHidden:YES];
   self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
 
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -184,6 +183,7 @@
     [self.ageButton setTitle:[self.patient.dob toString]
                     forState:UIControlStateNormal];
     [self.patientAgeField setHidden:YES];
+    [self.addVisitButton setHidden:YES];
     [self.ageButton setHidden:NO];
     [self.toolbar setHidden:NO];
     for (NSUInteger i = 0; i < self.genderControl.numberOfSegments; ++i) {
@@ -205,6 +205,7 @@
 
     [self.patientAgeField setHidden:NO];
     [self.ageButton setHidden:YES];
+    [self.addVisitButton setHidden:NO];
 
     [self.toolbar setHidden:YES];
 
@@ -255,13 +256,10 @@
 }
 
 - (IBAction)addVisitButtonClicked:(id)sender {
-  
+  Visit* v = [self.patientVisitStore newVisitForPatient:self.patient];
+  self.mostRecentVisit = v;
+  [self refreshVisitUI];
 }
-
-- (IBAction)genderSwitch:(id)sender {
-
-}
-
 
 - (void) refreshVisitUI {
   self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];

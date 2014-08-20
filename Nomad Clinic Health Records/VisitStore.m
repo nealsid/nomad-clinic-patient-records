@@ -8,12 +8,12 @@
 
 #import "VisitStore.h"
 
-#import "Clinician.h"
-#import "ClinicianStore.h"
 #import "NEMRAppDelegate.h"
 #import "Patient.h"
 #import "PatientStore.h"
 #import "Visit.h"
+#import "VisitNotesComplex.h"
+
 #import <CoreData/CoreData.h>
 
 @interface VisitStore ()
@@ -26,12 +26,19 @@
 
 @implementation VisitStore
 
-- (Visit*) newVisit {
+- (Visit*) newVisitForPatient:(Patient*) p {
   NSManagedObjectContext* ctx = self.managedObjectContext;
 
   Visit* pv =
       [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
                                     inManagedObjectContext:ctx];
+
+  pv.patient = p;
+  pv.visit_date = [NSDate date];
+  VisitNotesComplex* note = [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
+                                                          inManagedObjectContext:ctx];
+  pv.notes = note;
+  note.visit = pv;
   NSError* error;
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed"

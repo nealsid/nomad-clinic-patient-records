@@ -53,9 +53,10 @@
 /**
  * Creates a new Visit that is stored in the data store.
  *
+ * @param p A Patient to create the visit for.
  * @returns PatientVisit object
  */
-- (Visit*) newVisit;
+- (Visit*) newVisitForPatient:(Patient*) p;
 
 /**
  * Removes a PatientVisit from the PatientVisitStore

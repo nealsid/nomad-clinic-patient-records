@@ -21,6 +21,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface PatientViewController () <AgeChosenDelegate>
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *patientNameTopConstraint;
 
 @property (nonatomic, retain) Patient* patient;
 
@@ -69,8 +70,16 @@
                                              object:nil];
   [self.recentVisitTable registerClass:[UITableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
+  NSLog(@"Inside viewDidLoad: %@", self.patientNameTopConstraint);
 }
 
+- (void) viewDidLayoutSubviews {
+  NSLog(@"Inside viewDidLayoutSubviews: %f", [self.topLayoutGuide length]);
+
+  CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
+  self.patientNameTopConstraint.constant += topLayoutGuideLength;
+  [self.view layoutSubviews];
+}
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
                      andPatient:(Patient*)p {

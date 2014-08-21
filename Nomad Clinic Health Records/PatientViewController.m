@@ -232,7 +232,7 @@
   NSTimeInterval animationDuration = [[[notification userInfo] valueForKey: UIKeyboardAnimationDurationUserInfoKey] doubleValue];
   CGRect keyboardBounds = [(NSValue *)[[notification userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey] CGRectValue];
   keyboardBounds = [self.view convertRect:keyboardBounds fromView:nil];
-  [UIView beginAnimations:nil context: nil];
+  [UIView beginAnimations:nil context:nil];
   [UIView setAnimationCurve:animationCurve];
   [UIView setAnimationDuration:animationDuration];
   [self.toolbar setFrame:CGRectMake(0.0f,

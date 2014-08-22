@@ -41,6 +41,8 @@
 @property NSNumber* chosenMonth;
 @property BOOL ageSet;
 
+@property BOOL adjustedForTopLayout;
+
 @end
 
 @implementation PatientViewController
@@ -75,10 +77,12 @@
 
 - (void) viewDidLayoutSubviews {
   NSLog(@"Inside viewDidLayoutSubviews: %f", [self.topLayoutGuide length]);
-
-  CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
-  self.patientNameTopConstraint.constant += topLayoutGuideLength;
-  [self.view layoutSubviews];
+  if (!self.adjustedForTopLayout) {
+    CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
+    self.patientNameTopConstraint.constant += topLayoutGuideLength;
+    [self.view layoutSubviews];
+    self.adjustedForTopLayout = YES;
+  }
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
@@ -92,6 +96,7 @@
     self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    self.adjustedForTopLayout = NO;
   }
 
   return self;

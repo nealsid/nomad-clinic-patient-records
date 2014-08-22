@@ -22,12 +22,12 @@
 
 @interface PatientViewController () <AgeChosenDelegate>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *patientNameTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomConstraint;
 
 @property (nonatomic, retain) Patient* patient;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *addVisitButton;
-@property (weak, nonatomic) IBOutlet UIButton *ageButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
 @property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
@@ -52,16 +52,12 @@
   [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
   if (self.patient != nil) {
     [self updateUIWithPatient];
-    [self.ageButton setTitle:[self.patient.dob toString]
-                    forState:UIControlStateNormal];
     [self.genderControl setSelectedSegmentIndex:[self.patient.gender intValue]];
     [self setEditing:NO animated:NO];
   } else {
     [self setEditing:YES animated:NO];
     [self.recentVisitTable setHidden:YES];
   }
-  self.ageButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(keyboardWillShow:)
                                                name:UIKeyboardWillShowNotification
@@ -72,11 +68,9 @@
                                              object:nil];
   [self.recentVisitTable registerClass:[UITableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
-  NSLog(@"Inside viewDidLoad: %@", self.patientNameTopConstraint);
 }
 
 - (void) viewDidLayoutSubviews {
-  NSLog(@"Inside viewDidLayoutSubviews: %f", [self.topLayoutGuide length]);
   if (!self.adjustedForTopLayout) {
     CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
     self.patientNameTopConstraint.constant += topLayoutGuideLength;
@@ -194,11 +188,9 @@
     [self.patientNameField setEnabled:YES];
     [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
 
-    [self.ageButton setTitle:[self.patient.dob toString]
-                    forState:UIControlStateNormal];
-    [self.patientAgeField setHidden:YES];
+    [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
+    [self.patientAgeField setEnabled:YES];
     [self.addVisitButton setHidden:YES];
-    [self.ageButton setHidden:NO];
     [self.toolbar setHidden:NO];
     for (NSUInteger i = 0; i < self.genderControl.numberOfSegments; ++i) {
       [self.genderControl setEnabled:YES forSegmentAtIndex:i];
@@ -216,9 +208,10 @@
     [super setEditing:editing animated:animated];
     [self.patientNameField setEnabled:NO];
     [self.patientNameField setBorderStyle:UITextBorderStyleNone];
+    [self.patientAgeField setBorderStyle:UITextBorderStyleNone];
+    [self.patientAgeField setEnabled:NO];
 
     [self.patientAgeField setHidden:NO];
-    [self.ageButton setHidden:YES];
     [self.addVisitButton setHidden:NO];
 
     [self.toolbar setHidden:YES];
@@ -236,7 +229,7 @@
 
 - (void)updateUIWithPatient {
   [self.patientNameField setText:self.patient.name];
-  [self.patientAgeField setText:[self.patient.dob toString]];
+  [self.patientAgeField setText:[NSString stringWithFormat:@"Born %@",[self.patient.dob toString]]];
 
   [self refreshVisitUI];
 }
@@ -249,11 +242,13 @@
   [UIView beginAnimations:nil context:nil];
   [UIView setAnimationCurve:animationCurve];
   [UIView setAnimationDuration:animationDuration];
+  self.toolbarBottomConstraint.constant = keyboardBounds.size.height;
+  NSLog(@"The keyboard height is: %f", keyboardBounds.size.height);
   [self.toolbar setFrame:CGRectMake(0.0f,
                                     self.view.frame.size.height - keyboardBounds.size.height - self.toolbar.frame.size.height,
                                     self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
+  [self.view layoutIfNeeded];
   [UIView commitAnimations];
-  [self.view bringSubviewToFront:self.toolbar];
 }
 
 - (void) keyboardWillHide: (NSNotification *)notification {
@@ -262,10 +257,12 @@
   [UIView beginAnimations:nil context: nil];
   [UIView setAnimationCurve:animationCurve];
   [UIView setAnimationDuration:animationDuration];
+  self.toolbarBottomConstraint.constant = 0;
+
   [self.toolbar setFrame:CGRectMake(0.0f,
                                     self.view.frame.size.height - 46.0f, self.toolbar.frame.size.width,
                                     self.toolbar.frame.size.height)];
-  
+  [self.view layoutIfNeeded];
   [UIView commitAnimations];
 }
 
@@ -311,10 +308,8 @@
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   formatter.dateStyle = NSDateFormatterMediumStyle;
   formatter.timeStyle = NSDateFormatterNoStyle;
-  [self.ageButton setTitle:[formatter stringFromDate:birthDate]
-                  forState:UIControlStateNormal];
   self.ageSet = YES;
-  [self.navigationController popToViewController:self animated:YES];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) ageWasChosenByMonthAndOrYear:(NSInteger)year
@@ -340,6 +335,27 @@
     return [Utils dateFromMonth:01 day:01 year:[self.patient.dob.year intValue]];
   }
   return nil;
+}
+- (IBAction)editingChanged:(id)sender {
+  NSLog(@"Editing changed");
+}
+
+- (IBAction)editingBegan:(id)sender {
+  NSLog(@"Editing began");
+}
+
+- (IBAction)editingEnd:(id)sender {
+  NSLog(@"Editing ended");
+
+}
+
+- (IBAction)touchUpInside:(id)sender {
+  NSLog(@"Touch up inside");
+  
+}
+
+- (IBAction)touchdown:(id)sender {
+  NSLog(@"Touch down");
 }
 
 @end

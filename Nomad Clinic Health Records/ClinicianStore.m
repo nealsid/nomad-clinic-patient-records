@@ -85,7 +85,6 @@
     [NSException raise:@"Fetch failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
-  NSLog(@"%@", result);
   return result;
 }
 

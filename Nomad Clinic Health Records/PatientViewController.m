@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  NSLog(@"%@", [self editButtonItem]);
   [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
   if (self.patient != nil) {
     [self updateUIWithPatient];
@@ -73,9 +74,14 @@
 - (void) viewDidLayoutSubviews {
   if (!self.adjustedForTopLayout) {
     CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
+    CGFloat bottomLayoutGuideLength = [self.bottomLayoutGuide length];
+    NSLog(@"%@", self.patientNameTopConstraint);
     self.patientNameTopConstraint.constant += topLayoutGuideLength;
+    NSLog(@"%@", self.patientNameTopConstraint);
     [self.view layoutSubviews];
     self.adjustedForTopLayout = YES;
+    NSLog(@"Adjusting for top layout guide: %f", topLayoutGuideLength);
+    NSLog(@"Adjusting for bottom layout guide: %f", bottomLayoutGuideLength);
   }
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil

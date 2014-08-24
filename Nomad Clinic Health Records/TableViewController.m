@@ -71,12 +71,17 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   return 44;
 }
 
-- (void) tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView*)tableView
+   willDisplayCell:(UITableViewCell *)cell
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([self isLastRow:[indexPath row]]) {
     return;
   }
   if ([indexPath row] % 2 == 0) {
-    cell.backgroundColor = [UIColor colorWithRed:0xda/255.0 green:0xe5/255.0 blue:0xf4/255.0 alpha:1.0];
+    cell.backgroundColor = [UIColor colorWithRed:0xda/255.0
+                                           green:0xe5/255.0
+                                            blue:0xf4/255.0
+                                           alpha:1.0];
   }
 }
 

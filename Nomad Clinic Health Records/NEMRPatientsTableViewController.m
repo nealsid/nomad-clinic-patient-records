@@ -69,7 +69,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   Patient* p = [self.patients objectAtIndex:row];
 
   NSLog(@"%@", p);
-
   PatientViewController* pvc =
   [[PatientViewController alloc] initWithNibName:nil
                                               bundle:nil

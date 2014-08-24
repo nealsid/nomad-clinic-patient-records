@@ -14,6 +14,7 @@
 #import "NEMRAppDelegate.h"
 #import "Patient.h"
 #import "Patient+Gender.h"
+#import "Village.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
 #import "Utils.h"
@@ -188,6 +189,13 @@
     visitNote.objective = @"This is the O in SOAP";
     visitNote.assessment = @"This is the A in SOAP";
     visitNote.plan = @"This is the P in SOAP";
+  }
+
+  NSArray* clinicNames = @[@"Simikot", @"Yalbang", @"Halzi"];
+  for (NSString* clinicName in clinicNames) {
+    Village* v = [NSEntityDescription insertNewObjectForEntityForName:@"Village"
+                                               inManagedObjectContext:ctx];
+    v.name = clinicName;
   }
 
   if (![ctx save:&error]) {

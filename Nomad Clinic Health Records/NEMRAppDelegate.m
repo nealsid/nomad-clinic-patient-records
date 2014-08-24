@@ -29,15 +29,16 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [self.window makeKeyAndVisible];
   
   /* Set up root view controller */
+  UITabBarController* tbc = [[UITabBarController alloc] init];
+
   UINavigationController* navController = [[UINavigationController alloc] init];
   NEMRPatientsTableViewController* vc = [[NEMRPatientsTableViewController alloc] init];
   [navController pushViewController:vc animated:NO];
-//  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:54.0/255 green:79.0/255 blue:42.0/255 alpha:1.0]];
-//  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:0xda/255.0 green:0xee/255.0 blue:0xff/255.0 alpha:1.0]];
-  [self.navigationController.]
+  //  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:54.0/255 green:79.0/255 blue:42.0/255 alpha:1.0]];
+  //  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:0xda/255.0 green:0xee/255.0 blue:0xff/255.0 alpha:1.0]];
   self.window.tintColor = [UIColor darkGrayColor];
-
-  [self.window setRootViewController:navController];
+  tbc.viewControllers = @[navController];
+  [self.window setRootViewController:tbc];
   return YES;
 }
 

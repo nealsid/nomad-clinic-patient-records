@@ -53,9 +53,6 @@
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
   NSEntityDescription* e = [NSEntityDescription entityForName:@"Clinic"
                                        inManagedObjectContext:ctx];
-  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
-                                                       ascending:YES];
-  req.sortDescriptors = @[sd];
   req.entity = e;
   NSError *error;
   NSArray* result = [ctx executeFetchRequest:req error:&error];

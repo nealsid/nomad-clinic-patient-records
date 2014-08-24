@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Village;
 
 @interface Clinic : NSManagedObject
 
-@property (nonatomic, retain) NSManagedObject *village;
+@property (nonatomic, retain) Village *village;
 
 @end

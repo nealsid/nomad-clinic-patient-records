@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "TableViewController.h"
 
-@interface NEMRPatientsTableViewController : TableViewController
+@interface PatientsTableViewController : TableViewController
+
 @end

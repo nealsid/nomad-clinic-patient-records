@@ -49,7 +49,6 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  NSLog(@"%@", [self editButtonItem]);
   [self.navigationItem setRightBarButtonItem:[self editButtonItem]];
   if (self.patient != nil) {
     [self updateUIWithPatient];
@@ -59,6 +58,8 @@
     [self setEditing:YES animated:NO];
     [self.recentVisitTable setHidden:YES];
   }
+  NSLog(@"%@", self.tabBarController);
+
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(keyboardWillShow:)
                                                name:UIKeyboardWillShowNotification
@@ -74,14 +75,10 @@
 - (void) viewDidLayoutSubviews {
   if (!self.adjustedForTopLayout) {
     CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
-    CGFloat bottomLayoutGuideLength = [self.bottomLayoutGuide length];
-    NSLog(@"%@", self.patientNameTopConstraint);
+//    CGFloat bottomLayoutGuideLength = [self.bottomLayoutGuide length];
     self.patientNameTopConstraint.constant += topLayoutGuideLength;
-    NSLog(@"%@", self.patientNameTopConstraint);
     [self.view layoutSubviews];
     self.adjustedForTopLayout = YES;
-    NSLog(@"Adjusting for top layout guide: %f", topLayoutGuideLength);
-    NSLog(@"Adjusting for bottom layout guide: %f", bottomLayoutGuideLength);
   }
 }
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
@@ -97,6 +94,7 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     self.adjustedForTopLayout = NO;
+    self.hidesBottomBarWhenPushed = YES;
   }
 
   return self;
@@ -249,7 +247,6 @@
   [UIView setAnimationCurve:animationCurve];
   [UIView setAnimationDuration:animationDuration];
   self.toolbarBottomConstraint.constant = keyboardBounds.size.height;
-  NSLog(@"The keyboard height is: %f", keyboardBounds.size.height);
   [self.toolbar setFrame:CGRectMake(0.0f,
                                     self.view.frame.size.height - keyboardBounds.size.height - self.toolbar.frame.size.height,
                                     self.toolbar.frame.size.width, self.toolbar.frame.size.height)];
@@ -292,7 +289,6 @@
 }
 
 - (void) newFieldValue:(NSNumber*)newValue {
-  NSLog(@"Setting weight to %@", newValue);
   self.mostRecentVisit.notes.weight = newValue;
   [self.patientVisitStore saveChanges];
   [self.recentVisitTable reloadData];
@@ -301,7 +297,6 @@
 
 - (void) soapViewController:(SOAPViewController*)vc saveNewNote:(NSString*)s
                     forType:(SOAPEntryType)type {
-  NSLog(@"Setting note to %@", s);
   self.mostRecentVisit.notes.objective = s;
   [self.patientVisitStore saveChanges];
   [self.recentVisitTable reloadData];
@@ -341,27 +336,6 @@
     return [Utils dateFromMonth:01 day:01 year:[self.patient.dob.year intValue]];
   }
   return nil;
-}
-- (IBAction)editingChanged:(id)sender {
-  NSLog(@"Editing changed");
-}
-
-- (IBAction)editingBegan:(id)sender {
-  NSLog(@"Editing began");
-}
-
-- (IBAction)editingEnd:(id)sender {
-  NSLog(@"Editing ended");
-
-}
-
-- (IBAction)touchUpInside:(id)sender {
-  NSLog(@"Touch up inside");
-  
-}
-
-- (IBAction)touchdown:(id)sender {
-  NSLog(@"Touch down");
 }
 
 @end

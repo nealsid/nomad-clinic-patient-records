@@ -7,7 +7,10 @@
 //
 
 #import "NEMRAppDelegate.h"
-#import "NEMRPatientsTableViewController.h"
+
+
+#import "ClinicViewController.h"
+#import "PatientsTableViewController.h"
 #import "Patient.h"
 
 @import CoreData;
@@ -32,18 +35,21 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   UITabBarController* tbc = [[UITabBarController alloc] init];
 
   UINavigationController* navController = [[UINavigationController alloc] init];
-  NEMRPatientsTableViewController* vc = [[NEMRPatientsTableViewController alloc] init];
+  ClinicViewController* vc = [[ClinicViewController alloc] init];
   [navController pushViewController:vc animated:NO];
   //  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:54.0/255 green:79.0/255 blue:42.0/255 alpha:1.0]];
   //  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:0xda/255.0 green:0xee/255.0 blue:0xff/255.0 alpha:1.0]];
   self.window.tintColor = [UIColor darkGrayColor];
-  tbc.viewControllers = @[navController];
+  UINavigationController* patientNavController = [[UINavigationController alloc] init];
+  PatientsTableViewController* patientsVc = [[PatientsTableViewController alloc] init];
+  [patientNavController pushViewController:patientsVc animated:YES];
+  tbc.viewControllers = @[navController, patientNavController];
+  [tbc setModalTransitionStyle:UIModalTransitionStylePartialCurl];
   [self.window setRootViewController:tbc];
   return YES;
 }
 
-+ (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size
-{
++ (UIImage*) imageWithColor:(UIColor*)color size:(CGSize)size {
   UIGraphicsBeginImageContext(size);
   UIBezierPath* rPath = [UIBezierPath bezierPathWithRect:CGRectMake(0., 0., size.width, size.height)];
   [color setFill];

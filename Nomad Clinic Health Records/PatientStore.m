@@ -9,6 +9,7 @@
 
 #import "PatientStore.h"
 
+#import "Clinic.h"
 #import "Clinician.h"
 #import "FlexDate.h"
 #import "NEMRAppDelegate.h"
@@ -196,6 +197,9 @@
     Village* v = [NSEntityDescription insertNewObjectForEntityForName:@"Village"
                                                inManagedObjectContext:ctx];
     v.name = clinicName;
+    Clinic* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinic"
+                                              inManagedObjectContext:ctx];
+    c.village = v;
   }
 
   if (![ctx save:&error]) {

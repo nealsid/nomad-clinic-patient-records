@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
-#import "NEMRPatientsTableViewController.h"
+#import "PatientsTableViewController.h"
 #import "PatientViewController.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
@@ -14,7 +14,7 @@
 #import "PatientStore.h"
 #import "TableViewController.h"
 
-@interface NEMRPatientsTableViewController ()
+@interface PatientsTableViewController ()
 
 @property (nonatomic, strong) IBOutlet UIView* headerView;
 @property (nonatomic, retain) UIFont* itemFont;
@@ -23,13 +23,16 @@
 
 @end
 
-@implementation NEMRPatientsTableViewController
+@implementation PatientsTableViewController
 
 - (instancetype) init {
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
     self.itemFont = [UIFont systemFontOfSize:20];
     self.patientStore = [PatientStore sharedPatientStore];
+    self.patients = [self.patientStore patients];
+    self.numberOfRows = [self.patients count];
+    self.title = @"Patients";
   }
   return self;
 }
@@ -42,16 +45,13 @@
   [super viewDidLoad];
   [self.tableView registerClass:[UITableViewCell class]
          forCellReuseIdentifier:@"UITableViewCell"];
-  [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  self.title = @"Patients";
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.navigationController.navigationBar.titleTextAttributes =
   [NSDictionary dictionaryWithObjects:@[[UIColor darkGrayColor], [UIFont fontWithName:@"MarkerFelt-Thin" size:24.0]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
   UIBarButtonItem* newPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                     target:self
                                                                                     action:@selector(addNewItem:)];
-  [self.navigationItem setRightBarButtonItem:newPatientButton];
-  self.patients = [self.patientStore patients];
-  self.numberOfRows = [self.patients count];
+  self.navigationItem.rightBarButtonItem = newPatientButton;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

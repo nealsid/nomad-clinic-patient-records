@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PatientAddEditViewController">
@@ -11,42 +11,58 @@
                 <outlet property="genderControl" destination="0J7-kI-sFq" id="n9v-yL-jDH"/>
                 <outlet property="patientAgeField" destination="6U0-dq-c8A" id="EZF-jS-O6S"/>
                 <outlet property="patientNameField" destination="SgM-e5-CG8" id="CN3-cu-MRn"/>
+                <outlet property="topSubviewYConstraint" destination="X0S-km-SLs" id="swn-Yj-YW2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Patient Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SgM-e5-CG8">
-                    <rect key="frame" x="186" y="90" width="228" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Patient Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SgM-e5-CG8">
+                    <rect key="frame" x="46" y="30" width="228" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0J7-kI-sFq">
-                    <rect key="frame" x="186" y="229" width="228" height="29"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0J7-kI-sFq">
+                    <rect key="frame" x="46" y="106" width="228" height="29"/>
                     <segments>
                         <segment title="Female"/>
                         <segment title="Male"/>
                         <segment title="Other"/>
                     </segments>
                 </segmentedControl>
-                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vs5-0M-c3u">
-                    <rect key="frame" x="8" y="265" width="600" height="162"/>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vs5-0M-c3u">
+                    <rect key="frame" x="67" y="142" width="186" height="162"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="BTW-US-7I8"/>
                         <outlet property="delegate" destination="-1" id="GNc-0g-2jV"/>
                     </connections>
                 </pickerView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Patient Birthday" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-dq-c8A">
-                    <rect key="frame" x="186" y="158" width="228" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Patient Birthday" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6U0-dq-c8A">
+                    <rect key="frame" x="46" y="68" width="228" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="6U0-dq-c8A" secondAttribute="trailing" constant="46" id="0sc-0u-Een"/>
+                <constraint firstItem="0J7-kI-sFq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="46" id="5XS-1S-x6N"/>
+                <constraint firstAttribute="trailing" secondItem="Vs5-0M-c3u" secondAttribute="trailing" constant="67" id="6Vy-bt-jTk"/>
+                <constraint firstItem="SgM-e5-CG8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="46" id="QBQ-jC-0ir"/>
+                <constraint firstItem="0J7-kI-sFq" firstAttribute="top" secondItem="6U0-dq-c8A" secondAttribute="bottom" constant="8" id="THv-EB-K3f"/>
+                <constraint firstItem="SgM-e5-CG8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="X0S-km-SLs"/>
+                <constraint firstAttribute="trailing" secondItem="SgM-e5-CG8" secondAttribute="trailing" constant="46" id="Xed-0w-JYt"/>
+                <constraint firstAttribute="trailing" secondItem="0J7-kI-sFq" secondAttribute="trailing" constant="46" id="Yd8-eP-Epz"/>
+                <constraint firstItem="6U0-dq-c8A" firstAttribute="top" secondItem="SgM-e5-CG8" secondAttribute="bottom" constant="8" id="ZvT-4M-xMx"/>
+                <constraint firstItem="6U0-dq-c8A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="46" id="ebW-c0-QYL"/>
+                <constraint firstItem="Vs5-0M-c3u" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="67" id="eqi-R1-E7Z"/>
+                <constraint firstItem="SgM-e5-CG8" firstAttribute="centerX" secondItem="6U0-dq-c8A" secondAttribute="centerX" id="pHl-jb-Ezf"/>
+                <constraint firstItem="Vs5-0M-c3u" firstAttribute="top" secondItem="0J7-kI-sFq" secondAttribute="bottom" constant="8" id="qP8-p7-tI0"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
 </document>

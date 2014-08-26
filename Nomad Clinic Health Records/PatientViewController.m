@@ -81,6 +81,7 @@
     self.adjustedForTopLayout = YES;
   }
 }
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
                      andPatient:(Patient*)p {

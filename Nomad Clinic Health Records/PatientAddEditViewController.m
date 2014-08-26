@@ -14,6 +14,9 @@
 
 @interface PatientAddEditViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSubviewYConstraint;
+@property BOOL didAdjustForLayoutGuides;
+
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
@@ -24,6 +27,8 @@
 
 @property (weak, nonatomic) ClinicStore* clinicStore;
 @property (weak, nonatomic) NSArray* allClinics;
+
+
 @end
 
 @implementation PatientAddEditViewController
@@ -53,6 +58,15 @@
   [super viewDidLoad];
 }
 
+- (void) viewDidLayoutSubviews {
+  if (!self.didAdjustForLayoutGuides) {
+    CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
+    self.topSubviewYConstraint.constant += topLayoutGuideLength;
+    [self.view layoutSubviews];
+    self.didAdjustForLayoutGuides = YES;
+  }
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
@@ -69,16 +83,8 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component {
+  NSLog(@"Row %ld - %@", (long)row, [[[self.allClinics objectAtIndex:row] village] name]);
   return [[[self.allClinics objectAtIndex:row] village] name];
 }
-/*
- #pragma mark - Navigation
-
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

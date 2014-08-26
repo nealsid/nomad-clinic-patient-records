@@ -21,7 +21,7 @@
  */
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
-                      ForPatient:(Patient*)p andClinic:(Clinic*)c;
+                      forPatient:(Patient*)p andClinic:(Clinic*)c;
 
 /**
  * Initializes the view controller for editing an existing patient.

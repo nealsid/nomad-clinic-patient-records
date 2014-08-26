@@ -13,6 +13,7 @@
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "Patient+Gender.h"
+#import "PatientAddEditViewController.h"
 #import "PatientStore.h"
 #import "TableViewController.h"
 #import "Village.h"
@@ -42,6 +43,7 @@
     [self refreshPatientsFromStore];
     NSLog(@"%lu patients", (long)self.patients.count);
     if (self.clinic) {
+      self.hidesBottomBarWhenPushed = YES;
       self.title = self.clinic.village.name;
     } else {
       self.title = @"All patients";
@@ -152,11 +154,9 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   return cell;
 }
 
-- (IBAction) addNewItem: (id) sender {
-  PatientViewController* pvc =
-    [[PatientViewController alloc] initWithNibName:nil
-                                                bundle:nil
-                                            andPatient:nil];
+- (void) addNewItem: (id) sender {
+  PatientAddEditViewController* pvc =
+    [[PatientAddEditViewController alloc] initForNewPatientAtClinic:self.clinic];
   [self.navigationController pushViewController:pvc animated:YES];
 }
 

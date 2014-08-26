@@ -47,7 +47,7 @@
                                                                 inManagedObjectContext:ctx];
   visitNotes.visit = v;
   v.patient = p;
-  
+
   NSError* error;
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed"
@@ -159,7 +159,7 @@
   NSMutableArray* patients = [[NSMutableArray alloc] init];
   for (int i = 0; i < [patientNames count]; ++i) {
     Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
-                  
+
                                                inManagedObjectContext:ctx];
     p.name = [patientNames objectAtIndex:i];
     p.gender = [patientGenders objectAtIndex:i];
@@ -172,12 +172,12 @@
     FlexDate* f = [[patients objectAtIndex:i] dob];
     f.year = @(1980 + i);
   }
-  
+
   for(int i = 2 ; i < 4 ; ++i) {
     FlexDate* f = [[patients objectAtIndex:i] dob];
     f.specificdate = [Utils dateFromMonth:9 day:2 year:(1980 + i)];
   }
-  
+
 
   NSMutableArray* clinicians = [[NSMutableArray alloc] init];
   NSArray* clinicianNames = @[@"Roshi Joan Halifax",

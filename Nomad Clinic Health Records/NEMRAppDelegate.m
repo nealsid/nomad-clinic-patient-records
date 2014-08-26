@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
+#import "ClinicViewController.h"
 #import "NEMRAppDelegate.h"
 
 
@@ -26,11 +27,11 @@
 
 - (BOOL)          application:(UIApplication *)application
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  
+
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
-  
+
   /* Set up root view controller */
   UITabBarController* tbc = [[UITabBarController alloc] init];
 
@@ -88,7 +89,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   if (_managedObjectContext != nil) {
     return _managedObjectContext;
   }
-  
+
   NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
   if (coordinator != nil) {
     _managedObjectContext = [[NSManagedObjectContext alloc] init];
@@ -110,16 +111,16 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   if (_persistentStoreCoordinator != nil) {
     return _persistentStoreCoordinator;
   }
-  
+
   NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Nomad_Clinic_Health_Records.sqlite"];
-  
+
   NSError *error = nil;
   _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
   if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     abort();
   }
-  
+
   return _persistentStoreCoordinator;
 }
 

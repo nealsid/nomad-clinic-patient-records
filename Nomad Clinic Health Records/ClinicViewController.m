@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
+#import "Clinic.h"
 #import "ClinicViewController.h"
 
 #import "Clinic.h"
@@ -18,6 +19,7 @@
 
 @property (nonatomic, retain) ClinicStore* clinicStore;
 @property (nonatomic, retain) NSArray* clinics;
+
 @property (nonatomic, retain) UIFont* itemFont;
 
 @end
@@ -27,7 +29,7 @@
 - (instancetype) init {
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
-    NSLog(@"%lu", (unsigned long)[[[PatientStore sharedPatientStore] patients] count]);
+    NSLog(@"%lu patients", (long)[[[PatientStore sharedPatientStore] patients] count]);
     self.clinicStore = [ClinicStore sharedClinicStore];
     self.clinics = [self.clinicStore clinics];
     self.numberOfRows = self.clinics.count;
@@ -44,6 +46,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  self.title = @"Clinics";
   self.navigationController.navigationBar.titleTextAttributes =
   [NSDictionary dictionaryWithObjects:@[[UIColor darkGrayColor], [UIFont fontWithName:@"MarkerFelt-Thin" size:24.0]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
 }
@@ -81,5 +84,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   cell.textLabel.text = c.village.name;
   return cell;
 }
+
 
 @end

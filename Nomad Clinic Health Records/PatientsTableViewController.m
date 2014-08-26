@@ -7,12 +7,15 @@
 //
 
 #import "PatientsTableViewController.h"
+
+#import "Clinic.h"
 #import "PatientViewController.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "Patient+Gender.h"
 #import "PatientStore.h"
 #import "TableViewController.h"
+#import "Village.h"
 
 @interface PatientsTableViewController ()
 
@@ -20,25 +23,35 @@
 @property (nonatomic, retain) UIFont* itemFont;
 @property (nonatomic, retain) PatientStore* patientStore;
 @property (nonatomic, retain) NSArray* patients;
+@property (nonatomic, retain) Clinic* clinic;
 
 @end
 
 @implementation PatientsTableViewController
 
 - (instancetype) init {
+  return [self initForClinic:nil];
+}
+
+- (instancetype) initForClinic:(Clinic*)c {
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
     self.itemFont = [UIFont systemFontOfSize:20];
-    self.patientStore = [PatientStore sharedPatientStore];
-    self.patients = [self.patientStore patients];
     self.numberOfRows = [self.patients count];
-    self.title = @"Patients";
+    self.clinic = c;
+    [self refreshPatientsFromStore];
+    NSLog(@"%lu patients", (long)self.patients.count);
+    if (self.clinic) {
+      self.title = self.clinic.village.name;
+    } else {
+      self.title = @"All patients";
+    }
   }
   return self;
 }
 
 - (instancetype) initWithStyle:(UITableViewStyle)style {
-  return [self init];
+  return [self initForClinic:nil];
 }
 
 - (void)viewDidLoad {
@@ -56,8 +69,6 @@
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  self.patients = [self.patientStore patients];
-  self.numberOfRows = [self.patients count];
   [self.tableView reloadData];
 }
 
@@ -77,6 +88,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [self.navigationController pushViewController:pvc animated:YES];
 }
 
+- (void) refreshPatientsFromStore {
+  if (!self.patientStore) {
+    self.patientStore = [PatientStore sharedPatientStore];
+  }
+  self.patients = [self.patientStore patientsForClinic:self.clinic];
+  self.numberOfRows = [self.patients count];
+}
+
 - (void) tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
  forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,8 +103,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Patient* p = [self.patients objectAtIndex:[indexPath row]];
     [self.patientStore removePatient:p];
-    self.patients = [self.patientStore patients];
-    self.numberOfRows = [self.patients count];
+    [self refreshPatientsFromStore];
 
     [tableView deleteRowsAtIndexPaths:@[indexPath]
                      withRowAnimation:UITableViewRowAnimationFade];

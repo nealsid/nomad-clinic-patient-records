@@ -20,11 +20,19 @@
 + (instancetype) sharedPatientStore;
 
 /**
- * Fetches patients from store and returns them as an array
+ * Fetches all patients from store and returns them as an array
  *
  * @returns NSArray of Patients
  */
 - (NSArray*) patients;
+
+/**
+ * Fetches patients for a given clinic and returns them as an array
+ *
+ * @param c Clinic to fetch patients for.
+ * @returns NSArray of Patients
+ */
+- (NSArray*) patientsForClinic:(Clinic*)c;
 
 /**
  * Saves all outstanding changes to the underlying store

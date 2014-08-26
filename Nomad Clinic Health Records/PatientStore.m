@@ -90,6 +90,10 @@
 }
 
 - (NSArray*) patients {
+  return [self patientsForClinic:nil];
+}
+
+- (NSArray*) patientsForClinic:(Clinic*)c {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
   NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient"
@@ -98,12 +102,18 @@
                                                        ascending:YES];
   req.sortDescriptors = @[sd];
   req.entity = e;
+  if (c) {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"clinic == %@", c];
+    req.predicate = predicate;
+  }
+  NSLog(@"Patient fetch: %@", req);
   NSError *error;
   NSArray* result = [ctx executeFetchRequest:req error:&error];
   if (!result) {
     [NSException raise:@"Fetch failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
+  NSLog(@"Patient fetch had %lu results", (long)result.count);
   return result;
 }
 
@@ -122,7 +132,20 @@
   if ([result count] > 0) {
     return;
   }
-  NSLog(@"No patients found, generating..");
+  NSLog(@"No data found, generating..");
+
+  NSArray* clinicNames = @[@"Simikot", @"Yalbang", @"Halzi"];
+  NSMutableArray* clinicObjects = [NSMutableArray array];
+  for (NSString* clinicName in clinicNames) {
+    Village* v = [NSEntityDescription insertNewObjectForEntityForName:@"Village"
+                                               inManagedObjectContext:ctx];
+    v.name = clinicName;
+    Clinic* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinic"
+                                              inManagedObjectContext:ctx];
+    c.village = v;
+    [clinicObjects addObject:c];
+  }
+
 
   NSArray* patientNames = @[@"Neal Sidhwaney",
                             @"Bob Jones",
@@ -142,7 +165,9 @@
     p.gender = [patientGenders objectAtIndex:i];
     p.dob = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate" inManagedObjectContext:ctx];
     [patients addObject:p];
+    p.clinic = [clinicObjects objectAtIndex:(i % clinicObjects.count)];
   }
+
   for(int i = 0 ; i < 2 ; ++i) {
     FlexDate* f = [[patients objectAtIndex:i] dob];
     f.year = @(1980 + i);
@@ -190,16 +215,6 @@
     visitNote.objective = @"This is the O in SOAP";
     visitNote.assessment = @"This is the A in SOAP";
     visitNote.plan = @"This is the P in SOAP";
-  }
-
-  NSArray* clinicNames = @[@"Simikot", @"Yalbang", @"Halzi"];
-  for (NSString* clinicName in clinicNames) {
-    Village* v = [NSEntityDescription insertNewObjectForEntityForName:@"Village"
-                                               inManagedObjectContext:ctx];
-    v.name = clinicName;
-    Clinic* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinic"
-                                              inManagedObjectContext:ctx];
-    c.village = v;
   }
 
   if (![ctx save:&error]) {

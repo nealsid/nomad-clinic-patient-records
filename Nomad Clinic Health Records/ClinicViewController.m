@@ -11,6 +11,7 @@
 #import "Clinic.h"
 #import "ClinicStore.h"
 #import "PatientStore.h"
+#import "PatientsTableViewController.h"
 #import "Village.h"
 
 @interface ClinicViewController ()
@@ -45,6 +46,18 @@
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.navigationController.navigationBar.titleTextAttributes =
   [NSDictionary dictionaryWithObjects:@[[UIColor darkGrayColor], [UIFont fontWithName:@"MarkerFelt-Thin" size:24.0]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
+}
+
+- (void)      tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger row = [indexPath row];
+   Clinic* c = [self.clinics objectAtIndex:row];
+
+  NSLog(@"Clinic selected: %@", c);
+  PatientsTableViewController* pvc =
+  [[PatientsTableViewController alloc] initForClinic:c];
+
+  [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView

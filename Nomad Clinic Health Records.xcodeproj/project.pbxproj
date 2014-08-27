@@ -43,6 +43,11 @@
 		F9B9EF5A19A23EAE00072D7D /* VisitNotesComplex.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF5919A23EAE00072D7D /* VisitNotesComplex.m */; };
 		F9B9EF6319A25C3800072D7D /* NumberFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9EF6119A25C3800072D7D /* NumberFieldViewController.m */; };
 		F9B9EF6419A25C3800072D7D /* NumberFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B9EF6219A25C3800072D7D /* NumberFieldViewController.xib */; };
+		F9DA49D419AE58E8008BFC6F /* stethoscope-311855.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49D219AE58E8008BFC6F /* stethoscope-311855.png */; };
+		F9DA49D519AE58E8008BFC6F /* stethoscope-311855_640@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49D319AE58E8008BFC6F /* stethoscope-311855_640@2x.png */; };
+		F9DA49D819AE5A06008BFC6F /* crowd.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49D619AE5A06008BFC6F /* crowd.png */; };
+		F9DA49D919AE5A06008BFC6F /* crowd@2.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49D719AE5A06008BFC6F /* crowd@2.png */; };
+		F9DA49DB19AE5B3E008BFC6F /* stethoscope-311855_640-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49DA19AE5B3E008BFC6F /* stethoscope-311855_640-selected@2x.png */; };
 		F9DBC47D199D57EE00FB2544 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DBC47B199D57EE00FB2544 /* female.png */; };
 		F9DBC47E199D57EE00FB2544 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DBC47C199D57EE00FB2544 /* male.png */; };
 		F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAA21986C03000E8568F /* NEMRClinicianTableViewController.m */; };
@@ -132,6 +137,11 @@
 		F9B9EF6119A25C3800072D7D /* NumberFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberFieldViewController.m; sourceTree = "<group>"; };
 		F9B9EF6219A25C3800072D7D /* NumberFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberFieldViewController.xib; sourceTree = "<group>"; };
 		F9B9EF6519A3CCE900072D7D /* Patient+Gender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Patient+Gender.h"; sourceTree = "<group>"; };
+		F9DA49D219AE58E8008BFC6F /* stethoscope-311855.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stethoscope-311855.png"; sourceTree = "<group>"; };
+		F9DA49D319AE58E8008BFC6F /* stethoscope-311855_640@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stethoscope-311855_640@2x.png"; sourceTree = "<group>"; };
+		F9DA49D619AE5A06008BFC6F /* crowd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowd.png; sourceTree = "<group>"; };
+		F9DA49D719AE5A06008BFC6F /* crowd@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crowd@2.png"; sourceTree = "<group>"; };
+		F9DA49DA19AE5B3E008BFC6F /* stethoscope-311855_640-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stethoscope-311855_640-selected@2x.png"; sourceTree = "<group>"; };
 		F9DBC47B199D57EE00FB2544 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
 		F9DBC47C199D57EE00FB2544 /* male.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = male.png; sourceTree = "<group>"; };
 		F9E9DAA11986C03000E8568F /* NEMRClinicianTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMRClinicianTableViewController.h; sourceTree = "<group>"; };
@@ -328,6 +338,11 @@
 		F9FAEA62197B075500C9B3E5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F9DA49DA19AE5B3E008BFC6F /* stethoscope-311855_640-selected@2x.png */,
+				F9DA49D619AE5A06008BFC6F /* crowd.png */,
+				F9DA49D719AE5A06008BFC6F /* crowd@2.png */,
+				F9DA49D219AE58E8008BFC6F /* stethoscope-311855.png */,
+				F9DA49D319AE58E8008BFC6F /* stethoscope-311855_640@2x.png */,
 				F9DBC47B199D57EE00FB2544 /* female.png */,
 				F9DBC47C199D57EE00FB2544 /* male.png */,
 				F914D8DC1989837800BBD38E /* female-patient.png */,
@@ -435,11 +450,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9DA49D419AE58E8008BFC6F /* stethoscope-311855.png in Resources */,
 				F99720F019ACC8C8006F6630 /* PatientAddEditViewController.xib in Resources */,
 				F9E9DAA51986C03000E8568F /* NEMRClinicianTableViewController.xib in Resources */,
 				F911FF8A197CC2570063A1F1 /* PatientsTableViewController.xib in Resources */,
 				F9DBC47E199D57EE00FB2544 /* male.png in Resources */,
 				F983434B19900AC50015974B /* SOAPViewController.xib in Resources */,
+				F9DA49D519AE58E8008BFC6F /* stethoscope-311855_640@2x.png in Resources */,
 				F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */,
 				F9A29CE719AB70B400F83BFC /* Empty.xib in Resources */,
 				F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */,
@@ -454,7 +471,10 @@
 				F9E9DAB21986C4EC00E8568F /* ClinicianViewController.xib in Resources */,
 				F9B9EF6419A25C3800072D7D /* NumberFieldViewController.xib in Resources */,
 				F9FAEA6D197B075500C9B3E5 /* Images.xcassets in Resources */,
+				F9DA49DB19AE5B3E008BFC6F /* stethoscope-311855_640-selected@2x.png in Resources */,
+				F9DA49D819AE5A06008BFC6F /* crowd.png in Resources */,
 				F937FC23199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib in Resources */,
+				F9DA49D919AE5A06008BFC6F /* crowd@2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

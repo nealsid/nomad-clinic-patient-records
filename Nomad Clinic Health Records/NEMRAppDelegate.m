@@ -44,8 +44,19 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   UINavigationController* patientNavController = [[UINavigationController alloc] init];
   PatientsTableViewController* patientsVc = [[PatientsTableViewController alloc] init];
   [patientNavController pushViewController:patientsVc animated:YES];
+
+  UIImage* stetho = [UIImage imageNamed:@"stethoscope-311855_640"];
+  UIImage* stethoSelected = nil;//[UIImage imageNamed:@"stethoscope-311855_640-selected"];
+  navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinics"
+                                                           image:stetho
+                                                   selectedImage:stethoSelected];
+  UIImage* crowd = [UIImage imageNamed:@"crowd"];
+  patientNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patients"
+                                                                  image:crowd
+                                                          selectedImage:nil];
   tbc.viewControllers = @[navController, patientNavController];
   [tbc setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+
   [self.window setRootViewController:tbc];
   return YES;
 }

@@ -47,8 +47,11 @@
   [super viewDidLoad];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.title = @"Clinics";
+  
   self.navigationController.navigationBar.titleTextAttributes =
-  [NSDictionary dictionaryWithObjects:@[[UIColor darkGrayColor], [UIFont fontWithName:@"MarkerFelt-Thin" size:24.0]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
+  [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
+                                        [UIFont boldSystemFontOfSize:24]]
+                              forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
 }
 
 - (void)      tableView:(UITableView *)tableView

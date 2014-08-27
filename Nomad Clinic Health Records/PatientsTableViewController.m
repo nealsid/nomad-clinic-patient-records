@@ -134,24 +134,19 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
   [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-  NSString* gender = @"";
   if ([p isFemale]) {
-    gender = @"Female";
     cell.imageView.image = [UIImage imageNamed:@"female-patient"];
   } else if([p isMale]) {
-    gender = @"Male";
     cell.imageView.image = [UIImage imageNamed:@"male-patient"];
-  } else {
-    gender = @"Other";
   }
   
   NSString* detailText;
   if (self.clinic) {
-    detailText = [NSString stringWithFormat:@"%@.  Born: %@",
-                  gender, [p.dob toString]];
+    detailText = [NSString stringWithFormat:@"Born: %@",
+                  [p.dob toString]];
   } else {
-    detailText = [NSString stringWithFormat:@"%@, %@.  Born: %@",
-                  p.clinic.village.name, gender, [p.dob toString]];
+    detailText = [NSString stringWithFormat:@"%@.  Born: %@",
+                  p.clinic.village.name, [p.dob toString]];
   }
   cell.detailTextLabel.text = detailText;
   cell.detailTextLabel.textColor = [UIColor grayColor];

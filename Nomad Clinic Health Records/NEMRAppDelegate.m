@@ -45,11 +45,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   PatientsTableViewController* patientsVc = [[PatientsTableViewController alloc] init];
   [patientNavController pushViewController:patientsVc animated:YES];
 
-  UIImage* stetho = [UIImage imageNamed:@"stethoscope-311855_640"];
-  UIImage* stethoSelected = nil;//[UIImage imageNamed:@"stethoscope-311855_640-selected"];
+  UIImage* stetho = [UIImage imageNamed:@"stetho"];
   navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinics"
                                                            image:stetho
-                                                   selectedImage:stethoSelected];
+                                                   selectedImage:nil];
   UIImage* crowd = [UIImage imageNamed:@"crowd"];
   patientNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patients"
                                                                   image:crowd

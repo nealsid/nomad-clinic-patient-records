@@ -76,7 +76,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = @"No more clinics";
     return cell;
   }
-  [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
+  [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   if (row > [self.clinics count]) {
     return nil;
   }

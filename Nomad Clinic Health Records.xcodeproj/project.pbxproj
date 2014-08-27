@@ -20,6 +20,7 @@
 		F9247D7B199A940300C97F93 /* FlexDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9247D7A199A940300C97F93 /* FlexDate.m */; };
 		F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */; };
 		F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */; };
+		F92D297119AE841500DCE531 /* Patient+Gender.m in Sources */ = {isa = PBXBuildFile; fileRef = F92D297019AE841500DCE531 /* Patient+Gender.m */; };
 		F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC061999027C00FD1355 /* DOBSetViewController.m */; };
 		F937FC091999027C00FD1355 /* DOBSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC071999027C00FD1355 /* DOBSetViewController.xib */; };
 		F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC1D199940BB00FD1355 /* FlexDate+ToString.m */; };
@@ -96,6 +97,7 @@
 		F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeEntryChoiceViewController.h; sourceTree = "<group>"; };
 		F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeEntryChoiceViewController.m; sourceTree = "<group>"; };
 		F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeEntryChoiceViewController.xib; sourceTree = "<group>"; };
+		F92D297019AE841500DCE531 /* Patient+Gender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Patient+Gender.m"; sourceTree = "<group>"; };
 		F937FC051999027C00FD1355 /* DOBSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DOBSetViewController.h; sourceTree = "<group>"; };
 		F937FC061999027C00FD1355 /* DOBSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DOBSetViewController.m; sourceTree = "<group>"; };
 		F937FC071999027C00FD1355 /* DOBSetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DOBSetViewController.xib; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				F9247D79199A940300C97F93 /* FlexDate.h */,
 				F9247D7A199A940300C97F93 /* FlexDate.m */,
 				F9B9EF6519A3CCE900072D7D /* Patient+Gender.h */,
+				F92D297019AE841500DCE531 /* Patient+Gender.m */,
 				F9B9EF4F199FE10A00072D7D /* Visit.h */,
 				F9B9EF50199FE10A00072D7D /* Visit.m */,
 				F9B9EF5819A23EAE00072D7D /* VisitNotesComplex.h */,
@@ -510,6 +513,7 @@
 				F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */,
 				F911FF84197C07B20063A1F1 /* PatientViewController.m in Sources */,
 				F9E9DAA81986C11B00E8568F /* ClinicianStore.m in Sources */,
+				F92D297119AE841500DCE531 /* Patient+Gender.m in Sources */,
 				F9B9EF5A19A23EAE00072D7D /* VisitNotesComplex.m in Sources */,
 				F9B9EF6319A25C3800072D7D /* NumberFieldViewController.m in Sources */,
 				F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */,

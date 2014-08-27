@@ -53,6 +53,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   patientNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patients"
                                                                   image:crowd
                                                           selectedImage:nil];
+  tbc.tabBar.tintColor = [UIColor colorWithHue:.6 saturation:.8 brightness:.96 alpha:1.0];
   tbc.viewControllers = @[navController, patientNavController];
   [tbc setModalTransitionStyle:UIModalTransitionStylePartialCurl];
 

@@ -61,7 +61,9 @@
          forCellReuseIdentifier:@"UITableViewCell"];
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.navigationController.navigationBar.titleTextAttributes =
-  [NSDictionary dictionaryWithObjects:@[[UIColor darkGrayColor], [UIFont fontWithName:@"MarkerFelt-Thin" size:24.0]] forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
+  [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
+                                        [UIFont boldSystemFontOfSize:24]]
+                              forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
   UIBarButtonItem* newPatientButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                     target:self
                                                                                     action:@selector(addNewItem:)];
@@ -122,7 +124,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     cell.textLabel.text = @"No more patients";
     return cell;
   }
-  [cell setAccessoryType:UITableViewCellAccessoryDetailButton];
+  [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   if (row > [self.patients count]) {
     return nil;
   }
@@ -133,18 +135,16 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
   [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
   NSString* gender = @"";
-  switch ([p.gender intValue]) {
-    case Female:
-      gender = @"Female";
-      break;
-    case Male:
-      gender = @"Male";
-      break;
-    case Other:
-    default:
-      gender = @"Other";
-      break;
+  if ([p isFemale]) {
+    gender = @"Female";
+    cell.imageView.image = [UIImage imageNamed:@"female-patient"];
+  } else if([p isMale]) {
+    gender = @"Male";
+    cell.imageView.image = [UIImage imageNamed:@"male-patient"];
+  } else {
+    gender = @"Other";
   }
+  
   NSString* detailText;
   if (self.clinic) {
     detailText = [NSString stringWithFormat:@"%@.  Born: %@",

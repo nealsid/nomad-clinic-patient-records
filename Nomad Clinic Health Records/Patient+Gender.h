@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Patient.h"
+
 // An enum that represents gender options.  These HAVE to be kept in the same order as
 // the UISegmentedControl for gender in PatientViewController.{xib,m,h}
 typedef NS_ENUM(NSInteger, PatientGender) {
@@ -15,4 +17,12 @@ typedef NS_ENUM(NSInteger, PatientGender) {
   Male,
   Other
 };
+
+@interface Patient (Gender)
+
+- (BOOL) isFemale;
+- (BOOL) isMale;
+
+@end
+
 

@@ -15,6 +15,7 @@
 #import "Clinic.h"
 #import "ClinicStore.h"
 #import "Village.h"
+#import "VisitStore.h"
 
 @interface PatientAddEditViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -26,14 +27,17 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
 @property (weak, nonatomic) IBOutlet UIPickerView *clinicPicker;
 
-@property (weak, nonatomic) Patient* patient;
+@property (strong, nonatomic) Patient* patient;
 @property (weak, nonatomic) Clinic* clinic;
 
 @property (weak, nonatomic) ClinicStore* clinicStore;
 @property (strong, nonatomic) NSArray* allClinics;
 
-@property (strong, nonatomic) UIBarButtonItem* oldBackButton;
+@property (strong, nonatomic) IBOutlet UIToolbar *datePickerDone;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 
+@property (strong, nonatomic) NSDateFormatter* dateFormatter;
+@property (strong, nonatomic) NSDate* patientBirthdate;
 @end
 
 @implementation PatientAddEditViewController
@@ -55,6 +59,10 @@
     self.clinicStore = [ClinicStore sharedClinicStore];
     self.allClinics = [self.clinicStore clinics];
     self.patient = p;
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    self.dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    self.patientBirthdate = self.patient.dob.specificdate;
   }
   return self;
 }
@@ -68,6 +76,8 @@
   if (self.patient) {
     self.patientNameField.text = self.patient.name;
     self.patientAgeField.text = [self.patient.dob toString];
+    [self.genderControl setSelectedSegmentIndex:[self.patient.gender intValue]];
+    [self.datePicker setDate:self.patientBirthdate];
   }
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                          target:self
@@ -75,7 +85,20 @@
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                         target:self
                                                                                         action:@selector(cancel:)];
+  self.patientAgeField.inputAccessoryView = self.datePickerDone;
+  self.patientAgeField.inputView = self.datePicker;
 }
+
+- (IBAction)cancelEditing:(id)sender {
+  [self.patientAgeField resignFirstResponder];
+}
+
+- (IBAction)doneEditing:(id)sender {
+  self.patientAgeField.text = [self.dateFormatter stringFromDate:self.datePicker.date];
+  self.patientBirthdate = self.datePicker.date;
+  [self.patientAgeField resignFirstResponder];
+}
+
 - (void) cancel:(id)sender {
   [self.navigationController popViewControllerAnimated:YES];
 }
@@ -97,25 +120,40 @@
     if ([newName length] > 0) {
       requiresSave = YES;
     }
-  } else if (![newName isEqualToString:self.patient.name]) {
-    // Or if the user has modified the patient name.
-    requiresSave = YES;
+  } else {
+    if (![newName isEqualToString:self.patient.name]) {
+      // Or if the user has modified the patient name.
+      requiresSave = YES;
+    }
+
+    if (self.genderControl.selectedSegmentIndex != [self.patient.gender integerValue]) {
+      requiresSave = YES;
+    }
+
+    NSLog(@"%@/%@", self.patientBirthdate, self.patient.dob.specificdate);
+    if (![self.patientBirthdate isEqualToDate:self.patient.dob.specificdate]) {
+      requiresSave = YES;
+    }
+
+    NSInteger selectedClinic = [self.clinicPicker selectedRowInComponent:0];
+    Clinic* c = [self.allClinics objectAtIndex:selectedClinic];
+    if (self.patient.clinic != c) {
+      requiresSave = YES;
+    }
   }
 
   if (requiresSave) {
     NSLog(@"Requires save");
-    Patient* p = [[PatientStore sharedPatientStore] newPatient];
-    self.patient = p;
-    self.patient.name = newName;
-
-    if (self.patient.dob == nil) {
-      [NSException raise:@"Patient Save failed"
-                  format:@"Reason: patient has no flex date"];
+    if (!self.patient) {
+      self.patient = [[PatientStore sharedPatientStore] newPatient];
+      [[VisitStore sharedVisitStore] newVisitForPatient:self.patient];
     }
+    self.patient.name = newName;
     self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];
     NSInteger selectedClinic = [self.clinicPicker selectedRowInComponent:0];
     Clinic* c = [self.allClinics objectAtIndex:selectedClinic];
-    p.clinic = c;
+    self.patient.clinic = c;
+    self.patient.dob.specificdate = self.patientBirthdate;
     [[PatientStore sharedPatientStore] saveChanges];
   }
   [self.navigationController popViewControllerAnimated:YES];

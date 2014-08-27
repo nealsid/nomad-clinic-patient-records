@@ -12,7 +12,7 @@
 // the UISegmentedControl for gender in PatientViewController.{xib,m,h}
 typedef NS_ENUM(NSInteger, PatientGender) {
   Female,
-  Other,
-  Male
+  Male,
+  Other
 };
 

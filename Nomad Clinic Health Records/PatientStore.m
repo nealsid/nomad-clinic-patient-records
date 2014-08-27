@@ -168,14 +168,9 @@
     p.clinic = [clinicObjects objectAtIndex:(i % clinicObjects.count)];
   }
 
-  for(int i = 0 ; i < 2 ; ++i) {
+  for(int i = 0 ; i < 4 ; ++i) {
     FlexDate* f = [[patients objectAtIndex:i] dob];
-    f.year = @(1980 + i);
-  }
-
-  for(int i = 2 ; i < 4 ; ++i) {
-    FlexDate* f = [[patients objectAtIndex:i] dob];
-    f.specificdate = [Utils dateFromMonth:9 day:2 year:(1980 + i)];
+    f.specificdate = [Utils dateFromMonth:3 day:8 year:(1941 + i)];
   }
 
 

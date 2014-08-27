@@ -82,10 +82,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   Patient* p = [self.patients objectAtIndex:row];
 
   NSLog(@"%@", p);
-  PatientAddEditViewController* pvc =
-  [[PatientAddEditViewController alloc] initWithNibName:nil
-                                                 bundle:nil
-                                             forPatient:p];
+  PatientViewController* pvc = [[PatientViewController alloc] initWithNibName:nil bundle:nil andPatient:p];
 
   [self.navigationController pushViewController:pvc animated:YES];
 }

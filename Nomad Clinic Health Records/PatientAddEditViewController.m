@@ -43,7 +43,7 @@
 }
 
 - (instancetype)initForPatient:(Patient *)p {
-  return [self initWithNibName:nil bundle:nil forPatient:p andClinic:nil];
+  return [self initWithNibName:nil bundle:nil forPatient:p andClinic:p.clinic];
 }
 
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil

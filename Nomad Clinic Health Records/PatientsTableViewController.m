@@ -20,7 +20,6 @@
 
 @interface PatientsTableViewController ()
 
-@property (nonatomic, strong) IBOutlet UIView* headerView;
 @property (nonatomic, retain) UIFont* itemFont;
 @property (nonatomic, retain) PatientStore* patientStore;
 @property (nonatomic, retain) NSArray* patients;
@@ -83,10 +82,10 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   Patient* p = [self.patients objectAtIndex:row];
 
   NSLog(@"%@", p);
-  PatientViewController* pvc =
-  [[PatientViewController alloc] initWithNibName:nil
-                                              bundle:nil
-                                          andPatient:p];
+  PatientAddEditViewController* pvc =
+  [[PatientAddEditViewController alloc] initWithNibName:nil
+                                                 bundle:nil
+                                             forPatient:p];
 
   [self.navigationController pushViewController:pvc animated:YES];
 }
@@ -149,8 +148,15 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
       gender = @"Other";
       break;
   }
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, Born: %@",
-                               p.clinic.village.name, [p.dob toString]];
+  NSString* detailText;
+  if (self.clinic) {
+    detailText = [NSString stringWithFormat:@"%@.  Born: %@",
+                  gender, [p.dob toString]];
+  } else {
+    detailText = [NSString stringWithFormat:@"%@, %@.  Born: %@",
+                  p.clinic.village.name, gender, [p.dob toString]];
+  }
+  cell.detailTextLabel.text = detailText;
   cell.detailTextLabel.textColor = [UIColor grayColor];
   return cell;
 }

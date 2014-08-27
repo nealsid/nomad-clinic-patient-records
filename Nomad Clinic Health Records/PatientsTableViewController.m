@@ -71,6 +71,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  [self refreshPatientsFromStore];
   [self.tableView reloadData];
 }
 
@@ -149,7 +150,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
       break;
   }
   cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, Born: %@",
-                               gender, [p.dob toString]];
+                               p.clinic.village.name, [p.dob toString]];
   cell.detailTextLabel.textColor = [UIColor grayColor];
   return cell;
 }

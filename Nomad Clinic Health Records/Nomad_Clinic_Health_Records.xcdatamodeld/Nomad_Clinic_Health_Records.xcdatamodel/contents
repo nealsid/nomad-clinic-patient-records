@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Clinic" representedClassName="Clinic" syncable="YES">
         <attribute name="clinic_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="patients" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="clinic" inverseEntity="Patient" syncable="YES"/>
+        <relationship name="patients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Patient" inverseName="clinic" inverseEntity="Patient" syncable="YES"/>
         <relationship name="village" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Village" inverseName="held_clinics" inverseEntity="Village" syncable="YES"/>
     </entity>
     <entity name="Clinician" representedClassName="Clinician" syncable="YES">
@@ -53,7 +53,7 @@
         <relationship name="visit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="notes" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clinic" positionX="-90" positionY="-108" width="128" height="88"/>
+        <element name="Clinic" positionX="-90" positionY="-108" width="128" height="90"/>
         <element name="Clinician" positionX="81" positionY="99" width="128" height="73"/>
         <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
         <element name="Patient" positionX="-270" positionY="-261" width="128" height="148"/>

@@ -8,6 +8,10 @@
 
 #import "PatientAddEditViewController.h"
 
+#import "FlexDate.h"
+#import "FlexDate+ToString.h"
+#import "Patient.h"
+#import "PatientStore.h"
 #import "Clinic.h"
 #import "ClinicStore.h"
 #import "Village.h"
@@ -26,8 +30,9 @@
 @property (weak, nonatomic) Clinic* clinic;
 
 @property (weak, nonatomic) ClinicStore* clinicStore;
-@property (weak, nonatomic) NSArray* allClinics;
+@property (strong, nonatomic) NSArray* allClinics;
 
+@property (strong, nonatomic) UIBarButtonItem* oldBackButton;
 
 @end
 
@@ -56,6 +61,23 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  if (self.clinic) {
+    NSInteger index = [self.allClinics indexOfObject:self.clinic];
+    [self.clinicPicker selectRow:index inComponent:0 animated:YES];
+  }
+  if (self.patient) {
+    self.patientNameField.text = self.patient.name;
+    self.patientAgeField.text = [self.patient.dob toString];
+  }
+  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                         target:self
+                                                                                         action:@selector(saveChangesIfNecessary:)];
+  self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                        target:self
+                                                                                        action:@selector(cancel:)];
+}
+- (void) cancel:(id)sender {
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) viewDidLayoutSubviews {
@@ -67,9 +89,50 @@
   }
 }
 
+- (void) saveChangesIfNecessary:(id)sender {
+  NSString* newName = self.patientNameField.text;
+
+  BOOL requiresSave = NO;
+  if (!self.patient) {
+    if ([newName length] > 0) {
+      requiresSave = YES;
+    }
+  } else if (![newName isEqualToString:self.patient.name]) {
+    // Or if the user has modified the patient name.
+    requiresSave = YES;
+  }
+
+  if (requiresSave) {
+    NSLog(@"Requires save");
+    Patient* p = [[PatientStore sharedPatientStore] newPatient];
+    self.patient = p;
+    self.patient.name = newName;
+
+    if (self.patient.dob == nil) {
+      [NSException raise:@"Patient Save failed"
+                  format:@"Reason: patient has no flex date"];
+    }
+    self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];
+    NSInteger selectedClinic = [self.clinicPicker selectedRowInComponent:0];
+    Clinic* c = [self.allClinics objectAtIndex:selectedClinic];
+    p.clinic = c;
+    [[PatientStore sharedPatientStore] saveChanges];
+  }
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void) highlightInvalidUIElements {
+  if ([self.patientNameField.text length] == 0) {
+    self.patientNameField.layer.masksToBounds = YES;
+    self.patientNameField.layer.borderColor = [[UIColor redColor] CGColor];
+    self.patientNameField.layer.borderWidth = 1.0f;
+  } else {
+    self.patientNameField.layer.borderColor = [[UIColor clearColor] CGColor];
+  }
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {

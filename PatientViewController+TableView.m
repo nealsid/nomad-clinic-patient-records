@@ -38,11 +38,37 @@ heightForHeaderInSection:(NSInteger)section {
   return 3;
 }
 
-- (NSString*) tableView:(UITableView *)tableView
-titleForHeaderInSection:(NSInteger)section {
-  return [NSString stringWithFormat:@"Most recent visit: %@",
-          [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
+- (UIView*)  tableView:(UITableView *)tableView
+viewForHeaderInSection:(NSInteger)section {
+  UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
+
+  UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(13.0, 0.0, 200.0, 40.0)];
+  label.text = [NSString stringWithFormat:@"%@",
+                [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
+  label.backgroundColor = [UIColor clearColor];
+  [view.contentView addSubview:label];
+  NSLog(@"VFHS: %f, %f, %f, %f", view.frame.origin.x, view.frame.origin.y, view.frame.size.width, view.frame.size.height);
+  self.sectionHeaderView = view;
+  return view;
 }
+
+- (void) animateSectionHeaderBackground {
+  NSLog(@"Inside animate");
+  UIColor* oldColor = self.sectionHeaderView.backgroundColor;
+  self.sectionHeaderView.contentView.backgroundColor = [UIColor redColor];
+//  [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//    self.sectionHeaderView.contentView.backgroundColor = oldColor;
+//  }
+//                   completion:^(BOOL finished){
+//                     NSLog(@"Animatino done: %d", finished);
+//                   }];
+}
+
+//- (NSString*) tableView:(UITableView *)tableView
+//titleForHeaderInSection:(NSInteger)section {
+//  return [NSString stringWithFormat:@"%@",
+//          [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
+//}
 
 - (CGFloat)    tableView:(UITableView *)tableView
 heightForFooterInSection:(NSInteger)section {

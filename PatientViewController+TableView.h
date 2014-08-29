@@ -10,4 +10,6 @@
 
 @interface PatientViewController (TableView) <UITableViewDataSource, UITableViewDelegate>
 
+- (void) animateSectionHeaderBackground;
+
 @end

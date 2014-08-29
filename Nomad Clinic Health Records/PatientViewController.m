@@ -14,6 +14,7 @@
 #import "Patient.h"
 #import "PatientAddEditViewController.h"
 #import "PatientStore.h"
+#import "PatientViewController+TableView.h"
 #import "SOAPViewController.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
@@ -49,6 +50,7 @@
   [self refreshVisitUI];
   [self.recentVisitTable registerClass:[UITableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
+  [self.recentVisitTable registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"header"];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -83,7 +85,7 @@
     self.hidesBottomBarWhenPushed = YES;
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
   }
   return self;
 }
@@ -159,6 +161,7 @@
   Visit* v = [self.patientVisitStore newVisitForPatient:self.patient];
   self.mostRecentVisit = v;
   [self refreshVisitUI];
+  [self animateSectionHeaderBackground];
 }
 
 - (void) refreshVisitUI {

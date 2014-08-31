@@ -16,7 +16,9 @@
 
 @property (strong, nonatomic) Visit* mostRecentVisit;
 @property (strong, nonatomic) NSDateFormatter* dateFormatter;
-@property (strong, nonatomic) UITableViewHeaderFooterView* sectionHeaderView;
+
+@property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
+@property BOOL shouldAnimateHeaderBackground;
 
 /**
  * Designated initializer for the Patient view controller.

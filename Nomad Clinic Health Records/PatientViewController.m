@@ -30,7 +30,6 @@
 @property (nonatomic, retain) Patient* patient;
 
 @property (weak, nonatomic) IBOutlet UIButton *addVisitButton;
-@property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 
 @property (weak, nonatomic) VisitStore* patientVisitStore;
@@ -161,6 +160,7 @@
   Visit* v = [self.patientVisitStore newVisitForPatient:self.patient];
   self.mostRecentVisit = v;
   [self refreshVisitUI];
+  NSLog(@"Called refresh");
   [self animateSectionHeaderBackground];
 }
 

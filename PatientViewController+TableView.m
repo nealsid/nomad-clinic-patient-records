@@ -38,25 +38,54 @@ heightForHeaderInSection:(NSInteger)section {
   return 3;
 }
 
+- (void)    tableView:(UITableView *)tableView
+willDisplayHeaderView:(UIView *)view
+           forSection:(NSInteger)section {
+  UITableViewHeaderFooterView* headerView = (UITableViewHeaderFooterView*)view;
+  if (self.shouldAnimateHeaderBackground) {
+    self.shouldAnimateHeaderBackground = NO;
+    [UIView animateWithDuration:.8
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                       headerView.contentView.backgroundColor = [UIColor blackColor];
+    }
+                     completion:^(BOOL finished){
+                       [UIView animateWithDuration:.8
+                                             delay:0.0
+                                           options:UIViewAnimationOptionCurveEaseInOut
+                                        animations:^{
+                                          headerView.contentView.backgroundColor = [UIColor clearColor];
+                                        }
+                                        completion:^(BOOL finished){
+                                          NSLog(@"Animation done: %d", finished);
+                                        }];
+
+                     }];
+  } else {
+    headerView.contentView.backgroundColor = [UIColor clearColor];
+  }
+}
+
 - (UIView*)  tableView:(UITableView *)tableView
 viewForHeaderInSection:(NSInteger)section {
   UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
-
+  
   UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(13.0, 0.0, 200.0, 40.0)];
+
   label.text = [NSString stringWithFormat:@"%@",
                 [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
-  label.backgroundColor = [UIColor clearColor];
+
   [view.contentView addSubview:label];
-  NSLog(@"VFHS: %f, %f, %f, %f", view.frame.origin.x, view.frame.origin.y, view.frame.size.width, view.frame.size.height);
-  self.sectionHeaderView = view;
+  NSLog(@"vfhins: %@", view.contentView);
   return view;
 }
 
 - (void) animateSectionHeaderBackground {
   NSLog(@"Inside animate");
-  UIColor* oldColor = self.sectionHeaderView.backgroundColor;
-  self.sectionHeaderView.contentView.backgroundColor = [UIColor redColor];
-//  [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+  self.shouldAnimateHeaderBackground = YES;
+//  UIColor* oldColor = self.sectionHeaderView.backgroundColor;
+  //  [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 //    self.sectionHeaderView.contentView.backgroundColor = oldColor;
 //  }
 //                   completion:^(BOOL finished){

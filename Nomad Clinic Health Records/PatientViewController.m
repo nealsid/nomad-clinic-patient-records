@@ -24,15 +24,16 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface PatientViewController ()
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *patientNameTopConstraint;
-@property BOOL adjustedForTopLayout;
+
+@property (weak, nonatomic)   IBOutlet NSLayoutConstraint *patientNameTopConstraint;
+@property (weak, nonatomic)   IBOutlet UIButton *addVisitButton;
+@property (weak, nonatomic)   IBOutlet UITextField *patientNameField;
+
+@property                     BOOL adjustedForTopLayout;
 
 @property (nonatomic, retain) Patient* patient;
 
-@property (weak, nonatomic) IBOutlet UIButton *addVisitButton;
-@property (weak, nonatomic) IBOutlet UITextField *patientNameField;
-
-@property (weak, nonatomic) VisitStore* patientVisitStore;
+@property (weak, nonatomic)   VisitStore* patientVisitStore;
 @property (nonatomic, strong) NSDateFormatter* formatter;
 
 @end
@@ -97,65 +98,6 @@
   return self;
 }
 
-//- (BOOL) patientFieldsValidForSave {
-//  return [self.patientNameField.text length] > 0;
-//}
-//
-//- (void) highlightInvalidUIElements {
-//  if ([self.patientNameField.text length] == 0) {
-//    self.patientNameField.layer.masksToBounds = YES;
-//    self.patientNameField.layer.borderColor = [[UIColor redColor] CGColor];
-//    self.patientNameField.layer.borderWidth = 1.0f;
-//  } else {
-//    self.patientNameField.layer.borderColor = [[UIColor clearColor] CGColor];
-//  }
-//}
-//
-//- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-//  if (editing) {
-//    [super setEditing:editing animated:animated];
-//    [self.patientNameField setEnabled:YES];
-//    [self.patientNameField setBorderStyle:UITextBorderStyleRoundedRect];
-//
-//    [self.patientAgeField setBorderStyle:UITextBorderStyleRoundedRect];
-//    [self.patientAgeField setEnabled:YES];
-//    [self.addVisitButton setHidden:YES];
-//    [self.toolbar setHidden:NO];
-//    for (NSUInteger i = 0; i < self.genderControl.numberOfSegments; ++i) {
-//      [self.genderControl setEnabled:YES forSegmentAtIndex:i];
-//    }
-//    self.genderControl.selectedSegmentIndex = [self.patient.gender integerValue];
-//    [self.recentVisitTable setHidden:YES];
-//  } else {
-//
-//    [self highlightInvalidUIElements];
-//
-//    if (![self patientFieldsValidForSave]) {
-//      return;
-//    }
-//
-//    [super setEditing:editing animated:animated];
-//    [self.patientNameField setEnabled:NO];
-//    [self.patientNameField setBorderStyle:UITextBorderStyleNone];
-//    [self.patientAgeField setBorderStyle:UITextBorderStyleNone];
-//    [self.patientAgeField setEnabled:NO];
-//
-//    [self.patientAgeField setHidden:NO];
-//    [self.addVisitButton setHidden:NO];
-//
-//    [self.toolbar setHidden:YES];
-//
-//    for (NSUInteger i = 0; i < self.genderControl.numberOfSegments; ++i) {
-//      if (i != [self.genderControl selectedSegmentIndex]) {
-//        [self.genderControl setEnabled:NO forSegmentAtIndex:i];
-//      }
-//    }
-//    [self.recentVisitTable setHidden:NO];
-//
-//    [self saveChangesIfNecessary];
-//  }
-//}
-
 - (IBAction)addVisitButtonClicked:(id)sender {
   Visit* v = [self.patientVisitStore newVisitForPatient:self.patient];
   self.mostRecentVisit = v;
@@ -177,7 +119,7 @@
 }
 
 - (void) newFieldValue:(NSNumber*)newValue {
-  self.mostRecentVisit.notes.weight = newValue;
+  self.mostRecentVisit.notes.weight_class = newValue;
   [self.patientVisitStore saveChanges];
   [self.recentVisitTable reloadData];
   [self.navigationController popViewControllerAnimated:YES];

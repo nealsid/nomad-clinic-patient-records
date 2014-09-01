@@ -8,9 +8,11 @@
 
 #import "PatientViewController+TableView.h"
 
+#import "PickerFieldViewController.h"
 #import "SOAPViewController.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
+#import "VisitNotesComplex+WeightClass.h"
 
 @implementation PatientViewController (TableView)
 
@@ -44,6 +46,7 @@ willDisplayHeaderView:(UIView *)view
   UITableViewHeaderFooterView* headerView = (UITableViewHeaderFooterView*)view;
   if (self.shouldAnimateHeaderBackground) {
     self.shouldAnimateHeaderBackground = NO;
+    // This color is Apple iOS blue.
     UIColor* flashColor = [UIColor colorWithHue:212.0/360 saturation:.98 brightness:.98 alpha:1.0];
     [UIView animateKeyframesWithDuration:1.0 delay:0.0 options:0 animations:^{
       [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:.20 animations:^{
@@ -87,20 +90,7 @@ viewForHeaderInSection:(NSInteger)section {
 - (void) animateSectionHeaderBackground {
   NSLog(@"Inside animate");
   self.shouldAnimateHeaderBackground = YES;
-//  UIColor* oldColor = self.sectionHeaderView.backgroundColor;
-  //  [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//    self.sectionHeaderView.contentView.backgroundColor = oldColor;
-//  }
-//                   completion:^(BOOL finished){
-//                     NSLog(@"Animatino done: %d", finished);
-//                   }];
 }
-
-//- (NSString*) tableView:(UITableView *)tableView
-//titleForHeaderInSection:(NSInteger)section {
-//  return [NSString stringWithFormat:@"%@",
-//          [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
-//}
 
 - (CGFloat)    tableView:(UITableView *)tableView
 heightForFooterInSection:(NSInteger)section {
@@ -120,12 +110,13 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([indexPath row] == 0) {
-    NumberFieldViewController *vc = [[NumberFieldViewController alloc]
-                                     initWithNibName:nil
-                                     bundle:nil
-                                     fieldName:@"Weight"
-                                     initialValue:[self.mostRecentVisit.notes.weight stringValue]
-                                     fieldChangedDelegate:self];
+    NSArray* weightClasses = [VisitNotesComplex allWeightClassesAsStrings];
+
+    PickerFieldViewController* vc = [[PickerFieldViewController alloc]
+                                     initWithFieldName:@"Weight"
+                                     choices:weightClasses
+                                     initialChoiceIndex:[self.mostRecentVisit.notes.weight_class integerValue]
+                                     fieldEditDelegate:self];
     [self.navigationController pushViewController:vc animated:YES];
     return;
   }
@@ -149,7 +140,13 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   cell.textLabel.textColor = [UIColor darkGrayColor];
   if (row == 0) {
     cell.textLabel.text = @"Weight";
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ lbs", self.mostRecentVisit.notes.weight];
+    cell.detailTextLabel.text = [VisitNotesComplex stringForWeightClass:self.mostRecentVisit.notes.weight_class];
+    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:20];
+    if ([self.mostRecentVisit.notes isWeightExteme]) {
+      cell.detailTextLabel.textColor = [UIColor redColor];
+    } else {
+      cell.detailTextLabel.textColor = [UIColor blackColor];
+    }
   } else if (row == 1) {
     cell.textLabel.text = @"Healthy?";
     UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];

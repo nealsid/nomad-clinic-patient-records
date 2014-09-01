@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol FieldEditDelegate
-
-- (void) newFieldValue:(NSNumber*) newValue;
-
-@end
+#import "FieldEditDelegate.h"
 
 @interface NumberFieldViewController : UIViewController
 

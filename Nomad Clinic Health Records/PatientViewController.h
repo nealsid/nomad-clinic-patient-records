@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Patient.h"
 
+#import "FieldEditDelegate.h"
 #import "NumberFieldViewController.h"
 #import "SOAPViewController.h"
 

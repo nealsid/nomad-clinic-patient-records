@@ -50,6 +50,7 @@
         <attribute name="subjective" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temp_fahrenheit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="weight_class" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="visit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="notes" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <elements>
@@ -59,6 +60,6 @@
         <element name="Patient" positionX="-270" positionY="-261" width="128" height="148"/>
         <element name="Village" positionX="-81" positionY="-99" width="128" height="118"/>
         <element name="Visit" positionX="-63" positionY="18" width="128" height="103"/>
-        <element name="VisitNotesComplex" positionX="-56" positionY="-108" width="128" height="240"/>
+        <element name="VisitNotesComplex" positionX="-56" positionY="-108" width="128" height="255"/>
     </elements>
 </model>

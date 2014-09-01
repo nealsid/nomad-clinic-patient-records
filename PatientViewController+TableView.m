@@ -44,24 +44,27 @@ willDisplayHeaderView:(UIView *)view
   UITableViewHeaderFooterView* headerView = (UITableViewHeaderFooterView*)view;
   if (self.shouldAnimateHeaderBackground) {
     self.shouldAnimateHeaderBackground = NO;
-    [UIView animateWithDuration:.8
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                       headerView.contentView.backgroundColor = [UIColor blackColor];
-    }
-                     completion:^(BOOL finished){
-                       [UIView animateWithDuration:.8
-                                             delay:0.0
-                                           options:UIViewAnimationOptionCurveEaseInOut
-                                        animations:^{
-                                          headerView.contentView.backgroundColor = [UIColor clearColor];
-                                        }
-                                        completion:^(BOOL finished){
-                                          NSLog(@"Animation done: %d", finished);
-                                        }];
-
-                     }];
+    UIColor* flashColor = [UIColor colorWithHue:212.0/360 saturation:.98 brightness:.98 alpha:1.0];
+    [UIView animateKeyframesWithDuration:1.0 delay:0.0 options:0 animations:^{
+      [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:.20 animations:^{
+        headerView.contentView.backgroundColor = [UIColor clearColor];
+      }];
+      [UIView addKeyframeWithRelativeStartTime:0.2 relativeDuration:.20 animations:^{
+        headerView.contentView.backgroundColor = flashColor;
+      }];
+      [UIView addKeyframeWithRelativeStartTime:.4 relativeDuration:.20 animations:^{
+        headerView.contentView.backgroundColor = [UIColor clearColor];
+      }];
+      [UIView addKeyframeWithRelativeStartTime:.6 relativeDuration:.20 animations:^{
+        headerView.contentView.backgroundColor = flashColor;
+        
+      }];
+      [UIView addKeyframeWithRelativeStartTime:.8 relativeDuration:.20 animations:^{
+        headerView.contentView.backgroundColor = [UIColor clearColor];
+      }];
+    } completion:^(BOOL finished) {
+      NSLog(@"Animation finished: %d", finished);
+    }];
   } else {
     headerView.contentView.backgroundColor = [UIColor clearColor];
   }

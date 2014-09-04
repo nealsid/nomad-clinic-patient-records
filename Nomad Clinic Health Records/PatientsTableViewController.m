@@ -139,7 +139,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   } else if([p isMale]) {
     cell.imageView.image = [UIImage imageNamed:@"male-patient"];
   }
-  
+
   cell.detailTextLabel.text = [NSString stringWithFormat:@"Born: %@",
                                [p.dob toString]];
   cell.detailTextLabel.textColor = [UIColor grayColor];
@@ -148,7 +148,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 - (void) addNewItem: (id) sender {
   PatientAddEditViewController* pvc =
-    [[PatientAddEditViewController alloc] initForNewPatientAtClinic:self.clinic];
+    [[PatientAddEditViewController alloc] initForNewPatientInVillage:self.clinic.village];
   [self.navigationController pushViewController:pvc animated:YES];
 }
 

@@ -94,7 +94,7 @@
   return [self patientsForClinic:nil];
 }
 
-- (NSArray*) patientsForClinic:(Clinic*)c {
+- (NSArray*) patientsForClinic:(Clinic*) c {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
   NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient"
@@ -104,7 +104,7 @@
   req.sortDescriptors = @[sd];
   req.entity = e;
   if (c) {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"clinic == %@", c];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(0 != SUBQUERY(visits, $x, $x.clinic == %@).@count)", c];
     req.predicate = predicate;
   }
   NSLog(@"Patient fetch: %@", req);

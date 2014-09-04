@@ -8,12 +8,11 @@
 
 #import "PatientAddEditViewController.h"
 
+#import "BaseStore.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "PatientStore.h"
-#import "Clinic.h"
-#import "ClinicStore.h"
 #import "Village.h"
 #import "VisitStore.h"
 
@@ -25,13 +24,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *patientNameField;
 @property (weak, nonatomic) IBOutlet UITextField *patientAgeField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderControl;
-@property (weak, nonatomic) IBOutlet UIPickerView *clinicPicker;
+@property (weak, nonatomic) IBOutlet UIPickerView *villagePicker;
 
 @property (strong, nonatomic) Patient* patient;
 @property (weak, nonatomic) Village* village;
 
-@property (weak, nonatomic) ClinicStore* clinicStore;
-@property (strong, nonatomic) NSArray* allClinics;
+@property (weak, nonatomic) BaseStore* villageStore;
+@property (strong, nonatomic) NSArray* allVillages;
 
 @property (strong, nonatomic) IBOutlet UIToolbar *datePickerDone;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
@@ -63,8 +62,8 @@
   self = [super initWithNibName:nibNameOrNil bundle:bundleOrNil];
   if (self) {
     self.village = v;
-    self.clinicStore = [ClinicStore sharedClinicStore];
-    self.allClinics = [self.clinicStore clinics];
+    self.villageStore = [BaseStore sharedStoreForEntity:@"Village"];
+    self.allVillages = [self.villageStore entities];
     self.patient = p;
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
@@ -77,8 +76,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   if (self.village) {
-    NSInteger index = [self.allClinics indexOfObject:self.village];
-    [self.clinicPicker selectRow:index inComponent:0 animated:YES];
+    NSInteger index = [self.allVillages indexOfObject:self.village];
+    [self.villagePicker selectRow:index inComponent:0 animated:YES];
   }
   if (self.patient) {
     self.patientNameField.text = self.patient.name;
@@ -142,9 +141,9 @@
       requiresSave = YES;
     }
 
-    NSInteger selectedClinic = [self.clinicPicker selectedRowInComponent:0];
-    Clinic* c = [self.allClinics objectAtIndex:selectedClinic];
-    if (self.patient.clinic != c) {
+    NSInteger selectedVillage = [self.villagePicker selectedRowInComponent:0];
+    Village* v = [self.allVillages objectAtIndex:selectedVillage];
+    if (self.patient.village != v) {
       requiresSave = YES;
     }
   }
@@ -157,9 +156,9 @@
     }
     self.patient.name = newName;
     self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];
-    NSInteger selectedClinic = [self.clinicPicker selectedRowInComponent:0];
-    Clinic* c = [self.allClinics objectAtIndex:selectedClinic];
-    self.patient.clinic = c;
+    NSInteger selectedVillage = [self.villagePicker selectedRowInComponent:0];
+    Village* v = [self.allVillages objectAtIndex:selectedVillage];
+    self.patient.village = v;
     self.patient.dob.specificdate = self.patientBirthdate;
     [[PatientStore sharedPatientStore] saveChanges];
   }
@@ -184,15 +183,16 @@
   return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-  return self.allClinics.count;
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component {
+  return self.allVillages.count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component {
-  NSLog(@"Row %ld - %@", (long)row, [[[self.allClinics objectAtIndex:row] village] name]);
-  return [[[self.allClinics objectAtIndex:row] village] name];
+  NSLog(@"Row %ld - %@", (long)row, [[[self.allVillages objectAtIndex:row] village] name]);
+  return [[[self.allVillages objectAtIndex:row] village] name];
 }
 
 @end

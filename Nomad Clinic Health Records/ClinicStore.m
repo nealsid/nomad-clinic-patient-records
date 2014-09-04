@@ -25,7 +25,7 @@
   }
   return clinicStore;
 }
-- (void) webv
+
 - (instancetype) init {
   self = [super init];
   if (self) {

@@ -31,6 +31,8 @@
 		F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC20199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m */; };
 		F937FC23199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */; };
 		F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A22197D9A4C002616A6 /* PatientStore.m */; };
+		F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3519B7F24B009DDC6D /* BaseStore.m */; };
+		F960BC3819B7F258009DDC6D /* BaseStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3719B7F258009DDC6D /* BaseStoreTest.m */; };
 		F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96CF7F9199EA5E700F2C4EF /* TableViewController.m */; };
 		F971217B19A8026800C59980 /* Village.m in Sources */ = {isa = PBXBuildFile; fileRef = F971217A19A8026800C59980 /* Village.m */; };
 		F971217F19A806FC00C59980 /* ClinicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F971217D19A806FC00C59980 /* ClinicViewController.m */; };
@@ -119,6 +121,9 @@
 		F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientDOBMonthAndYearViewController.xib; sourceTree = "<group>"; };
 		F93E6A21197D9A4C002616A6 /* PatientStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientStore.h; sourceTree = "<group>"; };
 		F93E6A22197D9A4C002616A6 /* PatientStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientStore.m; sourceTree = "<group>"; };
+		F960BC3419B7F24B009DDC6D /* BaseStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseStore.h; sourceTree = "<group>"; };
+		F960BC3519B7F24B009DDC6D /* BaseStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStore.m; sourceTree = "<group>"; };
+		F960BC3719B7F258009DDC6D /* BaseStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStoreTest.m; sourceTree = "<group>"; };
 		F96CF7F8199EA5E700F2C4EF /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		F96CF7F9199EA5E700F2C4EF /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		F971217919A8026800C59980 /* Village.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Village.h; sourceTree = "<group>"; };
@@ -268,6 +273,9 @@
 				F907A4F819B5029200A22A15 /* VisitNotesComplex.m */,
 				F907A4FA19B502BD00A22A15 /* VisitNotesComplex+WeightClass.h */,
 				F907A4FB19B502BD00A22A15 /* VisitNotesComplex+WeightClass.m */,
+				F960BC3419B7F24B009DDC6D /* BaseStore.h */,
+				F960BC3519B7F24B009DDC6D /* BaseStore.m */,
+				F960BC3719B7F258009DDC6D /* BaseStoreTest.m */,
 			);
 			name = "CoreData Classes";
 			sourceTree = "<group>";
@@ -513,6 +521,7 @@
 				F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */,
 				F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */,
 				F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */,
+				F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */,
 				F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */,
 				F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */,
 				F971218319A8072700C59980 /* ClinicStore.m in Sources */,
@@ -549,6 +558,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F960BC3819B7F258009DDC6D /* BaseStoreTest.m in Sources */,
 				F9FAEA79197B075500C9B3E5 /* Nomad_Clinic_Health_RecordsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,7 +664,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78f11aab-8741-485b-8fb0-dee5747b48d1";
+				PROVISIONING_PROFILE = "785e4578-791a-4751-86fb-9b19c5352b42";
 				SDKROOT = iphoneos7.1;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -673,7 +683,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "78f11aab-8741-485b-8fb0-dee5747b48d1";
+				PROVISIONING_PROFILE = "785e4578-791a-4751-86fb-9b19c5352b42";
 				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

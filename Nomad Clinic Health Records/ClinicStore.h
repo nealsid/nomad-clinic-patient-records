@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ClinicStore : NSObject
+
 /**
  * Returns an application wide clinicStore singleton.
  *

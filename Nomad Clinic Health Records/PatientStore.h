@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "Patient.h"
 
+@class Clinic;
+
 @interface PatientStore : NSObject
 
 /**

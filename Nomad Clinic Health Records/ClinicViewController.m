@@ -52,6 +52,10 @@
   [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
                                         [UIFont boldSystemFontOfSize:24]]
                               forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
+  UIBarButtonItem* newClinicButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                   target:self
+                                                                                   action:@selector(addNewClinic:)];
+  self.navigationItem.rightBarButtonItem = newClinicButton;
 }
 
 - (void)      tableView:(UITableView *)tableView

@@ -2,8 +2,8 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Clinic" representedClassName="Clinic" syncable="YES">
         <attribute name="clinic_date" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="patients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Patient" inverseName="clinic" inverseEntity="Patient" syncable="YES"/>
         <relationship name="village" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Village" inverseName="held_clinics" inverseEntity="Village" syncable="YES"/>
+        <relationship name="visits" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="clinic" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <entity name="Clinician" representedClassName="Clinician" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,10 +19,9 @@
         <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Transformable" valueTransformerName="NEMRImageTransformer" syncable="YES"/>
-        <relationship name="clinic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Clinic" inverseName="patients" inverseEntity="Clinic" syncable="YES"/>
         <relationship name="dob" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FlexDate" inverseName="patient" inverseEntity="FlexDate" syncable="YES"/>
         <relationship name="village" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Village" inverseName="patients" inverseEntity="Village" syncable="YES"/>
-        <relationship name="visits" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="patient" inverseEntity="Visit" syncable="YES"/>
+        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visit" inverseName="patient" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <entity name="Village" representedClassName="Village" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -33,6 +32,7 @@
     </entity>
     <entity name="Visit" representedClassName="Visit" syncable="YES">
         <attribute name="visit_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="clinic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Clinic" inverseName="visits" inverseEntity="Clinic" syncable="YES"/>
         <relationship name="clinician" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="Clinician" inverseName="patient" inverseEntity="Clinician" syncable="YES"/>
         <relationship name="notes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VisitNotesComplex" inverseName="visit" inverseEntity="VisitNotesComplex" syncable="YES"/>
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="visits" inverseEntity="Patient" syncable="YES"/>
@@ -57,9 +57,9 @@
         <element name="Clinic" positionX="-90" positionY="-108" width="128" height="90"/>
         <element name="Clinician" positionX="81" positionY="99" width="128" height="73"/>
         <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
-        <element name="Patient" positionX="-270" positionY="-261" width="128" height="148"/>
+        <element name="Patient" positionX="-270" positionY="-261" width="128" height="133"/>
         <element name="Village" positionX="-81" positionY="-99" width="128" height="118"/>
-        <element name="Visit" positionX="-63" positionY="18" width="128" height="103"/>
+        <element name="Visit" positionX="-63" positionY="18" width="128" height="118"/>
         <element name="VisitNotesComplex" positionX="-56" positionY="-108" width="128" height="255"/>
     </elements>
 </model>

@@ -83,4 +83,8 @@
   return @"Unknown";
 }
 
+- (void)setWeightClass:(VisitWeightClass) weightClass {
+  self.weight_class = [NSNumber numberWithInt:weightClass];
+}
+
 @end

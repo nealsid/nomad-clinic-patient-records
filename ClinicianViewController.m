@@ -22,7 +22,6 @@
 
 - (IBAction)saveButton:(id)sender {
   NSString* newName = self.nameField.text;
-
   BOOL requiresSave = NO;
   if (self.clinician == nil) {
     Clinician* c = [[ClinicianStore sharedClinicianStore] newClinician];

@@ -12,7 +12,6 @@
 @protocol ClinicianViewControllerDelegate;
 
 @interface ClinicianViewController : UIViewController
-
 /**
  * Designated initializer for the Clinician view controller.
  *

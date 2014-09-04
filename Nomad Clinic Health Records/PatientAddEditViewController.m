@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *clinicPicker;
 
 @property (strong, nonatomic) Patient* patient;
-@property (weak, nonatomic) Clinic* clinic;
+@property (weak, nonatomic) Village* village;
 
 @property (weak, nonatomic) ClinicStore* clinicStore;
 @property (strong, nonatomic) NSArray* allClinics;
@@ -42,20 +42,27 @@
 
 @implementation PatientAddEditViewController
 
-- (instancetype) initForNewPatientAtClinic:(Clinic *)c {
-  return [self initWithNibName:nil bundle:nil forPatient:nil andClinic:c];
+- (instancetype) initForNewPatientInVillage:(Village *)v {
+  return [self initWithNibName:nil
+                        bundle:nil
+                    forPatient:nil
+                    andVillage:v];
 }
 
-- (instancetype)initForPatient:(Patient *)p {
-  return [self initWithNibName:nil bundle:nil forPatient:p andClinic:p.clinic];
+- (instancetype)initForPatient:(Patient *) p {
+  return [self initWithNibName:nil
+                        bundle:nil
+                    forPatient:p
+                    andVillage:p.village];
 }
 
-- (instancetype) initWithNibName:(NSString*)nibNameOrNil
-                          bundle:(NSBundle*)bundleOrNil
-                      forPatient:(Patient*)p andClinic:(Clinic*)c {
+- (instancetype) initWithNibName:(NSString *) nibNameOrNil
+                          bundle:(NSBundle *) bundleOrNil
+                      forPatient:(Patient *) p
+                       andVillage:(Village *) v {
   self = [super initWithNibName:nibNameOrNil bundle:bundleOrNil];
   if (self) {
-    self.clinic = c;
+    self.village = v;
     self.clinicStore = [ClinicStore sharedClinicStore];
     self.allClinics = [self.clinicStore clinics];
     self.patient = p;
@@ -69,8 +76,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  if (self.clinic) {
-    NSInteger index = [self.allClinics indexOfObject:self.clinic];
+  if (self.village) {
+    NSInteger index = [self.allClinics indexOfObject:self.village];
     [self.clinicPicker selectRow:index inComponent:0 animated:YES];
   }
   if (self.patient) {

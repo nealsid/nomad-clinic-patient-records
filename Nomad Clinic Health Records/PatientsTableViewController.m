@@ -140,15 +140,8 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
     cell.imageView.image = [UIImage imageNamed:@"male-patient"];
   }
   
-  NSString* detailText;
-  if (self.clinic) {
-    detailText = [NSString stringWithFormat:@"Born: %@",
-                  [p.dob toString]];
-  } else {
-    detailText = [NSString stringWithFormat:@"%@.  Born: %@",
-                  p.clinic.village.name, [p.dob toString]];
-  }
-  cell.detailTextLabel.text = detailText;
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"Born: %@",
+                               [p.dob toString]];
   cell.detailTextLabel.textColor = [UIColor grayColor];
   return cell;
 }

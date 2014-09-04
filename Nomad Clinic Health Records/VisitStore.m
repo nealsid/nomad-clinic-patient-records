@@ -13,6 +13,7 @@
 #import "PatientStore.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
+#import "VisitNotesComplex+WeightClass.h"
 
 #import <CoreData/CoreData.h>
 
@@ -38,6 +39,7 @@
   VisitNotesComplex* note = [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
                                                           inManagedObjectContext:ctx];
   pv.notes = note;
+  [pv.notes setWeightClass:WeightClassExpected];
   note.visit = pv;
   NSError* error;
   if (![ctx save:&error]) {

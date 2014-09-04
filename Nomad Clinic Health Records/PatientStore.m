@@ -18,6 +18,7 @@
 #import "Village.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
+#import "VisitNotesComplex+WeightClass.h"
 #import "Utils.h"
 
 #import <UIKit/UIKit.h>
@@ -165,7 +166,6 @@
     p.gender = [patientGenders objectAtIndex:i];
     p.dob = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate" inManagedObjectContext:ctx];
     [patients addObject:p];
-    p.clinic = [clinicObjects objectAtIndex:(i % clinicObjects.count)];
   }
 
   for(int i = 0 ; i < 4 ; ++i) {
@@ -191,6 +191,8 @@
     Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
                                              inManagedObjectContext:ctx];
     visit.patient = [patients objectAtIndex:i];
+    visit.clinic = [clinicObjects objectAtIndex:(i % clinicObjects.count)];
+
     visit.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
     visit.visit_date = [Utils dateFromMonth:10 day:2 year:2013];
     NSLog(@"Creating pv for %@ - %@", visit.patient.name, [[visit.clinician anyObject] name]);
@@ -202,7 +204,7 @@
     visitNote.bp_systolic = @120;
     visitNote.bp_diastolic = @80;
     visitNote.healthy = [NSNumber numberWithBool:NO];
-    visitNote.weight = [NSNumber numberWithInt:160];
+    [visitNote setWeightClass:WeightClassExpected];
     visitNote.breathing_rate = @60;
     visitNote.pulse = @75;
     visitNote.temp_fahrenheit = @98.6;

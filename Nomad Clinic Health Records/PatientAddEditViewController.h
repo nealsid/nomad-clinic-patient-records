@@ -35,7 +35,8 @@
  * Initializes a view controller for a new patient for a given clinic.
  *
  * @param v Village that the patient defaults to. Can be nil, in which case
- *          the default is the unspecified (usually the first clinic returned by Core Data)
+ *          the default is the unspecified (usually the first village returned 
+ *          by Core Data)
  */
 - (instancetype) initForNewPatientInVillage:(Village *) v;
 @end

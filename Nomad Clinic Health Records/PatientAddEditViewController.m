@@ -152,7 +152,7 @@
     NSLog(@"Requires save");
     if (!self.patient) {
       self.patient = [[PatientStore sharedPatientStore] newPatient];
-      [[VisitStore sharedVisitStore] newVisitForPatient:self.patient atClinic:];
+      [[VisitStore sharedVisitStore] newVisitForPatient:self.patient atClinic:nil];
     }
     self.patient.name = newName;
     self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];

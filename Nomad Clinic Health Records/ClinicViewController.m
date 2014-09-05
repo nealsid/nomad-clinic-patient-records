@@ -11,6 +11,7 @@
 
 #import "Clinic.h"
 #import "ClinicStore.h"
+#import "ClinicAddEditViewController.h"
 #import "PatientStore.h"
 #import "PatientsTableViewController.h"
 #import "Village.h"
@@ -56,6 +57,11 @@
                                                                                    target:self
                                                                                    action:@selector(addNewClinic:)];
   self.navigationItem.rightBarButtonItem = newClinicButton;
+}
+
+- (void) addNewClinic:(id) sender {
+  ClinicAddEditViewController *cvc = [[ClinicAddEditViewController alloc] initWithNibName:nil bundle:nil];
+  [self.navigationController pushViewController:cvc animated:YES];
 }
 
 - (void)      tableView:(UITableView *)tableView

@@ -99,7 +99,7 @@
 }
 
 - (IBAction)addVisitButtonClicked:(id)sender {
-  Visit* v = [self.patientVisitStore newVisitForPatient:self.patient];
+  Visit* v = [self.patientVisitStore newVisitForPatient:self.patient atClinic:nil];
   self.mostRecentVisit = v;
   [self refreshVisitUI];
   NSLog(@"Called refresh");

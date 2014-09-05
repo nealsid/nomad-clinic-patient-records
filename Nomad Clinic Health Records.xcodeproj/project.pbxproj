@@ -33,7 +33,6 @@
 		F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC1D199940BB00FD1355 /* FlexDate+ToString.m */; };
 		F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC20199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m */; };
 		F937FC23199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */; };
-		F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A22197D9A4C002616A6 /* PatientStore.m */; };
 		F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */; };
 		F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */; };
 		F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3519B7F24B009DDC6D /* BaseStore.m */; };
@@ -42,7 +41,6 @@
 		F971217B19A8026800C59980 /* Village.m in Sources */ = {isa = PBXBuildFile; fileRef = F971217A19A8026800C59980 /* Village.m */; };
 		F971217F19A806FC00C59980 /* ClinicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F971217D19A806FC00C59980 /* ClinicViewController.m */; };
 		F971218019A806FC00C59980 /* ClinicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F971217E19A806FC00C59980 /* ClinicViewController.xib */; };
-		F971218319A8072700C59980 /* ClinicStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F971218219A8072700C59980 /* ClinicStore.m */; };
 		F983434A19900AC50015974B /* SOAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F983434819900AC50015974B /* SOAPViewController.m */; };
 		F983434B19900AC50015974B /* SOAPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F983434919900AC50015974B /* SOAPViewController.xib */; };
 		F9844660199E5BFA00F59910 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F984465F199E5BFA00F59910 /* Utils.m */; };
@@ -59,12 +57,10 @@
 		F9DBC47E199D57EE00FB2544 /* male.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DBC47C199D57EE00FB2544 /* male.png */; };
 		F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAA21986C03000E8568F /* NEMRClinicianTableViewController.m */; };
 		F9E9DAA51986C03000E8568F /* NEMRClinicianTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAA31986C03000E8568F /* NEMRClinicianTableViewController.xib */; };
-		F9E9DAA81986C11B00E8568F /* ClinicianStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAA71986C11B00E8568F /* ClinicianStore.m */; };
 		F9E9DAAC1986C23F00E8568F /* Clinician.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAAB1986C23F00E8568F /* Clinician.m */; };
 		F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAAF1986C4EC00E8568F /* ClinicianViewController.m */; };
 		F9E9DAB21986C4EC00E8568F /* ClinicianViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAB01986C4EC00E8568F /* ClinicianViewController.xib */; };
 		F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAB41986D47A00E8568F /* ClinicianTableViewHeader.xib */; };
-		F9E9DABB198814ED00E8568F /* VisitStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DABA198814ED00E8568F /* VisitStore.m */; };
 		F9FAEA65197B075500C9B3E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA64197B075500C9B3E5 /* main.m */; };
 		F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */; };
 		F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA69197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld */; };
@@ -127,8 +123,6 @@
 		F937FC1F199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientDOBMonthAndYearViewController.h; sourceTree = "<group>"; };
 		F937FC20199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientDOBMonthAndYearViewController.m; sourceTree = "<group>"; };
 		F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientDOBMonthAndYearViewController.xib; sourceTree = "<group>"; };
-		F93E6A21197D9A4C002616A6 /* PatientStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientStore.h; sourceTree = "<group>"; };
-		F93E6A22197D9A4C002616A6 /* PatientStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientStore.m; sourceTree = "<group>"; };
 		F94B3A3D19B985B8003D3E2B /* ClinicAddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicAddEditViewController.h; sourceTree = "<group>"; };
 		F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicAddEditViewController.m; sourceTree = "<group>"; };
 		F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicAddEditViewController.xib; sourceTree = "<group>"; };
@@ -142,8 +136,6 @@
 		F971217C19A806FC00C59980 /* ClinicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicViewController.h; sourceTree = "<group>"; };
 		F971217D19A806FC00C59980 /* ClinicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicViewController.m; sourceTree = "<group>"; };
 		F971217E19A806FC00C59980 /* ClinicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicViewController.xib; sourceTree = "<group>"; };
-		F971218119A8072700C59980 /* ClinicStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicStore.h; sourceTree = "<group>"; };
-		F971218219A8072700C59980 /* ClinicStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicStore.m; sourceTree = "<group>"; };
 		F983434719900AC50015974B /* SOAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPViewController.h; sourceTree = "<group>"; };
 		F983434819900AC50015974B /* SOAPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPViewController.m; sourceTree = "<group>"; };
 		F983434919900AC50015974B /* SOAPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SOAPViewController.xib; sourceTree = "<group>"; };
@@ -166,16 +158,12 @@
 		F9E9DAA11986C03000E8568F /* NEMRClinicianTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEMRClinicianTableViewController.h; sourceTree = "<group>"; };
 		F9E9DAA21986C03000E8568F /* NEMRClinicianTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEMRClinicianTableViewController.m; sourceTree = "<group>"; };
 		F9E9DAA31986C03000E8568F /* NEMRClinicianTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NEMRClinicianTableViewController.xib; sourceTree = "<group>"; };
-		F9E9DAA61986C11B00E8568F /* ClinicianStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianStore.h; sourceTree = "<group>"; };
-		F9E9DAA71986C11B00E8568F /* ClinicianStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianStore.m; sourceTree = "<group>"; };
 		F9E9DAAA1986C23F00E8568F /* Clinician.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clinician.h; sourceTree = "<group>"; };
 		F9E9DAAB1986C23F00E8568F /* Clinician.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Clinician.m; sourceTree = "<group>"; };
 		F9E9DAAE1986C4EC00E8568F /* ClinicianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClinicianViewController.h; path = ../ClinicianViewController.h; sourceTree = "<group>"; };
 		F9E9DAAF1986C4EC00E8568F /* ClinicianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicianViewController.m; path = ../ClinicianViewController.m; sourceTree = "<group>"; };
 		F9E9DAB01986C4EC00E8568F /* ClinicianViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicianViewController.xib; path = ../ClinicianViewController.xib; sourceTree = "<group>"; };
 		F9E9DAB41986D47A00E8568F /* ClinicianTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicianTableViewHeader.xib; sourceTree = "<group>"; };
-		F9E9DAB9198814ED00E8568F /* VisitStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitStore.h; sourceTree = "<group>"; };
-		F9E9DABA198814ED00E8568F /* VisitStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitStore.m; sourceTree = "<group>"; };
 		F9FAEA5F197B075500C9B3E5 /* Nomad Clinic Health Records.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nomad Clinic Health Records.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FAEA63197B075500C9B3E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9FAEA64197B075500C9B3E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -248,14 +236,6 @@
 				F960BC3419B7F24B009DDC6D /* BaseStore.h */,
 				F960BC3519B7F24B009DDC6D /* BaseStore.m */,
 				F960BC3719B7F258009DDC6D /* BaseStoreTest.m */,
-				F9E9DAA61986C11B00E8568F /* ClinicianStore.h */,
-				F9E9DAA71986C11B00E8568F /* ClinicianStore.m */,
-				F93E6A21197D9A4C002616A6 /* PatientStore.h */,
-				F93E6A22197D9A4C002616A6 /* PatientStore.m */,
-				F9E9DAB9198814ED00E8568F /* VisitStore.h */,
-				F9E9DABA198814ED00E8568F /* VisitStore.m */,
-				F971218119A8072700C59980 /* ClinicStore.h */,
-				F971218219A8072700C59980 /* ClinicStore.m */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -541,22 +521,18 @@
 				F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */,
 				F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */,
 				F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */,
-				F971218319A8072700C59980 /* ClinicStore.m in Sources */,
 				F9247D7B199A940300C97F93 /* FlexDate.m in Sources */,
 				F907A50019B5065E00A22A15 /* PickerFieldViewController.m in Sources */,
 				F90E425A19B7A8EC00882BE7 /* Visit.m in Sources */,
-				F9E9DABB198814ED00E8568F /* VisitStore.m in Sources */,
 				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,
 				F914D8DA19883C5500BBD38E /* PatientVisitViewController.m in Sources */,
 				F9844660199E5BFA00F59910 /* Utils.m in Sources */,
 				F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */,
 				F983434A19900AC50015974B /* SOAPViewController.m in Sources */,
-				F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */,
 				F971217B19A8026800C59980 /* Village.m in Sources */,
 				F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */,
 				F911FF84197C07B20063A1F1 /* PatientViewController.m in Sources */,
-				F9E9DAA81986C11B00E8568F /* ClinicianStore.m in Sources */,
 				F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */,
 				F92D297119AE841500DCE531 /* Patient+Gender.m in Sources */,
 				F907A4FC19B502BD00A22A15 /* VisitNotesComplex+WeightClass.m in Sources */,

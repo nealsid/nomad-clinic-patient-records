@@ -8,12 +8,12 @@
 
 #import "PatientVisitViewController.h"
 
+#import "BaseStore.h"
 #import "Clinician.h"
 #import "Patient.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
 #import "PatientVisitNoteViewController.h"
-#import "VisitStore.h"
 
 @interface PatientVisitViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -46,7 +46,7 @@
     [self.noteTableView registerClass:[UITableViewCell class]
                forCellReuseIdentifier:@"UITableViewCell"];
     self.itemFont = [UIFont systemFontOfSize:20];
-    VisitStore* visitStore = [VisitStore sharedVisitStore];
+    BaseStore* visitStore = [BaseStore sharedStoreForEntity:@"Visit"];
     self.notes = [visitStore notesForVisit:self.visit];
   }
   return self;

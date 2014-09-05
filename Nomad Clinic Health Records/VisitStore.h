@@ -56,7 +56,7 @@
  * @param p A Patient to create the visit for.
  * @returns PatientVisit object
  */
-- (Visit*) newVisitForPatient:(Patient*) p;
+- (Visit*) newVisitForPatient:(Patient*) p atClinic:(Clinic *) c;
 
 /**
  * Removes a PatientVisit from the PatientVisitStore

@@ -34,6 +34,8 @@
 		F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F937FC20199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m */; };
 		F937FC23199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */; };
 		F93E6A23197D9A4C002616A6 /* PatientStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F93E6A22197D9A4C002616A6 /* PatientStore.m */; };
+		F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */; };
+		F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */; };
 		F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3519B7F24B009DDC6D /* BaseStore.m */; };
 		F960BC3819B7F258009DDC6D /* BaseStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3719B7F258009DDC6D /* BaseStoreTest.m */; };
 		F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96CF7F9199EA5E700F2C4EF /* TableViewController.m */; };
@@ -127,6 +129,9 @@
 		F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientDOBMonthAndYearViewController.xib; sourceTree = "<group>"; };
 		F93E6A21197D9A4C002616A6 /* PatientStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientStore.h; sourceTree = "<group>"; };
 		F93E6A22197D9A4C002616A6 /* PatientStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientStore.m; sourceTree = "<group>"; };
+		F94B3A3D19B985B8003D3E2B /* ClinicAddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicAddEditViewController.h; sourceTree = "<group>"; };
+		F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicAddEditViewController.m; sourceTree = "<group>"; };
+		F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicAddEditViewController.xib; sourceTree = "<group>"; };
 		F960BC3419B7F24B009DDC6D /* BaseStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseStore.h; sourceTree = "<group>"; };
 		F960BC3519B7F24B009DDC6D /* BaseStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStore.m; sourceTree = "<group>"; };
 		F960BC3719B7F258009DDC6D /* BaseStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStoreTest.m; sourceTree = "<group>"; };
@@ -310,6 +315,9 @@
 				F99720EC19ACC8C8006F6630 /* PatientAddEditViewController.h */,
 				F99720ED19ACC8C8006F6630 /* PatientAddEditViewController.m */,
 				F99720EE19ACC8C8006F6630 /* PatientAddEditViewController.xib */,
+				F94B3A3D19B985B8003D3E2B /* ClinicAddEditViewController.h */,
+				F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */,
+				F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */,
 			);
 			name = "Entity View Controllers";
 			sourceTree = "<group>";
@@ -339,12 +347,12 @@
 				F914D8E0198A990E00BBD38E /* Table View Controllers */,
 				F9E9DAB31986C83100E8568F /* Entity View Controllers */,
 				F9E9DAAD1986C24800E8568F /* CoreData Classes */,
+				F9E9DAA91986C16800E8568F /* Stores */,
 				F984465E199E5BFA00F59910 /* Utils.h */,
 				F984465F199E5BFA00F59910 /* Utils.m */,
 				F907A50219B51BEC00A22A15 /* FieldEditDelegate.h */,
 				F96CF7F8199EA5E700F2C4EF /* TableViewController.h */,
 				F96CF7F9199EA5E700F2C4EF /* TableViewController.m */,
-				F9E9DAA91986C16800E8568F /* Stores */,
 				F9FAEA66197B075500C9B3E5 /* NEMRAppDelegate.h */,
 				F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */,
 				F937FC1C199940BB00FD1355 /* FlexDate+ToString.h */,
@@ -493,6 +501,7 @@
 				F9DBC47D199D57EE00FB2544 /* female.png in Resources */,
 				F9E9DAB21986C4EC00E8568F /* ClinicianViewController.xib in Resources */,
 				F9B9EF6419A25C3800072D7D /* NumberFieldViewController.xib in Resources */,
+				F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */,
 				F9FAEA6D197B075500C9B3E5 /* Images.xcassets in Resources */,
 				F997FE2A19AE77A800487ADE /* stetho.png in Resources */,
 				F9DA49D819AE5A06008BFC6F /* crowd.png in Resources */,
@@ -540,6 +549,7 @@
 				F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */,
 				F911FF84197C07B20063A1F1 /* PatientViewController.m in Sources */,
 				F9E9DAA81986C11B00E8568F /* ClinicianStore.m in Sources */,
+				F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */,
 				F92D297119AE841500DCE531 /* Patient+Gender.m in Sources */,
 				F907A4FC19B502BD00A22A15 /* VisitNotesComplex+WeightClass.m in Sources */,
 				F9B9EF6319A25C3800072D7D /* NumberFieldViewController.m in Sources */,

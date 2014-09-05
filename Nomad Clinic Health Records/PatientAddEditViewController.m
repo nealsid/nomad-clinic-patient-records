@@ -152,7 +152,7 @@
     NSLog(@"Requires save");
     if (!self.patient) {
       self.patient = [[PatientStore sharedPatientStore] newPatient];
-      [[VisitStore sharedVisitStore] newVisitForPatient:self.patient];
+      [[VisitStore sharedVisitStore] newVisitForPatient:self.patient atClinic:];
     }
     self.patient.name = newName;
     self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];
@@ -191,8 +191,9 @@ numberOfRowsInComponent:(NSInteger)component {
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component {
-  NSLog(@"Row %ld - %@", (long)row, [[[self.allVillages objectAtIndex:row] village] name]);
-  return [[[self.allVillages objectAtIndex:row] village] name];
+  NSString* villageName = [[self.allVillages objectAtIndex:row] name];
+  NSLog(@"Row %ld - %@", (long)row, villageName);
+  return villageName;
 }
 
 @end

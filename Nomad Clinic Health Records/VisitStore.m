@@ -27,7 +27,7 @@
 
 @implementation VisitStore
 
-- (Visit*) newVisitForPatient:(Patient*) p {
+- (Visit*) newVisitForPatient:(Patient*) p atClinic:(Clinic *) c {
   NSManagedObjectContext* ctx = self.managedObjectContext;
 
   Visit* pv =
@@ -41,12 +41,12 @@
   pv.notes = note;
   [pv.notes setWeightClass:WeightClassExpected];
   note.visit = pv;
+  pv.clinic = c;
   NSError* error;
   if (![ctx save:&error]) {
     [NSException raise:@"Save failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
-
   return pv;
 }
 

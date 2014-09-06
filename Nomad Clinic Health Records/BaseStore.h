@@ -25,13 +25,13 @@
 - (void) saveChanges;
 
 /**
- * Follows a 1 to many CoreData relationship to find related entities, and
+ * Follows a 1-to-many CoreData relationship to find related entities, and
  * returns the most recent one according to the specified date property name.
  *
  * @param relatedEntityName The name of the related entities.
  * @param mo The NSManagedObject on the source side of the relation.
  * @param dateField The field that specifies the date field in the
- *                  related entities schema.
+ *                  related entity's schema.
  *
  * @returns Most recent related entity or nil if none exist.
  */

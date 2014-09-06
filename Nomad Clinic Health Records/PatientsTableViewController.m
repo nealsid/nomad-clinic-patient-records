@@ -21,7 +21,7 @@
 @interface PatientsTableViewController ()
 
 @property (nonatomic, retain) UIFont* itemFont;
-@property (nonatomic, retain) PatientStore* patientStore;
+@property (nonatomic, retain) BaseStore* patientStore;
 @property (nonatomic, retain) NSArray* patients;
 @property (nonatomic, retain) Clinic* clinic;
 
@@ -91,9 +91,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void) refreshPatientsFromStore {
   if (!self.patientStore) {
-    self.patientStore = [PatientStore sharedPatientStore];
+    self.patientStore = [BaseStore sharedStoreForEntity:@"Patient"];
   }
-  self.patients = [self.patientStore patientsForClinic:self.clinic];
+  self.patients = [self.patientStore relatedEntities:@"Patient" forInstance:self.clinic];
   self.numberOfRows = [self.patients count];
 }
 
@@ -103,7 +103,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
   if (editingStyle == UITableViewCellEditingStyleDelete) {
     Patient* p = [self.patients objectAtIndex:[indexPath row]];
-    [self.patientStore removePatient:p];
+    [self.patientStore removeEntity:p];
     [self refreshPatientsFromStore];
 
     [tableView deleteRowsAtIndexPaths:@[indexPath]

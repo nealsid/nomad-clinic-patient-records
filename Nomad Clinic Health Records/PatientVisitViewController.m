@@ -47,7 +47,9 @@
                forCellReuseIdentifier:@"UITableViewCell"];
     self.itemFont = [UIFont systemFontOfSize:20];
     BaseStore* visitStore = [BaseStore sharedStoreForEntity:@"Visit"];
-    self.notes = [visitStore notesForVisit:self.visit];
+    self.notes = [visitStore relatedEntities:@"VisitNotesComplex"
+                                 forInstance:visit
+                                     sortKey:@"note_date"];
   }
   return self;
 }

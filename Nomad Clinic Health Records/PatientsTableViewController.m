@@ -8,13 +8,13 @@
 
 #import "PatientsTableViewController.h"
 
+#import "BaseStore.h"
 #import "Clinic.h"
 #import "PatientViewController.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "Patient+Gender.h"
 #import "PatientAddEditViewController.h"
-#import "PatientStore.h"
 #import "TableViewController.h"
 #import "Village.h"
 

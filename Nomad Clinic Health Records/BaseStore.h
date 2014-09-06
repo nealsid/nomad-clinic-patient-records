@@ -24,7 +24,58 @@
 
 - (void) saveChanges;
 
+/**
+ * Follows a 1 to many CoreData relationship to find related entities, and
+ * returns the most recent one according to the specified date property name.
+ *
+ * @param relatedEntityName The name of the related entities.
+ * @param mo The NSManagedObject on the source side of the relation.
+ * @param dateField The field that specifies the date field in the
+ *                  related entities schema.
+ *
+ * @returns Most recent related entity or nil if none exist.
+ */
+- (NSManagedObject*) mostRecentRelatedEntity:(NSString*) relatedEntityName
+                                 forInstance:(NSManagedObject*) mo
+                                   dateField:(NSString*) dateField;
+
+/**
+ * Follows a 1 to many CoreData relationship to find related entities.
+ *
+ * @param relatedEntityName The name of the relation
+ * @param mo The managed Object on the source side of the relatino
+ * @param sortKey Sort key for the result set (can be nil).  Right now
+ *                we always sort in descending order.
+ *
+ * @returns Array of results
+ */
+- (NSArray*) relatedEntities:(NSString*) relatedEntityName
+                 forInstance:(NSManagedObject*) mo
+                     sortKey:(NSString*) sortKey;
+
+/**
+ * Follows a 1 to many CoreData relationship to find related entities, with
+ * unspecified sort order in results.
+ *
+ * @param relatedEntityName The name of the relation
+ * @param mo The managed Object on the source side of the relatino
+ *
+ * @returns Array of results
+ */
+- (NSArray*) relatedEntities:(NSString*) relatedEntityName
+                 forInstance:(NSManagedObject*) mo;
+
 - (NSManagedObject*) newEntity;
+
+/**
+ * Creates a new related entity for a given NSManagedObject.
+ *
+ * @param relatedEntityName Name of the related entity type.
+ * @param mo The managed object that the new entity is related to.
+ * @returns The new NSManagedObject that is related to MO.
+ */
+- (NSManagedObject*) newRelatedEntity:(NSString*) relatedEntityName
+                     forManagedObject:(NSManagedObject*) mo;
 
 - (void)removeEntity:(NSManagedObject *)obj;
 

@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
+#import "BaseStore.h"
 #import "NEMRClinicianTableViewController.h"
 #import "ClinicianViewController.h"
 #import "Clinician.h"
-#import "ClinicianStore.h"
 
 @interface NEMRClinicianTableViewController ()
 
 @property (nonatomic, strong) IBOutlet UIView* headerView;
 @property (nonatomic, retain) UIFont* itemFont;
-@property (nonatomic, retain) ClinicianStore* clinicianStore;
+@property (nonatomic, retain) BaseStore* clinicianStore;
 @property (nonatomic, retain) NSArray* clinicians;
 
 @end

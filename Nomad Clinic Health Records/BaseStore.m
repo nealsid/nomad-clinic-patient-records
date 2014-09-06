@@ -89,4 +89,54 @@
   }
 }
 
+- (NSManagedObject*) newRelatedEntity:(NSString*) relatedEntityName
+                     forManagedObject:(NSManagedObject*) mo {
+  NSManagedObject *foo = [self newEnt
+}
+
+- (NSManagedObject*) mostRecentRelatedEntity:(NSString*) relatedEntityName
+                                 forInstance:(NSManagedObject*) mo
+                                   dateField:(NSString*) dateField {
+  NSArray* relatedEntities = [self relatedEntities:relatedEntityName
+                                       forInstance:mo
+                                           sortKey:dateField];
+  if (relatedEntities.count > 0) {
+    return [relatedEntities objectAtIndex:0];
+  }
+  return nil;
+}
+
+- (NSArray*) relatedEntities:(NSString*) relatedEntityName
+                 forInstance:(NSManagedObject*) mo
+                     sortKey:(NSString*) sortKey {
+  NSManagedObjectContext* ctx = self.managedObjectContext;
+  NSFetchRequest* req = [[NSFetchRequest alloc] init];
+  NSEntityDescription* e = [NSEntityDescription entityForName:relatedEntityName
+                                       inManagedObjectContext:ctx];
+  if (sortKey) {
+    NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:sortKey
+                                                       ascending:YES];
+    req.sortDescriptors = @[sd];
+  }
+
+  req.entity = e;
+
+  NSPredicate *predicate =
+  [NSPredicate predicateWithFormat:@"%@ == %@", mo.entity.name, mo];
+  req.predicate = predicate;
+  NSLog(@"Fetch: %@", req);
+  NSError *error;
+  NSArray* result = [ctx executeFetchRequest:req error:&error];
+  if (!result) {
+    [NSException raise:@"Fetch failed"
+                format:@"Reason: %@", [error localizedDescription]];
+  }
+  return result;
+}
+
+- (NSArray*) relatedEntities:(NSString*) relatedEntityName
+                 forInstance:(NSManagedObject*) mo {
+  return [self relatedEntities:relatedEntityName forInstance:mo sortKey:nil];
+}
+
 @end

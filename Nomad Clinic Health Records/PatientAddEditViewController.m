@@ -12,9 +12,7 @@
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
-#import "PatientStore.h"
 #import "Village.h"
-#import "VisitStore.h"
 
 @interface PatientAddEditViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 

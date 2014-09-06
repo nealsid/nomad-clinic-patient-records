@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Neal Sidhwaney. All rights reserved.
 //
 
+#import "BaseStore.h"
 #import "ClinicianViewController.h"
 #import "Clinician.h"
-#import "CLinicianStore.h"
 
 @interface ClinicianViewController ()
 
@@ -24,7 +24,7 @@
   NSString* newName = self.nameField.text;
   BOOL requiresSave = NO;
   if (self.clinician == nil) {
-    Clinician* c = [[ClinicianStore sharedClinicianStore] newClinician];
+    Clinician* c = (Clinician*)[[BaseStore sharedStoreForEntity:@"Clinician"] newEntity];
     self.clinician = c;
   }
 
@@ -35,7 +35,7 @@
   }
 
   if (requiresSave) {
-    [[ClinicianStore sharedClinicianStore] saveChanges];
+    [[BaseStore sharedStoreForEntity:@"Clinician"] saveChanges];
     [self.delegate clinicianViewControllerSave:self
                                      clinician:self.clinician];
   }

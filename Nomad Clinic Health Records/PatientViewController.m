@@ -8,17 +8,16 @@
 
 #import "PatientViewController.h"
 
+#import "BaseStore.h"
 #import "DOBSetViewController.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "PatientAddEditViewController.h"
-#import "PatientStore.h"
 #import "PatientViewController+TableView.h"
 #import "SOAPViewController.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
-#import "VisitStore.h"
 #import "Utils.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -33,7 +32,7 @@
 
 @property (nonatomic, retain) Patient* patient;
 
-@property (weak, nonatomic)   VisitStore* patientVisitStore;
+@property (weak, nonatomic)   BaseStore* visitStore;
 @property (nonatomic, strong) NSDateFormatter* formatter;
 
 @end
@@ -79,8 +78,10 @@
                          bundle:nibBundleOrNil];
   if (self) {
     self.patient = p;
-    self.patientVisitStore = [VisitStore sharedVisitStore];
-    self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
+    self.visitStore = [BaseStore sharedStoreForEntity:@"Visit"];
+    self.mostRecentVisit = (Visit*)[self.visitStore mostRecentRelatedEntity:@"Visit"
+                                                                forInstance:self.patient
+                                                                  dateField:@"visit_date"];
     self.adjustedForTopLayout = NO;
     self.hidesBottomBarWhenPushed = YES;
     self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -99,15 +100,17 @@
 }
 
 - (IBAction)addVisitButtonClicked:(id)sender {
+  Visit* v = (Visit *)[self.visitStore newRelatedEntity:@"Visit" forManagedObject:self.patient];
   Visit* v = [self.patientVisitStore newVisitForPatient:self.patient atClinic:nil];
-  self.mostRecentVisit = v;
   [self refreshVisitUI];
   NSLog(@"Called refresh");
   [self animateSectionHeaderBackground];
 }
 
 - (void) refreshVisitUI {
-  self.mostRecentVisit = [self.patientVisitStore mostRecentVisitForPatient:self.patient];
+  self.mostRecentVisit =  (Visit*)[self.visitStore mostRecentRelatedEntity:@"Visit"
+                                                               forInstance:self.patient
+                                                                 dateField:@"visit_date"];
   [self.recentVisitTable reloadData];
 }
 

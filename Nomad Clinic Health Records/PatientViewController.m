@@ -100,8 +100,8 @@
 }
 
 - (IBAction)addVisitButtonClicked:(id)sender {
-  Visit* v = (Visit *)[self.visitStore newRelatedEntity:@"Visit" forManagedObject:self.patient];
-  Visit* v = [self.patientVisitStore newVisitForPatient:self.patient atClinic:nil];
+  Visit* v = (Visit *)[self.visitStore newEntity];
+  v.patient = self.patient;
   [self refreshVisitUI];
   NSLog(@"Called refresh");
   [self animateSectionHeaderBackground];
@@ -117,13 +117,13 @@
 - (void) isHealthySwitchClicked:(id)sender {
   UISwitch* healthSwitch = (UISwitch*)sender;
   self.mostRecentVisit.notes.healthy = [NSNumber numberWithBool:healthSwitch.isOn];
-  [self.patientVisitStore saveChanges];
+  [self.visitStore saveChanges];
   [self.recentVisitTable reloadData];
 }
 
 - (void) newFieldValue:(NSNumber*)newValue {
   self.mostRecentVisit.notes.weight_class = newValue;
-  [self.patientVisitStore saveChanges];
+  [self.visitStore saveChanges];
   [self.recentVisitTable reloadData];
   [self.navigationController popViewControllerAnimated:YES];
 }
@@ -131,7 +131,7 @@
 - (void) soapViewController:(SOAPViewController*)vc saveNewNote:(NSString*)s
                     forType:(SOAPEntryType)type {
   self.mostRecentVisit.notes.objective = s;
-  [self.patientVisitStore saveChanges];
+  [self.visitStore saveChanges];
   [self.recentVisitTable reloadData];
   [self.navigationController popViewControllerAnimated:YES];
 

@@ -9,16 +9,15 @@
 #import "Clinic.h"
 #import "ClinicViewController.h"
 
+#import "BaseStore.h"
 #import "Clinic.h"
-#import "ClinicStore.h"
 #import "ClinicAddEditViewController.h"
-#import "PatientStore.h"
 #import "PatientsTableViewController.h"
 #import "Village.h"
 
 @interface ClinicViewController ()
 
-@property (nonatomic, retain) ClinicStore* clinicStore;
+@property (nonatomic, retain) BaseStore* clinicStore;
 @property (nonatomic, retain) NSArray* clinics;
 
 @property (nonatomic, retain) UIFont* itemFont;
@@ -30,9 +29,9 @@
 - (instancetype) init {
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
-    NSLog(@"%lu patients", (long)[[[PatientStore sharedPatientStore] patients] count]);
-    self.clinicStore = [ClinicStore sharedClinicStore];
-    self.clinics = [self.clinicStore clinics];
+    NSLog(@"%lu patients", (long)[[[BaseStore sharedStoreForEntity:@"Patient"] entities] count]);
+    self.clinicStore = [BaseStore sharedStoreForEntity:@"Clinic"];
+    self.clinics = [self.clinicStore entities];
     self.numberOfRows = self.clinics.count;
     self.title = @"Clinics";
     self.itemFont = [UIFont fontWithName:@"American Typewriter" size:32];
@@ -48,7 +47,7 @@
   [super viewDidLoad];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.title = @"Clinics";
-  
+
   self.navigationController.navigationBar.titleTextAttributes =
   [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
                                         [UIFont boldSystemFontOfSize:24]]

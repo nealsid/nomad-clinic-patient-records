@@ -13,6 +13,7 @@
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "Village.h"
+#import "Visit.h"
 
 @interface PatientAddEditViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -149,8 +150,10 @@
   if (requiresSave) {
     NSLog(@"Requires save");
     if (!self.patient) {
-      self.patient = [[PatientStore sharedPatientStore] newPatient];
-      [[VisitStore sharedVisitStore] newVisitForPatient:self.patient atClinic:nil];
+      self.patient = (Patient*)[[BaseStore sharedStoreForEntity:@"Patient"] newEntity];
+      Visit* v = (Visit*)[[BaseStore sharedStoreForEntity:@"Visit"] newEntity];
+      v.patient = self.patient;
+      v.clinic = nil;
     }
     self.patient.name = newName;
     self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];
@@ -158,7 +161,7 @@
     Village* v = [self.allVillages objectAtIndex:selectedVillage];
     self.patient.village = v;
     self.patient.dob.specificdate = self.patientBirthdate;
-    [[PatientStore sharedPatientStore] saveChanges];
+    [[BaseStore sharedStoreForEntity:@"Patient"] saveChanges];
   }
   [self.navigationController popViewControllerAnimated:YES];
 }

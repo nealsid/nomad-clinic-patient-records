@@ -43,7 +43,7 @@
  * Follows a 1 to many CoreData relationship to find related entities.
  *
  * @param relatedEntityName The name of the relation
- * @param mo The managed Object on the source side of the relatino
+ * @param mo The managed Object on the source side of the relation
  * @param sortKey Sort key for the result set (can be nil).  Right now
  *                we always sort in descending order.
  *
@@ -58,7 +58,7 @@
  * unspecified sort order in results.
  *
  * @param relatedEntityName The name of the relation
- * @param mo The managed Object on the source side of the relatino
+ * @param mo The managed Object on the source side of the relation
  *
  * @returns Array of results
  */

@@ -26,8 +26,8 @@
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
     self.itemFont = [UIFont systemFontOfSize:20];
-    self.clinicianStore = [ClinicianStore sharedClinicianStore];
-    self.clinicians = [self.clinicianStore clinicians];
+    self.clinicianStore = [BaseStore sharedStoreForEntity:@"Clinician"];
+    self.clinicians = [self.clinicianStore entities];
   }
   return self;
 }
@@ -163,7 +163,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void) clinicianViewControllerSave:(ClinicianViewController*)clinicianViewController
                            clinician:(Clinician*)c {
   [self dismissViewControllerAnimated:YES completion:nil];
-  self.clinicians = [self.clinicianStore clinicians];
+  self.clinicians = [self.clinicianStore entities];
   [self.tableView reloadData];
 }
 

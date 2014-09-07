@@ -33,7 +33,7 @@
   return [self initForClinic:nil];
 }
 
-- (instancetype) initForClinic:(Clinic*)c {
+- (instancetype) initForClinic:(Clinic*) c {
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
     self.itemFont = [UIFont systemFontOfSize:20];

@@ -93,7 +93,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (!self.patientStore) {
     self.patientStore = [BaseStore sharedStoreForEntity:@"Patient"];
   }
-  self.patients = [self.patientStore relatedEntities:@"Patient" forInstance:self.clinic];
+  self.patients = [self.patientStore patientsForClinic:self.clinic];
   self.numberOfRows = [self.patients count];
 }
 

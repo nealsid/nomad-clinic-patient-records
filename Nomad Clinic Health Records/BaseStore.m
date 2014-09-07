@@ -257,4 +257,29 @@
     [NSException raise:@"Save failed" format:@"Reason: %@",[error localizedDescription]];
   }
 }
+
+- (NSArray*) patientsForClinic:(Clinic*) c {
+  NSManagedObjectContext* ctx = self.managedObjectContext;
+  NSFetchRequest* req = [[NSFetchRequest alloc] init];
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient"
+                                       inManagedObjectContext:ctx];
+  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name"
+                                                       ascending:YES];
+  req.sortDescriptors = @[sd];
+  req.entity = e;
+  if (c) {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(0 != SUBQUERY(visits, $x, $x.clinic == %@).@count)", c];
+    req.predicate = predicate;
+  }
+  NSLog(@"Patient fetch: %@", req);
+  NSError *error;
+  NSArray* result = [ctx executeFetchRequest:req error:&error];
+  if (!result) {
+    [NSException raise:@"Fetch failed"
+                format:@"Reason: %@", [error localizedDescription]];
+  }
+  NSLog(@"Patient fetch had %lu results", (long)result.count);
+  return result;
+}
+
 @end

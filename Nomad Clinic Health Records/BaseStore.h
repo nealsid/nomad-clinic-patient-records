@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Patient, Clinic;
+
 @interface BaseStore : NSObject
 
 @property (nonatomic, strong) NSString* entityName;
@@ -78,5 +80,15 @@
                      forManagedObject:(NSManagedObject*) mo;
 
 - (void)removeEntity:(NSManagedObject *)obj;
+
+/**
+ * Helper method to find patients who have been seen at a clinic. It's
+ * separate because the CoreData syntax for creating predicates on related entities
+ * requires a SUBQUERY.
+ *
+ * @param C The clinic to filter visits by.
+ * @return An array of patients who have visits at the given clinic.
+ */
+- (NSArray*) patientsForClinic:(Clinic*) c;
 
 @end

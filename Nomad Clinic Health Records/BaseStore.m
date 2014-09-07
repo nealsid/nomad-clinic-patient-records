@@ -126,6 +126,7 @@
 
 - (NSArray*) relatedEntities:(NSString*) relatedEntityName
                  forInstance:(NSManagedObject*) mo
+              byRelationName:(NSString*)relationName
                      sortKey:(NSString*) sortKey {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];

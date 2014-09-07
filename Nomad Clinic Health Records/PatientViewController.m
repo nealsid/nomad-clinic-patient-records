@@ -49,7 +49,8 @@
   [self refreshVisitUI];
   [self.recentVisitTable registerClass:[UITableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
-  [self.recentVisitTable registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"header"];
+  [self.recentVisitTable registerClass:[UITableViewHeaderFooterView class]
+    forHeaderFooterViewReuseIdentifier:@"header"];
 }
 
 - (void) viewWillAppear:(BOOL)animated {

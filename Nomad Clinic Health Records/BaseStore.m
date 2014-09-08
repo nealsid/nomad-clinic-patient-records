@@ -106,19 +106,19 @@
   }
 }
 
-- (NSManagedObject*) newRelatedEntity:(NSString*) relatedEntityName
-                     forManagedObject:(NSManagedObject*) mo {
-  NSManagedObject *foo = [[BaseStore sharedStoreForEntity:relatedEntityName] newEntity];
-  return foo;
-}
-
 - (NSManagedObject*) mostRecentRelatedEntity:(NSString*) relatedEntityName
                                  forInstance:(NSManagedObject*) mo
+                              byRelationName:(NSString *) relationName
                                    dateField:(NSString*) dateField {
   NSArray* relatedEntities = [self relatedEntities:relatedEntityName
                                        forInstance:mo
+                                      byRelationName:relationName
                                            sortKey:dateField];
   if (relatedEntities.count > 0) {
+    Visit* v = [relatedEntities objectAtIndex:0];
+    NSLog(@"Most recent related: %@", v);
+    NSLog(@"Most recent related: %@", v.visit_date);
+
     return [relatedEntities objectAtIndex:0];
   }
   return nil;
@@ -126,7 +126,7 @@
 
 - (NSArray*) relatedEntities:(NSString*) relatedEntityName
                  forInstance:(NSManagedObject*) mo
-              byRelationName:(NSString*)relationName
+              byRelationName:(NSString*) relationName
                      sortKey:(NSString*) sortKey {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
@@ -134,14 +134,14 @@
                                        inManagedObjectContext:ctx];
   if (sortKey) {
     NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:sortKey
-                                                       ascending:YES];
+                                                       ascending:NO];
     req.sortDescriptors = @[sd];
   }
 
   req.entity = e;
 
   NSPredicate *predicate =
-  [NSPredicate predicateWithFormat:@"%@ == %@", mo.entity.name, mo];
+  [NSPredicate predicateWithFormat:@"%K == %@", relationName, mo];
   req.predicate = predicate;
   NSLog(@"Fetch: %@", req);
   NSError *error;
@@ -150,12 +150,17 @@
     [NSException raise:@"Fetch failed"
                 format:@"Reason: %@", [error localizedDescription]];
   }
+  NSLog(@"%ld results", (long)result.count);
   return result;
 }
 
 - (NSArray*) relatedEntities:(NSString*) relatedEntityName
-                 forInstance:(NSManagedObject*) mo {
-  return [self relatedEntities:relatedEntityName forInstance:mo sortKey:nil];
+                 forInstance:(NSManagedObject*) mo
+              byRelationName:(NSString*)relationName {
+  return [self relatedEntities:relatedEntityName
+                   forInstance:mo
+                byRelationName:relationName
+                       sortKey:nil];
 }
 
 - (void) createTestDataIfNecessary {
@@ -176,14 +181,22 @@
   NSLog(@"No data found, generating..");
 
   NSArray* clinicNames = @[@"Simikot", @"Yalbang", @"Halzi"];
+  NSArray* clinicDates = @[@"9/18/2014", @"9/19/2014", @"9/20/2014"];
+  NSDateFormatter* dateFormatter;
+  dateFormatter = [[NSDateFormatter alloc] init];
+  dateFormatter.dateStyle = NSDateFormatterShortStyle;
+
   NSMutableArray* clinicObjects = [NSMutableArray array];
-  for (NSString* clinicName in clinicNames) {
+  for (int i = 0; i < clinicNames.count; ++i) {
+    NSString* clinicName = clinicNames[i];
+
     Village* v = [NSEntityDescription insertNewObjectForEntityForName:@"Village"
                                                inManagedObjectContext:ctx];
     v.name = clinicName;
     Clinic* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinic"
                                               inManagedObjectContext:ctx];
     c.village = v;
+    c.clinic_date = [dateFormatter dateFromString:clinicDates[i]];
     [clinicObjects addObject:c];
   }
 

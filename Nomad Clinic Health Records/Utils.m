@@ -20,4 +20,14 @@
   return date;
 }
 
++ (NSString*) dateToMediumFormat:(NSDate*) d {
+  static NSDateFormatter* dateFormatter;
+  if (!dateFormatter) {
+    dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    dateFormatter.timeStyle = NSDateFormatterNoStyle;
+  }
+  return [dateFormatter stringFromDate:d];
+}
+
 @end

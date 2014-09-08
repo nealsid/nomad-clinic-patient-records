@@ -14,6 +14,7 @@
 #import "ClinicAddEditViewController.h"
 #import "PatientsTableViewController.h"
 #import "Village.h"
+#import "Utils.h"
 
 @interface ClinicViewController ()
 
@@ -94,6 +95,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   }
   Clinic* c = [self.clinics objectAtIndex:row];
   cell.textLabel.text = c.village.name;
+  cell.detailTextLabel.text = [Utils dateToMediumFormat:c.clinic_date];
   return cell;
 }
 

@@ -14,4 +14,6 @@
                      day:(NSInteger)day
                     year:(NSInteger)year;
 
++ (NSString*) dateToMediumFormat:(NSDate*) d;
+
 @end

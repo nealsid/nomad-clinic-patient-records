@@ -18,6 +18,7 @@
 #import "SOAPViewController.h"
 #import "Visit.h"
 #import "VisitNotesComplex.h"
+#import "VisitNotesComplex+WeightClass.h"
 #import "Utils.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -33,7 +34,6 @@
 @property (nonatomic, retain) Patient* patient;
 
 @property (weak, nonatomic)   BaseStore* visitStore;
-@property (nonatomic, strong) NSDateFormatter* formatter;
 
 @end
 
@@ -82,12 +82,10 @@
     self.visitStore = [BaseStore sharedStoreForEntity:@"Visit"];
     self.mostRecentVisit = (Visit*)[self.visitStore mostRecentRelatedEntity:@"Visit"
                                                                 forInstance:self.patient
+                                                             byRelationName:@"patient"
                                                                   dateField:@"visit_date"];
     self.adjustedForTopLayout = NO;
     self.hidesBottomBarWhenPushed = YES;
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
   }
   return self;
 }
@@ -103,6 +101,11 @@
 - (IBAction)addVisitButtonClicked:(id)sender {
   Visit* v = (Visit *)[self.visitStore newEntity];
   v.patient = self.patient;
+  v.visit_date = [NSDate date];
+  v.notes = (VisitNotesComplex*)[[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] newEntity];
+  [v.notes setWeightClass:WeightClassExpected];
+  [self.visitStore saveChanges];
+  NSLog(@"Saving visit: %@", v);
   [self refreshVisitUI];
   NSLog(@"Called refresh");
   [self animateSectionHeaderBackground];
@@ -111,6 +114,7 @@
 - (void) refreshVisitUI {
   self.mostRecentVisit =  (Visit*)[self.visitStore mostRecentRelatedEntity:@"Visit"
                                                                forInstance:self.patient
+                                                            byRelationName:@"patient"
                                                                  dateField:@"visit_date"];
   [self.recentVisitTable reloadData];
 }

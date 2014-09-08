@@ -32,6 +32,8 @@
  *
  * @param relatedEntityName The name of the related entities.
  * @param mo The NSManagedObject on the source side of the relation.
+ * @param relationName The name of the property in the schema of
+ *                     relatedEntityName that points to mo
  * @param dateField The field that specifies the date field in the
  *                  related entity's schema.
  *
@@ -39,6 +41,7 @@
  */
 - (NSManagedObject*) mostRecentRelatedEntity:(NSString*) relatedEntityName
                                  forInstance:(NSManagedObject*) mo
+                                byRelationName:(NSString *) relationName
                                    dateField:(NSString*) dateField;
 
 /**
@@ -46,6 +49,8 @@
  *
  * @param relatedEntityName The name of the relation
  * @param mo The managed Object on the source side of the relation
+ * @param relationName The name of the property in the schema of
+ *                     relatedEntityName that points to mo
  * @param sortKey Sort key for the result set (can be nil).  Right now
  *                we always sort in descending order.
  *
@@ -53,6 +58,7 @@
  */
 - (NSArray*) relatedEntities:(NSString*) relatedEntityName
                  forInstance:(NSManagedObject*) mo
+              byRelationName:(NSString*) relationName
                      sortKey:(NSString*) sortKey;
 
 /**
@@ -61,25 +67,18 @@
  *
  * @param relatedEntityName The name of the relation
  * @param mo The managed Object on the source side of the relation
+ * @param relationName The name of the property in the schema of
+ *                     relatedEntityName that points to mo
  *
  * @returns Array of results
  */
 - (NSArray*) relatedEntities:(NSString*) relatedEntityName
-                 forInstance:(NSManagedObject*) mo;
+                 forInstance:(NSManagedObject*) mo
+              byRelationName:(NSString*)relationName;
 
 - (NSManagedObject*) newEntity;
 
-/**
- * Creates a new related entity for a given NSManagedObject.
- *
- * @param relatedEntityName Name of the related entity type.
- * @param mo The managed object that the new entity is related to.
- * @returns The new NSManagedObject that is related to MO.
- */
-- (NSManagedObject*) newRelatedEntity:(NSString*) relatedEntityName
-                     forManagedObject:(NSManagedObject*) mo;
-
-- (void)removeEntity:(NSManagedObject *)obj;
+- (void)removeEntity:(NSManagedObject *) obj;
 
 /**
  * Helper method to find patients who have been seen at a clinic. It's

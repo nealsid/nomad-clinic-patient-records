@@ -49,6 +49,7 @@
     BaseStore* visitStore = [BaseStore sharedStoreForEntity:@"Visit"];
     self.notes = [visitStore relatedEntities:@"VisitNotesComplex"
                                  forInstance:visit
+                              byRelationName:@"visit"
                                      sortKey:@"note_date"];
   }
   return self;

@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSArray* allVillages;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLayoutConstraint;
 @property BOOL adjustedForTopLayout;
+@property (weak, nonatomic) IBOutlet UIDatePicker *clinicDatePicker;
 
 @property (strong, nonatomic) UIBarButtonItem* saveButton;
 

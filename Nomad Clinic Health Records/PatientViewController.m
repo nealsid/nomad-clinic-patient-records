@@ -84,6 +84,9 @@
                                                                 forInstance:self.patient
                                                              byRelationName:@"patient"
                                                                   dateField:@"visit_date"];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
     self.adjustedForTopLayout = NO;
     self.hidesBottomBarWhenPushed = YES;
   }

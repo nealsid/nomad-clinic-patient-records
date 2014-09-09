@@ -76,7 +76,7 @@ willDisplayHeaderView:(UIView *)view
 - (UIView*)  tableView:(UITableView *)tableView
 viewForHeaderInSection:(NSInteger)section {
   UITableViewHeaderFooterView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"header"];
-  
+
   UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(13.0, 0.0, 200.0, 40.0)];
 
   label.text = [NSString stringWithFormat:@"%@",

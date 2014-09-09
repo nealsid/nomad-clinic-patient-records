@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Clinic;
+
 @interface ClinicAddEditViewController : UIViewController
+
+- (instancetype)initWithClinic:(Clinic*) c;
 
 @end

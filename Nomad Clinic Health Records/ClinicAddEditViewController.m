@@ -9,23 +9,39 @@
 #import "ClinicAddEditViewController.h"
 
 #import "BaseStore.h"
+#import "Clinic.h"
+#import "Utils.h"
+#import "Village.h"
 
-@interface ClinicAddEditViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ClinicAddEditViewController () <UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIPickerView *clinicVillagePickerView;
-@property (weak, nonatomic) BaseStore* villageStore;
-@property (strong, nonatomic) NSArray* allVillages;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLayoutConstraint;
-@property BOOL adjustedForTopLayout;
+
 @property (weak, nonatomic) IBOutlet UIDatePicker *clinicDatePicker;
 
+@property (weak, nonatomic) IBOutlet UITextField *villageTextBox;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UITextField *clinicDateTextBox;
+
+@property (strong, nonatomic) NSArray* allVillages;
+@property (strong, nonatomic) Clinic* clinic;
 @property (strong, nonatomic) UIBarButtonItem* saveButton;
+@property (strong, nonatomic) BaseStore* villageStore;
+
+@property BOOL adjustedForTopLayout;
 
 @end
 
 @implementation ClinicAddEditViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (instancetype)initWithClinic:(Clinic*) c {
+  return [self initWithNibName:nil bundle:nil andClinic:c];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil andClinic:(Clinic*) c {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     self.villageStore = [BaseStore sharedStoreForEntity:@"Village"];
@@ -35,14 +51,35 @@
                                                                     target:self
                                                                     action:@selector(saveClinic:)];
     self.navigationItem.rightBarButtonItem = self.saveButton;
-    self.title = @"New Clinic";
-
+    if (c) {
+      self.title = [NSString stringWithFormat:@"Edit %@", c.village.name];
+      self.clinic = c;
+    } else {
+      self.title = @"New Clinic";
+    }
+    
   }
   return self;
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+  return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil andClinic:nil];
+}
+
 - (void) saveClinic:(id) sender {
 
+}
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.villageTextBox.inputView = self.clinicVillagePickerView;
+  self.villageTextBox.inputAccessoryView = self.toolbar;
+  self.clinicDateTextBox.inputView = self.clinicDatePicker;
+  self.clinicDateTextBox.inputAccessoryView = self.toolbar;
+  if (self.clinic) {
+    self.villageTextBox.text = self.clinic.village.name;
+    self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.clinic.clinic_date];
+  }
 }
 
 - (void) viewDidLayoutSubviews {
@@ -54,9 +91,14 @@
     self.adjustedForTopLayout = YES;
   }
 }
+- (IBAction)cancelEditing:(id)sender {
+  [self.villageTextBox resignFirstResponder];
+}
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
+- (IBAction)doneEditing:(id)sender {
+  NSInteger selected = [self.clinicVillagePickerView selectedRowInComponent:0];
+  self.villageTextBox.text = [[self.allVillages objectAtIndex:selected] name];
+  [self.villageTextBox resignFirstResponder];
 }
 
 - (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {

@@ -148,7 +148,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 - (void) addNewItem: (id) sender {
   PatientAddEditViewController* pvc =
-    [[PatientAddEditViewController alloc] initForNewPatientInVillage:self.clinic.village];
+    [[PatientAddEditViewController alloc] initForNewPatientInVillage:self.clinic.village atClinic:self.clinic];
   [self.navigationController pushViewController:pvc animated:YES];
 }
 

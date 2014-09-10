@@ -63,11 +63,39 @@
 }
 
 - (NSArray*) entities {
+  return [self entitiesWithSortKey:nil ascending:YES andPredicate:nil];
+}
+
+- (NSArray*) entitiesWithPredicate:(NSPredicate*)predicate {
+  return [self entitiesWithSortKey:nil ascending:YES andPredicate:predicate];
+}
+
+- (NSArray*) entitiesWithSortKey:(NSString*) sortKey ascending:(BOOL)ascending {
+  return [self entitiesWithSortKey:sortKey ascending:ascending andPredicate:nil];
+}
+
+- (NSArray*) entitiesWithSortKey:(NSString*) sortKey ascending:(BOOL)ascending andPredicate:(NSPredicate*) predicate {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
   NSEntityDescription* e = [NSEntityDescription entityForName:self.entityName
                                        inManagedObjectContext:ctx];
   req.entity = e;
+  if (sortKey) {
+    NSMutableArray* sortDescriptors = [NSMutableArray array];
+
+    NSArray* components = [sortKey componentsSeparatedByString:@","];
+    for (NSString* oneComponent in components) {
+      NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:oneComponent
+                                                           ascending:ascending];
+      [sortDescriptors addObject:sd];
+    }
+    req.sortDescriptors = sortDescriptors;
+  }
+
+  if (predicate) {
+    req.predicate = predicate;
+  }
+
   NSError *error;
   NSArray* result = [ctx executeFetchRequest:req error:&error];
   if (!result) {
@@ -76,6 +104,7 @@
   }
   NSLog(@"%@", result);
   return result;
+
 }
 
 - (NSManagedObject*) newEntity {

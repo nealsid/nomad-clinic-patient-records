@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class Patient, Village;
+@class Clinic, Patient, Village;
 
 @interface PatientAddEditViewController : UIViewController
 
@@ -19,10 +19,11 @@
  * @param p Patient to fill in UI fields from.
  * @param v Default village for UI
  */
-- (instancetype) initWithNibName:(NSString*) nibNameOrNil
-                          bundle:(NSBundle*) bundleOrNil
-                      forPatient:(Patient*) p
-                      andVillage:(Village*) v;
+- (instancetype) initWithNibName:(NSString *) nibNameOrNil
+                          bundle:(NSBundle *) bundleOrNil
+                      forPatient:(Patient *) p
+                       andVillage:(Village *) v
+                        atClinic:(Clinic*) c;
 
 /**
  * Initializes the view controller for editing an existing patient.
@@ -35,8 +36,8 @@
  * Initializes a view controller for a new patient for a given clinic.
  *
  * @param v Village that the patient defaults to. Can be nil, in which case
- *          the default is the unspecified (usually the first village returned 
+ *          the default is the unspecified (usually the first village returned
  *          by Core Data)
  */
-- (instancetype) initForNewPatientInVillage:(Village *) v;
+- (instancetype) initForNewPatientInVillage:(Village *) v atClinic:(Clinic*)c;
 @end

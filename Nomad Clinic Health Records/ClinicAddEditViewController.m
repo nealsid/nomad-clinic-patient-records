@@ -31,7 +31,8 @@
 @property (strong, nonatomic) BaseStore* villageStore;
 
 @property BOOL adjustedForTopLayout;
-
+@property NSInteger lastSelectedVillageIndex;
+@property (strong, nonatomic) NSDate* lastChosenDate;
 @end
 
 @implementation ClinicAddEditViewController
@@ -54,10 +55,13 @@
     if (c) {
       self.title = [NSString stringWithFormat:@"Edit %@", c.village.name];
       self.clinic = c;
+      self.lastSelectedVillageIndex = [self.allVillages indexOfObject:c.village];
+      self.lastChosenDate = self.clinic.clinic_date;
     } else {
+      self.lastSelectedVillageIndex = 0;
+      self.lastChosenDate = [NSDate date];
       self.title = @"New Clinic";
     }
-    
   }
   return self;
 }
@@ -67,7 +71,19 @@
 }
 
 - (void) saveClinic:(id) sender {
-
+  Village* v = [self.allVillages objectAtIndex:[self.clinicVillagePickerView selectedRowInComponent:0]];
+  NSDate* clinic_date = [self.clinicDatePicker date];
+  if (!self.clinic) {
+    BaseStore* b = [BaseStore sharedStoreForEntity:@"Clinic"];
+    NSPredicate *conflictingClinicsPredicate =  [NSPredicate predicateWithFormat:@"village == %@ and clinic_date == %@", v, clinic_date];
+    NSArray* conflictingClinics = [b entitiesWithPredicate:conflictingClinicsPredicate];
+    NSLog(@"Conflicting Clinics count: %ld", (long)conflictingClinics.count);
+    self.clinic = (Clinic*)[b newEntity];
+  }
+  self.clinic.village = v;
+  self.clinic.clinic_date = clinic_date;
+  [[BaseStore sharedStoreForEntity:@"Clinic"] saveChanges];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -76,10 +92,22 @@
   self.villageTextBox.inputAccessoryView = self.toolbar;
   self.clinicDateTextBox.inputView = self.clinicDatePicker;
   self.clinicDateTextBox.inputAccessoryView = self.toolbar;
+  NSString* initialClinicName;
+  NSDate* initialDate;
+  NSInteger indexOfInitialVillage;
   if (self.clinic) {
-    self.villageTextBox.text = self.clinic.village.name;
-    self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.clinic.clinic_date];
+    initialClinicName = self.clinic.village.name;
+    initialDate = self.clinic.clinic_date;
+    indexOfInitialVillage = [self.allVillages indexOfObject:self.clinic.village];
+  } else {
+    indexOfInitialVillage = 0;
+    initialClinicName = [[self.allVillages objectAtIndex:indexOfInitialVillage] name];
+    initialDate = [NSDate date];
   }
+  self.villageTextBox.text = initialClinicName;
+  self.clinicDateTextBox.text = [Utils dateToMediumFormat:initialDate];
+  [self.clinicVillagePickerView selectRow:indexOfInitialVillage inComponent:0 animated:NO];
+  [self.clinicDatePicker setDate:initialDate];
 }
 
 - (void) viewDidLayoutSubviews {
@@ -91,14 +119,34 @@
     self.adjustedForTopLayout = YES;
   }
 }
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
+  NSInteger i = [self.clinicVillagePickerView selectedRowInComponent:0];
+  self.lastSelectedVillageIndex = [self.allVillages indexOfObject:[self.allVillages objectAtIndex:i]];
+  self.lastChosenDate = self.clinicDatePicker.date;
+}
+
 - (IBAction)cancelEditing:(id)sender {
   [self.villageTextBox resignFirstResponder];
+  [self.clinicDateTextBox resignFirstResponder];
+
+  [self.clinicVillagePickerView selectRow:self.lastSelectedVillageIndex inComponent:0 animated:NO];
+  [self.clinicDatePicker setDate:self.lastChosenDate];
+
+  self.villageTextBox.text = [[self.allVillages objectAtIndex:self.lastSelectedVillageIndex] name];
+  self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.lastChosenDate];
 }
 
 - (IBAction)doneEditing:(id)sender {
-  NSInteger selected = [self.clinicVillagePickerView selectedRowInComponent:0];
-  self.villageTextBox.text = [[self.allVillages objectAtIndex:selected] name];
   [self.villageTextBox resignFirstResponder];
+  [self.clinicDateTextBox resignFirstResponder];
+
+  NSInteger selected = [self.clinicVillagePickerView selectedRowInComponent:0];
+  self.lastSelectedVillageIndex = [self.allVillages indexOfObject:[self.allVillages objectAtIndex:selected]];
+  self.lastChosenDate = self.clinicDatePicker.date;
+
+  self.villageTextBox.text = [[self.allVillages objectAtIndex:selected] name];
+  self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.lastChosenDate];
 }
 
 - (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {

@@ -9,11 +9,14 @@
 #import "PatientAddEditViewController.h"
 
 #import "BaseStore.h"
+#import "Clinic.h"
 #import "FlexDate.h"
 #import "FlexDate+ToString.h"
 #import "Patient.h"
 #import "Village.h"
 #import "Visit.h"
+#import "VisitNotesComplex.h"
+#import "VisitNotesComplex+WeightClass.h"
 
 @interface PatientAddEditViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -27,6 +30,7 @@
 
 @property (strong, nonatomic) Patient* patient;
 @property (weak, nonatomic) Village* village;
+@property (weak, nonatomic) Clinic* clinic;
 
 @property (weak, nonatomic) BaseStore* villageStore;
 @property (strong, nonatomic) NSArray* allVillages;
@@ -40,24 +44,27 @@
 
 @implementation PatientAddEditViewController
 
-- (instancetype) initForNewPatientInVillage:(Village *)v {
+- (instancetype) initForNewPatientInVillage:(Village *) v atClinic:(Clinic*) c {
   return [self initWithNibName:nil
                         bundle:nil
                     forPatient:nil
-                    andVillage:v];
+                    andVillage:v
+                      atClinic:c];
 }
 
 - (instancetype)initForPatient:(Patient *) p {
   return [self initWithNibName:nil
                         bundle:nil
                     forPatient:p
-                    andVillage:p.village];
+                    andVillage:p.village
+                      atClinic:nil];
 }
 
 - (instancetype) initWithNibName:(NSString *) nibNameOrNil
                           bundle:(NSBundle *) bundleOrNil
                       forPatient:(Patient *) p
-                       andVillage:(Village *) v {
+                       andVillage:(Village *) v
+                        atClinic:(Clinic*) c {
   self = [super initWithNibName:nibNameOrNil bundle:bundleOrNil];
   if (self) {
     self.village = v;
@@ -68,6 +75,7 @@
     self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     self.dateFormatter.timeStyle = NSDateFormatterNoStyle;
     self.patientBirthdate = self.patient.dob.specificdate;
+    self.clinic = c;
   }
   return self;
 }
@@ -151,9 +159,14 @@
     NSLog(@"Requires save");
     if (!self.patient) {
       self.patient = (Patient*)[[BaseStore sharedStoreForEntity:@"Patient"] newEntity];
+      self.patient.dob = (FlexDate*)[[BaseStore sharedStoreForEntity:@"FlexDate"] newEntity];
       Visit* v = (Visit*)[[BaseStore sharedStoreForEntity:@"Visit"] newEntity];
+      VisitNotesComplex* notes = (VisitNotesComplex*)[[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] newEntity];
       v.patient = self.patient;
-      v.clinic = nil;
+      v.clinic = self.clinic;
+      v.notes = notes;
+      v.visit_date = [NSDate date];
+      [v.notes setWeightClass:WeightClassExpected];
     }
     self.patient.name = newName;
     self.patient.gender = [NSNumber numberWithInteger:self.genderControl.selectedSegmentIndex];

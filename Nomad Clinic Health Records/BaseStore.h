@@ -22,8 +22,39 @@
  */
 + (instancetype) sharedStoreForEntity:(NSString *) entityName;
 
+/*
+ * Returns all entities with unspecified sort order.
+ *
+ */
 - (NSArray*) entities;
 
+/*
+ * Returns all entities with a given predicate.
+ *
+ */
+- (NSArray*) entitiesWithPredicate:(NSPredicate*)predicate;
+
+/**
+ * Returns all entities sorted by the given sort key, in ascending/descending order.
+ *
+ * @param sortKey Key to sort by. Can be nil.  Can be a list of comma-separated sort keys.
+ * @param ascending Whether sort is ascending or descending (ignored if first param is nil).
+ */
+- (NSArray*) entitiesWithSortKey:(NSString*) sortKey ascending:(BOOL)ascending;
+
+/**
+ * Returns all entities sorted by the given sort key, in
+ * ascending/descending order, and with an optional predicate.
+ *
+ * @param sortKey Key to sort by. Can be nil.  Can be a list of comma-separated sort keys.
+ * @param ascending Whether sort is ascending or descending (ignored if first param is nil).
+ * @param predicate An NSPredicate to add to the query. Can be nil.
+ */
+- (NSArray*) entitiesWithSortKey:(NSString*) sortKey ascending:(BOOL)ascending andPredicate:(NSPredicate*)predicate;
+
+/**
+ * Saves outstanding CoreData changes
+ */
 - (void) saveChanges;
 
 /**

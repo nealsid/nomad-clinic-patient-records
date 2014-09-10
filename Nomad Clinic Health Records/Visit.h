@@ -2,7 +2,7 @@
 //  Visit.h
 //  Nomad Clinic Health Records
 //
-//  Created by Neal Sidhwaney on 9/3/14.
+//  Created by Neal Sidhwaney on 9/9/14.
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
@@ -14,10 +14,10 @@
 @interface Visit : NSManagedObject
 
 @property (nonatomic, retain) NSDate * visit_date;
+@property (nonatomic, retain) Clinic *clinic;
 @property (nonatomic, retain) NSSet *clinician;
 @property (nonatomic, retain) VisitNotesComplex *notes;
 @property (nonatomic, retain) Patient *patient;
-@property (nonatomic, retain) Clinic *clinic;
 @end
 
 @interface Visit (CoreDataGeneratedAccessors)

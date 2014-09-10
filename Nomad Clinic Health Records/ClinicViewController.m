@@ -23,6 +23,7 @@
 
 @property (nonatomic, retain) UIFont* itemFont;
 
+@property (strong, nonatomic) UIBarButtonItem* editButton;
 @end
 
 @implementation ClinicViewController
@@ -32,18 +33,26 @@
   if (self) {
     NSLog(@"%lu patients", (long)[[[BaseStore sharedStoreForEntity:@"Patient"] entities] count]);
     self.clinicStore = [BaseStore sharedStoreForEntity:@"Clinic"];
-    self.clinics = [self.clinicStore entities];
-    self.numberOfRows = self.clinics.count;
+    [self refetchDataForTableView];
     self.title = @"Clinics";
     self.itemFont = [UIFont fontWithName:@"American Typewriter" size:32];
   }
   return self;
 }
 
+- (void) refetchDataForTableView {
+  self.clinics = [self.clinicStore entitiesWithSortKey:@"village.name,clinic_date" ascending:YES];
+  self.numberOfRows = self.clinics.count;
+}
+
 - (instancetype) initWithStyle:(UITableViewStyle)style {
   return [self init];
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+  [self refetchDataForTableView];
+  [self.tableView reloadData];
+}
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -57,6 +66,9 @@
                                                                                    target:self
                                                                                    action:@selector(addNewClinic:)];
   self.navigationItem.rightBarButtonItem = newClinicButton;
+  UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit:)];
+  self.navigationItem.leftBarButtonItem = editButton;
+  self.tableView.allowsSelectionDuringEditing = YES;
 }
 
 - (void) addNewClinic:(id) sender {
@@ -64,16 +76,50 @@
   [self.navigationController pushViewController:cvc animated:YES];
 }
 
+- (void) edit:(id) sender {
+  BOOL editing = self.tableView.isEditing;
+  if (editing) {
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+  } else {
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(edit:)];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
+  }
+  [self.tableView setEditing:![self.tableView isEditing]];
+}
+
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   NSInteger row = [indexPath row];
-   Clinic* c = [self.clinics objectAtIndex:row];
+  Clinic* c = [self.clinics objectAtIndex:row];
 
   NSLog(@"Clinic selected: %@", c);
-  PatientsTableViewController* pvc =
-  [[PatientsTableViewController alloc] initForClinic:c];
 
-  [self.navigationController pushViewController:pvc animated:YES];
+  if (self.tableView.editing) {
+    ClinicAddEditViewController *cvc = [[ClinicAddEditViewController alloc] initWithClinic:c];
+    [self.navigationController pushViewController:cvc animated:YES];
+     self.tableView.editing = NO;
+  } else {
+    PatientsTableViewController* pvc =
+    [[PatientsTableViewController alloc] initForClinic:c];
+
+    [self.navigationController pushViewController:pvc animated:YES];
+  }
+}
+
+- (void) tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    Clinic* c = [self.clinics objectAtIndex:[indexPath row]];
+    [self.clinicStore removeEntity:c];
+    [self refetchDataForTableView];
+
+    [tableView deleteRowsAtIndexPaths:@[indexPath]
+                     withRowAnimation:UITableViewRowAnimationFade];
+    [tableView reloadData];
+  }
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView

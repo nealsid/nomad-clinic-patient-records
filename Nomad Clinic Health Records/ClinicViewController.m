@@ -76,7 +76,7 @@
   [self.navigationController pushViewController:cvc animated:YES];
 }
 
-- (void) edit:(id) sender {
+- (void) toggleEditing {
   BOOL editing = self.tableView.isEditing;
   if (editing) {
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(edit:)];
@@ -86,6 +86,9 @@
     self.navigationItem.leftBarButtonItem = barButtonItem;
   }
   [self.tableView setEditing:![self.tableView isEditing]];
+}
+- (void) edit:(id) sender {
+  [self toggleEditing];
 }
 
 - (void)      tableView:(UITableView *)tableView
@@ -98,7 +101,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   if (self.tableView.editing) {
     ClinicAddEditViewController *cvc = [[ClinicAddEditViewController alloc] initWithClinic:c];
     [self.navigationController pushViewController:cvc animated:YES];
-     self.tableView.editing = NO;
+    [self toggleEditing];
   } else {
     PatientsTableViewController* pvc =
     [[PatientsTableViewController alloc] initForClinic:c];

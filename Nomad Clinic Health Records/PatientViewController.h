@@ -13,6 +13,8 @@
 #import "NumberFieldViewController.h"
 #import "SOAPViewController.h"
 
+@class VisitNotesComplex;
+
 @interface PatientViewController : UIViewController <FieldEditDelegate, SOAPNoteViewControllerDelegate>
 
 @property (strong, nonatomic) Visit* mostRecentVisit;
@@ -21,11 +23,14 @@
 @property (weak, nonatomic) IBOutlet UITableView *recentVisitTable;
 @property BOOL shouldAnimateHeaderBackground;
 
+@property (strong, nonatomic) NSArray* visitSpecificFieldMetadata;
+@property (strong, nonatomic) NSArray* visitModelDisplayMetadata;
+
 /**
  * Designated initializer for the Patient view controller.
  *
  * @param andPatient The patient to edit or nil if a new patient
- * @param withDelegate The object that conforms to 
+ * @param withDelegate The object that conforms to
  *                     NEMRPatientViewControllerDelegate
  * @returns An initialized viewcontroller
  */
@@ -38,5 +43,7 @@
  *  This method updates & commits the changes to CoreData.
  */
 - (void) isHealthySwitchClicked:(id)sender;
+
+- (NSString*) formatBloodPressure:(VisitNotesComplex*) note;
 
 @end

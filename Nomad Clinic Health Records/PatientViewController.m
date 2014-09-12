@@ -35,6 +35,11 @@
 
 @property (weak, nonatomic)   BaseStore* visitStore;
 
+/**
+ * Constructs an array of field metadata only for fields that specifically exist.
+ */
+- (void) constructDisplayMetadataFromVisit;
+
 @end
 
 @implementation PatientViewController
@@ -45,7 +50,7 @@
                                                                               target:self
                                                                               action:@selector(editPatient:)];
   [self.navigationItem setRightBarButtonItem:editButton];
-  [self.patientNameField setText:self.patient.name];
+  [self.patientNameField setText:@"Most recent visit"];
   [self refreshVisitUI];
   [self.recentVisitTable registerClass:[UITableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
@@ -54,7 +59,8 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-  [self.patientNameField setText:self.patient.name];
+  self.title = self.patient.name;
+//  [self.patientNameField setText:self.patient.name];
   [self refreshVisitUI];
 }
 
@@ -70,6 +76,23 @@
     [self.view layoutSubviews];
     self.adjustedForTopLayout = YES;
   }
+}
+
+- (void) constructDisplayMetadataFromVisit {
+  NSMutableArray *visitSpecificFieldMetadata = [NSMutableArray array];
+  NSLog(@"Constructing metadata for visit: %@", self.mostRecentVisit.notes);
+  for (int i = 0 ; i < self.visitModelDisplayMetadata.count; ++i) {
+    NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[i];
+    if ([self.mostRecentVisit.notes valueForKey:[fieldMetadata objectForKey:@"fieldName"]] != nil) {
+      NSLog(@"Adding field %@, value: %@", [fieldMetadata objectForKey:@"fieldName"], [self.mostRecentVisit.notes valueForKey:[fieldMetadata objectForKey:@"fieldName"]]);
+      [visitSpecificFieldMetadata addObject:fieldMetadata];
+    }
+  }
+  self.visitSpecificFieldMetadata = [NSArray arrayWithArray:visitSpecificFieldMetadata];
+}
+
+- (NSString*) formatBloodPressure:(VisitNotesComplex*) note {
+  return [NSString stringWithFormat:@"%@/%@", note.bp_systolic, note.bp_diastolic];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
@@ -89,7 +112,44 @@
     self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
     self.adjustedForTopLayout = NO;
     self.hidesBottomBarWhenPushed = YES;
-  }
+    self.visitModelDisplayMetadata = @[@{@"fieldName":@"healthy",
+                                         @"prettyName":@"Is Healthy?"},
+
+                                          @{@"fieldName":@"bp_systolic",
+                                            @"prettyName":@"Systolic",
+                                            @"formatSelector":[self methodSignatureForSelector:@selector(formatBloodPressure:)]},
+
+                                          @{@"fieldName":@"breathing_rate",
+                                            @"prettyName":@"Breathing rate"},
+
+                                          @{@"fieldName":@"pulse",
+                                            @"prettyName":@"Pulse"},
+
+                                          @{@"fieldName":@"temp_fahrenheit",
+                                            @"prettyName":@"Temp (℉)"},
+
+                                          @{@"fieldName":@"weight",
+                                            @"prettyName":@"Weight"},
+
+                                          @{@"fieldName":@"weight_class",
+                                            @"prettyName":@"Weight class"},
+
+                                          @{@"fieldName":@"subjective",
+                                            @"prettyName":@"Subjective"},
+
+                                          @{@"fieldName":@"objective",
+                                            @"prettyName":@"Objective"},
+
+                                          @{@"fieldName":@"assessment",
+                                            @"prettyName":@"Assessment"},
+
+                                          @{@"fieldName":@"plan",
+                                            @"prettyName":@"Plan"},
+
+                                          @{@"fieldName":@"note",
+                                            @"prettyName":@"Note"}];
+    [self constructDisplayMetadataFromVisit];
+    }
   return self;
 }
 

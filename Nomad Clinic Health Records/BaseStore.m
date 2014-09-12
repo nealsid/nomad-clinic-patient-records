@@ -281,8 +281,8 @@
     VisitNotesComplex* visitNote =
     [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
                                   inManagedObjectContext:ctx];
-    visitNote.note = @"This is test note #1";
     visitNote.visit = visit;
+    visitNote.note = @"This is test note #1";
     visitNote.bp_systolic = @120;
     visitNote.bp_diastolic = @80;
     visitNote.healthy = [NSNumber numberWithBool:NO];

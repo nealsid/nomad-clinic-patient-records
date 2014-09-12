@@ -37,7 +37,7 @@ heightForHeaderInSection:(NSInteger)section {
 
 - (NSInteger) tableView:(UITableView *)tableView
   numberOfRowsInSection:(NSInteger)section {
-  return 3;
+  return self.visitSpecificFieldMetadata.count;
 }
 
 - (void)    tableView:(UITableView *)tableView
@@ -60,7 +60,7 @@ willDisplayHeaderView:(UIView *)view
       }];
       [UIView addKeyframeWithRelativeStartTime:.6 relativeDuration:.20 animations:^{
         headerView.contentView.backgroundColor = flashColor;
-        
+
       }];
       [UIView addKeyframeWithRelativeStartTime:.8 relativeDuration:.20 animations:^{
         headerView.contentView.backgroundColor = [UIColor clearColor];
@@ -81,7 +81,8 @@ viewForHeaderInSection:(NSInteger)section {
 
   label.text = [NSString stringWithFormat:@"%@",
                 [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
-
+  view.contentView.backgroundColor = [UIColor whiteColor];
+  label.backgroundColor = [UIColor whiteColor];
   [view.contentView addSubview:label];
   NSLog(@"vfhins: %@", view.contentView);
   return view;
@@ -138,30 +139,39 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                                                  reuseIdentifier:@"UITableViewCell"];
 
   cell.textLabel.textColor = [UIColor darkGrayColor];
-  if (row == 0) {
-    cell.textLabel.text = @"Weight";
-    cell.detailTextLabel.text = [VisitNotesComplex stringForWeightClass:self.mostRecentVisit.notes.weight_class];
-    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:20];
-    if ([self.mostRecentVisit.notes isWeightExteme]) {
-      cell.detailTextLabel.textColor = [UIColor redColor];
-    } else {
-      cell.detailTextLabel.textColor = [UIColor blackColor];
-    }
-  } else if (row == 1) {
-    cell.textLabel.text = @"Healthy?";
-    UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-    [switchView addTarget:self
-                   action:@selector(isHealthySwitchClicked:)
-         forControlEvents:UIControlEventValueChanged];
-    cell.accessoryView = switchView;
-    switchView.on = [self.mostRecentVisit.notes.healthy boolValue];
-    if (![self.mostRecentVisit.notes.healthy boolValue]) {
-      cell.textLabel.textColor = [UIColor redColor];
-    }
-  } else if (row == 2) {
-    cell.textLabel.text = @"Note";
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  NSDictionary* fieldInfo = [self.visitSpecificFieldMetadata objectAtIndex:row];
+  cell.textLabel.text = [fieldInfo objectForKey:@"prettyName"];
+  NSMethodSignature* formatMethod = [fieldInfo objectForKey:@"formatSelector"];
+  if (formatMethod != nil) {
+    NSInvocation* formatInvocation = [NSInvocation invocationWithMethodSignature:formatMethod];
+    [formatInvocation setArgument:self.mostRecentVisit.notes atIndex:0];
+    [formatInvocation invoke];
+    cell.detailTextLabel.text;
   }
+  // if (row == 0) {
+  //   cell.textLabel.text = @"Weight";
+  //   cell.detailTextLabel.text = [VisitNotesComplex stringForWeightClass:self.mostRecentVisit.notes.weight_class];
+  //   cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:20];
+  //   if ([self.mostRecentVisit.notes isWeightExteme]) {
+  //     cell.detailTextLabel.textColor = [UIColor redColor];
+  //   } else {
+  //     cell.detailTextLabel.textColor = [UIColor blackColor];
+  //   }
+  // } else if (row == 1) {
+  //   cell.textLabel.text = @"Healthy?";
+  //   UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+  //   [switchView addTarget:self
+  //                  action:@selector(isHealthySwitchClicked:)
+  //        forControlEvents:UIControlEventValueChanged];
+  //   cell.accessoryView = switchView;
+  //   switchView.on = [self.mostRecentVisit.notes.healthy boolValue];
+  //   if (![self.mostRecentVisit.notes.healthy boolValue]) {
+  //     cell.textLabel.textColor = [UIColor redColor];
+  //   }
+  // } else if (row == 2) {
+  //   cell.textLabel.text = @"Note";
+  //   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  // }
   return cell;
 }
 

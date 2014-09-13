@@ -116,8 +116,8 @@
                                          @"prettyName":@"Is Healthy?"},
 
                                           @{@"fieldName":@"bp_systolic",
-                                            @"prettyName":@"Systolic",
-                                            @"formatSelector":[self methodSignatureForSelector:@selector(formatBloodPressure:)]},
+                                            @"prettyName":@"Blood pressure",
+                                            @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)]},
 
                                           @{@"fieldName":@"breathing_rate",
                                             @"prettyName":@"Breathing rate"},

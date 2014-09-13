@@ -141,12 +141,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   cell.textLabel.textColor = [UIColor darkGrayColor];
   NSDictionary* fieldInfo = [self.visitSpecificFieldMetadata objectAtIndex:row];
   cell.textLabel.text = [fieldInfo objectForKey:@"prettyName"];
-  NSMethodSignature* formatMethod = [fieldInfo objectForKey:@"formatSelector"];
-  if (formatMethod != nil) {
-    NSInvocation* formatInvocation = [NSInvocation invocationWithMethodSignature:formatMethod];
-    [formatInvocation setArgument:self.mostRecentVisit.notes atIndex:0];
-    [formatInvocation invoke];
-    cell.detailTextLabel.text;
+  VisitNotesComplex* notes = self.mostRecentVisit.notes;
+  SEL formatSelector = [[fieldInfo objectForKey:@"formatSelector"] pointerValue];
+  if (formatSelector != nil) {
+    IMP imp = [self methodForSelector:formatSelector];
+    NSString* (*func)(id, SEL, VisitNotesComplex*) = (void *)imp;
+    NSString* formattedValue = func(self, formatSelector, notes);
+    NSLog(@"Formatted value: %@", formattedValue);
+    cell.detailTextLabel.text = formattedValue;
+  } else {
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[notes valueForKey:[fieldInfo objectForKey:@"fieldName"]]];
   }
   // if (row == 0) {
   //   cell.textLabel.text = @"Weight";

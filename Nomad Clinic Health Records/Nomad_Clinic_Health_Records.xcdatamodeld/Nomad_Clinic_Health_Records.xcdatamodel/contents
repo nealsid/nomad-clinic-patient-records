@@ -16,6 +16,7 @@
         <relationship name="patient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Patient" inverseName="dob" inverseEntity="Patient" syncable="YES"/>
     </entity>
     <entity name="Patient" representedClassName="Patient" syncable="YES">
+        <attribute name="child" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Transformable" valueTransformerName="NEMRImageTransformer" syncable="YES"/>
@@ -57,7 +58,7 @@
         <element name="Clinic" positionX="-90" positionY="-108" width="128" height="90"/>
         <element name="Clinician" positionX="81" positionY="99" width="128" height="73"/>
         <element name="FlexDate" positionX="-90" positionY="-108" width="128" height="103"/>
-        <element name="Patient" positionX="-270" positionY="-261" width="128" height="133"/>
+        <element name="Patient" positionX="-270" positionY="-261" width="128" height="150"/>
         <element name="Village" positionX="-81" positionY="-99" width="128" height="120"/>
         <element name="Visit" positionX="-63" positionY="18" width="128" height="118"/>
         <element name="VisitNotesComplex" positionX="-56" positionY="-108" width="128" height="253"/>

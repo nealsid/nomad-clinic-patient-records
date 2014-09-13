@@ -51,16 +51,14 @@
                                                                               action:@selector(editPatient:)];
   [self.navigationItem setRightBarButtonItem:editButton];
   [self.patientNameField setText:@"Most recent visit"];
-  [self refreshVisitUI];
   [self.recentVisitTable registerClass:[PatientVisitTableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
   [self.recentVisitTable registerClass:[UITableViewHeaderFooterView class]
     forHeaderFooterViewReuseIdentifier:@"header"];
+  self.title = self.patient.name;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-  self.title = self.patient.name;
-//  [self.patientNameField setText:self.patient.name];
   [self refreshVisitUI];
 }
 
@@ -93,6 +91,10 @@
 
 - (NSString*) formatBloodPressure:(VisitNotesComplex*) note {
   return [NSString stringWithFormat:@"%@/%@", note.bp_systolic, note.bp_diastolic];
+}
+
+- (NSString*) formatWeightClass:(VisitNotesComplex*) note {
+  return [VisitNotesComplex stringForWeightClass:note.weight_class];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
@@ -132,7 +134,8 @@
                                             @"prettyName":@"Weight"},
 
                                           @{@"fieldName":@"weight_class",
-                                            @"prettyName":@"Weight class"},
+                                            @"prettyName":@"Weight class",
+                                            @"formatSelector":[NSValue valueWithPointer:@selector(formatWeightClass:)]},
 
                                           @{@"fieldName":@"subjective",
                                             @"prettyName":@"Subjective"},
@@ -148,8 +151,7 @@
 
                                           @{@"fieldName":@"note",
                                             @"prettyName":@"Note"}];
-    [self constructDisplayMetadataFromVisit];
-    }
+  }
   return self;
 }
 
@@ -179,6 +181,7 @@
                                                                forInstance:self.patient
                                                             byRelationName:@"patient"
                                                                  dateField:@"visit_date"];
+  [self constructDisplayMetadataFromVisit];
   [self.recentVisitTable reloadData];
 }
 

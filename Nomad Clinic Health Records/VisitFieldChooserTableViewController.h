@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class VisitNotesComplex;
+
 @interface VisitFieldChooserTableViewController : UITableViewController
+
+- (instancetype) initWithVisit:(VisitNotesComplex*) v;
 
 @end

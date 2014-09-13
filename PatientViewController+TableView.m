@@ -11,6 +11,7 @@
 #import "PickerFieldViewController.h"
 #import "SOAPViewController.h"
 #import "Visit.h"
+#import "VisitFieldChooserTableViewController.h"
 #import "VisitNotesComplex.h"
 #import "VisitNotesComplex+WeightClass.h"
 
@@ -106,11 +107,16 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (BOOL)            tableView:(UITableView *)tableView
 shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-  return [indexPath row] != 1;
+  return [indexPath row] != self.visitSpecificFieldMetadata.count;
 }
 
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if ([indexPath row] == (self.visitSpecificFieldMetadata.count + 1)) {
+    VisitFieldChooserTableViewController* vc = [[VisitFieldChooserTableViewController alloc] initWithVisit:self.mostRecentVisit.notes];
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
+  }
   if ([indexPath row] == 0) {
     NSArray* weightClasses = [VisitNotesComplex allWeightClassesAsStrings];
 

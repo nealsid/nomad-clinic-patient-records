@@ -30,6 +30,8 @@
 		F937FC23199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F937FC21199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib */; };
 		F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */; };
 		F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */; };
+		F95BF04119C43B6700CF265E /* VisitFieldChooserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF03F19C43B6700CF265E /* VisitFieldChooserTableViewController.m */; };
+		F95BF04219C43B6700CF265E /* VisitFieldChooserTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95BF04019C43B6700CF265E /* VisitFieldChooserTableViewController.xib */; };
 		F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3519B7F24B009DDC6D /* BaseStore.m */; };
 		F960BC3819B7F258009DDC6D /* BaseStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3719B7F258009DDC6D /* BaseStoreTest.m */; };
 		F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96CF7F9199EA5E700F2C4EF /* TableViewController.m */; };
@@ -116,6 +118,9 @@
 		F94B3A3D19B985B8003D3E2B /* ClinicAddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicAddEditViewController.h; sourceTree = "<group>"; };
 		F94B3A3E19B985B8003D3E2B /* ClinicAddEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicAddEditViewController.m; sourceTree = "<group>"; };
 		F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicAddEditViewController.xib; sourceTree = "<group>"; };
+		F95BF03E19C43B6700CF265E /* VisitFieldChooserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitFieldChooserTableViewController.h; sourceTree = "<group>"; };
+		F95BF03F19C43B6700CF265E /* VisitFieldChooserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitFieldChooserTableViewController.m; sourceTree = "<group>"; };
+		F95BF04019C43B6700CF265E /* VisitFieldChooserTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisitFieldChooserTableViewController.xib; sourceTree = "<group>"; };
 		F960BC3419B7F24B009DDC6D /* BaseStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseStore.h; sourceTree = "<group>"; };
 		F960BC3519B7F24B009DDC6D /* BaseStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStore.m; sourceTree = "<group>"; };
 		F960BC3719B7F258009DDC6D /* BaseStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStoreTest.m; sourceTree = "<group>"; };
@@ -210,6 +215,9 @@
 				F9E9DAA11986C03000E8568F /* NEMRClinicianTableViewController.h */,
 				F9E9DAA21986C03000E8568F /* NEMRClinicianTableViewController.m */,
 				F9E9DAA31986C03000E8568F /* NEMRClinicianTableViewController.xib */,
+				F95BF03E19C43B6700CF265E /* VisitFieldChooserTableViewController.h */,
+				F95BF03F19C43B6700CF265E /* VisitFieldChooserTableViewController.m */,
+				F95BF04019C43B6700CF265E /* VisitFieldChooserTableViewController.xib */,
 			);
 			name = "Table View Controllers";
 			sourceTree = "<group>";
@@ -491,6 +499,7 @@
 				F9B9EF6419A25C3800072D7D /* NumberFieldViewController.xib in Resources */,
 				F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */,
 				F9FAEA6D197B075500C9B3E5 /* Images.xcassets in Resources */,
+				F95BF04219C43B6700CF265E /* VisitFieldChooserTableViewController.xib in Resources */,
 				F997FE2A19AE77A800487ADE /* stetho.png in Resources */,
 				F9DA49D819AE5A06008BFC6F /* crowd.png in Resources */,
 				F937FC23199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.xib in Resources */,
@@ -522,6 +531,7 @@
 				F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */,
 				F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */,
 				F9DA2D0619BFFEF900787C8E /* Visit.m in Sources */,
+				F95BF04119C43B6700CF265E /* VisitFieldChooserTableViewController.m in Sources */,
 				F907A50019B5065E00A22A15 /* PickerFieldViewController.m in Sources */,
 				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,

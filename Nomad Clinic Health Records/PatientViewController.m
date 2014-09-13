@@ -52,7 +52,7 @@
   [self.navigationItem setRightBarButtonItem:editButton];
   [self.patientNameField setText:@"Most recent visit"];
   [self refreshVisitUI];
-  [self.recentVisitTable registerClass:[UITableViewCell class]
+  [self.recentVisitTable registerClass:[PatientVisitTableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
   [self.recentVisitTable registerClass:[UITableViewHeaderFooterView class]
     forHeaderFooterViewReuseIdentifier:@"header"];

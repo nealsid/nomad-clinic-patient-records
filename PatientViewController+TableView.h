@@ -13,3 +13,10 @@
 - (void) animateSectionHeaderBackground;
 
 @end
+
+// Subclass to override default style settings.
+@interface PatientVisitTableViewCell : UITableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+
+@end

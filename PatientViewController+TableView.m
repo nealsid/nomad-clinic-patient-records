@@ -37,7 +37,8 @@ heightForHeaderInSection:(NSInteger)section {
 
 - (NSInteger) tableView:(UITableView *)tableView
   numberOfRowsInSection:(NSInteger)section {
-  return self.visitSpecificFieldMetadata.count;
+  // + 2 for some extra "special" fields.  See cellForRowAtIndexPath for more details.
+  return self.visitSpecificFieldMetadata.count + 2;
 }
 
 - (void)    tableView:(UITableView *)tableView
@@ -134,23 +135,38 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (UITableViewCell*) tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSInteger row = [indexPath row];
-  UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                                 reuseIdentifier:@"UITableViewCell"];
+
+  UITableViewCell* cell = [self.recentVisitTable dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
   cell.textLabel.textColor = [UIColor darkGrayColor];
-  NSDictionary* fieldInfo = [self.visitSpecificFieldMetadata objectAtIndex:row];
-  cell.textLabel.text = [fieldInfo objectForKey:@"prettyName"];
-  VisitNotesComplex* notes = self.mostRecentVisit.notes;
-  SEL formatSelector = [[fieldInfo objectForKey:@"formatSelector"] pointerValue];
-  if (formatSelector != nil) {
-    IMP imp = [self methodForSelector:formatSelector];
-    NSString* (*func)(id, SEL, VisitNotesComplex*) = (void *)imp;
-    NSString* formattedValue = func(self, formatSelector, notes);
-    NSLog(@"Formatted value: %@", formattedValue);
-    cell.detailTextLabel.text = formattedValue;
+  NSInteger row = [indexPath row];
+  if (row < self.visitSpecificFieldMetadata.count) {
+    NSDictionary* fieldInfo = [self.visitSpecificFieldMetadata objectAtIndex:row];
+
+    cell.textLabel.text = [fieldInfo objectForKey:@"prettyName"];
+
+    VisitNotesComplex* notes = self.mostRecentVisit.notes;
+    SEL formatSelector = [[fieldInfo objectForKey:@"formatSelector"] pointerValue];
+
+    if (formatSelector != nil) {
+      IMP imp = [self methodForSelector:formatSelector];
+      NSString* (*func)(id, SEL, VisitNotesComplex*) = (void *)imp;
+      NSString* formattedValue = func(self, formatSelector, notes);
+      NSLog(@"Formatted value: %@", formattedValue);
+      cell.detailTextLabel.text = formattedValue;
+    } else {
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[notes valueForKey:[fieldInfo objectForKey:@"fieldName"]]];
+    }
+    return cell;
+  } else if (row == self.visitSpecificFieldMetadata.count) {
+    cell.textLabel.text = @"";
+    cell.detailTextLabel.text = @"";
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    return cell;
   } else {
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[notes valueForKey:[fieldInfo objectForKey:@"fieldName"]]];
+    cell.textLabel.text = @"Add/remove fields to visit";
+    cell.detailTextLabel.text = @"";
   }
   // if (row == 0) {
   //   cell.textLabel.text = @"Weight";
@@ -177,6 +193,16 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   //   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   // }
   return cell;
+}
+
+@end
+
+@implementation PatientVisitTableViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+{
+  // ignore the style argument, use our own to override
+  return [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
 }
 
 @end

@@ -112,12 +112,17 @@ shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)      tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  if ([indexPath row] == (self.visitSpecificFieldMetadata.count + 1)) {
+  NSInteger row = [indexPath row];
+  if (row == (self.visitSpecificFieldMetadata.count + 1)) {
     VisitFieldChooserTableViewController* vc = [[VisitFieldChooserTableViewController alloc] initWithVisit:self.mostRecentVisit.notes];
     [self.navigationController pushViewController:vc animated:YES];
     return;
   }
-  if ([indexPath row] == 0) {
+
+  NSDictionary* fieldMetadata = self.visitSpecificFieldMetadata[row];
+  Class editClass = [fieldMetadata objectForKey:@"editClass"];
+  if ()
+  if (row == 0) {
     NSArray* weightClasses = [VisitNotesComplex allWeightClassesAsStrings];
 
     PickerFieldViewController* vc = [[PickerFieldViewController alloc]

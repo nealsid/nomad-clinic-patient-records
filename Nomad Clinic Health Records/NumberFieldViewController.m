@@ -20,6 +20,9 @@
 @property (strong, nonatomic) NSString* fieldName;
 @property (strong, nonatomic) NSString* initialValue;
 
+@property (strong, nonatomic) NSString* field2Name;
+@property (strong, nonatomic) NSString* initialValue;
+
 @end
 
 @implementation NumberFieldViewController

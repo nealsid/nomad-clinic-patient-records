@@ -11,6 +11,8 @@
 
 @interface NumberFieldViewController : UIViewController
 
+- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata;
+
 - (instancetype) initWithFieldName:(NSString*)fieldName
                       initialValue:(NSString*)initialValue
               fieldChangedDelegate:(id<FieldEditDelegate>) delegate;

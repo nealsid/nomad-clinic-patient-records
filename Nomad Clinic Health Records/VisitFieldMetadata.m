@@ -22,7 +22,8 @@ static NSArray* visitFieldMetadata;
                            @{@"fieldName":@"bp_systolic",
                              @"prettyName":@"Blood pressure",
                              @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)],
-                             @"defaultValue":[NSNumber numberWithInt:0]},
+                             @"defaultValue":[NSNumber numberWithInt:0],
+                             @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"breathing_rate",
                              @"prettyName":@"Breathing rate",

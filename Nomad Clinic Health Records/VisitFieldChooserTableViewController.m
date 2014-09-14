@@ -8,12 +8,14 @@
 
 #import "VisitFieldChooserTableViewController.h"
 
+#import "BaseStore.h"
 #import "PatientViewController+TableView.h"
+#import "VisitFieldMetadata.h"
 #import "VisitNotesComplex.h"
 
 @interface VisitFieldChooserTableViewController ()
 
-@property (strong, nonatomic) NSArray* visitModelDisplayMetadata;
+@property (weak, nonatomic) NSArray* visitModelDisplayMetadata;
 @property (weak, nonatomic) VisitNotesComplex* visitNotes;
 
 @end
@@ -25,54 +27,7 @@
   if (self) {
     self.visitNotes = v;
     [self.tableView registerClass:[PatientVisitTableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
-    self.visitModelDisplayMetadata = @[@{@"fieldName":@"healthy",
-                                         @"prettyName":@"Is Healthy?",
-                                         @"defaultValue":[NSNumber numberWithBool:NO]},
-
-                                          @{@"fieldName":@"bp_systolic",
-                                            @"prettyName":@"Blood pressure",
-                                            @"defaultValue":[NSNumber numberWithInt:0]},
-
-                                          @{@"fieldName":@"breathing_rate",
-                                            @"prettyName":@"Breathing rate",
-                                            @"defaultValue":[NSNumber numberWithInt:0]},
-
-                                          @{@"fieldName":@"pulse",
-                                            @"prettyName":@"Pulse",
-                                            @"defaultValue":[NSNumber numberWithInt:0]},
-
-                                          @{@"fieldName":@"temp_fahrenheit",
-                                            @"prettyName":@"Temp (℉)",
-                                            @"defaultValue":[NSNumber numberWithInt:0]},
-
-                                          @{@"fieldName":@"weight",
-                                            @"prettyName":@"Weight",
-                                            @"defaultValue":[NSNumber numberWithInt:0]},
-
-                                          @{@"fieldName":@"weight_class",
-                                            @"prettyName":@"Weight class",
-                                            @"defaultValue":[NSNumber numberWithInt:2]},
-
-                                          @{@"fieldName":@"subjective",
-                                            @"prettyName":@"Subjective",
-                                            @"defaultValue":@""},
-
-                                          @{@"fieldName":@"objective",
-                                            @"prettyName":@"Objective",
-                                            @"defaultValue":@""},
-
-                                          @{@"fieldName":@"assessment",
-                                            @"prettyName":@"Assessment",
-                                            @"defaultValue":@""},
-
-                                          @{@"fieldName":@"plan",
-                                            @"prettyName":@"Plan",
-                                            @"defaultValue":@""},
-
-                                          @{@"fieldName":@"note",
-                                            @"prettyName":@"Note",
-                                            @"defaultValue":@""}];
-
+    self.visitModelDisplayMetadata = VisitFieldMetadata.visitFieldMetadata;
   }
   return self;
 }
@@ -112,6 +67,7 @@
     NSObject* defaultValue = [fieldMetadata objectForKey:@"defaultValue"];
     [self.visitNotes setValue:defaultValue forKey:fieldName];
   }
+  [[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] saveChanges];
   [self.tableView reloadData];
 }
 

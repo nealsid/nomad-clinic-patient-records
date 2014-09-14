@@ -63,6 +63,7 @@
 		F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E9DAAF1986C4EC00E8568F /* ClinicianViewController.m */; };
 		F9E9DAB21986C4EC00E8568F /* ClinicianViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAB01986C4EC00E8568F /* ClinicianViewController.xib */; };
 		F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9E9DAB41986D47A00E8568F /* ClinicianTableViewHeader.xib */; };
+		F9F4BEE919C61E480058B704 /* VisitFieldMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = F9F4BEE819C61E480058B704 /* VisitFieldMetadata.m */; };
 		F9FAEA65197B075500C9B3E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA64197B075500C9B3E5 /* main.m */; };
 		F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */; };
 		F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9FAEA69197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld */; };
@@ -169,6 +170,8 @@
 		F9E9DAAF1986C4EC00E8568F /* ClinicianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClinicianViewController.m; path = ../ClinicianViewController.m; sourceTree = "<group>"; };
 		F9E9DAB01986C4EC00E8568F /* ClinicianViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClinicianViewController.xib; path = ../ClinicianViewController.xib; sourceTree = "<group>"; };
 		F9E9DAB41986D47A00E8568F /* ClinicianTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicianTableViewHeader.xib; sourceTree = "<group>"; };
+		F9F4BEE719C61E480058B704 /* VisitFieldMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitFieldMetadata.h; sourceTree = "<group>"; };
+		F9F4BEE819C61E480058B704 /* VisitFieldMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitFieldMetadata.m; sourceTree = "<group>"; };
 		F9FAEA5F197B075500C9B3E5 /* Nomad Clinic Health Records.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nomad Clinic Health Records.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9FAEA63197B075500C9B3E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9FAEA64197B075500C9B3E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				F9E9DAA91986C16800E8568F /* Stores */,
 				F984465E199E5BFA00F59910 /* Utils.h */,
 				F984465F199E5BFA00F59910 /* Utils.m */,
+				F9F4BEE719C61E480058B704 /* VisitFieldMetadata.h */,
+				F9F4BEE819C61E480058B704 /* VisitFieldMetadata.m */,
 				F907A50219B51BEC00A22A15 /* FieldEditDelegate.h */,
 				F9FAEA66197B075500C9B3E5 /* NEMRAppDelegate.h */,
 				F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */,
@@ -524,6 +529,7 @@
 				F9FC825D19A516E200BA86E7 /* PatientViewController+TableView.m in Sources */,
 				F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */,
 				F9DA2D0319BFFE7200787C8E /* FlexDate.m in Sources */,
+				F9F4BEE919C61E480058B704 /* VisitFieldMetadata.m in Sources */,
 				F9DA2D0019BFFE7200787C8E /* Village.m in Sources */,
 				F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */,
 				F9FAEA83197B0B2800C9B3E5 /* NEMRImageTransformer.m in Sources */,

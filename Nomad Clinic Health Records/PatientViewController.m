@@ -17,6 +17,7 @@
 #import "PatientViewController+TableView.h"
 #import "SOAPViewController.h"
 #import "Visit.h"
+#import "VisitFieldMetadata.h"
 #import "VisitNotesComplex.h"
 #import "VisitNotesComplex+WeightClass.h"
 #import "Utils.h"
@@ -114,43 +115,7 @@
     self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
     self.adjustedForTopLayout = NO;
     self.hidesBottomBarWhenPushed = YES;
-    self.visitModelDisplayMetadata = @[@{@"fieldName":@"healthy",
-                                         @"prettyName":@"Is Healthy?"},
-
-                                          @{@"fieldName":@"bp_systolic",
-                                            @"prettyName":@"Blood pressure",
-                                            @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)]},
-
-                                          @{@"fieldName":@"breathing_rate",
-                                            @"prettyName":@"Breathing rate"},
-
-                                          @{@"fieldName":@"pulse",
-                                            @"prettyName":@"Pulse"},
-
-                                          @{@"fieldName":@"temp_fahrenheit",
-                                            @"prettyName":@"Temp (℉)"},
-
-                                          @{@"fieldName":@"weight",
-                                            @"prettyName":@"Weight"},
-
-                                          @{@"fieldName":@"weight_class",
-                                            @"prettyName":@"Weight class",
-                                            @"formatSelector":[NSValue valueWithPointer:@selector(formatWeightClass:)]},
-
-                                          @{@"fieldName":@"subjective",
-                                            @"prettyName":@"Subjective"},
-
-                                          @{@"fieldName":@"objective",
-                                            @"prettyName":@"Objective"},
-
-                                          @{@"fieldName":@"assessment",
-                                            @"prettyName":@"Assessment"},
-
-                                          @{@"fieldName":@"plan",
-                                            @"prettyName":@"Plan"},
-
-                                          @{@"fieldName":@"note",
-                                            @"prettyName":@"Note"}];
+    self.visitModelDisplayMetadata = VisitFieldMetadata.visitFieldMetadata;
   }
   return self;
 }

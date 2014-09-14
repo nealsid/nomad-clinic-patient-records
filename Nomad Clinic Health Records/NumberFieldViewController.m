@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UITextField *field2;
 
 @property (weak, nonatomic) id<FieldEditDelegate> delegate;
 
@@ -26,14 +28,46 @@
                           bundle:(NSBundle*)bundleOrNil
                        fieldName:(NSString*)fieldName
                     initialValue:(NSString*)initialValue
+                      field2Name:(NSString*)field2Name
+              field2InitialValue:(NSString*)field2InitialValue
             fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
   self = [super initWithNibName:nibNameOrNil bundle:bundleOrNil];
   if(self) {
     self.fieldName = fieldName;
     self.initialValue = initialValue;
+    if (field2Name) {
+      self.label2.text = field2Name;
+      self.field2.text = field2InitialValue;
+    }
     self.delegate = delegate;
   }
   return self;
+}
+
+- (instancetype) initWithFieldName:(NSString*)fieldName
+                      initialValue:(NSString*)initialValue
+                        field2Name:(NSString*)field2Name
+                field2InitialValue:(NSString*)field2InitialValue
+              fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
+  return [self initWithNibName:nil
+                        bundle:nil
+                     fieldName:fieldName
+                  initialValue:initialValue
+                    field2Name:field2Name
+            field2InitialValue:field2InitialValue
+          fieldChangedDelegate:delegate];
+}
+
+- (instancetype) initWithFieldName:(NSString*)fieldName
+                      initialValue:(NSString*)initialValue
+              fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
+  return [self initWithNibName:nil
+                        bundle:nil
+                     fieldName:fieldName
+                  initialValue:initialValue
+                    field2Name:nil
+            field2InitialValue:nil
+          fieldChangedDelegate:delegate];
 }
 
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
@@ -42,6 +76,8 @@
                         bundle:bundleOrNil
                      fieldName:@""
                   initialValue:@""
+                    field2Name:nil
+            field2InitialValue:nil
                       fieldChangedDelegate:nil];
   return self;
 }
@@ -53,6 +89,10 @@
                                                                               target:self
                                                                               action:@selector(saveField:)];
   [self.navigationItem setRightBarButtonItem:saveButton];
+  if (self.label2) {
+    self.label2.hidden = NO;
+    self.field2.hidden = NO;
+  }
 }
 
 - (void) highlightFieldIfInvalid {

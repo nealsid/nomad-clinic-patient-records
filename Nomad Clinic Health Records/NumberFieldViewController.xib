@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumberFieldViewController">
             <connections>
+                <outlet property="field2" destination="EyZ-wv-mZZ" id="W1e-wl-iAf"/>
+                <outlet property="label2" destination="rh3-By-Lvy" id="iyl-3l-K16"/>
                 <outlet property="titleLabel" destination="eMi-ee-zLo" id="a2H-2S-Y3m"/>
                 <outlet property="valueField" destination="U9i-Ap-6wE" id="Zj4-5A-orQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -36,15 +38,48 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </textField>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rh3-By-Lvy">
+                    <rect key="frame" x="279" y="262" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="4GG-vm-f0L"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EyZ-wv-mZZ">
+                    <rect key="frame" x="180" y="334" width="240" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="rZ9-Cj-zey"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="U9i-Ap-6wE" secondAttribute="centerX" constant="-0.5" id="2Yo-SM-nc0"/>
+                <constraint firstItem="U9i-Ap-6wE" firstAttribute="centerX" secondItem="rh3-By-Lvy" secondAttribute="centerX" id="JOU-Vn-e5a"/>
                 <constraint firstItem="U9i-Ap-6wE" firstAttribute="top" secondItem="eMi-ee-zLo" secondAttribute="bottom" constant="51" id="QPE-qm-J0U"/>
+                <constraint firstItem="EyZ-wv-mZZ" firstAttribute="top" secondItem="rh3-By-Lvy" secondAttribute="bottom" constant="51" id="SYX-rs-JUG"/>
                 <constraint firstItem="eMi-ee-zLo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="109" id="h9S-ww-fwy"/>
+                <constraint firstItem="rh3-By-Lvy" firstAttribute="top" secondItem="U9i-Ap-6wE" secondAttribute="bottom" constant="51" id="hyl-PB-6l9"/>
                 <constraint firstItem="eMi-ee-zLo" firstAttribute="centerX" secondItem="U9i-Ap-6wE" secondAttribute="centerX" constant="-0.5" id="jOW-OA-hPN"/>
+                <constraint firstItem="EyZ-wv-mZZ" firstAttribute="centerX" secondItem="rh3-By-Lvy" secondAttribute="centerX" id="nm9-Ki-2iC"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

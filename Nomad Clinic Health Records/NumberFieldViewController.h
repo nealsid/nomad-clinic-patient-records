@@ -11,10 +11,16 @@
 
 @interface NumberFieldViewController : UIViewController
 
+- (instancetype) initWithFieldName:(NSString*)fieldName
+                      initialValue:(NSString*)initialValue
+              fieldChangedDelegate:(id<FieldEditDelegate>) delegate;
+
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
                        fieldName:(NSString*)fieldName
                     initialValue:(NSString*)initialValue
+                      field2Name:(NSString*)field2Name
+              field2InitialValue:(NSString*)field2InitialValue
             fieldChangedDelegate:(id<FieldEditDelegate>)delegate;
 
 @end

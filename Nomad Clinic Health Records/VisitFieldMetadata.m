@@ -7,6 +7,7 @@
 //
 
 #import "VisitFieldMetadata.h"
+
 #import "PatientViewController.h"
 
 @implementation VisitFieldMetadata
@@ -22,8 +23,7 @@ static NSArray* visitFieldMetadata;
                            @{@"fieldName":@"bp_systolic",
                              @"prettyName":@"Blood pressure",
                              @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)],
-                             @"defaultValue":[NSNumber numberWithInt:0],
-                             @"editClass":[NumberFieldViewController class]},
+                             @"defaultValue":[NSNumber numberWithInt:0]},
 
                            @{@"fieldName":@"breathing_rate",
                              @"prettyName":@"Breathing rate",

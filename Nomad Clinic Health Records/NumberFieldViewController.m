@@ -8,27 +8,54 @@
 
 #import "NumberFieldViewController.h"
 
+#import "VisitNotesComplex.h"
+
 @interface NumberFieldViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
+
 @property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet UITextField *field2;
 
 @property (weak, nonatomic) id<FieldEditDelegate> delegate;
-
+@property (strong, nonatomic) NSDictionary* visitFieldMetadata;
 @property (strong, nonatomic) NSString* fieldName;
 @property (strong, nonatomic) NSString* initialValue;
 
 @property (strong, nonatomic) NSString* field2Name;
-@property (strong, nonatomic) NSString* initialValue;
+@property (strong, nonatomic) NSString* field2InitialValue;
 
 @end
 
 @implementation NumberFieldViewController
 
+- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
+                        fromVisitNotes:(VisitNotesComplex*)notes
+                  fieldChangedDelegate:(id<FieldEditDelegate>) delegate {
+  NSString* labelText = [fieldMetadata objectForKey:@"prettyName"];
+  NSString *initialValue = [NSString stringWithFormat:@"%@", [notes valueForKey:[fieldMetadata objectForKey:@"fieldName"]]];
+  NSString* diastolicLabel;
+  NSString* initialDiastolic;
+  // Special case blood pressure.
+  if ([[fieldMetadata objectForKey:@"fieldName"] isEqualToString:@"bp_systolic"]) {
+    labelText = @"Systolic";
+    diastolicLabel = @"Diastolic";
+    initialDiastolic = [NSString stringWithFormat:@"%@", [notes valueForKey:@"bp_diastolic"]];
+  }
+  return [self initWithNibName:nil
+                        bundle:nil
+                   visitFieldMetadata:(NSDictionary*)fieldMetadata
+                     fieldName:labelText
+                  initialValue:initialValue
+                    field2Name:diastolicLabel
+            field2InitialValue:initialDiastolic
+          fieldChangedDelegate:delegate];
+}
+
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
+              visitFieldMetadata:(NSDictionary*)visitFieldMetadata
                        fieldName:(NSString*)fieldName
                     initialValue:(NSString*)initialValue
                       field2Name:(NSString*)field2Name
@@ -38,45 +65,19 @@
   if(self) {
     self.fieldName = fieldName;
     self.initialValue = initialValue;
-    if (field2Name) {
-      self.label2.text = field2Name;
-      self.field2.text = field2InitialValue;
-    }
+    self.field2Name = field2Name;
+    self.field2InitialValue = field2InitialValue;
+    self.visitFieldMetadata = visitFieldMetadata;
     self.delegate = delegate;
   }
   return self;
-}
-
-- (instancetype) initWithFieldName:(NSString*)fieldName
-                      initialValue:(NSString*)initialValue
-                        field2Name:(NSString*)field2Name
-                field2InitialValue:(NSString*)field2InitialValue
-              fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
-  return [self initWithNibName:nil
-                        bundle:nil
-                     fieldName:fieldName
-                  initialValue:initialValue
-                    field2Name:field2Name
-            field2InitialValue:field2InitialValue
-          fieldChangedDelegate:delegate];
-}
-
-- (instancetype) initWithFieldName:(NSString*)fieldName
-                      initialValue:(NSString*)initialValue
-              fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
-  return [self initWithNibName:nil
-                        bundle:nil
-                     fieldName:fieldName
-                  initialValue:initialValue
-                    field2Name:nil
-            field2InitialValue:nil
-          fieldChangedDelegate:delegate];
 }
 
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil {
   self = [self initWithNibName:nibNameOrNil
                         bundle:bundleOrNil
+            visitFieldMetadata:nil
                      fieldName:@""
                   initialValue:@""
                     field2Name:nil
@@ -92,41 +93,65 @@
                                                                               target:self
                                                                               action:@selector(saveField:)];
   [self.navigationItem setRightBarButtonItem:saveButton];
-  if (self.label2) {
+  if (self.field2Name) {
     self.label2.hidden = NO;
     self.field2.hidden = NO;
+    self.label2.text = self.field2Name;
+    self.field2.text = self.field2InitialValue;
   }
 }
 
-- (void) highlightFieldIfInvalid {
-  if (![self fieldIsValid]) {
+/* Returns YES if either field is invalid */
+- (BOOL) highlightFieldsIfInvalid {
+  BOOL field1IsValid = [self fieldIsValid:self.valueField];
+  if (!field1IsValid) {
     self.valueField.layer.borderColor = [[UIColor redColor] CGColor];
     self.valueField.layer.borderWidth = 1.0f;
   } else {
     self.valueField.layer.borderColor = [[UIColor clearColor] CGColor];
     self.valueField.layer.borderWidth = 1.0f;
   }
+  BOOL field2IsValid = self.field2Name && [self fieldIsValid:self.field2];
+
+  if (!field2IsValid) {
+    self.field2.layer.borderColor = [[UIColor redColor] CGColor];
+    self.field2.layer.borderWidth = 1.0f;
+  } else {
+    self.field2.layer.borderColor = [[UIColor clearColor] CGColor];
+    self.field2.layer.borderWidth = 1.0f;
+  }
+  return !field1IsValid || !field2IsValid;
 }
 
-- (BOOL) fieldIsValid {
+- (BOOL) fieldIsValid:(UITextField*)textField {
   NSCharacterSet* ws = [NSCharacterSet whitespaceCharacterSet];
-  if ([self.valueField.text integerValue] == 0 &&
-      ![[self.valueField.text stringByTrimmingCharactersInSet:ws] isEqualToString:@"0"]) {
+  if ([textField.text integerValue] == 0 &&
+      ![[textField.text stringByTrimmingCharactersInSet:ws] isEqualToString:@"0"]) {
     return NO;
   }
   return YES;
 }
 
 - (void) saveField:(id)sender {
-  if (![self fieldIsValid]) {
-    [self highlightFieldIfInvalid];
+  if (![self highlightFieldsIfInvalid]) {
     return;
   }
+  
   NSCharacterSet* ws = [NSCharacterSet whitespaceCharacterSet];
   NSString* input = [self.valueField.text stringByTrimmingCharactersInSet:ws];
 
   NSNumber* newValue = [NSNumber numberWithInteger:[input integerValue]];
-  [self.delegate newFieldValue:newValue];
+
+  NSNumber* newValue2;
+  if (self.field2Name) {
+    NSString* input = [self.valueField.text stringByTrimmingCharactersInSet:ws];
+  
+    newValue2 = [NSNumber numberWithInteger:[input   integerValue]];
+  }
+  
+  [self.delegate newFieldValuesFieldMetadata:self.visitFieldMetadata
+                                      value1:newValue
+                                      value2:newValue2];
 }
 
 @end

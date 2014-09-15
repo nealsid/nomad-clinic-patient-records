@@ -120,28 +120,30 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   }
 
   NSDictionary* fieldMetadata = self.visitSpecificFieldMetadata[row];
-  Class editClass = [fieldMetadata objectForKey:@"editClass"];
-  if ()
-  if (row == 0) {
-    NSArray* weightClasses = [VisitNotesComplex allWeightClassesAsStrings];
-
-    PickerFieldViewController* vc = [[PickerFieldViewController alloc]
-                                     initWithFieldName:@"Weight"
-                                     choices:weightClasses
-                                     initialChoiceIndex:[self.mostRecentVisit.notes.weight_class integerValue]
-                                     fieldEditDelegate:self];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-  }
-  if ([indexPath row] == 2) {
-    SOAPViewController* vc = [[SOAPViewController alloc] initWithNibName:nil
-                                                                  bundle:nil
-                                                                soapType:O
-                                                                    note:self.mostRecentVisit.notes.objective
-                                                                delegate:self];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-  }
+  NumberFieldViewController* vc = [[NumberFieldViewController alloc] initWithFieldMetadata:fieldMetadata
+                                                                            fromVisitNotes:self.mostRecentVisit.notes
+                                                                      fieldChangedDelegate:self];
+  [self.navigationController pushViewController:vc animated:YES];
+//  if (row == 0) {
+//    NSArray* weightClasses = [VisitNotesComplex allWeightClassesAsStrings];
+//
+//    PickerFieldViewController* vc = [[PickerFieldViewController alloc]
+//                                     initWithFieldName:@"Weight"
+//                                     choices:weightClasses
+//                                     initialChoiceIndex:[self.mostRecentVisit.notes.weight_class integerValue]
+//                                     fieldEditDelegate:self];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
+//  }
+//  if ([indexPath row] == 2) {
+//    SOAPViewController* vc = [[SOAPViewController alloc] initWithNibName:nil
+//                                                                  bundle:nil
+//                                                                soapType:O
+//                                                                    note:self.mostRecentVisit.notes.objective
+//                                                                delegate:self];
+//    [self.navigationController pushViewController:vc animated:YES];
+//    return;
+//  }
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView

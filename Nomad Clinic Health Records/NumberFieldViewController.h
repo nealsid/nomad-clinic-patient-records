@@ -9,16 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "FieldEditDelegate.h"
 
+@class VisitNotesComplex;
+
 @interface NumberFieldViewController : UIViewController
 
-- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata;
+- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
+                        fromVisitNotes:(VisitNotesComplex*)notes
+                  fieldChangedDelegate:(id<FieldEditDelegate>) delegate;
 
-- (instancetype) initWithFieldName:(NSString*)fieldName
-                      initialValue:(NSString*)initialValue
-              fieldChangedDelegate:(id<FieldEditDelegate>) delegate;
 
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
+              visitFieldMetadata:(NSDictionary*)visitFieldMetadata
                        fieldName:(NSString*)fieldName
                     initialValue:(NSString*)initialValue
                       field2Name:(NSString*)field2Name

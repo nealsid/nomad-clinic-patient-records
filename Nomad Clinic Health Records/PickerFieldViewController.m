@@ -79,7 +79,7 @@
 - (void) saveField:(id)sender {
   NSInteger selectedRow = [self.pickerView selectedRowInComponent:0];
   NSNumber* newValue = [NSNumber numberWithInteger:selectedRow];
-  [self.delegate newFieldValue:newValue];
+//  [self.delegate newFieldValue:newValue];
 }
 
 

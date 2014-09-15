@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VisitFieldMetadata.h"
 
 @protocol FieldEditDelegate <NSObject>
 
-- (void) newFieldValue:(NSNumber*) newValue;
+- (void) newFieldValuesFieldMetadata:(NSDictionary*)visitFieldMetadata value1:(NSNumber*) newValue value2:(NSNumber*)newValue2;
 
 @end

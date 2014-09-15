@@ -310,6 +310,7 @@
 		F9F67E8719BA1DE300144061 /* Utility View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F907A50219B51BEC00A22A15 /* FieldEditDelegate.h */,
 				F96CF7F8199EA5E700F2C4EF /* TableViewController.h */,
 				F96CF7F9199EA5E700F2C4EF /* TableViewController.m */,
 				F9B9EF6019A25C3800072D7D /* NumberFieldViewController.h */,
@@ -353,7 +354,6 @@
 				F984465F199E5BFA00F59910 /* Utils.m */,
 				F9F4BEE719C61E480058B704 /* VisitFieldMetadata.h */,
 				F9F4BEE819C61E480058B704 /* VisitFieldMetadata.m */,
-				F907A50219B51BEC00A22A15 /* FieldEditDelegate.h */,
 				F9FAEA66197B075500C9B3E5 /* NEMRAppDelegate.h */,
 				F9FAEA67197B075500C9B3E5 /* NEMRAppDelegate.m */,
 				F937FC1C199940BB00FD1355 /* FlexDate+ToString.h */,

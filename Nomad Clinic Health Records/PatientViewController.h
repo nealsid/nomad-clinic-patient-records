@@ -45,5 +45,6 @@
 - (void) isHealthySwitchClicked:(id)sender;
 
 - (NSString*) formatBloodPressure:(VisitNotesComplex*) note;
+- (NSString*) formatWeightClass:(VisitNotesComplex*) note;
 
 @end

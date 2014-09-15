@@ -83,8 +83,8 @@ viewForHeaderInSection:(NSInteger)section {
 
   label.text = [NSString stringWithFormat:@"%@",
                 [self.dateFormatter stringFromDate:self.mostRecentVisit.visit_date]];
-  view.contentView.backgroundColor = [UIColor whiteColor];
-  label.backgroundColor = [UIColor whiteColor];
+  view.contentView.backgroundColor = [UIColor clearColor];
+//  label.backgroundColor = [UIColor whiteColor];
   [view.contentView addSubview:label];
   NSLog(@"vfhins: %@", view.contentView);
   return view;

@@ -133,7 +133,7 @@
 }
 
 - (void) saveField:(id)sender {
-  if (![self highlightFieldsIfInvalid]) {
+  if ([self highlightFieldsIfInvalid]) {
     return;
   }
   
@@ -144,9 +144,8 @@
 
   NSNumber* newValue2;
   if (self.field2Name) {
-    NSString* input = [self.valueField.text stringByTrimmingCharactersInSet:ws];
-  
-    newValue2 = [NSNumber numberWithInteger:[input   integerValue]];
+    NSString* input = [self.field2.text stringByTrimmingCharactersInSet:ws];
+    newValue2 = [NSNumber numberWithInteger:[input integerValue]];
   }
   
   [self.delegate newFieldValuesFieldMetadata:self.visitFieldMetadata

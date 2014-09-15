@@ -66,6 +66,10 @@
   } else {
     NSObject* defaultValue = [fieldMetadata objectForKey:@"defaultValue"];
     [self.visitNotes setValue:defaultValue forKey:fieldName];
+    // Special case blood pressure (lots of these :-( )
+    if ([fieldName isEqualToString:@"bp_systolic"]) {
+      [self.visitNotes setValue:defaultValue forKey:@"bp_diastolic"];
+    }
   }
   [[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] saveChanges];
   [self.tableView reloadData];

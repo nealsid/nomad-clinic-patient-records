@@ -51,7 +51,7 @@
                                                                               target:self
                                                                               action:@selector(editPatient:)];
   [self.navigationItem setRightBarButtonItem:editButton];
-  [self.patientNameField setText:@"Most recent visit"];
+  [self.patientNameField setText:@"Last Visit"];
   [self.recentVisitTable registerClass:[PatientVisitTableViewCell class]
                 forCellReuseIdentifier:@"UITableViewCell"];
   [self.recentVisitTable registerClass:[UITableViewHeaderFooterView class]
@@ -157,8 +157,14 @@
   [self.recentVisitTable reloadData];
 }
 
-- (void) newFieldValue:(NSNumber*)newValue {
-  self.mostRecentVisit.notes.weight_class = newValue;
+- (void) newFieldValuesFieldMetadata:(NSDictionary *)visitFieldMetadata
+                              value1:(NSNumber *)newValue
+                              value2:(NSNumber *)newValue2 {
+  NSString* propertyName = [visitFieldMetadata objectForKey:@"fieldName"];
+  [self.mostRecentVisit.notes setValue:newValue forKey:propertyName];
+  if ([propertyName isEqualToString:@"bp_systolic"]) {
+    [self.mostRecentVisit.notes setValue:newValue2 forKey:@"bp_diastolic"];
+  }
   [self.visitStore saveChanges];
   [self.recentVisitTable reloadData];
   [self.navigationController popViewControllerAnimated:YES];

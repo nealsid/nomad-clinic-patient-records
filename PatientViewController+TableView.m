@@ -9,7 +9,7 @@
 #import "PatientViewController+TableView.h"
 
 #import "PickerFieldViewController.h"
-#import "SOAPViewController.h"
+#import "StringFieldViewController.h"
 #import "Visit.h"
 #import "VisitFieldChooserTableViewController.h"
 #import "VisitNotesComplex.h"

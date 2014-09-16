@@ -11,7 +11,7 @@
 
 #import "FieldEditDelegate.h"
 #import "NumberFieldViewController.h"
-#import "SOAPViewController.h"
+#import "StringFieldViewController.h"
 
 @class VisitNotesComplex;
 

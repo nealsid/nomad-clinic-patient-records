@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Upaya Zen Center. All rights reserved.
 //
 
-#import "SOAPViewController.h"
+#import "StringFieldViewController.h"
 
 #import "FieldEditDelegate.h"
+#import "VisitNotesComplex.h"
 
-@interface SOAPViewController ()
+@interface StringFieldViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextView* soapNoteTextView;
 
@@ -23,19 +24,20 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 @property (weak, nonatomic) id<FieldEditDelegate> delegate;
+@property (strong, nonatomic) NSDictionary* visitFieldMetadata;
+@property (strong, nonatomic) NSString* fieldName;
 
 @end
 
-@implementation SOAPViewController
+@implementation StringFieldViewController
 
 - (IBAction)saveButtonPressed:(id)sender {
   NSString* newText = self.soapNoteTextView.text;
   BOOL theSame = [newText isEqual:self.note];
 
   if (!theSame) {
-    [self.delegate newFieldValuesFieldMetadata:self.visitFieldMetdata
-                                        value1:newText
-                                        value2:nil];
+    [self.delegate newStringFieldValueFieldMetadata:self.visitFieldMetadata
+                                              value:newText];
   } else {
     [self cancelButtonPressed:nil];
   }
@@ -51,13 +53,14 @@
 - (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
                         fromVisitNotes:(VisitNotesComplex*)notes
                   fieldChangedDelegate:(id<FieldEditDelegate>) delegate {
-  NSString* fieldName = [fieldMetdata objectForKey:@"prettyName"];
-  NSString* initialValue = [notes objectForKey:[fieldMetadata objectForKey:@"fieldName"]];
+  NSString* fieldName = [fieldMetadata objectForKey:@"prettyName"];
+  NSString* initialValue = [notes valueForKey:[fieldMetadata objectForKey:@"fieldName"]];
   return [self initWithNibName:nil
                         bundle:nil
-             visitFieldMetdata:fieldMetadata
+             visitFieldMetadata:fieldMetadata
+                     fieldName:fieldName
                   initialValue:initialValue
-               fieldChangedDelegate:delegate];
+          fieldChangedDelegate:delegate];
 }
 
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
@@ -69,7 +72,7 @@
   self = [super init];
   if (self) {
     self.fieldName = fieldName;
-    self.visitFieldMetdata = visitFieldMetadata;
+    self.visitFieldMetadata = visitFieldMetadata;
     self.note = initialValue;
     self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                  action:@selector(tap:)];

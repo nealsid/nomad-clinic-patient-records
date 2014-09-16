@@ -15,7 +15,7 @@
 #import "Patient.h"
 #import "PatientAddEditViewController.h"
 #import "PatientViewController+TableView.h"
-#import "SOAPViewController.h"
+#import "StringFieldViewController.h"
 #import "Visit.h"
 #import "VisitFieldMetadata.h"
 #import "VisitNotesComplex.h"
@@ -170,13 +170,13 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) soapViewController:(SOAPViewController*)vc saveNewNote:(NSString*)s
-                    forType:(SOAPEntryType)type {
-  self.mostRecentVisit.notes.objective = s;
+- (void) newStringFieldValueFieldMetadata:(NSDictionary*) visitFieldMetadata
+                                    value:(NSString*) newValue {
+  NSString* propertyName = [visitFieldMetadata objectForKey:@"fieldName"];
+  [self.mostRecentVisit.notes setValue:newValue forKey:propertyName];
   [self.visitStore saveChanges];
   [self.recentVisitTable reloadData];
   [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 @end

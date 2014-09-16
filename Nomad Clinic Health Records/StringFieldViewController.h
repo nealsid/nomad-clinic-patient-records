@@ -27,7 +27,7 @@
 
 // @end
 
-@interface SOAPViewController : UIViewController
+@interface StringFieldViewController : UIViewController
 
 - (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
                         fromVisitNotes:(VisitNotesComplex*)notes

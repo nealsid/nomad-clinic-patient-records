@@ -33,8 +33,8 @@
 		F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96CF7F9199EA5E700F2C4EF /* TableViewController.m */; };
 		F971217F19A806FC00C59980 /* ClinicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F971217D19A806FC00C59980 /* ClinicViewController.m */; };
 		F971218019A806FC00C59980 /* ClinicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F971217E19A806FC00C59980 /* ClinicViewController.xib */; };
-		F983434A19900AC50015974B /* SOAPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F983434819900AC50015974B /* SOAPViewController.m */; };
-		F983434B19900AC50015974B /* SOAPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F983434919900AC50015974B /* SOAPViewController.xib */; };
+		F983434A19900AC50015974B /* StringFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F983434819900AC50015974B /* StringFieldViewController.m */; };
+		F983434B19900AC50015974B /* StringFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F983434919900AC50015974B /* StringFieldViewController.xib */; };
 		F9844660199E5BFA00F59910 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F984465F199E5BFA00F59910 /* Utils.m */; };
 		F99720EF19ACC8C8006F6630 /* PatientAddEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99720ED19ACC8C8006F6630 /* PatientAddEditViewController.m */; };
 		F99720F019ACC8C8006F6630 /* PatientAddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99720EE19ACC8C8006F6630 /* PatientAddEditViewController.xib */; };
@@ -120,9 +120,9 @@
 		F971217C19A806FC00C59980 /* ClinicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicViewController.h; sourceTree = "<group>"; };
 		F971217D19A806FC00C59980 /* ClinicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicViewController.m; sourceTree = "<group>"; };
 		F971217E19A806FC00C59980 /* ClinicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicViewController.xib; sourceTree = "<group>"; };
-		F983434719900AC50015974B /* SOAPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAPViewController.h; sourceTree = "<group>"; };
-		F983434819900AC50015974B /* SOAPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAPViewController.m; sourceTree = "<group>"; };
-		F983434919900AC50015974B /* SOAPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SOAPViewController.xib; sourceTree = "<group>"; };
+		F983434719900AC50015974B /* StringFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringFieldViewController.h; sourceTree = "<group>"; };
+		F983434819900AC50015974B /* StringFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFieldViewController.m; sourceTree = "<group>"; };
+		F983434919900AC50015974B /* StringFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringFieldViewController.xib; sourceTree = "<group>"; };
 		F984465E199E5BFA00F59910 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		F984465F199E5BFA00F59910 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		F99720EC19ACC8C8006F6630 /* PatientAddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientAddEditViewController.h; sourceTree = "<group>"; };
@@ -277,9 +277,9 @@
 				F911FF83197C07B20063A1F1 /* PatientViewController.xib */,
 				F9FC825B19A516E200BA86E7 /* PatientViewController+TableView.h */,
 				F9FC825C19A516E200BA86E7 /* PatientViewController+TableView.m */,
-				F983434719900AC50015974B /* SOAPViewController.h */,
-				F983434819900AC50015974B /* SOAPViewController.m */,
-				F983434919900AC50015974B /* SOAPViewController.xib */,
+				F983434719900AC50015974B /* StringFieldViewController.h */,
+				F983434819900AC50015974B /* StringFieldViewController.m */,
+				F983434919900AC50015974B /* StringFieldViewController.xib */,
 				F9A29CE619AB70B400F83BFC /* Empty.xib */,
 				F99720EC19ACC8C8006F6630 /* PatientAddEditViewController.h */,
 				F99720ED19ACC8C8006F6630 /* PatientAddEditViewController.m */,
@@ -470,7 +470,7 @@
 				F9E9DAA51986C03000E8568F /* NEMRClinicianTableViewController.xib in Resources */,
 				F911FF8A197CC2570063A1F1 /* PatientsTableViewController.xib in Resources */,
 				F9DBC47E199D57EE00FB2544 /* male.png in Resources */,
-				F983434B19900AC50015974B /* SOAPViewController.xib in Resources */,
+				F983434B19900AC50015974B /* StringFieldViewController.xib in Resources */,
 				F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */,
 				F9A29CE719AB70B400F83BFC /* Empty.xib in Resources */,
 				F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */,
@@ -528,7 +528,7 @@
 				F9DA2CF419BFFE7200787C8E /* Clinician.m in Sources */,
 				F9DA2CF719BFFE7200787C8E /* Patient.m in Sources */,
 				F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */,
-				F983434A19900AC50015974B /* SOAPViewController.m in Sources */,
+				F983434A19900AC50015974B /* StringFieldViewController.m in Sources */,
 				F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */,
 				F911FF84197C07B20063A1F1 /* PatientViewController.m in Sources */,
 				F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */,

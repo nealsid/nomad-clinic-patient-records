@@ -11,6 +11,10 @@
 
 @protocol FieldEditDelegate <NSObject>
 
-- (void) newFieldValuesFieldMetadata:(NSDictionary*)visitFieldMetadata value1:(NSNumber*) newValue value2:(NSNumber*)newValue2;
+- (void) newFieldValuesFieldMetadata:(NSDictionary*)visitFieldMetadata
+                              value1:(NSNumber*) newValue
+                              value2:(NSNumber*)newValue2;
 
+- (void) newStringFieldValueFieldMetadata:(NSDictionary*) visitFieldMetadata
+                                    value:(NSString*) newValue;
 @end

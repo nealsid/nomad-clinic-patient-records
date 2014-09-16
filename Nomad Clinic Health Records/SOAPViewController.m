@@ -8,19 +8,21 @@
 
 #import "SOAPViewController.h"
 
-@interface SOAPViewController () {
-  SOAPEntryType entryType;
-}
+#import "FieldEditDelegate.h"
+
+@interface SOAPViewController ()
 
 @property (nonatomic, weak) IBOutlet UITextView* soapNoteTextView;
 
 @property (nonatomic, weak) NSString* note;
+
 @property (nonatomic, strong) UITapGestureRecognizer* tapRecognizer;
+
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
-@property (weak, nonatomic) id<SOAPNoteViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<FieldEditDelegate> delegate;
 
 @end
 
@@ -31,9 +33,9 @@
   BOOL theSame = [newText isEqual:self.note];
 
   if (!theSame) {
-    [self.delegate soapViewController:self
-                          saveNewNote:newText
-                              forType:entryType];
+    [self.delegate newFieldValuesFieldMetadata:self.visitFieldMetdata
+                                        value1:newText
+                                        value2:nil];
   } else {
     [self cancelButtonPressed:nil];
   }
@@ -46,15 +48,29 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (instancetype) initWithNibName:(NSString *)nibNameOrNil
-                          bundle:(NSBundle *)nibBundleOrNil
-                        soapType:(SOAPEntryType)s
-                            note:(NSString*)text
-                        delegate:(id<SOAPNoteViewControllerDelegate>)delegate {
+- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
+                        fromVisitNotes:(VisitNotesComplex*)notes
+                  fieldChangedDelegate:(id<FieldEditDelegate>) delegate {
+  NSString* fieldName = [fieldMetdata objectForKey:@"prettyName"];
+  NSString* initialValue = [notes objectForKey:[fieldMetadata objectForKey:@"fieldName"]];
+  return [self initWithNibName:nil
+                        bundle:nil
+             visitFieldMetdata:fieldMetadata
+                  initialValue:initialValue
+               fieldChangedDelegate:delegate];
+}
+
+- (instancetype) initWithNibName:(NSString*)nibNameOrNil
+                          bundle:(NSBundle*)bundleOrNil
+              visitFieldMetadata:(NSDictionary*)visitFieldMetadata
+                       fieldName:(NSString*)fieldName
+                    initialValue:(NSString*)initialValue
+            fieldChangedDelegate:(id<FieldEditDelegate>)delegate {
   self = [super init];
   if (self) {
-    entryType = s;
-    self.note = text;
+    self.fieldName = fieldName;
+    self.visitFieldMetdata = visitFieldMetadata;
+    self.note = initialValue;
     self.tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                  action:@selector(tap:)];
     self.delegate = delegate;
@@ -72,7 +88,7 @@
   [super viewDidLoad];
   self.soapNoteTextView.text = self.note;
   [self.soapNoteTextView addGestureRecognizer:self.tapRecognizer];
-  self.title = [self stringForSoapEntryType:entryType];
+  self.title = self.fieldName;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -101,21 +117,6 @@
                                     self.toolbar.frame.size.height)];
 
   [UIView commitAnimations];
-}
-
-- (NSString*) stringForSoapEntryType:(SOAPEntryType)s {
-  switch(s) {
-    case S:
-      return @"Subjective";
-    case O:
-      return @"Objective";
-    case A:
-      return @"Assessment";
-    case P:
-      return @"Plan";
-    default:
-      return @"";
-  }
 }
 
 @end

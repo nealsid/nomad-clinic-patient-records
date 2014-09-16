@@ -9,6 +9,7 @@
 #import "VisitFieldMetadata.h"
 
 #import "PatientViewController.h"
+#import "PickerFieldViewController.h"
 
 @implementation VisitFieldMetadata
 
@@ -23,28 +24,34 @@ static NSArray* visitFieldMetadata;
                            @{@"fieldName":@"bp_systolic",
                              @"prettyName":@"Blood pressure",
                              @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)],
-                             @"defaultValue":[NSNumber numberWithInt:0]},
+                             @"defaultValue":[NSNumber numberWithInt:0],
+                             @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"breathing_rate",
                              @"prettyName":@"Breathing rate",
-                             @"defaultValue":[NSNumber numberWithInt:0]},
+                             @"defaultValue":[NSNumber numberWithInt:0],
+                             @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"pulse",
                              @"prettyName":@"Pulse",
-                             @"defaultValue":[NSNumber numberWithInt:0]},
+                             @"defaultValue":[NSNumber numberWithInt:0],
+                             @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"temp_fahrenheit",
                              @"prettyName":@"Temp (℉)",
-                             @"defaultValue":[NSNumber numberWithInt:0]},
+                             @"defaultValue":[NSNumber numberWithInt:0],
+                             @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"weight",
                              @"prettyName":@"Weight",
-                             @"defaultValue":[NSNumber numberWithInt:0]},
+                             @"defaultValue":[NSNumber numberWithInt:0],
+                             @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"weight_class",
                              @"prettyName":@"Weight class",
                              @"formatSelector":[NSValue valueWithPointer:@selector(formatWeightClass:)],
-                             @"defaultValue":[NSNumber numberWithInt:2]},
+                             @"defaultValue":[NSNumber numberWithInt:2],
+                             @"editClass":[PickerFieldViewController class]},
 
                            @{@"fieldName":@"subjective",
                              @"prettyName":@"Subjective",

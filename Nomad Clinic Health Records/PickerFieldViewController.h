@@ -9,8 +9,22 @@
 #import <UIKit/UIKit.h>
 
 @protocol FieldEditDelegate;
+@class VisitNotesComplex;
 
 @interface PickerFieldViewController : UIViewController
+
+/**
+ * Initializes a PickerFieldViewController from field metadata.  Knows how
+ * to construct a choice list from a given field (i.e. weight class)
+ *
+ * @param fieldMetadata The dictionary containing field information.
+ * @param notes The visit notes.
+ * @param delegate The delegate to call with the updated choice when
+ * the user saves.
+ */
+- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
+                        fromVisitNotes:(VisitNotesComplex*)notes
+                  fieldChangedDelegate:(id<FieldEditDelegate>) delegate;
 
 /**
  * Designated intializer.
@@ -21,6 +35,7 @@
  */
 - (instancetype)initWithNibName:(NSString *) nibNameOrNil
                          bundle:(NSBundle *) nibBundleOrNil
+              visitFieldMetdata:(NSDictionary*)fieldMetadata
                       fieldName:(NSString*) fieldName
                         choices:(NSArray *) choices
              initialChoiceIndex:(NSInteger) initialChoice
@@ -31,8 +46,8 @@
  *
  * @param choices The list of choices.
  */
-- (instancetype) initWithFieldName:(NSString*) fieldName
-                           choices:(NSArray*) choices
-                initialChoiceIndex:(NSInteger) initialChoice
-                 fieldEditDelegate:(id<FieldEditDelegate>) delegate;
+// - (instancetype) initWithFieldName:(NSString*) fieldName
+//                            choices:(NSArray*) choices
+//                 initialChoiceIndex:(NSInteger) initialChoice
+//                  fieldEditDelegate:(id<FieldEditDelegate>) delegate;
 @end

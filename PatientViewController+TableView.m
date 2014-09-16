@@ -120,10 +120,14 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   }
 
   NSDictionary* fieldMetadata = self.visitSpecificFieldMetadata[row];
-  NumberFieldViewController* vc = [[NumberFieldViewController alloc] initWithFieldMetadata:fieldMetadata
-                                                                            fromVisitNotes:self.mostRecentVisit.notes
-                                                                      fieldChangedDelegate:self];
-  [self.navigationController pushViewController:vc animated:YES];
+  Class c = [fieldMetadata objectForKey:@"editClass"];
+  if (c) {
+
+    UIViewController* vc = [[c alloc] initWithFieldMetadata:fieldMetadata
+                                             fromVisitNotes:self.mostRecentVisit.notes
+                                       fieldChangedDelegate:self];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 //  if (row == 0) {
 //    NSArray* weightClasses = [VisitNotesComplex allWeightClassesAsStrings];
 //

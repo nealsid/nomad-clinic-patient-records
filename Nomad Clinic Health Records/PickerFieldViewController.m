@@ -9,6 +9,8 @@
 #import "PickerFieldViewController.h"
 
 #import "FieldEditDelegate.h"
+#import "VisitNotesComplex.h"
+#import "VisitNotesComplex+WeightClass.h"
 
 @interface PickerFieldViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -20,26 +22,48 @@
 @property (strong, nonatomic) NSString* fieldName;
 @property NSInteger initialChoice;
 @property BOOL adjustedForTopLayout;
+@property (strong, nonatomic) NSDictionary* fieldMetadata;
 
 @property (strong, nonatomic) id<FieldEditDelegate> delegate;
+
 @end
 
 @implementation PickerFieldViewController
 
-- (instancetype) initWithFieldName:(NSString*)fieldName
-                           choices:(NSArray*)choices
-                initialChoiceIndex:(NSInteger) initialChoice
-                 fieldEditDelegate:(id<FieldEditDelegate>)delegate {
+- (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
+                        fromVisitNotes:(VisitNotesComplex*)notes
+                  fieldChangedDelegate:(id<FieldEditDelegate>) delegate {
+  NSString* fieldName = [fieldMetadata objectForKey:@"fieldName"];
+  NSArray* choices;
+  NSInteger initialChoice;
+  if ([fieldName isEqualToString:@"weight_class"]) {
+    choices = [VisitNotesComplex allWeightClassesAsStrings];
+    initialChoice = [notes.weight_class integerValue];
+  }
   return [self initWithNibName:nil
                         bundle:nil
-                     fieldName:fieldName
+             visitFieldMetdata:fieldMetadata
+                     fieldName:[fieldMetadata objectForKey:@"prettyName"]
                        choices:choices
             initialChoiceIndex:initialChoice
-                      fieldEditDelegate:delegate];
+             fieldEditDelegate:delegate];
 }
+
+// - (instancetype) initWithFieldName:(NSString*)fieldName
+//                            choices:(NSArray*)choices
+//                 initialChoiceIndex:(NSInteger) initialChoice
+//                  fieldEditDelegate:(id<FieldEditDelegate>)delegate {
+//   return [self initWithNibName:nil
+//                         bundle:nil
+//                      fieldName:fieldName
+//                        choices:choices
+//             initialChoiceIndex:initialChoice
+//                       fieldEditDelegate:delegate];
+// }
 
 - (instancetype)initWithNibName:(NSString *) nibNameOrNil
                          bundle:(NSBundle *) nibBundleOrNil
+              visitFieldMetdata:(NSDictionary*)fieldMetadata
                       fieldName:(NSString*) fieldName
                         choices:(NSArray *) choices
              initialChoiceIndex:(NSInteger) initialChoice
@@ -52,6 +76,7 @@
     self.fieldName = fieldName;
     self.delegate = delegate;
     self.initialChoice = initialChoice;
+    self.fieldMetadata = fieldMetadata;
   }
   return self;
 }
@@ -60,6 +85,7 @@
                          bundle:(NSBundle *)nibBundleOrNil {
   return [self initWithNibName:nibNameOrNil
                         bundle:nibBundleOrNil
+             visitFieldMetdata:nil
                      fieldName:nil
                        choices:nil
             initialChoiceIndex:0
@@ -79,7 +105,9 @@
 - (void) saveField:(id)sender {
   NSInteger selectedRow = [self.pickerView selectedRowInComponent:0];
   NSNumber* newValue = [NSNumber numberWithInteger:selectedRow];
-//  [self.delegate newFieldValuesFieldMetadata:<#(NSDictionary *)#> value1:<#(NSNumber *)#> value2:<#(NSNumber *)#>wFieldValue:newValue];
+  [self.delegate newFieldValuesFieldMetadata:self.fieldMetadata
+                                      value1:newValue
+                                      value2:nil];
 }
 
 
@@ -105,4 +133,5 @@
     self.adjustedForTopLayout = YES;
   }
 }
+
 @end

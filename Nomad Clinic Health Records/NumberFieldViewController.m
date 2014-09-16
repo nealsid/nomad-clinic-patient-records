@@ -45,7 +45,7 @@
   }
   return [self initWithNibName:nil
                         bundle:nil
-                   visitFieldMetadata:(NSDictionary*)fieldMetadata
+                   visitFieldMetadata:fieldMetadata
                      fieldName:labelText
                   initialValue:initialValue
                     field2Name:diastolicLabel
@@ -136,7 +136,7 @@
   if ([self highlightFieldsIfInvalid]) {
     return;
   }
-  
+
   NSCharacterSet* ws = [NSCharacterSet whitespaceCharacterSet];
   NSString* input = [self.valueField.text stringByTrimmingCharactersInSet:ws];
 
@@ -147,7 +147,7 @@
     NSString* input = [self.field2.text stringByTrimmingCharactersInSet:ws];
     newValue2 = [NSNumber numberWithInteger:[input integerValue]];
   }
-  
+
   [self.delegate newFieldValuesFieldMetadata:self.visitFieldMetadata
                                       value1:newValue
                                       value2:newValue2];

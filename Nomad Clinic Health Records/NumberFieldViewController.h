@@ -17,7 +17,6 @@
                         fromVisitNotes:(VisitNotesComplex*)notes
                   fieldChangedDelegate:(id<FieldEditDelegate>) delegate;
 
-
 - (instancetype) initWithNibName:(NSString*)nibNameOrNil
                           bundle:(NSBundle*)bundleOrNil
               visitFieldMetadata:(NSDictionary*)visitFieldMetadata

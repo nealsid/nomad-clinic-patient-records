@@ -15,7 +15,7 @@
 
 @class VisitNotesComplex;
 
-@interface PatientViewController : UIViewController <FieldEditDelegate, SOAPNoteViewControllerDelegate>
+@interface PatientViewController : UIViewController <FieldEditDelegate>
 
 @property (strong, nonatomic) Visit* mostRecentVisit;
 @property (strong, nonatomic) NSDateFormatter* dateFormatter;

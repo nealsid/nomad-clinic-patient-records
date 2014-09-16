@@ -26,4 +26,5 @@ typedef NS_ENUM(NSInteger, VisitWeightClass) {
 - (BOOL) isWeightExteme;
 - (VisitWeightClass)weightClassForVisit;
 - (void)setWeightClass:(VisitWeightClass) weightClass;
+
 @end

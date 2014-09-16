@@ -21,6 +21,8 @@
 @property (strong, nonatomic) NSMutableSet* fieldsToRemove;
 @property (strong, nonatomic) NSMutableSet* fieldsToAdd;
 
+@property (strong, nonatomic) UIColor* addedColor;
+
 @end
 
 @implementation VisitFieldChooserTableViewController
@@ -33,6 +35,7 @@
     self.visitModelDisplayMetadata = VisitFieldMetadata.visitFieldMetadata;
     self.fieldsToAdd = [NSMutableSet set];
     self.fieldsToRemove = [NSMutableSet set];
+    self.addedColor = [UIColor colorWithHue:1 saturation:1 brightness:1.0 alpha:1.0];
   }
   return self;
 }
@@ -43,14 +46,35 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+  UIBarButtonItem* saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                               target:self
                                                                               action:@selector(saveChanges:)];
-  self.navigationItem.rightBarButtonItem = editButton;
+  self.navigationItem.rightBarButtonItem = saveButton;
 }
 
 - (void) saveChanges:(id)sender {
+  for(NSNumber* rowNumber in self.fieldsToAdd) {
+    NSInteger row = [rowNumber intValue];
+    NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[row];
+    NSString* fieldName = [fieldMetadata objectForKey:@"fieldName"];
 
+    NSObject* defaultValue = [fieldMetadata objectForKey:@"defaultValue"];
+    [self.visitNotes setValue:defaultValue forKey:fieldName];
+    // Special case blood pressure (lots of these :-( )
+    if ([fieldName isEqualToString:@"bp_systolic"]) {
+      [self.visitNotes setValue:defaultValue forKey:@"bp_diastolic"];
+    }
+  }
+  
+  for (NSNumber* rowNumber in self.fieldsToRemove) {
+    NSInteger row = [rowNumber intValue];
+    NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[row];
+    NSString* fieldName = [fieldMetadata objectForKey:@"fieldName"];
+    [self.visitNotes setValue:nil forKey:fieldName];
+    
+  }
+  [[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] saveChanges];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,26 +99,28 @@
   NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[row];
   NSString* fieldName = [fieldMetadata objectForKey:@"fieldName"];
 
-  NSNumber* rowNumber = [NSNumber numberWithInt:row];
-  if (self.fieldsToAdd member:rowNumber) {
-
+  NSNumber* rowNumber = [NSNumber numberWithInteger:row];
+  if ([self.fieldsToAdd member:rowNumber]) {
+    [self.fieldsToAdd removeObject:rowNumber];
+    [self.tableView reloadData];
+    NSLog(@"%@", self.fieldsToAdd);
+    NSLog(@"%@", self.fieldsToRemove);
+    return;
   }
-
+  
+  if ([self.fieldsToRemove member:rowNumber]) {
+    [self.fieldsToRemove removeObject:rowNumber];
+    [self.tableView reloadData];
+    NSLog(@"%@", self.fieldsToAdd);
+    NSLog(@"%@", self.fieldsToRemove);
+    return;
+  }
+  
   if ([self.visitNotes valueForKey:fieldName] != nil) {
     [self.fieldsToRemove addObject:[NSNumber numberWithInteger:row]];
-    [self.visitNotes setValue:nil forKey:fieldName];
   } else {
     [self.fieldsToAdd addObject:[NSNumber numberWithInteger:row]];
   }
-
-    NSObject* defaultValue = [fieldMetadata objectForKey:@"defaultValue"];
-    [self.visitNotes setValue:defaultValue forKey:fieldName];
-    // Special case blood pressure (lots of these :-( )
-    if ([fieldName isEqualToString:@"bp_systolic"]) {
-      [self.visitNotes setValue:defaultValue forKey:@"bp_diastolic"];
-    }
-  }
-  [[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] saveChanges];
   [self.tableView reloadData];
 }
 
@@ -102,10 +128,30 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
                                                           forIndexPath:indexPath];
+  NSLog(@"original cell tint: %@", cell.tintColor);
   NSInteger row = [indexPath row];
   NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[row];
-  cell.textLabel.text = [fieldMetadata objectForKey:@"prettyName"];
-  if ([self.visitNotes valueForKey:[fieldMetadata objectForKey:@"fieldName"]] != nil) {
+  
+  NSMutableAttributedString* textLabel = [[NSMutableAttributedString alloc] initWithString:[fieldMetadata objectForKey:@"prettyName"] attributes:nil];
+
+  NSNumber* rowNumber = [NSNumber numberWithInteger:row];
+  cell.contentView.backgroundColor = [UIColor clearColor];
+  cell.textLabel.backgroundColor = [UIColor clearColor];
+  cell.tintColor = [UIColor colorWithWhite:.3333 alpha:1.0];
+
+  if ([self.fieldsToAdd member:rowNumber]) {
+    cell.tintColor = [UIColor redColor];
+  }
+  if ([self.fieldsToRemove member:rowNumber]) {
+    NSDictionary* strikeThru = [NSDictionary dictionaryWithObjects:@[[NSNumber numberWithInt:NSUnderlineStyleSingle]]
+                                                           forKeys:@[NSStrikethroughStyleAttributeName]];
+
+    [textLabel setAttributes:strikeThru range:NSMakeRange(0, textLabel.string.length)];
+  }
+  cell.textLabel.attributedText = textLabel;
+  
+  if (([self.visitNotes valueForKey:[fieldMetadata objectForKey:@"fieldName"]] != nil &&
+       ![self.fieldsToRemove member:rowNumber]) || [self.fieldsToAdd member:rowNumber]) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
   } else {
     cell.accessoryType = UITableViewCellAccessoryNone;

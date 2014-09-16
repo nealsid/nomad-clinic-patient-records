@@ -44,7 +44,7 @@ static NSArray* visitFieldMetadata;
                              @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"weight",
-                             @"prettyName":@"Weight",
+                             @"prettyName":@"Weight (lbs)",
                              @"defaultValue":[NSNumber numberWithInt:0],
                              @"editClass":[NumberFieldViewController class]},
 

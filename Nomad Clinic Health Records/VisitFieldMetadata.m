@@ -10,6 +10,7 @@
 
 #import "PatientViewController.h"
 #import "PickerFieldViewController.h"
+#import "StringFieldViewController.h"
 
 @implementation VisitFieldMetadata
 
@@ -55,23 +56,28 @@ static NSArray* visitFieldMetadata;
 
                            @{@"fieldName":@"subjective",
                              @"prettyName":@"Subjective",
-                             @"defaultValue":@""},
+                             @"defaultValue":@"",
+                             @"editClass":[StringFieldViewController class]},
 
                            @{@"fieldName":@"objective",
                              @"prettyName":@"Objective",
-                             @"defaultValue":@""},
+                             @"defaultValue":@"",
+                             @"editClass":[StringFieldViewController class]},
 
                            @{@"fieldName":@"assessment",
                              @"prettyName":@"Assessment",
-                             @"defaultValue":@""},
+                             @"defaultValue":@"",
+                             @"editClass":[StringFieldViewController class]},
 
                            @{@"fieldName":@"plan",
                              @"prettyName":@"Plan",
-                             @"defaultValue":@""},
+                             @"defaultValue":@"",
+                             @"editClass":[StringFieldViewController class]},
 
                            @{@"fieldName":@"note",
                              @"prettyName":@"Note",
-                             @"defaultValue":@""}];
+                             @"defaultValue":@"",
+                             @"editClass":[StringFieldViewController class]}];
 
   }
   return visitFieldMetadata;

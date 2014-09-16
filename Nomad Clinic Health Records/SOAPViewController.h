@@ -20,13 +20,14 @@
 // @class SOAPViewController;
 
 @protocol FieldEditDelegate;
+@class VisitNotesComplex;
 
 // - (void) soapViewController:(SOAPViewController*)vc saveNewNote:(NSString*)s
 //                     forType:(SOAPEntryType)type;
 
 // @end
 
-@interface StringFieldViewController : UIViewController
+@interface SOAPViewController : UIViewController
 
 - (instancetype) initWithFieldMetadata:(NSDictionary*)fieldMetadata
                         fromVisitNotes:(VisitNotesComplex*)notes

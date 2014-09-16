@@ -14,12 +14,8 @@
 		F911FF85197C07B20063A1F1 /* PatientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F911FF83197C07B20063A1F1 /* PatientViewController.xib */; };
 		F911FF89197CC2570063A1F1 /* PatientsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F911FF87197CC2570063A1F1 /* PatientsTableViewController.m */; };
 		F911FF8A197CC2570063A1F1 /* PatientsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F911FF88197CC2570063A1F1 /* PatientsTableViewController.xib */; };
-		F914D8DA19883C5500BBD38E /* PatientVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F914D8D819883C5500BBD38E /* PatientVisitViewController.m */; };
-		F914D8DB19883C5500BBD38E /* PatientVisitViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F914D8D919883C5500BBD38E /* PatientVisitViewController.xib */; };
 		F914D8DD1989837800BBD38E /* female-patient.png in Resources */ = {isa = PBXBuildFile; fileRef = F914D8DC1989837800BBD38E /* female-patient.png */; };
 		F914D8DF1989880A00BBD38E /* male-patient.png in Resources */ = {isa = PBXBuildFile; fileRef = F914D8DE1989880A00BBD38E /* male-patient.png */; };
-		F914D8EF198D80A200BBD38E /* PatientVisitNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */; };
-		F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */; };
 		F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */; };
 		F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */; };
 		F92D297119AE841500DCE531 /* Patient+Gender.m in Sources */ = {isa = PBXBuildFile; fileRef = F92D297019AE841500DCE531 /* Patient+Gender.m */; };
@@ -96,14 +92,8 @@
 		F911FF86197CC2570063A1F1 /* PatientsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientsTableViewController.h; sourceTree = "<group>"; };
 		F911FF87197CC2570063A1F1 /* PatientsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientsTableViewController.m; sourceTree = "<group>"; };
 		F911FF88197CC2570063A1F1 /* PatientsTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientsTableViewController.xib; sourceTree = "<group>"; };
-		F914D8D719883C5500BBD38E /* PatientVisitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientVisitViewController.h; sourceTree = "<group>"; };
-		F914D8D819883C5500BBD38E /* PatientVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientVisitViewController.m; sourceTree = "<group>"; };
-		F914D8D919883C5500BBD38E /* PatientVisitViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientVisitViewController.xib; sourceTree = "<group>"; };
 		F914D8DC1989837800BBD38E /* female-patient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female-patient.png"; sourceTree = "<group>"; };
 		F914D8DE1989880A00BBD38E /* male-patient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male-patient.png"; sourceTree = "<group>"; };
-		F914D8EC198D80A200BBD38E /* PatientVisitNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientVisitNoteViewController.h; sourceTree = "<group>"; };
-		F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatientVisitNoteViewController.m; sourceTree = "<group>"; };
-		F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatientVisitNoteViewController.xib; sourceTree = "<group>"; };
 		F925BE4B1995544D0043029D /* AgeEntryChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgeEntryChoiceViewController.h; sourceTree = "<group>"; };
 		F925BE4C1995544D0043029D /* AgeEntryChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgeEntryChoiceViewController.m; sourceTree = "<group>"; };
 		F925BE4D1995544D0043029D /* AgeEntryChoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AgeEntryChoiceViewController.xib; sourceTree = "<group>"; };
@@ -287,12 +277,6 @@
 				F911FF83197C07B20063A1F1 /* PatientViewController.xib */,
 				F9FC825B19A516E200BA86E7 /* PatientViewController+TableView.h */,
 				F9FC825C19A516E200BA86E7 /* PatientViewController+TableView.m */,
-				F914D8D719883C5500BBD38E /* PatientVisitViewController.h */,
-				F914D8D819883C5500BBD38E /* PatientVisitViewController.m */,
-				F914D8D919883C5500BBD38E /* PatientVisitViewController.xib */,
-				F914D8EC198D80A200BBD38E /* PatientVisitNoteViewController.h */,
-				F914D8ED198D80A200BBD38E /* PatientVisitNoteViewController.m */,
-				F914D8EE198D80A200BBD38E /* PatientVisitNoteViewController.xib */,
 				F983434719900AC50015974B /* SOAPViewController.h */,
 				F983434819900AC50015974B /* SOAPViewController.m */,
 				F983434919900AC50015974B /* SOAPViewController.xib */,
@@ -491,9 +475,7 @@
 				F9A29CE719AB70B400F83BFC /* Empty.xib in Resources */,
 				F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */,
 				F971218019A806FC00C59980 /* ClinicViewController.xib in Resources */,
-				F914D8F0198D80A200BBD38E /* PatientVisitNoteViewController.xib in Resources */,
 				F914D8DD1989837800BBD38E /* female-patient.png in Resources */,
-				F914D8DB19883C5500BBD38E /* PatientVisitViewController.xib in Resources */,
 				F997FE2919AE77A800487ADE /* stetho@2x.png in Resources */,
 				F907A50119B5065E00A22A15 /* PickerFieldViewController.xib in Resources */,
 				F937FC091999027C00FD1355 /* DOBSetViewController.xib in Resources */,
@@ -541,7 +523,6 @@
 				F907A50019B5065E00A22A15 /* PickerFieldViewController.m in Sources */,
 				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,
-				F914D8DA19883C5500BBD38E /* PatientVisitViewController.m in Sources */,
 				F9844660199E5BFA00F59910 /* Utils.m in Sources */,
 				F9DA2CFA19BFFE7200787C8E /* Clinic.m in Sources */,
 				F9DA2CF419BFFE7200787C8E /* Clinician.m in Sources */,
@@ -560,7 +541,6 @@
 				F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */,
 				F9DA2D0919BFFEFA00787C8E /* VisitNotesComplex.m in Sources */,
 				F971217F19A806FC00C59980 /* ClinicViewController.m in Sources */,
-				F914D8EF198D80A200BBD38E /* PatientVisitNoteViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *villageTextBox;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UITextField *clinicDateTextBox;
+@property (weak, nonatomic) IBOutlet UILabel *addVillageLabel;
+@property (weak, nonatomic) IBOutlet UITextField *addVillageTextbox;
 
 @property (strong, nonatomic) NSArray* allVillages;
 @property (strong, nonatomic) Clinic* clinic;
@@ -33,6 +35,8 @@
 @property BOOL adjustedForTopLayout;
 @property NSInteger lastSelectedVillageIndex;
 @property (strong, nonatomic) NSDate* lastChosenDate;
+
+@property (strong, nonatomic) NSString* addNewVillageString;
 @end
 
 @implementation ClinicAddEditViewController
@@ -48,6 +52,8 @@
     self.villageStore = [BaseStore sharedStoreForEntity:@"Village"];
     self.allVillages = [self.villageStore entities];
     self.hidesBottomBarWhenPushed = YES;
+    self.addNewVillageString = @"Add new village";
+
     self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                     target:self
                                                                     action:@selector(saveClinic:)];
@@ -68,22 +74,6 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   return [self initWithNibName:nibNameOrNil bundle:nibBundleOrNil andClinic:nil];
-}
-
-- (void) saveClinic:(id) sender {
-  Village* v = [self.allVillages objectAtIndex:[self.clinicVillagePickerView selectedRowInComponent:0]];
-  NSDate* clinic_date = [self.clinicDatePicker date];
-  if (!self.clinic) {
-    BaseStore* b = [BaseStore sharedStoreForEntity:@"Clinic"];
-    NSPredicate *conflictingClinicsPredicate =  [NSPredicate predicateWithFormat:@"village == %@ and clinic_date == %@", v, clinic_date];
-    NSArray* conflictingClinics = [b entitiesWithPredicate:conflictingClinicsPredicate];
-    NSLog(@"Conflicting Clinics count: %ld", (long)conflictingClinics.count);
-    self.clinic = (Clinic*)[b newEntity];
-  }
-  self.clinic.village = v;
-  self.clinic.clinic_date = clinic_date;
-  [[BaseStore sharedStoreForEntity:@"Clinic"] saveChanges];
-  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -133,8 +123,16 @@
   [self.clinicVillagePickerView selectRow:self.lastSelectedVillageIndex inComponent:0 animated:NO];
   [self.clinicDatePicker setDate:self.lastChosenDate];
 
-  self.villageTextBox.text = [[self.allVillages objectAtIndex:self.lastSelectedVillageIndex] name];
-  self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.lastChosenDate];
+  if (self.lastSelectedVillageIndex == self.allVillages.count) {
+    self.addVillageLabel.hidden = NO;
+    self.addVillageTextbox.hidden = NO;
+    self.villageTextBox.text = self.addNewVillageString;
+  } else {
+    self.addVillageLabel.hidden = YES;
+    self.addVillageTextbox.hidden = YES;
+    self.villageTextBox.text = [[self.allVillages objectAtIndex:self.lastSelectedVillageIndex] name];
+    self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.lastChosenDate];
+  }
 }
 
 - (IBAction)doneEditing:(id)sender {
@@ -142,11 +140,61 @@
   [self.clinicDateTextBox resignFirstResponder];
 
   NSInteger selected = [self.clinicVillagePickerView selectedRowInComponent:0];
-  self.lastSelectedVillageIndex = [self.allVillages indexOfObject:[self.allVillages objectAtIndex:selected]];
+  if (selected == self.allVillages.count) {
+    self.addVillageLabel.hidden = NO;
+    self.addVillageTextbox.hidden = NO;
+    self.lastSelectedVillageIndex = self.allVillages.count;
+    self.villageTextBox.text = self.addNewVillageString;
+  } else {
+    self.addVillageLabel.hidden = YES;
+    self.addVillageTextbox.hidden = YES;
+    self.lastSelectedVillageIndex = [self.allVillages indexOfObject:[self.allVillages objectAtIndex:selected]];
+    self.villageTextBox.text = [[self.allVillages objectAtIndex:selected] name];
+  }
+  
   self.lastChosenDate = self.clinicDatePicker.date;
-
-  self.villageTextBox.text = [[self.allVillages objectAtIndex:selected] name];
   self.clinicDateTextBox.text = [Utils dateToMediumFormat:self.lastChosenDate];
+}
+
+- (BOOL) highlightFieldsIfInvalid {
+  if ([self.clinicVillagePickerView selectedRowInComponent:0] == self.allVillages.count) {
+    NSCharacterSet* ws = [NSCharacterSet whitespaceCharacterSet];
+    if ([[self.addVillageTextbox.text stringByTrimmingCharactersInSet:ws] isEqualToString:@""]) {
+      self.addVillageTextbox.layer.borderColor = [[UIColor redColor] CGColor];
+      self.addVillageTextbox.layer.borderWidth = 1.0f;
+      return YES;
+    } else {
+      self.addVillageTextbox.layer.borderColor = [[UIColor clearColor] CGColor];
+      self.addVillageTextbox.layer.borderWidth = 1.0f;
+    }
+  }
+  return NO;
+}
+
+- (void) saveClinic:(id) sender {
+  if ([self highlightFieldsIfInvalid]) {
+    return;
+  }
+  NSInteger selectedVillageIndex = [self.clinicVillagePickerView selectedRowInComponent:0];
+  Village* v;
+  if (selectedVillageIndex == self.allVillages.count) {
+    v = (Village*)[self.villageStore newEntity];
+    v.name = self.addVillageTextbox.text;
+  } else {
+    v = [self.allVillages objectAtIndex:[self.clinicVillagePickerView selectedRowInComponent:0]];
+  }
+  NSDate* clinic_date = [self.clinicDatePicker date];
+  if (!self.clinic) {
+    BaseStore* b = [BaseStore sharedStoreForEntity:@"Clinic"];
+    NSPredicate *conflictingClinicsPredicate =  [NSPredicate predicateWithFormat:@"village == %@ and clinic_date == %@", v, clinic_date];
+    NSArray* conflictingClinics = [b entitiesWithPredicate:conflictingClinicsPredicate];
+    NSLog(@"Conflicting Clinics count: %ld", (long)conflictingClinics.count);
+    self.clinic = (Clinic*)[b newEntity];
+  }
+  self.clinic.village = v;
+  self.clinic.clinic_date = clinic_date;
+  [[BaseStore sharedStoreForEntity:@"Clinic"] saveChanges];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -155,15 +203,18 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
-  return self.allVillages.count;
+  return self.allVillages.count + 1;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component {
-  NSString* villageName = [[self.allVillages objectAtIndex:row] name];
-  NSLog(@"Row %ld - %@", (long)row, villageName);
-  return villageName;
+  if (row < self.allVillages.count) {
+    NSString* villageName = [[self.allVillages objectAtIndex:row] name];
+    return villageName;
+  } else {
+    return self.addNewVillageString;
+  }
 }
 
 @end

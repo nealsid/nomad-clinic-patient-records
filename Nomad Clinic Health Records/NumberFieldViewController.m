@@ -111,11 +111,11 @@
     self.valueField.layer.borderColor = [[UIColor clearColor] CGColor];
     self.valueField.layer.borderWidth = 1.0f;
   }
-  
+
   if (!self.field2Name) {
     return !field1IsValid;
   }
-  
+
   BOOL field2IsValid = [self fieldIsValid:self.field2];
 
   if (!field2IsValid) {

@@ -29,12 +29,12 @@ static NSArray* visitFieldMetadata;
                              @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"breathing_rate",
-                             @"prettyName":@"Breathing rate",
+                             @"prettyName":@"Breathing rate (bpm)",
                              @"defaultValue":[NSNumber numberWithInt:0],
                              @"editClass":[NumberFieldViewController class]},
 
                            @{@"fieldName":@"pulse",
-                             @"prettyName":@"Pulse",
+                             @"prettyName":@"Pulse (bpm)",
                              @"defaultValue":[NSNumber numberWithInt:0],
                              @"editClass":[NumberFieldViewController class]},
 

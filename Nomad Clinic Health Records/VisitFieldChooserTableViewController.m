@@ -65,13 +65,13 @@
       [self.visitNotes setValue:defaultValue forKey:@"bp_diastolic"];
     }
   }
-  
+
   for (NSNumber* rowNumber in self.fieldsToRemove) {
     NSInteger row = [rowNumber intValue];
     NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[row];
     NSString* fieldName = [fieldMetadata objectForKey:@"fieldName"];
     [self.visitNotes setValue:nil forKey:fieldName];
-    
+
   }
   [[BaseStore sharedStoreForEntity:@"VisitNotesComplex"] saveChanges];
   [self.navigationController popViewControllerAnimated:YES];
@@ -107,15 +107,13 @@
     NSLog(@"%@", self.fieldsToRemove);
     return;
   }
-  
+
   if ([self.fieldsToRemove member:rowNumber]) {
     [self.fieldsToRemove removeObject:rowNumber];
     [self.tableView reloadData];
-    NSLog(@"%@", self.fieldsToAdd);
-    NSLog(@"%@", self.fieldsToRemove);
     return;
   }
-  
+
   if ([self.visitNotes valueForKey:fieldName] != nil) {
     [self.fieldsToRemove addObject:[NSNumber numberWithInteger:row]];
   } else {
@@ -128,10 +126,9 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
                                                           forIndexPath:indexPath];
-  NSLog(@"original cell tint: %@", cell.tintColor);
   NSInteger row = [indexPath row];
   NSDictionary* fieldMetadata = self.visitModelDisplayMetadata[row];
-  
+
   NSMutableAttributedString* textLabel = [[NSMutableAttributedString alloc] initWithString:[fieldMetadata objectForKey:@"prettyName"] attributes:nil];
 
   NSNumber* rowNumber = [NSNumber numberWithInteger:row];
@@ -149,7 +146,7 @@
     [textLabel setAttributes:strikeThru range:NSMakeRange(0, textLabel.string.length)];
   }
   cell.textLabel.attributedText = textLabel;
-  
+
   if (([self.visitNotes valueForKey:[fieldMetadata objectForKey:@"fieldName"]] != nil &&
        ![self.fieldsToRemove member:rowNumber]) || [self.fieldsToAdd member:rowNumber]) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;

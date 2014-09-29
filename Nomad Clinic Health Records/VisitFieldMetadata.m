@@ -8,9 +8,10 @@
 
 #import "VisitFieldMetadata.h"
 
+#import "DiseaseChooserTableViewController.h"
 #import "PatientViewController.h"
 #import "PickerFieldViewController.h"
-#import "StringFieldViewController.h"
+#import "TextViewViewController.h"
 
 @implementation VisitFieldMetadata
 
@@ -22,62 +23,68 @@ static NSArray* visitFieldMetadata;
                              @"prettyName":@"Is Healthy?",
                              @"defaultValue":[NSNumber numberWithBool:NO]},
 
-                           @{@"fieldName":@"bp_systolic",
-                             @"prettyName":@"Blood pressure",
-                             @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)],
-                             @"defaultValue":[NSNumber numberWithInt:0],
-                             @"editClass":[NumberFieldViewController class]},
+                              @{@"fieldName":@"diagnoses",
+                                @"prettyName":@"Diseases",
+                                @"defaultValue":[NSSet set],
+                                @"formatSelector":[NSValue valueWithPointer:@selector(formatDiagnoses:)],
+                                @"editClass":[DiseaseChooserTableViewController class]},
 
-                           @{@"fieldName":@"breathing_rate",
-                             @"prettyName":@"Breathing rate (bpm)",
-                             @"defaultValue":[NSNumber numberWithInt:0],
-                             @"editClass":[NumberFieldViewController class]},
+                              @{@"fieldName":@"bp_systolic",
+                                @"prettyName":@"Blood pressure",
+                                @"formatSelector":[NSValue valueWithPointer:@selector(formatBloodPressure:)],
+                                @"defaultValue":[NSNumber numberWithInt:0],
+                                @"editClass":[NumberFieldViewController class]},
 
-                           @{@"fieldName":@"pulse",
-                             @"prettyName":@"Pulse (bpm)",
-                             @"defaultValue":[NSNumber numberWithInt:0],
-                             @"editClass":[NumberFieldViewController class]},
+                              @{@"fieldName":@"breathing_rate",
+                                @"prettyName":@"Breathing rate (bpm)",
+                                @"defaultValue":[NSNumber numberWithInt:0],
+                                @"editClass":[NumberFieldViewController class]},
 
-                           @{@"fieldName":@"temp_fahrenheit",
-                             @"prettyName":@"Temp (℉)",
-                             @"defaultValue":[NSNumber numberWithInt:0],
-                             @"editClass":[NumberFieldViewController class]},
+                              @{@"fieldName":@"pulse",
+                                @"prettyName":@"Pulse (bpm)",
+                                @"defaultValue":[NSNumber numberWithInt:0],
+                                @"editClass":[NumberFieldViewController class]},
 
-                           @{@"fieldName":@"weight",
-                             @"prettyName":@"Weight (lbs)",
-                             @"defaultValue":[NSNumber numberWithInt:0],
-                             @"editClass":[NumberFieldViewController class]},
+                              @{@"fieldName":@"temp_fahrenheit",
+                                @"prettyName":@"Temp (℉)",
+                                @"defaultValue":[NSNumber numberWithInt:0],
+                                @"editClass":[NumberFieldViewController class]},
 
-                           @{@"fieldName":@"weight_class",
-                             @"prettyName":@"Weight class",
-                             @"formatSelector":[NSValue valueWithPointer:@selector(formatWeightClass:)],
-                             @"defaultValue":[NSNumber numberWithInt:2],
-                             @"editClass":[PickerFieldViewController class]},
+                              @{@"fieldName":@"weight",
+                                @"prettyName":@"Weight (lbs)",
+                                @"defaultValue":[NSNumber numberWithInt:0],
+                                @"editClass":[NumberFieldViewController class]},
 
-                           @{@"fieldName":@"subjective",
-                             @"prettyName":@"Subjective",
-                             @"defaultValue":@"",
-                             @"editClass":[StringFieldViewController class]},
+                              @{@"fieldName":@"weight_class",
+                                @"prettyName":@"Weight class",
+                                @"formatSelector":[NSValue valueWithPointer:@selector(formatWeightClass:)],
+                                @"defaultValue":[NSNumber numberWithInt:2],
+                                @"editClass":[PickerFieldViewController class]},
 
-                           @{@"fieldName":@"objective",
-                             @"prettyName":@"Objective",
-                             @"defaultValue":@"",
-                             @"editClass":[StringFieldViewController class]},
+                              @{@"fieldName":@"subjective",
+                                @"prettyName":@"Subjective",
+                                @"defaultValue":@"",
+                                @"editClass":[TextViewViewController class]},
 
-                           @{@"fieldName":@"assessment",
-                             @"prettyName":@"Assessment",
-                             @"defaultValue":@"",
-                             @"editClass":[StringFieldViewController class]},
+                              @{@"fieldName":@"objective",
+                                @"prettyName":@"Objective",
+                                @"defaultValue":@"",
+                                @"editClass":[TextViewViewController class]},
 
-                           @{@"fieldName":@"plan",
-                             @"prettyName":@"Plan",
-                             @"defaultValue":@"",
-                             @"editClass":[StringFieldViewController class]},
+                              @{@"fieldName":@"assessment",
+                                @"prettyName":@"Assessment",
+                                @"defaultValue":@"",
+                                @"editClass":[TextViewViewController class]},
 
-                           @{@"fieldName":@"note",
-                             @"prettyName":@"Note",
-                             @"defaultValue":@"",
-                             @"editClass":[StringFieldViewController class]}];
+                              @{@"fieldName":@"plan",
+                                @"prettyName":@"Plan",
+                                @"defaultValue":@"",
+                                @"editClass":[TextViewViewController class]},
+
+                              @{@"fieldName":@"note",
+                                @"prettyName":@"Note",
+                                @"defaultValue":@"",
+                                @"editClass":[TextViewViewController class]}];
 
   }
   return visitFieldMetadata;

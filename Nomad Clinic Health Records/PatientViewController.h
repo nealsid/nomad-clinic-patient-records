@@ -11,7 +11,7 @@
 
 #import "FieldEditDelegate.h"
 #import "NumberFieldViewController.h"
-#import "StringFieldViewController.h"
+#import "TextViewViewController.h"
 
 @class VisitNotesComplex;
 
@@ -44,6 +44,7 @@
  */
 - (void) isHealthySwitchClicked:(id)sender;
 
+- (NSString*) formatDiagnoses:(VisitNotesComplex*) note;
 - (NSString*) formatBloodPressure:(VisitNotesComplex*) note;
 - (NSString*) formatWeightClass:(VisitNotesComplex*) note;
 

@@ -13,6 +13,8 @@
 
 @property (nonatomic) NSInteger numberOfRows;
 
+@property BOOL useColorCoding;
+
 /**
  * Returns true if the rowNumber represents the last row in the table view.
  * Note that this is 1 more than the number of Rows because

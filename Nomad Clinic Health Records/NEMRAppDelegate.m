@@ -11,6 +11,7 @@
 
 
 #import "ClinicViewController.h"
+#import "DiseaseTableViewController.h"
 #import "PatientsTableViewController.h"
 #import "Patient.h"
 
@@ -36,25 +37,32 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   UITabBarController* tbc = [[UITabBarController alloc] init];
 
   UINavigationController* navController = [[UINavigationController alloc] init];
+  navController.navigationBar.titleTextAttributes =
+      [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
+                                            [UIFont boldSystemFontOfSize:24]]
+                                  forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
   ClinicViewController* vc = [[ClinicViewController alloc] init];
   [navController pushViewController:vc animated:NO];
   //  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:54.0/255 green:79.0/255 blue:42.0/255 alpha:1.0]];
   //  [navController.navigationBar setBackgroundColor:[UIColor colorWithRed:0xda/255.0 green:0xee/255.0 blue:0xff/255.0 alpha:1.0]];
   self.window.tintColor = [UIColor darkGrayColor];
-  UINavigationController* patientNavController = [[UINavigationController alloc] init];
-  PatientsTableViewController* patientsVc = [[PatientsTableViewController alloc] init];
-  [patientNavController pushViewController:patientsVc animated:YES];
-
+  UINavigationController* diseaseNavController = [[UINavigationController alloc] init];
+  DiseaseTableViewController* diseaseVc = [[DiseaseTableViewController alloc] init];
+  [diseaseNavController pushViewController:diseaseVc animated:YES];
+  diseaseNavController.navigationBar.titleTextAttributes =
+      [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
+                                            [UIFont boldSystemFontOfSize:24]]
+                                  forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
   UIImage* stetho = [UIImage imageNamed:@"stetho"];
   navController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinics"
                                                            image:stetho
                                                    selectedImage:nil];
   UIImage* crowd = [UIImage imageNamed:@"crowd"];
-  patientNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Patients"
+  diseaseNavController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Diseases"
                                                                   image:crowd
                                                           selectedImage:nil];
   tbc.tabBar.tintColor = [UIColor colorWithHue:.6 saturation:.8 brightness:.96 alpha:1.0];
-  tbc.viewControllers = @[navController, patientNavController];
+  tbc.viewControllers = @[navController, diseaseNavController];
   [tbc setModalTransitionStyle:UIModalTransitionStylePartialCurl];
 
   [self.window setRootViewController:tbc];

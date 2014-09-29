@@ -35,13 +35,14 @@
     self.clinicStore = [BaseStore sharedStoreForEntity:@"Clinic"];
     [self refetchDataForTableView];
     self.title = @"Clinics";
-    self.itemFont = [UIFont fontWithName:@"American Typewriter" size:32];
+    //    self.itemFont = [UIFont fontWithName:@"American Typewriter" size:32];
+    self.itemFont = [UIFont systemFontOfSize:24];
   }
   return self;
 }
 
 - (void) refetchDataForTableView {
-  self.clinics = [self.clinicStore entitiesWithSortKey:@"village.name,clinic_date" ascending:YES];
+  self.clinics = [self.clinicStore entitiesWithSortKey:@"clinic_date,village.name" ascending:YES];
   self.numberOfRows = self.clinics.count;
 }
 
@@ -58,10 +59,6 @@
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.title = @"Clinics";
 
-  self.navigationController.navigationBar.titleTextAttributes =
-  [NSDictionary dictionaryWithObjects:@[[UIColor blackColor],
-                                        [UIFont boldSystemFontOfSize:24]]
-                              forKeys:@[NSForegroundColorAttributeName, NSFontAttributeName]];
   UIBarButtonItem* newClinicButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                    target:self
                                                                                    action:@selector(addNewClinic:)];
@@ -131,7 +128,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
   UITableViewCell* cell =
   [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                          reuseIdentifier:@"UITableViewCell"];
-  cell.textLabel.textColor = [UIColor darkGrayColor];
+  cell.textLabel.textColor = [UIColor darkTextColor];
   cell.backgroundColor = [UIColor clearColor];
   cell.textLabel.font = self.itemFont;
   if ([self isLastRow:row]) {

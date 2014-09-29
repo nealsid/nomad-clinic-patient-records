@@ -49,18 +49,6 @@
              fieldEditDelegate:delegate];
 }
 
-// - (instancetype) initWithFieldName:(NSString*)fieldName
-//                            choices:(NSArray*)choices
-//                 initialChoiceIndex:(NSInteger) initialChoice
-//                  fieldEditDelegate:(id<FieldEditDelegate>)delegate {
-//   return [self initWithNibName:nil
-//                         bundle:nil
-//                      fieldName:fieldName
-//                        choices:choices
-//             initialChoiceIndex:initialChoice
-//                       fieldEditDelegate:delegate];
-// }
-
 - (instancetype)initWithNibName:(NSString *) nibNameOrNil
                          bundle:(NSBundle *) nibBundleOrNil
               visitFieldMetdata:(NSDictionary*)fieldMetadata

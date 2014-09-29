@@ -15,7 +15,7 @@
 #import "Patient.h"
 #import "PatientAddEditViewController.h"
 #import "PatientViewController+TableView.h"
-#import "StringFieldViewController.h"
+#import "TextViewViewController.h"
 #import "Visit.h"
 #import "VisitFieldMetadata.h"
 #import "VisitNotesComplex.h"
@@ -88,6 +88,10 @@
     }
   }
   self.visitSpecificFieldMetadata = [NSArray arrayWithArray:visitSpecificFieldMetadata];
+}
+
+- (NSString*) formatDiagnoses:(VisitNotesComplex*) note {
+  return [NSString stringWithFormat:@"%lu", (unsigned long)note.diagnoses.count];
 }
 
 - (NSString*) formatBloodPressure:(VisitNotesComplex*) note {

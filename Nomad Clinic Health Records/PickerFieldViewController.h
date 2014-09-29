@@ -41,13 +41,4 @@
              initialChoiceIndex:(NSInteger) initialChoice
               fieldEditDelegate:(id<FieldEditDelegate>) delegate;
 
-/**
- * Initializer to initialize the picker view with a list of choices.
- *
- * @param choices The list of choices.
- */
-// - (instancetype) initWithFieldName:(NSString*) fieldName
-//                            choices:(NSArray*) choices
-//                 initialChoiceIndex:(NSInteger) initialChoice
-//                  fieldEditDelegate:(id<FieldEditDelegate>) delegate;
 @end

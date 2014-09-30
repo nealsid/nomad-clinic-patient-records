@@ -131,13 +131,17 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     return _persistentStoreCoordinator;
   }
 
-  NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Nomad_Clinic_Health_Records.sqlite"];
-
   NSError *error = nil;
   _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-  if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    abort();
+
+  int dbNum = 0;
+  NSString* storeFilename = [NSString stringWithFormat:@"Nomad_Clinic_Health_Records-%d.sqlite", dbNum];
+  NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:storeFilename];
+
+  while (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    dbNum++;
+    storeFilename = [NSString stringWithFormat:@"Nomad_Clinic_Health_Records-%d.sqlite", dbNum];
+    storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:storeFilename];
   }
 
   return _persistentStoreCoordinator;

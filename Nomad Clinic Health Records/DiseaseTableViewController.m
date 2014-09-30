@@ -68,6 +68,10 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void) newFieldValuesFieldMetadata:(NSDictionary *)visitFieldMetadata value1:(NSNumber *)newValue value2:(NSNumber *)newValue2 {
+  NSLog(@"This method is not implemented");
+}
+
 - (void) refreshDiseases {
   self.diseases = [self.diseaseStore entities];
   self.numberOfRows = self.diseases.count;

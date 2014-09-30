@@ -90,7 +90,9 @@
     self.patientNameField.text = self.patient.name;
     self.patientAgeField.text = [self.patient.dob toString];
     [self.genderControl setSelectedSegmentIndex:[self.patient.gender intValue]];
-    [self.datePicker setDate:self.patientBirthdate];
+    if (self.patientBirthdate) {
+      [self.datePicker setDate:self.patientBirthdate];
+    }
   }
   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                          target:self

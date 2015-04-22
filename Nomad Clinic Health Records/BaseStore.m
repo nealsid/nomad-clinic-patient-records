@@ -9,6 +9,7 @@
 #import "BaseStore.h"
 #import "Clinic.h"
 #import "Clinician.h"
+#import "Disease.h"
 #import "FlexDate.h"
 #import "NEMRAppDelegate.h"
 #import "Patient.h"
@@ -195,9 +196,7 @@
 - (void) createTestDataIfNecessary {
   NSManagedObjectContext* ctx = self.managedObjectContext;
   NSFetchRequest* req = [[NSFetchRequest alloc] init];
-  NSEntityDescription* e = [NSEntityDescription entityForName:@"Patient" inManagedObjectContext:ctx];
-  NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-  req.sortDescriptors = @[sd];
+  NSEntityDescription* e = [NSEntityDescription entityForName:@"Clinic" inManagedObjectContext:ctx];
   req.entity = e;
   NSError *error;
   NSArray* result = [ctx executeFetchRequest:req error:&error];
@@ -209,8 +208,8 @@
   }
   NSLog(@"No data found, generating..");
 
-  NSArray* clinicNames = @[@"Simikot", @"Yalbang", @"Halzi"];
-  NSArray* clinicDates = @[@"9/18/2014", @"9/19/2014", @"9/20/2014"];
+  NSArray* clinicNames = @[@"Ghami Raju Bista", @"Tsarang", @"Lo Monathang", @"Tang Ge"];
+  NSArray* clinicDates = @[@"9/23/2014", @"9/25/2014", @"9/28/2014", @"10/04/2014"];
   NSDateFormatter* dateFormatter;
   dateFormatter = [[NSDateFormatter alloc] init];
   dateFormatter.dateStyle = NSDateFormatterShortStyle;
@@ -230,70 +229,77 @@
   }
 
 
-  NSArray* patientNames = @[@"Neal Sidhwaney",
-                            @"Bob Jones",
-                            @"Jane Doe",
-                            @"Isabel Bradley"];
+//  NSArray* patientNames = @[@"Neal Sidhwaney",
+//                            @"Bob Jones",
+//                            @"Jane Doe",
+//                            @"Isabel Bradley"];
+//
+//  NSArray* patientGenders = @[[NSNumber numberWithInteger:Male],
+//                              [NSNumber numberWithInteger:Male],
+//                              [NSNumber numberWithInteger:Female],
+//                              [NSNumber numberWithInteger:Female]];
+//  NSMutableArray* patients = [[NSMutableArray alloc] init];
+//  for (int i = 0; i < [patientNames count]; ++i) {
+//    Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
+//
+//                                               inManagedObjectContext:ctx];
+//    p.name = [patientNames objectAtIndex:i];
+//    p.gender = [patientGenders objectAtIndex:i];
+//    p.dob = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate" inManagedObjectContext:ctx];
+//    [patients addObject:p];
+//  }
+//
+//  for(int i = 0 ; i < 4 ; ++i) {
+//    FlexDate* f = [[patients objectAtIndex:i] dob];
+//    f.specificdate = [Utils dateFromMonth:3 day:8 year:(1941 + i)];
+//  }
+//
+//
+//  NSMutableArray* clinicians = [[NSMutableArray alloc] init];
+//  NSArray* clinicianNames = @[@"Roshi Joan Halifax",
+//                              @"Trudy Goldman",
+//                              @"Kat Bogacz",
+//                              @"Gary Pasternak",
+//                              @"Sam Hughes"];
+//  for (int i = 0; i < [clinicianNames count]; ++i) {
+//    Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
+//                                                 inManagedObjectContext:ctx];
+//    c.name = [clinicianNames objectAtIndex:i];
+//    [clinicians addObject:c];
+//  }
+//
+//  for (int i = 0; i < [patientNames count]; ++i) {
+//    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
+//                                                 inManagedObjectContext:ctx];
+//    visit.patient = [patients objectAtIndex:i];
+//    visit.clinic = [clinicObjects objectAtIndex:(i % clinicObjects.count)];
+//
+//    visit.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
+//    visit.visit_date = [Utils dateFromMonth:10 day:2 year:2013];
+//    NSLog(@"Creating pv for %@ - %@", visit.patient.name, [[visit.clinician anyObject] name]);
+//    VisitNotesComplex* visitNote =
+//    [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
+//                                  inManagedObjectContext:ctx];
+//    visitNote.visit = visit;
+//    visitNote.note = @"This is test note #1";
+//    visitNote.bp_systolic = @120;
+//    visitNote.bp_diastolic = @80;
+//    visitNote.healthy = [NSNumber numberWithBool:NO];
+//    [visitNote setWeightClass:WeightClassExpected];
+//    visitNote.breathing_rate = @60;
+//    visitNote.pulse = @75;
+//    visitNote.temp_fahrenheit = @98.6;
+//    visitNote.subjective = @"This is the S in SOAP";
+//    visitNote.objective = @"This is the O in SOAP";
+//    visitNote.assessment = @"This is the A in SOAP";
+//    visitNote.plan = @"This is the P in SOAP";
+//  }
 
-  NSArray* patientGenders = @[[NSNumber numberWithInteger:Male],
-                              [NSNumber numberWithInteger:Male],
-                              [NSNumber numberWithInteger:Female],
-                              [NSNumber numberWithInteger:Female]];
-  NSMutableArray* patients = [[NSMutableArray alloc] init];
-  for (int i = 0; i < [patientNames count]; ++i) {
-    Patient* p = [NSEntityDescription insertNewObjectForEntityForName:@"Patient"
-
+  NSArray* diseaseNames = @[@"Gastritis", @"Bronchitis", @"Osteoarthritis", @"Bursitis", @"Otitis media", @"Pneumonia"];
+  for (NSString* oneDisease in diseaseNames) {
+    Disease* d = [NSEntityDescription insertNewObjectForEntityForName:@"Disease"
                                                inManagedObjectContext:ctx];
-    p.name = [patientNames objectAtIndex:i];
-    p.gender = [patientGenders objectAtIndex:i];
-    p.dob = [NSEntityDescription insertNewObjectForEntityForName:@"FlexDate" inManagedObjectContext:ctx];
-    [patients addObject:p];
-  }
-
-  for(int i = 0 ; i < 4 ; ++i) {
-    FlexDate* f = [[patients objectAtIndex:i] dob];
-    f.specificdate = [Utils dateFromMonth:3 day:8 year:(1941 + i)];
-  }
-
-
-  NSMutableArray* clinicians = [[NSMutableArray alloc] init];
-  NSArray* clinicianNames = @[@"Roshi Joan Halifax",
-                              @"Trudy Goldman",
-                              @"Kat Bogacz",
-                              @"Gary Pasternak",
-                              @"Sam Hughes"];
-  for (int i = 0; i < [clinicianNames count]; ++i) {
-    Clinician* c = [NSEntityDescription insertNewObjectForEntityForName:@"Clinician"
-                                                 inManagedObjectContext:ctx];
-    c.name = [clinicianNames objectAtIndex:i];
-    [clinicians addObject:c];
-  }
-
-  for (int i = 0; i < [patientNames count]; ++i) {
-    Visit* visit = [NSEntityDescription insertNewObjectForEntityForName:@"Visit"
-                                                 inManagedObjectContext:ctx];
-    visit.patient = [patients objectAtIndex:i];
-    visit.clinic = [clinicObjects objectAtIndex:(i % clinicObjects.count)];
-
-    visit.clinician = [NSSet setWithObject:[clinicians objectAtIndex:i]];
-    visit.visit_date = [Utils dateFromMonth:10 day:2 year:2013];
-    NSLog(@"Creating pv for %@ - %@", visit.patient.name, [[visit.clinician anyObject] name]);
-    VisitNotesComplex* visitNote =
-    [NSEntityDescription insertNewObjectForEntityForName:@"VisitNotesComplex"
-                                  inManagedObjectContext:ctx];
-    visitNote.visit = visit;
-    visitNote.note = @"This is test note #1";
-    visitNote.bp_systolic = @120;
-    visitNote.bp_diastolic = @80;
-    visitNote.healthy = [NSNumber numberWithBool:NO];
-    [visitNote setWeightClass:WeightClassExpected];
-    visitNote.breathing_rate = @60;
-    visitNote.pulse = @75;
-    visitNote.temp_fahrenheit = @98.6;
-    visitNote.subjective = @"This is the S in SOAP";
-    visitNote.objective = @"This is the O in SOAP";
-    visitNote.assessment = @"This is the A in SOAP";
-    visitNote.plan = @"This is the P in SOAP";
+    d.name = oneDisease;
   }
 
   if (![ctx save:&error]) {
@@ -314,7 +320,6 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(0 != SUBQUERY(visits, $x, $x.clinic == %@).@count)", c];
     req.predicate = predicate;
   }
-  NSLog(@"Patient fetch: %@", req);
   NSError *error;
   NSArray* result = [ctx executeFetchRequest:req error:&error];
   if (!result) {

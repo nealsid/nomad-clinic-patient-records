@@ -9,7 +9,7 @@
 #import "PatientViewController+TableView.h"
 
 #import "PickerFieldViewController.h"
-#import "StringFieldViewController.h"
+#import "TextViewViewController.h"
 #import "Visit.h"
 #import "VisitFieldChooserTableViewController.h"
 #import "VisitNotesComplex.h"
@@ -156,7 +156,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell* cell = [self.recentVisitTable dequeueReusableCellWithIdentifier:@"UITableViewCell"];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-  cell.textLabel.textColor = [UIColor darkGrayColor];
+  cell.textLabel.textColor = [UIColor blackColor];
   NSInteger row = [indexPath row];
   if (row < self.visitSpecificFieldMetadata.count) {
     NSDictionary* fieldInfo = [self.visitSpecificFieldMetadata objectAtIndex:row];
@@ -175,6 +175,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     } else {
       cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",[notes valueForKey:[fieldInfo objectForKey:@"fieldName"]]];
     }
+    cell.detailTextLabel.textColor = [UIColor blackColor];
     return cell;
   } else if (row == self.visitSpecificFieldMetadata.count) {
     cell.textLabel.text = @"";
@@ -185,30 +186,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.text = @"Add/remove fields to visit";
     cell.detailTextLabel.text = @"";
   }
-  // if (row == 0) {
-  //   cell.textLabel.text = @"Weight";
-  //   cell.detailTextLabel.text = [VisitNotesComplex stringForWeightClass:self.mostRecentVisit.notes.weight_class];
-  //   cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:20];
-  //   if ([self.mostRecentVisit.notes isWeightExteme]) {
-  //     cell.detailTextLabel.textColor = [UIColor redColor];
-  //   } else {
-  //     cell.detailTextLabel.textColor = [UIColor blackColor];
-  //   }
-  // } else if (row == 1) {
-  //   cell.textLabel.text = @"Healthy?";
-  //   UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-  //   [switchView addTarget:self
-  //                  action:@selector(isHealthySwitchClicked:)
-  //        forControlEvents:UIControlEventValueChanged];
-  //   cell.accessoryView = switchView;
-  //   switchView.on = [self.mostRecentVisit.notes.healthy boolValue];
-  //   if (![self.mostRecentVisit.notes.healthy boolValue]) {
-  //     cell.textLabel.textColor = [UIColor redColor];
-  //   }
-  // } else if (row == 2) {
-  //   cell.textLabel.text = @"Note";
-  //   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  // }
   return cell;
 }
 

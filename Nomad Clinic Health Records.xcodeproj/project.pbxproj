@@ -28,13 +28,22 @@
 		F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94B3A3F19B985B8003D3E2B /* ClinicAddEditViewController.xib */; };
 		F95BF04119C43B6700CF265E /* VisitFieldChooserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF03F19C43B6700CF265E /* VisitFieldChooserTableViewController.m */; };
 		F95BF04219C43B6700CF265E /* VisitFieldChooserTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95BF04019C43B6700CF265E /* VisitFieldChooserTableViewController.xib */; };
+		F95BF04619C908E000CF265E /* DiseaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF04419C908E000CF265E /* DiseaseTableViewController.m */; };
+		F95BF04719C908E000CF265E /* DiseaseTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95BF04519C908E000CF265E /* DiseaseTableViewController.xib */; };
+		F95BF04E19C9105100CF265E /* StringFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF04C19C9105100CF265E /* StringFieldViewController.m */; };
+		F95BF04F19C9105100CF265E /* StringFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95BF04D19C9105100CF265E /* StringFieldViewController.xib */; };
+		F95BF05219C91FA500CF265E /* Visit.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF05119C91FA500CF265E /* Visit.m */; };
+		F95BF05519C91FA600CF265E /* VisitNotesComplex.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF05419C91FA600CF265E /* VisitNotesComplex.m */; };
+		F95BF05819C91FA600CF265E /* Disease.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF05719C91FA600CF265E /* Disease.m */; };
+		F95BF05C19C9219500CF265E /* DiseaseChooserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F95BF05A19C9219500CF265E /* DiseaseChooserTableViewController.m */; };
+		F95BF05D19C9219500CF265E /* DiseaseChooserTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F95BF05B19C9219500CF265E /* DiseaseChooserTableViewController.xib */; };
 		F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3519B7F24B009DDC6D /* BaseStore.m */; };
 		F960BC3819B7F258009DDC6D /* BaseStoreTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F960BC3719B7F258009DDC6D /* BaseStoreTest.m */; };
 		F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F96CF7F9199EA5E700F2C4EF /* TableViewController.m */; };
 		F971217F19A806FC00C59980 /* ClinicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F971217D19A806FC00C59980 /* ClinicViewController.m */; };
 		F971218019A806FC00C59980 /* ClinicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F971217E19A806FC00C59980 /* ClinicViewController.xib */; };
-		F983434A19900AC50015974B /* StringFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F983434819900AC50015974B /* StringFieldViewController.m */; };
-		F983434B19900AC50015974B /* StringFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F983434919900AC50015974B /* StringFieldViewController.xib */; };
+		F983434A19900AC50015974B /* TextViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F983434819900AC50015974B /* TextViewViewController.m */; };
+		F983434B19900AC50015974B /* TextViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F983434919900AC50015974B /* TextViewViewController.xib */; };
 		F9844660199E5BFA00F59910 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F984465F199E5BFA00F59910 /* Utils.m */; };
 		F99720EF19ACC8C8006F6630 /* PatientAddEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F99720ED19ACC8C8006F6630 /* PatientAddEditViewController.m */; };
 		F99720F019ACC8C8006F6630 /* PatientAddEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F99720EE19ACC8C8006F6630 /* PatientAddEditViewController.xib */; };
@@ -48,8 +57,6 @@
 		F9DA2CFA19BFFE7200787C8E /* Clinic.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA2CF919BFFE7200787C8E /* Clinic.m */; };
 		F9DA2D0019BFFE7200787C8E /* Village.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA2CFF19BFFE7200787C8E /* Village.m */; };
 		F9DA2D0319BFFE7200787C8E /* FlexDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA2D0219BFFE7200787C8E /* FlexDate.m */; };
-		F9DA2D0619BFFEF900787C8E /* Visit.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA2D0519BFFEF900787C8E /* Visit.m */; };
-		F9DA2D0919BFFEFA00787C8E /* VisitNotesComplex.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA2D0819BFFEFA00787C8E /* VisitNotesComplex.m */; };
 		F9DA49D819AE5A06008BFC6F /* crowd.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49D619AE5A06008BFC6F /* crowd.png */; };
 		F9DA49D919AE5A06008BFC6F /* crowd@2.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DA49D719AE5A06008BFC6F /* crowd@2.png */; };
 		F9DBC47D199D57EE00FB2544 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = F9DBC47B199D57EE00FB2544 /* female.png */; };
@@ -112,6 +119,21 @@
 		F95BF03E19C43B6700CF265E /* VisitFieldChooserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitFieldChooserTableViewController.h; sourceTree = "<group>"; };
 		F95BF03F19C43B6700CF265E /* VisitFieldChooserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitFieldChooserTableViewController.m; sourceTree = "<group>"; };
 		F95BF04019C43B6700CF265E /* VisitFieldChooserTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisitFieldChooserTableViewController.xib; sourceTree = "<group>"; };
+		F95BF04319C908E000CF265E /* DiseaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiseaseTableViewController.h; sourceTree = "<group>"; };
+		F95BF04419C908E000CF265E /* DiseaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiseaseTableViewController.m; sourceTree = "<group>"; };
+		F95BF04519C908E000CF265E /* DiseaseTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiseaseTableViewController.xib; sourceTree = "<group>"; };
+		F95BF04B19C9105100CF265E /* StringFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringFieldViewController.h; sourceTree = "<group>"; };
+		F95BF04C19C9105100CF265E /* StringFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFieldViewController.m; sourceTree = "<group>"; };
+		F95BF04D19C9105100CF265E /* StringFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringFieldViewController.xib; sourceTree = "<group>"; };
+		F95BF05019C91FA500CF265E /* Visit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visit.h; sourceTree = "<group>"; };
+		F95BF05119C91FA500CF265E /* Visit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visit.m; sourceTree = "<group>"; };
+		F95BF05319C91FA600CF265E /* VisitNotesComplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitNotesComplex.h; sourceTree = "<group>"; };
+		F95BF05419C91FA600CF265E /* VisitNotesComplex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitNotesComplex.m; sourceTree = "<group>"; };
+		F95BF05619C91FA600CF265E /* Disease.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Disease.h; sourceTree = "<group>"; };
+		F95BF05719C91FA600CF265E /* Disease.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Disease.m; sourceTree = "<group>"; };
+		F95BF05919C9219500CF265E /* DiseaseChooserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiseaseChooserTableViewController.h; sourceTree = "<group>"; };
+		F95BF05A19C9219500CF265E /* DiseaseChooserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiseaseChooserTableViewController.m; sourceTree = "<group>"; };
+		F95BF05B19C9219500CF265E /* DiseaseChooserTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiseaseChooserTableViewController.xib; sourceTree = "<group>"; };
 		F960BC3419B7F24B009DDC6D /* BaseStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseStore.h; sourceTree = "<group>"; };
 		F960BC3519B7F24B009DDC6D /* BaseStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStore.m; sourceTree = "<group>"; };
 		F960BC3719B7F258009DDC6D /* BaseStoreTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseStoreTest.m; sourceTree = "<group>"; };
@@ -120,9 +142,9 @@
 		F971217C19A806FC00C59980 /* ClinicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicViewController.h; sourceTree = "<group>"; };
 		F971217D19A806FC00C59980 /* ClinicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicViewController.m; sourceTree = "<group>"; };
 		F971217E19A806FC00C59980 /* ClinicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClinicViewController.xib; sourceTree = "<group>"; };
-		F983434719900AC50015974B /* StringFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringFieldViewController.h; sourceTree = "<group>"; };
-		F983434819900AC50015974B /* StringFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFieldViewController.m; sourceTree = "<group>"; };
-		F983434919900AC50015974B /* StringFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StringFieldViewController.xib; sourceTree = "<group>"; };
+		F983434719900AC50015974B /* TextViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewViewController.h; sourceTree = "<group>"; };
+		F983434819900AC50015974B /* TextViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewViewController.m; sourceTree = "<group>"; };
+		F983434919900AC50015974B /* TextViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewViewController.xib; sourceTree = "<group>"; };
 		F984465E199E5BFA00F59910 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		F984465F199E5BFA00F59910 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		F99720EC19ACC8C8006F6630 /* PatientAddEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatientAddEditViewController.h; sourceTree = "<group>"; };
@@ -145,10 +167,6 @@
 		F9DA2CFF19BFFE7200787C8E /* Village.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Village.m; sourceTree = "<group>"; };
 		F9DA2D0119BFFE7200787C8E /* FlexDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexDate.h; sourceTree = "<group>"; };
 		F9DA2D0219BFFE7200787C8E /* FlexDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexDate.m; sourceTree = "<group>"; };
-		F9DA2D0419BFFEF900787C8E /* Visit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visit.h; sourceTree = "<group>"; };
-		F9DA2D0519BFFEF900787C8E /* Visit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visit.m; sourceTree = "<group>"; };
-		F9DA2D0719BFFEFA00787C8E /* VisitNotesComplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitNotesComplex.h; sourceTree = "<group>"; };
-		F9DA2D0819BFFEFA00787C8E /* VisitNotesComplex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisitNotesComplex.m; sourceTree = "<group>"; };
 		F9DA49D619AE5A06008BFC6F /* crowd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crowd.png; sourceTree = "<group>"; };
 		F9DA49D719AE5A06008BFC6F /* crowd@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "crowd@2.png"; sourceTree = "<group>"; };
 		F9DBC47B199D57EE00FB2544 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
@@ -211,6 +229,12 @@
 				F95BF03E19C43B6700CF265E /* VisitFieldChooserTableViewController.h */,
 				F95BF03F19C43B6700CF265E /* VisitFieldChooserTableViewController.m */,
 				F95BF04019C43B6700CF265E /* VisitFieldChooserTableViewController.xib */,
+				F95BF04319C908E000CF265E /* DiseaseTableViewController.h */,
+				F95BF04419C908E000CF265E /* DiseaseTableViewController.m */,
+				F95BF04519C908E000CF265E /* DiseaseTableViewController.xib */,
+				F95BF05919C9219500CF265E /* DiseaseChooserTableViewController.h */,
+				F95BF05A19C9219500CF265E /* DiseaseChooserTableViewController.m */,
+				F95BF05B19C9219500CF265E /* DiseaseChooserTableViewController.xib */,
 			);
 			name = "Table View Controllers";
 			sourceTree = "<group>";
@@ -258,10 +282,12 @@
 				F9DA2CFF19BFFE7200787C8E /* Village.m */,
 				F907A4FA19B502BD00A22A15 /* VisitNotesComplex+WeightClass.h */,
 				F907A4FB19B502BD00A22A15 /* VisitNotesComplex+WeightClass.m */,
-				F9DA2D0419BFFEF900787C8E /* Visit.h */,
-				F9DA2D0519BFFEF900787C8E /* Visit.m */,
-				F9DA2D0719BFFEFA00787C8E /* VisitNotesComplex.h */,
-				F9DA2D0819BFFEFA00787C8E /* VisitNotesComplex.m */,
+				F95BF05619C91FA600CF265E /* Disease.h */,
+				F95BF05719C91FA600CF265E /* Disease.m */,
+				F95BF05319C91FA600CF265E /* VisitNotesComplex.h */,
+				F95BF05419C91FA600CF265E /* VisitNotesComplex.m */,
+				F95BF05019C91FA500CF265E /* Visit.h */,
+				F95BF05119C91FA500CF265E /* Visit.m */,
 			);
 			name = "CoreData Classes";
 			sourceTree = "<group>";
@@ -277,9 +303,6 @@
 				F911FF83197C07B20063A1F1 /* PatientViewController.xib */,
 				F9FC825B19A516E200BA86E7 /* PatientViewController+TableView.h */,
 				F9FC825C19A516E200BA86E7 /* PatientViewController+TableView.m */,
-				F983434719900AC50015974B /* StringFieldViewController.h */,
-				F983434819900AC50015974B /* StringFieldViewController.m */,
-				F983434919900AC50015974B /* StringFieldViewController.xib */,
 				F9A29CE619AB70B400F83BFC /* Empty.xib */,
 				F99720EC19ACC8C8006F6630 /* PatientAddEditViewController.h */,
 				F99720ED19ACC8C8006F6630 /* PatientAddEditViewController.m */,
@@ -303,6 +326,12 @@
 				F907A4FD19B5065E00A22A15 /* PickerFieldViewController.h */,
 				F907A4FE19B5065E00A22A15 /* PickerFieldViewController.m */,
 				F907A4FF19B5065E00A22A15 /* PickerFieldViewController.xib */,
+				F983434719900AC50015974B /* TextViewViewController.h */,
+				F983434819900AC50015974B /* TextViewViewController.m */,
+				F983434919900AC50015974B /* TextViewViewController.xib */,
+				F95BF04B19C9105100CF265E /* StringFieldViewController.h */,
+				F95BF04C19C9105100CF265E /* StringFieldViewController.m */,
+				F95BF04D19C9105100CF265E /* StringFieldViewController.xib */,
 			);
 			name = "Utility View Controllers";
 			sourceTree = "<group>";
@@ -466,12 +495,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95BF04F19C9105100CF265E /* StringFieldViewController.xib in Resources */,
 				F99720F019ACC8C8006F6630 /* PatientAddEditViewController.xib in Resources */,
 				F9E9DAA51986C03000E8568F /* NEMRClinicianTableViewController.xib in Resources */,
 				F911FF8A197CC2570063A1F1 /* PatientsTableViewController.xib in Resources */,
 				F9DBC47E199D57EE00FB2544 /* male.png in Resources */,
-				F983434B19900AC50015974B /* StringFieldViewController.xib in Resources */,
+				F983434B19900AC50015974B /* TextViewViewController.xib in Resources */,
 				F9E9DAB51986D47A00E8568F /* ClinicianTableViewHeader.xib in Resources */,
+				F95BF04719C908E000CF265E /* DiseaseTableViewController.xib in Resources */,
 				F9A29CE719AB70B400F83BFC /* Empty.xib in Resources */,
 				F925BE4F1995544D0043029D /* AgeEntryChoiceViewController.xib in Resources */,
 				F971218019A806FC00C59980 /* ClinicViewController.xib in Resources */,
@@ -482,6 +513,7 @@
 				F914D8DF1989880A00BBD38E /* male-patient.png in Resources */,
 				F911FF85197C07B20063A1F1 /* PatientViewController.xib in Resources */,
 				F9DBC47D199D57EE00FB2544 /* female.png in Resources */,
+				F95BF05D19C9219500CF265E /* DiseaseChooserTableViewController.xib in Resources */,
 				F9E9DAB21986C4EC00E8568F /* ClinicianViewController.xib in Resources */,
 				F9B9EF6419A25C3800072D7D /* NumberFieldViewController.xib in Resources */,
 				F94B3A4119B985B8003D3E2B /* ClinicAddEditViewController.xib in Resources */,
@@ -508,9 +540,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F95BF04E19C9105100CF265E /* StringFieldViewController.m in Sources */,
 				F9FC825D19A516E200BA86E7 /* PatientViewController+TableView.m in Sources */,
 				F9FAEA6B197B075500C9B3E5 /* Nomad_Clinic_Health_Records.xcdatamodeld in Sources */,
 				F9DA2D0319BFFE7200787C8E /* FlexDate.m in Sources */,
+				F95BF05519C91FA600CF265E /* VisitNotesComplex.m in Sources */,
 				F9F4BEE919C61E480058B704 /* VisitFieldMetadata.m in Sources */,
 				F9DA2D0019BFFE7200787C8E /* Village.m in Sources */,
 				F9E9DAA41986C03000E8568F /* NEMRClinicianTableViewController.m in Sources */,
@@ -518,17 +552,19 @@
 				F960BC3619B7F24B009DDC6D /* BaseStore.m in Sources */,
 				F96CF7FA199EA5E700F2C4EF /* TableViewController.m in Sources */,
 				F9E9DAB11986C4EC00E8568F /* ClinicianViewController.m in Sources */,
-				F9DA2D0619BFFEF900787C8E /* Visit.m in Sources */,
 				F95BF04119C43B6700CF265E /* VisitFieldChooserTableViewController.m in Sources */,
 				F907A50019B5065E00A22A15 /* PickerFieldViewController.m in Sources */,
+				F95BF05819C91FA600CF265E /* Disease.m in Sources */,
 				F9FAEA68197B075500C9B3E5 /* NEMRAppDelegate.m in Sources */,
 				F9FAEA65197B075500C9B3E5 /* main.m in Sources */,
+				F95BF05C19C9219500CF265E /* DiseaseChooserTableViewController.m in Sources */,
+				F95BF05219C91FA500CF265E /* Visit.m in Sources */,
 				F9844660199E5BFA00F59910 /* Utils.m in Sources */,
 				F9DA2CFA19BFFE7200787C8E /* Clinic.m in Sources */,
 				F9DA2CF419BFFE7200787C8E /* Clinician.m in Sources */,
 				F9DA2CF719BFFE7200787C8E /* Patient.m in Sources */,
 				F937FC081999027C00FD1355 /* DOBSetViewController.m in Sources */,
-				F983434A19900AC50015974B /* StringFieldViewController.m in Sources */,
+				F983434A19900AC50015974B /* TextViewViewController.m in Sources */,
 				F937FC1E199940BB00FD1355 /* FlexDate+ToString.m in Sources */,
 				F911FF84197C07B20063A1F1 /* PatientViewController.m in Sources */,
 				F94B3A4019B985B8003D3E2B /* ClinicAddEditViewController.m in Sources */,
@@ -538,8 +574,8 @@
 				F925BE4E1995544D0043029D /* AgeEntryChoiceViewController.m in Sources */,
 				F911FF89197CC2570063A1F1 /* PatientsTableViewController.m in Sources */,
 				F99720EF19ACC8C8006F6630 /* PatientAddEditViewController.m in Sources */,
+				F95BF04619C908E000CF265E /* DiseaseTableViewController.m in Sources */,
 				F937FC22199A89DD00FD1355 /* PatientDOBMonthAndYearViewController.m in Sources */,
-				F9DA2D0919BFFEFA00787C8E /* VisitNotesComplex.m in Sources */,
 				F971217F19A806FC00C59980 /* ClinicViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,7 +690,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "785e4578-791a-4751-86fb-9b19c5352b42";
+				PROVISIONING_PROFILE = "218d57c9-bbbb-44fc-b363-b36a58763bab";
 				SDKROOT = iphoneos7.1;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -673,7 +709,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "785e4578-791a-4751-86fb-9b19c5352b42";
+				PROVISIONING_PROFILE = "218d57c9-bbbb-44fc-b363-b36a58763bab";
 				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

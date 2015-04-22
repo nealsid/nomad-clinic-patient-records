@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClinicAddEditViewController">
             <connections>
+                <outlet property="addVillageLabel" destination="LbI-lr-uh0" id="aWy-ng-DUH"/>
+                <outlet property="addVillageTextbox" destination="uAH-69-6wi" id="dWj-aI-0eA"/>
                 <outlet property="clinicDatePicker" destination="5fd-2T-nqN" id="9B0-nb-Nim"/>
                 <outlet property="clinicDateTextBox" destination="XHU-AC-E9y" id="k6s-fl-TwA"/>
                 <outlet property="clinicVillagePickerView" destination="Wdp-t2-8RP" id="Wva-Ok-9sN"/>
@@ -54,17 +57,39 @@
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAH-69-6wi">
+                    <rect key="frame" x="62" y="230" width="191" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="191" id="HXO-pf-ePO"/>
+                        <constraint firstAttribute="height" constant="30" id="IvI-eN-bI5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Village Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbI-lr-uh0">
+                    <rect key="frame" x="8" y="161" width="298" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="M3k-ak-Rkd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jy1-iu-gNV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="13" id="3g8-9d-9m7"/>
                 <constraint firstItem="jy1-iu-gNV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="23" id="5M0-E0-Wic"/>
+                <constraint firstItem="LbI-lr-uh0" firstAttribute="top" secondItem="XHU-AC-E9y" secondAttribute="bottom" constant="43" id="5nf-Ni-KDb"/>
+                <constraint firstItem="uAH-69-6wi" firstAttribute="centerX" secondItem="LbI-lr-uh0" secondAttribute="centerX" id="Beu-be-qPL"/>
                 <constraint firstItem="jzK-vo-501" firstAttribute="top" secondItem="jy1-iu-gNV" secondAttribute="bottom" constant="32" id="C6r-z2-NPf"/>
+                <constraint firstAttribute="trailing" secondItem="LbI-lr-uh0" secondAttribute="trailing" constant="14" id="EP4-TQ-xly"/>
                 <constraint firstAttribute="trailing" secondItem="XHU-AC-E9y" secondAttribute="trailing" constant="20" id="FJ9-cW-RPZ"/>
                 <constraint firstItem="PZh-3G-Whf" firstAttribute="centerY" secondItem="jy1-iu-gNV" secondAttribute="centerY" constant="1.5" id="VeJ-s4-HfY"/>
                 <constraint firstAttribute="trailing" secondItem="PZh-3G-Whf" secondAttribute="trailing" constant="20" id="W8y-9e-ldt"/>
                 <constraint firstItem="jzK-vo-501" firstAttribute="centerY" secondItem="XHU-AC-E9y" secondAttribute="centerY" constant="-4.5" id="Zfe-N3-tvz"/>
                 <constraint firstItem="XHU-AC-E9y" firstAttribute="centerY" secondItem="jzK-vo-501" secondAttribute="centerY" constant="4.5" id="dqg-ed-xsm"/>
+                <constraint firstItem="uAH-69-6wi" firstAttribute="top" secondItem="LbI-lr-uh0" secondAttribute="bottom" constant="40" id="iVe-Xr-ddn"/>
+                <constraint firstItem="LbI-lr-uh0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="jHU-OK-wQm"/>
                 <constraint firstItem="jzK-vo-501" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="13" id="kBb-oi-Dhz"/>
             </constraints>
         </view>

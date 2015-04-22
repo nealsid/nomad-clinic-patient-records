@@ -10,6 +10,14 @@
 
 @implementation TableViewController
 
+- (instancetype) initWithStyle:(UITableViewStyle) style {
+  self = [super initWithStyle:style];
+  if (self) {
+    self.useColorCoding = YES;
+  }
+  return self;
+}
+
 - (BOOL) isLastRow:(NSInteger)rowNumber {
   return rowNumber == self.numberOfRows + 1;
 }
@@ -74,6 +82,9 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 - (void) tableView:(UITableView*)tableView
    willDisplayCell:(UITableViewCell *)cell
  forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (!self.useColorCoding) {
+    return;
+  }
   if ([self isLastRow:[indexPath row]]) {
     return;
   }
